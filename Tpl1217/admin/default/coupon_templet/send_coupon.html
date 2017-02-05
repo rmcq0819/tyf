@@ -1,0 +1,113 @@
+<include file="public:header" />
+<style type="text/css">
+	.t{ margin:15px; border:1px solid #CCCCCC;width:80%}
+	.t tr td{border:1px solid #CCCCCC; padding:12px;}
+	.t .r{ text-align:right;}
+	.text{ height:20px; width:203px;}
+	.btn{ width:60px;}
+</style>
+<script type="text/javascript" src="__STATIC__/js/showdate.js"></script>
+<script type="text/javascript" src="__STATIC__/js/jquery-1.4.4.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('input[name=class]').change(function(){
+			if($(this).val()==1){
+				$('#time').css('display','none');
+				$('#user').css('display','');
+			}
+			if($(this).val()==2){
+				$('#user').css('display','none');
+				$('#time').css('display','none');
+			}
+			if($(this).val()==3){
+				$('#user').css('display','none');
+				$('#time').css('display','');
+			}
+		})
+	
+	})
+</script>
+<script>
+	function check(){
+		if($('select').val()==''){
+			alert('当前模板为空,请先添加优惠券');
+		}
+	   if($('input[name=class]:checked').val()==3){
+		   var time1 = document.getElementById('time_start').value;
+		   var time2 = document.getElementById('time_end').value;
+		   var arr1 = time1.split("-");
+		   var arr2 = time2.split("-");
+		   var date1=new Date(parseInt(arr1[0]),parseInt(arr1[1])-1,parseInt(arr1[2]),0,0,0); 
+		   var date2=new Date(parseInt(arr2[0]),parseInt(arr2[1])-1,parseInt(arr2[2]),0,0,0);
+		   if(date1.getTime()>date2.getTime()) {                                
+				alert("结束时间不能小于开始时间");
+				return false;
+		   }
+	   }
+	}
+</script>
+<form name="form" method="post" action="{:U('coupon_templet/send_coupon')}" onsubmit="return check()">
+<table class="t" border="1">
+	<tr>
+		<td width="15%" class="r">发放模式：</td>
+		<td>
+			<input type="radio" name="class" checked value="1">会员&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="class" value="2">全员&nbsp;&nbsp;
+			<input type="radio" name="class" value="3">注册时间
+		</td>
+	</tr>
+	<tr id="user">
+		<td width="15%" class="r">会员ID：</td>
+		<td>
+		<input type="text" name="userId" class="text" value="" id="userId" onkeyup="value=value.replace(/[^\d|,]/g,'')" />
+		[多个ID用英文状态小写","分隔开。如：29,54,27 ]&nbsp;&nbsp;
+		<span style="color:#990000;" id="notice">
+		</span>
+		</td>
+	</tr>
+	<tr id="time" style="display:none">
+		<td width="15%" class="r">注册时间：</td>
+		<td>
+			<input type="text" name="start" id="time_start" class="date text" size="12" value="">&nbsp;&nbsp;<span style="color:#990000;" id="notice3">
+			--&nbsp;&nbsp;
+			<input type="text" name="end" id="time_end" class="date text" size="12" value="">&nbsp;&nbsp;<span style="color:#990000;" id="notice4">
+		</td>
+	</tr>
+	<tr><td class="r">优惠券模板：</td>
+		<td>
+			<select name="coupon_templetId">
+				<volist name="list" id="vo">
+					<option value="{$vo.id}">{$vo.title}</option>
+				</volist>	
+			</select>
+		</td>
+	</tr>
+	
+	<tr align="center"><td colspan="3"><input type="submit" value="提交" class="btn"/>&nbsp;&nbsp;
+	<input type="reset" value="重置" class="btn"/>&nbsp;&nbsp;
+	<input type="button" value="返回" onclick="javascript:history.go(-1);" class="btn"/></td></tr>
+</table>
+</form>
+<include file="public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+	inputField : "time_start",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "time_end",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+
+$('.J_preview').preview(); //查看大图
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+</script>
+</body>
+</html>

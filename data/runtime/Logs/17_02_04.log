@@ -1,0 +1,463 @@
+[ 2017-02-04T21:42:38+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/admin/default/public/head.html]
+[ 2017-02-04T21:43:55+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/admin/default/public/head.html]
+[ 2017-02-04T21:44:00+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/admin/default/public/head.html]
+[ 2017-02-04T21:45:57+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001043s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000045s ]
+INFO: Run load_lang Behavior [ RunTime:-0.004283s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012193s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004313s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004757s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000590s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.605619s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002732s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data D:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.608425s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019245s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.627757s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.628563s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.629393s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.630027s ]
+INFO: Run content_replace Behavior [ RunTime:-0.630871s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003941s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.631779s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001081s ]
+
+[ 2017-02-04T21:47:32+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001229s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000052s ]
+INFO: Run load_lang Behavior [ RunTime:-0.002116s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007026s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004512s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.005512s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000604s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.481720s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001990s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data D:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.483781s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018741s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.502570s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.503413s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.504179s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.504842s ]
+INFO: Run content_replace Behavior [ RunTime:-0.505674s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003792s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.506444s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001022s ]
+
+[ 2017-02-04T22:33:01+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001308s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000039s ]
+INFO: Run load_lang Behavior [ RunTime:-0.011289s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.049413s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.010233s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003096s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000562s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.013688s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000523s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000486s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.133765s ]
+INFO: [ view_template ] --END-- [ RunTime:0.011995s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.145817s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031839s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.177678s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.178328s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.178982s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.179544s ]
+INFO: Run content_replace Behavior [ RunTime:-0.180229s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003287s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.181010s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001561s ]
+
+[ 2017-02-04T22:33:03+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000604s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000030s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001452s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004355s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003212s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002792s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000410s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003532s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000412s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000386s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.028678s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001432s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.030145s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008797s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.038969s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.039297s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.039681s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.039997s ]
+INFO: Run content_replace Behavior [ RunTime:-0.040424s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001922s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.040934s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000555s ]
+
+[ 2017-02-04T22:33:05+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000609s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000030s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001464s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004401s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002758s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002748s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000404s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003168s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000376s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000408s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.029913s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001479s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.031428s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008645s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.040101s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.040426s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.040811s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.041140s ]
+INFO: Run content_replace Behavior [ RunTime:-0.041576s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001918s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.042062s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000561s ]
+
+[ 2017-02-04T22:33:05+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000603s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000041s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001449s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005247s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002828s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002643s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000381s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003292s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000389s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000364s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.030988s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001382s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.032404s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008739s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.041175s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.041523s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.042020s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.042608s ]
+INFO: Run content_replace Behavior [ RunTime:-0.043202s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002501s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.043722s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000602s ]
+
+[ 2017-02-04T22:48:26+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000832s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000033s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001772s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004924s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003098s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002717s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 1 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000452s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003615s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 1 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000447s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 2 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000454s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 60 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000423s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 300 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000380s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.032474s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001690s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.034197s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009261s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.043486s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.043854s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.044298s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.044653s ]
+INFO: Run content_replace Behavior [ RunTime:-0.045116s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002077s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.045650s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000619s ]
+
+[ 2017-02-04T22:48:30+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000610s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000031s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001524s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004761s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003198s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003021s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000423s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003594s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000417s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000379s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000381s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.032043s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001603s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.033685s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010069s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.043785s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.044118s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.044528s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.044846s ]
+INFO: Run content_replace Behavior [ RunTime:-0.045274s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001937s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.045763s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000604s ]
+
+[ 2017-02-04T22:49:08+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000636s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000033s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001538s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004581s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003718s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002879s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 70 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000433s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003147s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 70 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000425s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 117 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000360s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 378 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000364s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 382 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000351s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 384 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000348s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.034943s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001406s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.036385s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009704s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.046123s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.046468s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.046886s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.047208s ]
+INFO: Run content_replace Behavior [ RunTime:-0.047639s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001969s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.048134s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000564s ]
+
+[ 2017-02-04T22:49:12+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000463s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000029s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001314s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004181s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002835s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002750s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 340 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000395s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003343s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 340 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000445s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 154 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000322s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 11 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000336s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 29 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000288s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 345 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000334s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 399 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000303s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.029714s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001444s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.031196s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009724s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.040951s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.041403s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.041850s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.042199s ]
+INFO: Run content_replace Behavior [ RunTime:-0.042662s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002065s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.043059s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000558s ]
+
+[ 2017-02-04T22:49:13+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000628s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000037s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001443s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004123s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003042s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002686s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 353 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000398s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003260s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 353 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000404s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 354 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000370s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.028258s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001171s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.029464s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009247s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.038742s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.039183s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.039606s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.039956s ]
+INFO: Run content_replace Behavior [ RunTime:-0.040415s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002041s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.040824s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000560s ]
+
+[ 2017-02-04T22:49:13+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000469s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000030s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001295s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003788s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002812s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002659s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000394s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003269s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000406s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000398s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.027969s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001170s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.029173s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009307s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.038512s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.038944s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.039361s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.039712s ]
+INFO: Run content_replace Behavior [ RunTime:-0.040172s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002008s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.040561s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000559s ]
+
+[ 2017-02-04T22:49:15+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000465s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000030s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001293s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003792s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003153s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003615s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 364 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000400s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003126s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 364 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000375s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 365 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000307s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.030221s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001171s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.031425s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009254s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.040714s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.041175s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.041599s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.041949s ]
+INFO: Run content_replace Behavior [ RunTime:-0.042407s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002041s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.042795s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000557s ]
+
+[ 2017-02-04T22:49:16+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000488s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000032s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001338s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004018s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003239s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.002761s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000395s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 22 行.
+NOTIC: [2] Invalid argument supplied for foreach() D:\phpStudy\WWW\tyf\app\Lib\Action\backendAction.class.php 第 29 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.003569s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 359 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000411s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 360 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000387s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.029883s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001341s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.031263s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009971s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.041262s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.041699s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.042119s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.042468s ]
+INFO: Run content_replace Behavior [ RunTime:-0.042928s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002032s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.043340s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000556s ]
+
+[ 2017-02-04T22:49:19+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/admin/default/public/head.html]
+[ 2017-02-04T22:49:19+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/admin/default/public/head.html]
+[ 2017-02-04T22:49:34+08:00 ] 127.0.0.1 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000466s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000029s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001284s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003792s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003232s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003181s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000423s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004227s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000461s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000387s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000366s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.033433s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001190s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.034656s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010277s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.044967s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.045439s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.045884s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.046255s ]
+INFO: Run content_replace Behavior [ RunTime:-0.046748s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002159s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.047167s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000584s ]
+

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>动态公告</title>
+<include file="public:headtop" />
+<style>
+#content ul,li{padding:0px;margin:0px}
+#content ul	{padding:5px;}
+#content ul li{border-bottom:1px solid #ccc;padding:10px;}
+#content ul li span{float:right;}
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<h2 align="center" style="padding-top:10px;">动态公告</h2>
+<div id="content">
+	<ul>
+		<volist name="info" id="vo">
+			<li>
+				<a href=""><span>{$vo.title}</span></a><span>{$vo.add_time|date='y-m-s',###}</span>
+			</li>
+		</volist>
+	</ul>
+</div>
+ <div class="clear" style="height:30px;"></div>
+<!-- <include file="public:footer" /> -->
+</body>
+</html>

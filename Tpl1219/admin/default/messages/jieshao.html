@@ -1,0 +1,69 @@
+<include file="public:header" />
+<!--添加文章-->
+<div class="subnav">
+    <h1 class="title_2 line_x">公司介绍</h1>
+</div>
+<form id="info_form" action="{:U('messages/jieshao')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">公司介绍</li>
+		</ul>
+		<div class="J_panes">
+			<div class="content_list pad_10">
+				<table width="100%" cellspacing="0" class="table_form">
+						     
+		            <tr class="none">
+						<th>详细内容 :</th>
+		                <td><textarea name="infothr" id="infothr" style="width:68%;height:400px;visibility:hidden;resize:none;"></textarea></td>
+					</tr>
+				</table>
+			</div>
+			<div class="content_list pad_10 hidden">
+				<table width="100%" cellspacing="0" class="table_form">
+						<th>{:L('seo_desc')} :</th>
+						<td><textarea name="seo_desc" id="seo_desc" cols="80" rows="8"></textarea></td>
+					</tr>
+				</table>
+			</div>
+        </div>
+		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"><br /><br /><br /></div>
+	</div>
+</div>
+</form>
+<include file="public:footer" />
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script>
+
+$(function() {
+	KindEditor.create('#infothr', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+	$('ul.J_tabs').tabs('div.J_panes > div');
+
+	//颜色选择器
+	$('.J_color_picker').colorpicker();
+
+	//自动获取标签
+	$('#J_gettags').live('click', function() {
+		var title = $.trim($('#J_title').val());
+		if(title == ''){
+			$.pinphp.tip({content:lang.article_title_isempty, icon:'alert'});
+			return false;
+		}
+		$.getJSON('{:U("article/ajax_gettags")}', {title:title}, function(result){
+			if(result.status == 1){
+				$('#J_tags').val(result.data);
+			}else{
+				$.pinphp.tip({content:result.msg});
+			}
+		});
+	});
+	
+});
+</script>
+</body>
+</html>

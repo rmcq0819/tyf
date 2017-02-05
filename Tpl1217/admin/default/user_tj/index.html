@@ -1,0 +1,94 @@
+﻿<include file="public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+   
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <form action="{:U('user_tj/excelout')}" method="post"><input type="submit" class="btn" style="float:right;" value="导出数据"> </form>
+                     <form name="searchform" method="get" >
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="user_tj" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+                    时间 :
+                    <input type="text" name="time[time_start]" id="J_time_start" class="date" size="12" value="{$search.time_start}">
+                    -
+                    <input type="text" name="time[time_end]" id="J_time_end" class="date" size="12" value="{$search.time_end}">
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                    </form>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <div class="J_tablelist table_list" data-acturi="{:U('user/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th width="40" align="center"><span data-tdtype="order_by" data-field="img">头像</span></th>
+                <th width="80" align="left"><span data-tdtype="order_by" data-field="username">用户名</span></th>
+                <th width="80" align="left"><span data-tdtype="order_by" data-field="uid">会员组</span></th>
+                <th width="100"align="left"><span data-tdtype="order_by" data-field="wechatid">手机号码</span></th>
+                <th width="100" align="left"><span data-tdtype="order_by" data-field="email">邮箱</span></th>
+                <th width="30"><span data-tdtype="order_by" data-field="sex">性别</span></th>
+                <!-- <th width="60" align="right"><span data-tdtype="order_by" data-field="shares">分享</span></th>
+                <th width="60" align="right"><span data-tdtype="order_by" data-field="albums">专辑</span></th>-->
+                <th width="60"><span data-tdtype="order_by" data-field="order_count">订单数量</span></th>
+                <th width="60"><span data-tdtype="order_by" data-field="order_sumPrice">订单总金额</span></th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$val.id}</td>
+                <td align="center">
+				<if condition="$val.hyimg neq ''"><img src="{$val.hyimg}" style="width:100px;height:100px;" /><else /><img src="{$val.cover}" style="width:100px;height:100px;" /></if>
+				</td>
+                <td align="left"><if condition="$val['username']">{$val['username']}<else/>{$val['wechatid']}</if></td>
+				 <td align="left"><if condition="$val['uid'] eq 2">掌柜<else/>店长</if></td>
+                <td align="left"><if condition="$val['phone_mob']">{$val['phone_mob']}<else/>无</if></td>
+                <td align="left"><if condition="$val['email']">{$val.email}<else/>无</if></td>
+                <td align="center">
+                  <if condition="$val['gender'] eq '1'">男</if>
+                  <if condition="$val['gender'] eq '0'">女</if>
+                </td>
+                <td align="center">{$val['order_count']}</td>
+               <td align="center">{$val['order_sumPrice']}</td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script type="text/javascript">
+    Calendar.setup({
+        inputField: "J_time_start",
+        ifFormat: "%Y-%m-%d",
+        showsTime: false,
+        timeFormat: "24"
+    });
+    Calendar.setup({
+        inputField: "J_time_end",
+        ifFormat: "%Y-%m-%d",
+        showsTime: false,
+        timeFormat: "24"
+    });
+
+</script>

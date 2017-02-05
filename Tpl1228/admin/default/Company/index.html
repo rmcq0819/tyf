@@ -1,0 +1,86 @@
+<include file="public:header" />
+<!--tab start-->
+<div class="subnav">
+    <h1 class="title_2 line_x">公司信息</h1>
+</div>
+<!--tab end-->
+<div class="pad_lr_10">
+ <form class="form" method="post" id="form" action="{:U('Company/index')}" enctype="multipart/form-data"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{$set.discount}" />
+    <div class="content_list"> 
+     <table cellpadding="2" width="100%" cellspacing="1" class="table_form"> 
+      <tbody> 
+       <tr> 
+        <th width="120">*</span>名称：</th> 
+        <td><input type="text" id="name" name="name" value="{$set.name}"  class="input-text" size="20" /></td> 
+       </tr>
+       <tr> 
+        <th>*</span>简称：</th> 
+        <td><input type="text" id="shortname" name="shortname" value="{$set.shortname}"  class="input-text" size="20"/></td> 
+       </tr>
+       <tr> 
+        <th>*</span>电话：</th> 
+        <td><input type="text" id="tel" name="tel" value="{$set.tel}"  class="input-text" size="20" /></td> 
+       </tr> 
+       <tr> 
+        <th>*</span>手机：</th> 
+        <td><input type="text" id="mp" name="mp" value="{$set.mp}"  class="input-text" size="20"/></td> 
+       </tr> 
+       <tr> 
+        <th>*</span>地址：</th> 
+        <td><input type="text" id="address" name="address" value="{$set.address}"  class="input-text" size="20" /></td> 
+       </tr> 
+       <tr> 
+        <th>Logo地址：</th> 
+	         	<td><input type="file" name="img" /></td>
+       </tr>
+        <tr> 
+        <th>*</span>经纬度：</th> 
+        <td>经度 <input type="text" id="longitude"  name="longitude" id="J_title" class="input-text" size="20" value="{$set.longitude}" /> 
+		纬度 <input type="text"  name="latitude" class="input-text" size="20" id="latitude"  value="{$set.latitude}" /> 
+		</td> 
+       </tr>
+       <tr> 
+        <th><span class="red"></span>顺序：</th> 
+        <td><input type="text" id="taxis" name="taxis" value="{$set.taxis}" id="J_title" class="input-text" size="20" /></td> 
+       </tr>
+		<tr>
+			<th>详细内容 :</th>
+			<td><textarea name="intro" id="intro" style="width:68%;height:400px;visibility:hidden;resize:none;">{$set.intro}</textarea></td>
+		</tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isBranch eq 1">
+      <input type="hidden" name="isbranch" value="1" />
+      </if>
+      <input type="hidden" name="token" value="{$token}" />
+       <div class="mt10"><input type="submit" value="{:L('submit')}" class="btn btn_submit"></div>
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+
+
+</div>
+<div class="cLine">
+
+<div class="clr"></div>
+</div>
+</div>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script language="javascript">
+$(function() {
+	KindEditor.create('#intro', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+});
+</script>

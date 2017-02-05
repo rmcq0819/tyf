@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>地址管理</title>
+		<!--<link rel="stylesheet" type="text/css" href="../Style/shop.css" />-->
+		<!--<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js"></script>-->
+		<style>
+			*{
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav{
+				width: 100%;
+				height: 50px;		
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				background-color: rgb(240,93,0);
+			}
+			.topnav img{
+				position:absolute; 
+				left:5px; 
+				top:14px;
+			}
+			/*头部E*/
+			
+			/*地址S*/
+			#add ul li{
+				padding: 8px;
+			}
+			#add .user-name,#add .user-number,#add .carId,#add .addr{
+				font-size:15px; 
+				color: black;
+			}
+			#add .addr{
+				color: rgb(171,171,171);
+			}
+
+			#add .del {
+				width: 55px;
+				height: 25px;
+				float: right;
+				margin-top: 5px;
+				background: none;
+				color:rgb(240,93,0);
+				border: solid 1px rgb(240,93,0);
+				font-size:12px;
+				border-radius:5px;
+				margin-left:10px;
+			}
+			#add .set_default {
+				min-width: 65px;
+				height: 25px;
+				float: right;
+				margin-top: 5px;
+				background:none;
+				color:#106093;
+				border:solid 1px #106093;
+				font-size:12px;
+				border-radius:5px;
+				margin-left:10px;
+			}
+			/*地址E*/
+			
+			/*添加地址S*/
+			#add_address{
+				width: 94%;
+				height: 50px;
+				margin: 0 auto;
+				background-color: white;
+			}
+			#add_address p{
+				text-align: center;
+				font-size: 16px;
+				color: rgb(238,93,0);
+				line-height: 50px;
+			}
+			/*添加地址E*/
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<include file="public:head"/>
+		<!--<div class="mydizhi">
+        <volist name='address_list' id='vo' >
+            <a href="{:U('Order/jiesuan',array('addr_id'=>$vo['id']))}">
+            <dl <eq name="id" value="$vo['id']">class="hover" </eq>>
+                <dt><span>{$vo.mobile}</span>{$vo.consignee}<br />
+                {$vo.sheng}&nbsp;{$vo.shi}&nbsp;{$vo.qu}&nbsp;{$vo.address}</dt>
+                <dd><eq name="default" value="$vo['id']"><span class="icon-check2"  style="font-size:12px;color:#fff;"></span></eq></dd>
+                <div class="clear"></div>
+				<p class="address_action">
+                    <span ><a href="{:U('User/edit_address',array('id'=>$vo['id']))}"><i class="edit_icon"></i>编辑</a></span>
+                    <span><a href="{:U('User/address',array('id'=>$vo['id'],'type'=>'del'))}" class="delete float_none"><i class="delete_icon"></i>删除</a></span>
+                </p>
+                
+            </dl>
+          </volist>
+        </div>
+<div class="clear" style="height:33px;"></div>
+<div class="mydizhion">
+<div class="mydizhion1"><a href="{:U('User/addaddress')}">添加新地址</a></div>
+</div>-->
+
+		<!--头部-->
+		<div class="topnav">
+			<a href="{:U('User/index')}" >
+				<img src="../Style/images/fanhui1.png" width="25"/>
+			</a>
+			地址管理
+		</div>
+		<notempty name="address_list">
+		<!--地址列表-->
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default">
+			<volist name='address_list' id='vo' >
+			<div id="add" class="am-list-news-bd">
+				<ul class="am-list">
+		
+					<li>
+						<span class="user-name">{$vo.consignee}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="user-number"><php>echo substr_replace($vo['mobile'],'****',3,4);</php></span>
+					</li>
+					<li>
+						<p class="carId">{$vo.cardId}</p>
+						<p class="addr">{$vo.towns}{$vo.address}</p>
+					</li>
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4">
+							<if condition="$vo.is_default eq 1">
+  								<img src="../Style/index-images/add.jpg" alt="地址" width="25px" height="25px;" style="line-height: 48px;"/>
+  								<span style="color: black; font-size: 15px; line-height: 32px;"/>&nbsp;默认地址</span>
+							</if>
+  							</div>
+  							<div class="am-u-sm-8">
+  								
+  									<button class="del" type="button" onclick="del('{$vo.id}');">删&nbsp;除</button>
+							<if condition="$vo.is_default neq 1">
+								<a href="javascript:;" onclick="set_default('{$vo.id}')">
+									<button class="set_default" type="button">设为默认</button>
+								</a>
+  							</if>
+  							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</volist>
+		</div>
+		<else/>
+				<br />
+		<br />
+				<div style="text-align: center;">
+			<img src="../Style/index-images/kongdizhi.png" alt="空地址" style="width: 140px; height: 140px;" />
+		</div>
+		<div style="text-align: center; font-size: 14px; color: black;">
+			<p>无地址</p>
+		</div>
+	</br>
+	</notempty>
+		<!--添加地址-->
+		<div id="add_address">
+			<a href="{:U('User/addaddress')}"><p>添加一个新地址</p></a>
+		</div>
+		<include file="public:footer"/>
+	</body>
+
+</html>
+<script>
+//删除收货地址
+function del(id){
+	layer.open({
+			title: '提示',
+			content: '您确定要删除该条收货地址吗？',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href= "{:U('User/address')}&type=del&id="+id;
+				layer.open({content: '删除成功', time: 1});
+				layer.close(index);
+			}
+	});
+	
+}
+//设置默认收货地址
+function set_default(id){
+	layer.open({
+			title: '提示',
+			content: '您确定要将该条收货地址设为默认吗？',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href= "{:U('User/edit_address')}&id="+id;
+				layer.open({content: '设置默认地址成功', time: 1});
+				
+				layer.close(index);
+			}
+	});
+	
+}
+</script>

@@ -1,0 +1,766 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+					'onMenuShareTimeline',
+					'onMenuShareAppMessage',
+				]
+			});
+
+			wx.ready(function() {
+				wx.onMenuShareTimeline({
+					title: "{$item['title']}-团洋范", // 分享标题
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fx_info['cover']}", // 分享图标
+				});
+				wx.onMenuShareAppMessage({
+					title: "{$item['title']}-团洋范", // 分享标题
+					desc: "{$item['title']}-团洋范", // 分享描述
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fx_info['cover']}", // 分享图标
+					type: 'link',
+					dataUrl: '',
+				});
+			});
+		</script>
+		<link href="../Style/css/lightbox.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			
+			/*产品详情S*/
+			.am-g .product_name{		
+				font-size: 15px; 
+				color: rgb(60,133,52); 
+				padding-top: 10px;
+				}
+			.am-g .product-detail-1{
+				font-size: 13px; 
+				color: rgb(56,136,47);
+			}	
+			.am-g .product-detail-2{
+				color: black; 
+				font-size: 14px; 
+				margin-top: 10px;
+			}	
+			.am-g .price-tax{			/*免税价*/
+				margin-top: 15px;
+			}
+			.am-g .price-tax span:first-child{
+				color:black; 
+				font-size:16px;
+			}.am-g .price-tax span:last-child{
+				font-size: 18px;
+				color: rgb(240,121,27);
+			}
+			.am-g .price-market{		/*市场价*/
+				margin-top: -10px;
+			}
+			.am-g .price-market span:first-child{
+				color:black; 
+				font-size:14px;
+			}
+			.am-g .price-market span:last-child{
+				font-size: 14px;
+				color: rgb(137,137,137);
+			}
+			/*#area span:last-child {
+				text-align: center;
+			}*/
+			#area span{
+				color: rgb(240,93,0);
+			}
+						
+			/*产品详情E*/
+			
+			/*产品功效S*/
+			#product-effect{
+				height: 160px;
+				padding: 10px; 
+				background-color: white;
+			}
+			#service img{
+				width: 38px; 
+				height: 38px; 
+				margin-top: 8px;
+			}
+			/*产品功效E*/
+			
+			/*客服 收藏 一键分享S*/
+			#service_share{
+				height: 80px; 
+				background-color:white; 
+				padding: 5px;
+				border-top: solid 1px rgb(194,194,194);
+			}
+			#service_share .left-img{
+				width: 43%; 
+				float: left;
+			}
+			#service_share .line,#service_share .kefu,#service_share .collect,#service_share .share{
+				float: left;
+				margin-top: 15px;
+			}
+			#service_share .line{
+				width:10%; 	
+			}
+			#service_share .kefu{
+				width: 12%; 	
+				margin-right: 15px;
+			}
+			#service_share .collect{
+				width:12%; 	
+				margin-right: 15px;
+			}
+			#service_share .share{
+				width: 12%; 
+			}
+			/*客服 收藏 一键分享E*/
+			
+			/*选择规格S*/
+			.choosebox{background-color: white; margin-top: 5px; padding: 5px;}
+			.choosebox li{float:left;margin-right:10px; padding-top:10px ;}
+			.choosebox li a{float:left;background:#fff;font-size:14px;border:1px solid #ccc;height:26px;line-height:3px;padding:11px 16px; border-radius: 5px;}
+			.choosebox li a.current{background:url(../Style/index-images/right-icon.gif) no-repeat 100% 100%; ;background-color:rgb(240,93,0); color:white; border-color: white;}
+			.choosebox li input{display: none;}
+			.clearfix:after{visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0; }  /*清楚浮动*/
+			.clearfix{*zoom:1; padding:0px 0px 15px 46px;}
+			/*选择规格E*/
+			
+			/*购买数量S*/
+			#purchase-num{
+				margin-top:5px; 
+				height: 70px; 
+				padding: 5px;
+				background-color: white; 
+			}
+			#add-sub{
+				margin:0 auto; 
+				text-align: center;
+			}
+			#add-sub span{
+				float: left;
+				margin-left: 50px; 
+				text-align: center;
+			}
+			#remain{
+				text-align: center;
+			}
+			#remain span{
+				color: rgb(165,165,165);
+			}
+			/*购买数量S*/
+			
+			
+			/*佳品搭配S*/
+			.am-slider-carousel li {
+  				margin-right: 5px;
+			}
+			#Best-match{
+				margin-top: 10px;
+			}
+			#Best-match p{
+				font-size: 18px; 
+				color: black; 
+				height: 30px; 
+				line-height: 30px; 
+				margin: -5px 0px 0px 5px;
+			}
+			#Best-match img{
+				width: 170px;
+				height: 170px;
+			}
+			/*佳品搭配E*/
+			
+			/*产品介绍S*/
+			#product_intro{
+				margin-top: 5px;
+			}
+			#product_intro p{
+				font-size: 18px; 
+				color: black; 
+				height: 30px; 
+				line-height: 30px; 
+				margin: -5px 0px 0px 5px;
+			}
+			/*产品参数E*/
+			#product_cs{
+				width: 100%;
+				margin-top: 5px;
+				background-color: white; 
+			}
+
+			#product_cs p{
+				font-size: 18px; 
+				color: black; 
+				height: 30px; 
+				line-height: 30px; 
+				margin: -5px 0px 0px 5px;
+			}
+			
+			/*热品推荐*/
+			#hot_products{
+				margin-top: 5px;
+			}
+			#hot_products p{
+				font-size: 18px; 
+				color: black; 
+				height: 40px; 
+				line-height: 40px; 
+				margin-left: 5px;
+			}
+			#hot_products img{
+				width: 170px;
+				height: 170px;
+			}
+			
+			/*评论*/
+			#comment{
+				width: 100%; 	
+				margin-top: 5px; 
+				background-color: white; 
+			}
+			#comment p{
+				font-size: 18px; 
+				color: black; 
+				height: 35px; 
+				line-height: 35px;
+				margin: 5px 0px 0px 5px; 
+			}
+			#comment .am-g{
+				margin-top: 10px;
+				border-bottom: solid 1px rgb(180,180,180);
+			}
+			#comment .am-g img{					/*评论者头像*/
+				width: 35px; 
+				height: 35px;
+				margin-left: 10px;
+			}
+			#comment .am-g .am-u-sm-10{         /*评论者名字*/
+				line-height: 35px;
+			}
+			#comment .am-g .am-u-sm-12{			/*评论内容*/
+				padding: 10px;
+			}
+			/*查看全部评论*/
+			#all_comment{
+				width: 100%; 
+				height: 50px; 
+				margin-top: 5px;
+				background-color: white; 
+			}
+			#all_comment p{
+				text-align: center; 
+				line-height: 50px; 
+				font-size: 14px;
+			}
+			
+			.proneirong img{width:100%}
+			.proneimain img{width:100%}
+			
+			
+		</style>
+		<!-- 购物流程S -->
+		<script type="text/javascript">
+			
+		</script>
+		<script type="text/javascript" src="../Style/js/indexanimate.js"></script>
+		<!-- 购物流程E -->
+	</head>
+
+	<body>
+		<!-- topnav -->
+		<div class="top-title" id="end">
+			<div class="am-g">
+
+					<!-- 判断是否通过分享过来的商品 -->
+				<div class="am-u-sm-12" style="font-size:14px; padding-right:10px; background-color: rgb(240,93,0);">
+					<h2>产品详情</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="cartmsg"></div>
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+		<img src="../Style/images/guide.png" />
+		</div>
+		<div id='rtt'></div>
+		<!--隐藏域传输购物车所需内容-->
+			<input type="hidden" value="{$item.id}" id="goodId" >
+			<input type="hidden" value="{$item.price}" name="price" />
+			<input type="hidden" value="{$size}" name="issize" />
+			<input type="hidden" value="{$item.title}" name="title" id="title" />
+			<input type="hidden" value="{$item.img}" name="img" id="img" />
+			<input type="hidden" value="{$item.price}" name="price" id="price" />
+			<input type="hidden" value="<?php echo session('shopid');  ?>" name="shopid" id="shopid" />
+
+
+		<!-- 	<input type="hidden" value="{$item.adress}" name="adress" id="adress" />
+			<input type="hidden" value="{$item.buy_num}" name="buy_num" id="buy_num" /> -->
+			<!-- <input type="hidden" id="quantity"  value="1" orig="1" changed="1" class="spinnerExample"onafterpaste="this.value=this.value.replace(/\D/g,'')" onKeyUp="this.value=this.value.replace(/\D/g,'')" /> -->
+
+		</div>
+		<!-- itemgroupimg  产品详情-->
+		<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0" style="margin-top:50px;">
+			<ul class="am-slides">
+					<div class="am-g" style="height: 190px;">
+  						<div class="am-u-sm-6" style="height: 190px;"><img src="data/upload/item/{$item.img}" class="am-img-responsive"></div>
+  						<div class="am-u-sm-6">
+  							<p class="product_name">{$item.title}</p>
+  							<!-- <p class="product-detail-1">{$item.intro}</p>
+  							<p class="product-detail-2">{$item.tag}</p> -->
+  							<p class="price-tax"><span>免税价：</span><span>￥{$item.price}</span></p>
+  							<p class="price-market"><span>市场价：</span><span><del>￥{$item.priceyuan}</del></span></p>
+  						</div>
+					</div>
+			</ul>
+			<div id="area" class="am-g">
+  				<div class="am-u-sm-8"><span>&nbsp;&nbsp;产地：{$item.adress}</span></div>
+  				<div class="am-u-sm-4"><span>已售{$item.buy_num}笔</span></div>
+			</div>
+		</div>
+		<!--产品功效-->
+			<div id="product_cs">
+				<p>产品功效</p>
+				<div class="proneimain">
+					<notempty name="item.cs">
+					{$item.cs}
+					<else />
+					<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无产品参数！</div>
+					</notempty>
+				</div>
+			</div>
+			
+			<!--在线客服、收藏、一键分享-->
+			<div id="service_share">
+				<div class="left-img" >
+					<img src="../Style/index-images/miaoshu.png" alt="说明" onclick="location.href='./index.php?m=messages&a=index&id=5'" class="am-img-responsive" style="margin-top: 10px;"/>
+				</div>
+				<div class="line" style="">
+					<img src="../Style/index-images/123.png" alt="分割线" class="am-img-responsive" />
+				</div>
+  				<div class="kefu" style="">
+  					<li data-am-modal="{target: '#my-alert'}">
+						<a>
+							 <img src="../Style/index-images/1.png" alt="在线客服" class="am-img-responsive"/>
+						</a>
+				    </li>
+  				</div>
+
+  				
+  				<!--弹出二维码窗口-->
+				<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+				  <div class="am-modal-dialog">
+				    <div class="am-modal-hd" style="color:white; background-color:rgb(240,93,0);line-height:42px; font-family: '微软雅黑';">
+						<h3>长按二维码关注团洋范公众号</h3>
+					</div>
+				    <div class="am-modal-bd">
+				      <img src="../Style/index-images/erweima.jpg" alt="二维码" class="am-img-responsive" style="width:200px; height:200px;margin:0 auto; margin-top:10px"/>
+				    </div>
+				    <div class="am-modal-footer">
+				      <span class="am-modal-btn">关&nbsp;&nbsp闭</span>
+				    </div>
+				  </div>
+				</div>
+  				<div class="collect" style="">
+  					<img src="../Style/index-images/2.png"  onClick="shoucangFn();" alt="收藏" class="am-img-responsive" />
+  				</div>
+  				<div class="share" style="">
+  					<a href="javascript:;" onClick="share();"><img src="../Style/index-images/3.png" alt="一键分享" class="am-img-responsive"/></a>
+  				</div>
+  				
+			</div>
+
+		<script>
+			$(function() {
+				var $slider = $('#demo-slider-0');
+				var counter = 0;
+				var getSlide = function() {
+					counter++;
+					return '<li><img src="http://s.amazeui.org/media/i/demos/bing-' +
+						(Math.floor(Math.random() * 4) + 1) + '.jpg" />' +
+						'<div class="am-slider-desc">动态插入的 slide ' + counter + '</div></li>';
+				};
+
+				$('.js-demo-slider-btn').on('click', function() {
+					var action = this.getAttribute('data-action');
+					if(action === 'add') {
+						$slider.flexslider('addSlide', getSlide());
+					} else {
+						var count = $slider.flexslider('count');
+						count > 1 && $slider.flexslider('removeSlide', $slider.flexslider('count') - 1);
+					}
+				});
+
+			});
+		</script>
+			
+
+		<notempty name="size">
+		<!--选择规格-->
+		<div class="choosebox">
+			<p style="font: 18px '微软雅黑';">选择规格</p>
+			<ul class="clearfix">
+				<volist name="size" id="vo">
+				<li>
+					<input type="radio" name="name"/>
+					<a href="javascript:void(0);" class="size_radioToggle"><span class="value">{$vo}</span></a>
+					<input type="hidden" name="id" value="{$i-1}"></a>
+					<input type="hidden" name="yhprice{$i-1}" value="{$price[$i-1]}">
+					<input type="hidden" name="goods_stock{$i-1}" value="{$goods_stock[$i-1]}">
+					<input type="hidden" name="cost{$i-1}" value="{$cost[$i-1]}">
+				</li>
+				</volist>
+			</ul>
+		</div>
+	
+
+
+		<!-- hidden area -->
+			<input type="hidden" name="size" id="size" value="">
+			<!-- 单品适配 -->
+			<input type="hidden" name="yhprice" value="">
+			<input type="hidden" name="goods_stock" value="">
+			<input type="hidden" name="cost" value="">
+			<else />
+			<input type="hidden" name="cost1" value="{$cost}" />
+			</notempty>
+		<!--购买数量-->
+		<div id="purchase-num">
+			<p style="font-size: 18px;">购买数量：</p>
+			<div class="am-g" style="margin-top: 10px;">
+  				<div id="add-sub" class="am-u-sm-6">
+  					<span><input type="text" id="quantity"  value="1" orig="1" changed="1" class="spinnerExample"onafterpaste="this.value=this.value.replace(/\D/g,'')" onKeyUp="this.value=this.value.replace(/\D/g,'')" /></span>
+  				</div>
+  				<div id="remain" class="am-u-sm-6">
+  					<span style="">剩余
+  						  <notempty name="size">{$goods_stock[0]}<else/>
+						      <if condition="$item.goods_stock lt 0">
+						        <else />{$item.goods_stock}
+						      </if>
+					      </notempty>件
+					</span>
+  				</div>
+			</div>
+		</div>
+		
+		<!--佳品搭配-->
+		<div id="Best-match" class="am-slider am-slider-default am-slider-carousel" data-am-flexslider="{itemWidth: 170, itemMargin: 5, slideshow: false}">
+			<p>佳品搭配</p>
+  			<ul class="am-slides">
+  				<volist name="itemsbuy" id="vo">
+    			<li><a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}"><img src="data/upload/item/{$vo.img}" alt="佳品" style="width: 170px; height: 170px;"/></a></li>
+    			<!-- <li><img src="../Style/index-images/qita.gif" alt="" style="width: 170px; height: 170px;"/></li>
+    			<li><img src="../Style/index-images/muying.gif" alt="" style="width: 170px; height: 170px;"></li>
+    			<li><img src="../Style/index-images/shipin.gif" alt="" style="width: 170px; height: 170px;"></li>
+    			<li><img src="../Style/index-images/gehu.gif" alt="" style="width: 170px; height: 170px;"></li> -->
+    		    </volist>
+ 			 </ul>
+		</div>
+		
+		<!--商品介绍-->
+		<div id="product_intro" class="am-slider am-slider-default am-slider-carousel" data-am-flexslider="{itemWidth: 170, itemMargin: 5, slideshow: false}">
+
+			<p>产品详情</p>
+			<div class="proneirong">
+				<notempty name="item.info">
+				{$item.info}
+				<else />
+				<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无产品详情！</div>
+				</notempty>
+			</div>
+		</div>
+		
+		<!--热品推荐-->
+		<div id="hot_products" class="am-slider am-slider-default am-slider-carousel" data-am-flexslider="{itemWidth: 170, itemMargin: 5, slideshow: false}">
+			<p style="">热品推荐<span style="float: right;">查看更多>></span></p>
+  			<ul class="am-slides">
+    			<volist name="itemsbuy" id="vo">
+    			<li>
+    				<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+    					<img src="data/upload/item/{$vo.img}" alt="佳品" style="width: 170px; height: 170px;"/>
+    				</a>
+    			</li>
+    			<!-- <li><img src="../Style/index-images/qita.gif" alt="" style="width: 170px; height: 170px;"/></li>
+    			<li><img src="../Style/index-images/muying.gif" alt="" style="width: 170px; height: 170px;"></li>
+    			<li><img src="../Style/index-images/shipin.gif" alt="" style="width: 170px; height: 170px;"></li>
+    			<li><img src="../Style/index-images/gehu.gif" alt="" style="width: 170px; height: 170px;"></li> -->
+    			</volist>
+ 			 </ul>
+		</div>
+		
+		<!--评价-->
+		<div style="width: 100%; background-color: white; margin-top: 5px;">
+			<p style="font-size: 20px; color: black; height: 35px; line-height: 35px; margin-left: 5px; margin-top: 5px;"><img src="../Style/index-images/zan.png" alt="评价logo" style="width:30px; height:30px; margin-left:10px;"/>&nbsp;评价</p>
+			<notempty name="cmt_list">
+				<volist name="cmt_list" id="vo">
+				<div class="am-g" style="margin-top:10px ; border-bottom:solid 1px rgb(230,230,230);">
+	  				<div class="am-u-sm-2"><img src="{$vo.cover}"  alt="用户" style="width: 35px; height: 35px;margin-left: 10px;" /></div>
+	  				<div class="am-u-sm-10" style="line-height: 35px;">{$vo.uname}</div>
+	  				<div class="am-u-sm-12" style="padding: 10px;"><span>{$vo.info}</span></div>
+				<!-- 评论内容 -->
+					<if condition="($vo.picurl1 neq '') OR ($vo.picurl2 neq '') OR ($vo.picurl3 neq '')">
+						<div class="am-comment-bd" style="margin-top:-15px;">
+							<if condition="$vo.picurl1 neq ''">
+								<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+									<img src="{$vo.picurl1}" class="example-image" style="width:50px;height:50px;" />
+								</a>
+							</if>
+							<if condition="$vo.picurl2 neq ''">
+								<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+									<img src="{$vo.picurl2}" class="example-image" width="50" height="50" />
+								</a>
+							</if>
+							<if condition="$vo.picurl3 neq ''">
+								<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+									<img src="{$vo.picurl3}" class="example-image" width="50" height="50" />
+								</a>
+							</if>
+						</div>
+					</if>
+				</div>
+				</volist>
+				<else />
+					<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无评论！</div>
+				</notempty>
+		</div>
+		<!--查看全部评价-->
+		<div id="all_comment">
+			<p style="">查看全部评价</p>
+		</div>
+		
+		
+	
+		<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default">
+			<ul class="am-navbar-nav am-cf am-avg-sm-3 carbottombj" style=" background:#FFF; border-top:1px #dad9d9 solid;">
+			
+				<if condition="$item.goods_stock lt 1">
+					<li style="background:#999999;color:#FFFFFF">
+						<a href="javascript:;">已售完</a>
+					</li>
+					<else />
+					<li >
+						<a href="javascript:;" class="m-tip" onClick="buys();" style="font-size:14px; background-color: rgb(246,210,188); color: rgb(224,94,16);"><img src="../Style/index-images/shop-car2.png" alt="购物车" />加入购物车</a>
+					</li>
+					<li >
+						<a href="javascript:;" class="" onClick="buys(1);" style="font-size:14px;color:white; background-color: rgb(224,94,16);"><img src="../Style/index-images/buy.png" alt="购买"/>立即购买</a>
+					</li>
+				</if>
+
+			</ul>
+		</div>
+		<script type="text/javascript">
+			//点击调用次方法
+			function shoucangFn() {
+				//商品的id号
+				var id = {$item.id};
+				var url = "./index.php";
+				//发出请求
+				$.getJSON(url,{m:"Item",a:"shoucang",id:id},function(data){
+					//请求完毕后返回的数据
+					if(data.error){
+						/*alert(data.error);
+						if(data.error === "请先登录后收藏!") {
+							location.href = "./index.php?m=User&a=login";
+						}*/
+						$(".am-icon-star-o").css('color','#FABE01');
+						$('.cartmsg').html(data.error);
+						$('.cartmsg').slideDown(500);
+						setTimeout(slideUp_fn, 6000);
+						return;
+					}
+					if(data.success) {
+						//alert(data.success);
+						$(".am-icon-star-o").css('color','#FABE01');
+						$('.cartmsg').html(data.success);
+						$('.cartmsg').slideDown(500);
+						setTimeout(slideUp_fn, 6000);	
+					}
+				});
+			}	
+			function buys(an, cb) {
+				var size = $("input[name=size]").val();
+				//alert(size);
+				var issize = $("input[name=issize]").val(); //判断是否存在分类，若无为单品下单，获取单品价格
+
+				if(size == '') {
+					//alert('请选择分类');
+					$('.proshudamai').css('border', '1px solid red');
+					$('.cartmsg').html('请选择商品分类.');
+					$('.cartmsg').slideDown(500);
+					setTimeout(slideUp_fn, 6000);
+					return;
+				}
+				var goodId = $("#goodId").val();
+				//无分类下单
+				if(issize == '') {
+					var yhprice = $("input[name=price]").val();
+					var cost = $("input[name=cost1]").val(); //判断是否存在分类，若无为单品下单，获取单品成本价格
+				} else {
+					var yhprice = $("input[name=yhprice]").val();
+					var cost = $("input[name=cost]").val();
+				}
+				var quantity = $("#quantity").val();
+				var discount = $("#discount").val();
+
+				if(quantity == '') {
+					alert('请输入购买数量');
+					return;
+				}
+				if(parseInt(quantity) < 1) {
+					alert("购买数量不能小于1");
+					return;
+				}
+				if(isNaN(quantity)) {
+					alert("请输入数字!");
+					return;
+				}
+
+				//立即购买
+				if(an==1){
+			 add_to_cart(goodId,quantity,title,img,price,shopid,yhprice,size,discount,cost,cb);return;
+		}
+        add_cart(goodId,quantity,title,img,price,shopid,yhprice,size,discount,cost,cb);
+	
+    }
+			//立即购买
+			//立即购买
+	function add_to_cart(goodId,quantity,title,img,price,shopid,yhprice,size,discount,cost,cb)	//商品ID，购买数量，相应分类的价格，分类名称
+	{
+		var title = $("#title").val();
+    	var img = $("#img").val();
+    	var price = $("#price").val();
+    	var quantity = $("#quantity").val();
+    	var shopid = $("#shopid").val();
+	
+		var url  = "{:U('Shopcart/add_cart')}";
+		var jsurl = "{:U('Order/jiesuan')}&spr=0";
+     	$.post(url,{goodId:goodId,quantity:quantity,title,img,price,shopid,yhprice:yhprice,size:size,discount:discount,cost:cost},function(data){
+     		if(cb !== undefined) {
+				cb(data);
+				return;
+			}
+     	   if(data.status==1)
+     		{	
+				/*htm='<span>'+data.msg+'！购物车共有'+data.count+'件商品,共计：'+data.sumPrice+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(500);
+				$('#cart_count').html(data.count);
+				$('.am-icon-cart-plus').fadeOut(600);
+				setTimeout(slideUp_fn, 6000);*/
+				location.href = jsurl;			 
+				
+     		}else
+     		{
+     			htm='<span>'+data.msg+'！购物车共有'+data.count+'件商品,共计：'+data.sumPrice+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(1200);
+				$('#cart_count').html(data.count);
+     			$('.am-icon-cart-plus').fadeOut(600);
+     			setTimeout(slideUp_fn, 6000);
+     		}
+     	},'json');
+		
+	}
+    
+	//加入购物车
+    function add_cart(goodId,quantity,title,img,price,shopid,yhprice,size,discount,cost,cb)	//商品ID，购买数量，相应分类的价格，分类名称
+    {
+		//jquery获取隐藏域的值
+    	var title = $("#title").val();
+    	var img = $("#img").val();
+    	var price = $("#price").val();
+    	var quantity = $("#quantity").val();
+    	var shopid = $("#shopid").val();
+		
+     	var url  = "{:U('Shopcart/add_cart')}";
+     	$.post(url,{goodId:goodId,quantity:quantity,title,img,price,shopid,yhprice:yhprice,size:size,discount:discount,cost:cost},function(data){
+     		if(cb !== undefined) {
+				cb(data);
+				return;
+			}
+     	   if(data.status==1)
+     		{	
+				htm='<span>'+data.msg+'！购物车共有'+data.count+'件商品,共计：'+data.sumPrice+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(500);
+				$('#cart_count').html(data.count);
+				$('.am-icon-cart-plus').fadeOut(600);
+				setTimeout(slideUp_fn, 6000);				 
+				
+     		}else
+     		{
+     			htm='<span>'+data.msg+'！购物车共有'+data.count+'件商品,共计：'+data.sumPrice+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(1200);
+				$('#cart_count').html(data.count);
+     			$('.am-icon-cart-plus').fadeOut(600);
+     			setTimeout(slideUp_fn, 6000);
+     		}
+     	},'json');	
+    }
+
+			function slideUp_fn(){
+				$('.cartmsg').slideUp(1200);
+			} 
+			
+			function share() {
+				$("#mcover").show();
+			}
+			$('.spinnerExample').spinner({});
+		</script>
+		<script type="text/javascript" src="../Style/js/lightbox-plus-jquery.min.js"></script>
+		<script src="../Style/js/Y_lazyload.js" type="text/javascript"></script>
+		<!--图片懒加载-->
+		<script type="text/javascript">
+			$(function() {
+				/**
+				 *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+				 *
+				 *   event           //加载img的触发事件
+				 *   img             //随后加载 img 的dom
+				 *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+				 *   animate         //动画效果
+				 *   animate_delay   //动画等待时间，等待图片下载完成
+				 *   animate_time    //动画执行时间
+				 *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+				 **/
+				$(window).Y_lazyload({
+					time_out: 500
+				});
+			});
+		</script>
+	</body>
+	<!--规格选择-->
+	<script type="text/javascript">
+				$(function(){   
+					$('.choosebox li a').click(function(){
+						var thisToggle = $(this).is('.size_radioToggle') ? $(this) : $(this).prev();
+						var checkBox = thisToggle.prev();
+						checkBox.trigger('click');
+						$('.size_radioToggle').removeClass('current');
+						thisToggle.addClass('current');
+						//alert(thisToggle.children().html());
+						document.getElementById('size').value=thisToggle.children().html();
+						document.getElementById('yhprice').value=thisToggle.nextAll().eq(1).val();
+						document.getElementById('goods_stock').value=thisToggle.nextAll().eq(2).val();
+						document.getElementById('cost').value=thisToggle.nextAll().eq(3).val();
+						return false;
+					});		
+				});			
+	</script>
+</html>
+
+

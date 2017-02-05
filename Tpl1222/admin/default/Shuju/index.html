@@ -1,0 +1,464 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商城后台</title>
+<link href="__STATIC__/css/admin/pancl01.css" type="text/css" rel="stylesheet" />
+<link href="__STATIC__/css/admin/pancl02.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATIC__/js/all.js"></script>
+<script type="text/javascript" src="__STATIC__/js/colorbox.js"></script>
+<link href="__STATIC__/js/colorbox/colorbox.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__STATIC__/js/echarts/echarts.js"></script>
+<style type="text/css">
+   #mainer{ text-align:left;}
+    * {
+    box-sizing: border-box;
+}
+*::before, *::after {
+    box-sizing: border-box;
+}
+*::before, *::after {
+    box-sizing: border-box;
+}
+h3, .h3 {
+    font-size: 24px;
+}
+.m-t-xs {
+    margin-top: 5px;
+}
+.block {
+    display: block;
+}
+.scrollable{ margin:10px;}
+.panel.panel-default {
+    border-color: #e8e8e8;
+}
+.bg-light.lter, .bg-light .lter {
+    background-color: #fefefe;
+}
+.m-t {
+    margin-top: 15px;
+}
+.panel {
+    border-radius: 2px;
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel {
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    display: block;
+    height:90px;
+}
+.b-light {
+    border-color: #e4e4e4;
+}
+.b-r {
+    border-right: 1px solid #cfcfcf;
+}
+.padder-v {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.col-md-3 {
+    width: 20%;
+}
+.col-md-1, .col-md-2,.col-sm-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,.col-xs-6,.col-sm-10 {
+    float: left;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+.m-r-sm {
+    margin-right: 10px;
+}
+.fa-stack {
+    display: inline-block;
+    height: 2em;
+    line-height: 2em;
+    position: relative;
+    vertical-align: middle;
+    width: 2em;
+}
+.pull-left {
+    float: left;
+}
+.fa-2x {
+    font-size: 2em;
+}
+.pull-left {
+    float: left !important;
+}
+.text-uc {
+    text-transform: uppercase;
+}
+.text-muted {
+    color: #979797;
+}
+.text-muted {
+    color: #999;
+}
+small {
+    font-size: 12px;
+}
+.padder .fa {
+    margin-right: 5px;
+}
+.text-primary {
+    color: #65bd77;
+}
+.text-info {
+    color: #4cc0c1;
+}
+.text-success {
+    color: #8ec165;
+}
+.text-warning {
+    color: #ffc333;
+}
+.text-danger {
+    color: #fb6b5b;
+}
+.text-light {
+    color: #f1f1f1;
+}
+.text-white {
+    color: #fff;
+}
+.text-dark {
+    color: #2e3e4e;
+}
+.text-blue {
+    color: #368ee0;
+}
+.text-muted {
+    color: #979797;
+}
+.text-center {
+    text-align: center;
+}
+h4, .h4 {
+    font-size: 18px;
+}
+.fa-stack-2x {
+    font-size: 2em;
+}
+.fa-stack-1x, .fa-stack-2x {
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.fa {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+.fa-stack-1x {
+    line-height: inherit;
+}
+.panel.panel-default > .panel-heading, .panel.panel-default > .panel-footer {
+    border-color: #e8e8e8;
+}
+.panel-default > .panel-heading {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    color: #333;
+}
+.font-bold {
+    font-weight: 700;
+}
+.panel-heading {
+    border-radius: 2px 2px 0 0;
+}
+.panel-heading {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 10px 15px;
+}
+.panel-body::after, .modal-footer::before, .modal-footer::after, .row::after {
+    content: " ";
+    display: table;
+}
+.panel-body {
+    padding: 15px;
+}
+.no-padder {
+    padding: 0 !important;
+}
+.bg-white {
+    background-color: #fff;
+    color: #717171;
+}
+.panel-footer {
+    border-radius: 0 0 2px 2px;
+}
+.panel-footer {
+    background-color: #f5f5f5;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top: 1px solid #ddd;
+    padding: 10px 15px;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.col-md-8 {
+    width: 66.6667%;
+}
+.col-md-4 {
+    width: 33.3333%;
+}
+.no-gutter [class*="col"] {
+    padding: 0;
+}
+.b-light {
+    border-color: #e4e4e4;
+}
+.b-r {
+    border-right: 1px solid #cfcfcf;
+}
+.col-xs-3 {
+    width: 25%;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+.m-b {
+    margin-bottom: 15px;
+}
+
+.line {
+    background-color: transparent;
+    border-top: 1px solid #e8e8e8;
+    border-width: 1px 0 0;
+    font-size: 0;
+    height: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+.pull-in {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.col-xs-6 {
+    width: 50%;
+}
+.col-md-12 {
+    width: 100%;
+}
+.m-t-xs {
+    margin-top: 5px;
+}
+.col-sm-10 {
+    width: 83.3333%;
+}
+.money::before {
+    content: "¥";
+    margin-right: 1px;
+}
+.m-n {
+    margin: 0 !important;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.col-sm-2 {
+    width: 16.6667%;
+}
+.text-right {
+    text-align: right;
+}
+.list-group {
+    border-radius: 2px;
+}
+.list-group {
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+.panel .list-group-item {
+    border-color: #f0f0f0;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.list-group-item {
+    border-color: #e8e8e8;
+    padding-right: 15px;
+}
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+}
+</style>
+<script>
+    $(document).ready(function () {
+        $(".group1").colorbox({ rel: 'group1' });
+    });
+</script>
+</head>
+
+<body>
+<div id="mainer">
+        <div class="scrollable padder"> 
+            <section class="panel panel-default m-t" style="height:120px;">
+                <div class="panel-default">
+                    <header class="panel-heading font-bold">昨日数据指标</header>
+                </div>
+                <div class="row m-l-none m-r-none bg-light lter">
+                    <div class="col-sm-6 col-md-3 padder-v b-r b-light" style="text-align:center">
+                         <small class="text-muted text-uc">关注人数</small>
+                         <span class="h3 block m-t-xs"><strong><empty name="list.follownum">0<else />{$list.follownum}</empty></strong></span>
+                    </div>
+                    <div class="col-sm-6 col-md-3 padder-v b-r b-light" style="text-align:center">
+                        <small class="text-muted text-uc">取消关注人数</small>
+                        <span class="h3 block m-t-xs"><strong id="bugs"><empty name="list.unfollownum">0<else />{$list.unfollownum}</empty></strong></span>
+                           
+                    </div>
+                    <div class="col-sm-6 col-md-3 padder-v b-r b-light" style="text-align:center">
+                        <small class="text-muted text-uc">文本请求数</small>
+                        <span class="h3 block m-t-xs"><strong id="Strong1"><empty name="list.textnum">0<else />{$list.textnum}</empty></strong></span>
+                    </div>
+                    <div class="col-sm-6 col-md-3 padder-v b-r b-light" style="text-align:center">
+                        <small class="text-muted text-uc">图文请求数</small>
+                        <span class="h3 block m-t-xs"><strong id="firers"><empty name="list.imgnum">0<else />{$list.imgnum}</empty></strong></span>
+                    </div>
+                   <div class="col-sm-6 col-md-3 padder-v b-r b-light" style="text-align:center">
+                         <small class="text-muted text-uc">语音请求数</small>
+                         <span class="h3 block m-t-xs"><strong><empty name="list.videonum">0<else />{$list.videonum}</empty></strong></span>
+                    </div>
+                </div>
+            </section>
+            <div class="row">
+                <div class="col-md-8" style="width:100% " >
+                        <div class="panel panel-default" style="height:450px;">
+                            <header class="panel-heading font-bold">
+                                <select onchange='redirectto1(this.value)'>
+                                    <volist name="list2" id="vo">
+                                        <option <eq name="nian" value="$vo['year']">  selected </eq> value={$vo.year}>{$vo.year}</option>
+                                        </volist>
+                                </select>
+                                年
+                                <select onchange='redirectto(this.value)'>
+                                        <for start="1" end="13">
+                                            <option <eq name="month" value="$i">  selected </eq> value={$i}>{$i}</option>
+                                        </for>
+                                </select>
+                                月数据指标图
+                                
+                            </header>
+                            <div class="panel-body"  style="height:420px">
+                                <div id="visit_charts" style="height:420px" data-path="/vshop/Ajax/Get/GetGetOrderCountBookingAndOverAndReturn">
+                                    <div class="load">数据加载中...</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-8" style="width:100%;text-align:center">
+                        <div class="panel panel-default m-t" style="height:auto;">
+                            <header class="panel-heading font-bold" style="text-align:left">数据统计图</header>
+                            <table class="list-group" style="width:100%;text-align:center">
+                                    <tr  class="list-group-item" >
+                                        <td style="width:190px">
+                                            日期
+                                        </td>
+                                        <td style="width:190px">
+                                            关注请求数
+                                        </td>
+                                        <td style="width:190px">
+                                            取消关注数
+                                        </td>
+                                        <td style="width:190px">
+                                            文本请求数
+                                        </td>
+                                        <td style="width:190px">
+                                            图文请求数
+                                        </td>
+                                        <td style="width:190px">
+                                            语音请求数
+                                        </td>
+                                    </tr>
+                                    <volist name="list1" id="vo">
+                                        <tr  class="list-group-item">
+                                            <td style="width:190px">
+                                                {$vo.year}-{$vo.month}-{$vo.day}
+                                            </td>
+                                            <td style="width:190px">
+                                                {$vo.follownum}
+                                            </td>
+                                            <td style="width:190px">
+                                                 {$vo.unfollownum}
+                                            </td>
+                                            <td style="width:190px">
+                                                 {$vo.textnum}
+                                            </td>
+                                            <td style="width:190px">
+                                                 {$vo.imgnum}
+                                            </td>
+                                            <td style="width:190px">
+                                                 {$vo.videonum}
+                                            </td>
+                                        </tr>
+                                    </volist>    
+                            </table>
+                        </div>
+                </div> 
+            </div>       
+        </div>
+    <div class="mainbox" style=" display:none;">
+       <div class="mleft">
+
+        
+            <div class="mbar">
+               <h4>微商城提醒</h4>
+           
+               <div class="mtishi">
+                   <p><strong>您需要立即处理:</strong></p>
+               
+                   <p><span>订单提醒:</span>
+                       <a  href="{:U('item_order/index',array('status'=>1,'menuid'=>296))}">待付款订单 [<span class="count">{$count.fukuan}</span>]</a>
+                       <a href="{:U('item_order/index',array('status'=>2,'menuid'=>296))}">待发货订单 [<span class="count">{$count.fahuo}</span>]</a>
+                       <a href="{:U('item_order/index',array('status'=>3,'menuid'=>296))}">已发货订单 [<span class="count">{$count.yfahuo}</span>]</a>
+						<a href="{:U('item_order/index',array('status'=>6,'menuid'=>296))}">退款中订单 [<span class="count">{$count.tuihuo}</span>]</a>
+                   </p>
+                   <p><span>商品提醒:</span> <a href="{:U('item/index',array('status'=>0))}">待上架商品 [<span class="count">{$count.nobuycount}</span>]</a></p>
+               </div>
+           
+               <p><span>商品管理:</span> <a href="{:U('item/index',array('status'=>1,))}">出售中商品 [<span class="count">{$count.buycount}</span>]</a></p>
+				<p><span>三天内新留言:</span> <a href="{:U('index/words')}">有 [<span class="count">{$count.words}</span>]条</a></p>
+				<p><span>提现申请提醒:</span><a href="{:U('index/tixian')}">有 [<span class="count">{$count.tixians}</span>]条</a></p>\
+			   </p>
+            </div>            
+       </div>
+       <div class="mright"> </div>
+    </div>
+</div>
+{$echarts}
+</body>
+</html>
+<script>
+    function redirectto(num){
+        window.location.href="/index.php?g=admin&m=Shuju&a=index&month="+num;
+    }
+    function redirectto1(num){
+        window.location.href="/index.php?g=admin&m=Shuju&a=index&nian="+num;
+    }
+</script>

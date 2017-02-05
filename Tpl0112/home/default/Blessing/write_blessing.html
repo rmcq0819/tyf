@@ -1,0 +1,282 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>祝福语录</title>
+		<include file="public:head" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑"; outline: none;
+			}
+			input,textarea{
+				border:0;
+				-webkit-appearance:none;
+			}
+			label *{
+    			pointer-events: none;
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#comm ul li{
+				margin-top: 15px;
+			}
+			#comm ul li:first-child{
+				margin-top: 49px;
+			}
+			#header{
+				margin-top: 49px; background-color: white;
+			}
+			#header #header-n{
+				line-height: 60px; margin-top: 20px; color: rgb(85,85,85);
+			}
+			#header label{
+				margin-top: 23px;
+			}
+			
+			#comment{
+				border-top: solid 1px rgb(236,236,236); position: relative; left: 0px;
+			}
+			#comment textarea{
+				width: 100%; border: none; background-color: rgb(243,243,243); padding-left: 10px; padding-top: 10px; padding-bottom: 5px; outline: none; color: rgb(85,85,85);
+			}
+			#comment p{
+				position: absolute; right: 10px; bottom: 3px; color: rgb(171,171,171);
+			}
+			
+			#upload-img{
+				background-color: white; padding: 7px; padding-bottom: 16px;
+			}
+			#upload-img .title{
+				color: rgb(85,85,85); font-size: 13px;
+			}
+			#upload-img .am-u-sm-4{
+				position: relative; left: 0px;
+			}
+			#upload-img .am-u-sm-4 img{
+				width: 68px; height:67px; margin: 0 auto;
+			}
+			#upload-img .am-u-sm-4 input{
+				width: 100%; height: 100%;border: solid 1px red; position: absolute; left: 0px; top: 0px; opacity: 0;
+			}
+			#submit{
+				width: 97%; height: 40px; line-height: 40px;background-color: rgb(240,93,0); color: white; text-align: center; font-size: 17px; margin: 0 auto; border-radius: 4px; margin-top: 25px; margin-bottom: 30px;
+			}
+			/*验证消息弹出框*/
+			.showinfo {
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+	        #waiting{
+	        	width: 160px;position: fixed; left: 50%; top: 40%; margin-left: -25px;
+	        }
+	        #waiting p{
+	        	width: 132px;height: 19px;line-height: 19px;color: rgb(221,128,0); margin-top: 15px; font-size: 13px; margin-left: -40px; font-weight: bold; border-radius: 3px;
+	        }
+			.am-radio .am-icon-checked:before, .am-radio-inline .am-icon-checked:before{
+			    content: "\f058";
+			    color: rgb(240,93,0);
+			}
+		</style>
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+	</head>
+
+	<body style="background-color: rgb(243,243,243);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			祝福语录
+		</div>
+		
+		<div id="comm">
+		<form action="{:U('Blessing/write_blessing')}" name="blessing_form" id="blessing_form" method="post" enctype="multipart/form-data">
+			<ul>
+				<li>
+					<div id="header" style="height: 60px;border-bottom: solid 1px rgb(214,214,214);">
+						<div class="am-g">
+  							<div class="am-u-sm-5">
+  								<p id="header-n">
+  									<p>&nbsp;称谓：<input name="name" type="text" style="width: 60%;border: solid 1px rgb(178,178,178); border-radius: 5px; padding-left: 5px;"/></p>
+  								</p>
+  							</div>
+							<input type="hidden" name="phone" value="{$phone}">
+							<input type="hidden" name="orderId" value="{$orderId}">
+  							<div class="am-u-sm-7" style="text-align: center;">
+  								<label class="am-radio-inline">
+      								<input type="radio" name="gender" value="1" data-am-ucheck  checked>
+      								先生
+   		 						</label>
+    							<label class="am-radio-inline">
+      								<input type="radio" name="gender" value="2" data-am-ucheck>
+      								女士
+    							</label>
+    							<label class="am-radio-inline">
+      								<input type="radio" name="gender" value="3" data-am-ucheck>
+      								团体
+    							</label>
+  							</div>
+						</div>
+					</div>
+					<div id="comment">
+						<textarea onkeyup="checkLength(this);" name="blessing" rows="5" cols="" placeholder="将想要对收件人的祝福填写在这儿吧"></textarea>
+						<p><i class="am-icon-edit am-icon-sm"></i>&nbsp;您还可以输入<span id="sy" style="color:rgb(240,93,0);">120</span>个字</p>
+					</div>
+		
+					<div id="upload-img">
+						<p class="title">添加图片:</p>
+						<div class="am-g" style="margin-top: 10px;">
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img.png" id="img_1"  class="am-img-responsive"/>
+			  					<input type="file" name="pic_1" onchange="dochance(this,'1')"/>
+			  				</div>
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img2.png" id="img_2" class="am-img-responsive"/>
+			  					<input type="file" name="pic_2" onchange="dochance(this,'2')"/>
+			  				</div>
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img2.png" id="img_3" class="am-img-responsive"/>
+			  					<input type="file" name="pic_3" onchange="dochance(this,'3')"/>
+			  				</div>
+			  				<p style="color: rgb(150,150,150); text-align: center; margin-top: 70px;">（点击上传）</p>
+						</div>
+					</div>
+					<!------视频上传------>
+					<img src="../Style/index-images/p-line.png" alt="" class="am-img-responsive" style="width: 100%; height: 3px;"/>
+					<div id="upload-img">
+						<p class="title">添加视频:</p>
+						<div class="am-g" style="margin-top: 10px; text-align: center; position: relative; left: 0px;">
+							<!--<div class="am-progress am-progress-xs">
+    							<div class="am-progress-bar" style="width: 80%"></div>
+							</div>-->
+			  				<img src="../Style/index-images/activity/ship.png" alt="" style="width: 200px;"/>
+			  				<input type="file" name="video_1" style="width: 200px;height: 149px;position: absolute; left: 50%; top: 0px; margin-left: -100px; "/>
+			  				
+			  			<!-- 	<p style="color: rgb(150,150,150); margin-top: 7px;">（点击上传）</p> -->
+							<p style="text-align:center; margin-top:5px; color:rgb(150,150,150); font-size:12px;">( 建议WiFi环境上传，视频不超过100M )</p>
+						</div>
+					</div>
+					<img src="../Style/index-images/p-line.png" alt="" class="am-img-responsive" style="width: 100%; height: 3px;"/>
+				</li>
+			</ul>
+			</form>
+			<div id="submit">
+				保存预览
+			</div>
+		</div>
+		
+		<!----------------上传文件中------------->
+		<div id="waiting" style="display:none">
+			<img src="../Style/index-images/activity/move.gif" alt="上传中"/>
+      		<p>正在上传文件...请稍后</p>
+		</div>
+		
+		
+		<button type="button" id="saved" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 260, height: 225}" style="display:none">
+  			点击预览
+		</button>
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		  <div class="am-modal-dialog" style="background: none;">
+		    <div class="am-modal-bd" style="position: relative;left: 0px; border: solid 1px white; background-color: white;height: 300px; border-radius: 5px; margin-top: -30px;">
+	      		<img src="../Style/index-images/activity/close-white.png" alt="关闭" data-am-modal-close style="width: 33px; position: absolute; right: 0px; top: -40px;"/>
+	      		<div class="am-g">
+					<!--<div class="am-u-sm-3">
+						<img src="../Style/index-images/user.png" alt="" style="width: 60px;"/>
+					</div>-->
+					
+					<p style="position: absolute; left: 50%; top: 10px; margin-left: -115px;"><img src="../Style/index-images/activity/qrcodes.png" alt="" class="am-img-responsive" style="width: 230px;"/></p>
+				</div>
+		      	<button style="width: 120px; height: 28px;background-color: rgb(241,93,53); color: rgb(240,197,62); border: solid 1px rgb(240,197,62);border-bottom: solid 2px rgb(240,197,62); border-radius: 10px; position: absolute; left: 50%; top: 249px; margin-left: -60px;" onclick="location.href='{:U('Blessing/blessing',array('phone'=>$phone))}'">点击查看</button>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="showinfo animated shake"></div>
+		<script>
+			$(function(){
+				saved = {$saved};
+				if(saved==1){
+					$("#saved").click();//弹出预览
+				}
+			});
+			
+			
+		</script>
+		<script>	
+			function dochance(input,j){
+				var objUrl = getObjectURL(input.files[0]) ;
+				console.log("objUrl = "+objUrl) ;
+				if (objUrl) {
+					$("#img_"+j).attr("src", objUrl) ;
+				}
+			}
+
+			//建立一個可存取到該file的url
+			function getObjectURL(file) {
+				var url = null ; 
+				if (window.createObjectURL!=undefined) { // basic
+					url = window.createObjectURL(file) ;
+				} else if (window.URL!=undefined) { // mozilla(firefox)
+					url = window.URL.createObjectURL(file) ;
+				} else if (window.webkitURL!=undefined) { // webkit or chrome
+					url = window.webkitURL.createObjectURL(file) ;
+				}
+				return url ;
+			}
+		</script>
+		<script type="text/javascript">
+			function checkLength(which) {
+				var maxChars = 120; //
+				if(which.value.length > maxChars){
+					var content = $('.showinfo').html('您输入的字数超过限制啦~');
+					var w = content.width()/2;
+					$(".showinfo").css("margin-left",-w);
+					$(".showinfo").show().delay(3000).fadeOut();
+					// 超过限制的字数了就将 文本框中的内容按规定的字数 截取
+					which.value = which.value.substring(0,maxChars);
+					return false;
+				}else{
+					var curr = maxChars - which.value.length; 
+					document.getElementById("sy").innerHTML = curr.toString();
+					return true;
+				}
+			}
+			
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#submit").on("click",function(){
+					var name = $("input[name='name']").val();
+					var com = $("textarea[name='blessing']").val();
+					if(name==''){
+						var content = $('.showinfo').html('请输入称谓');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					 }
+					if(com==''){
+						var content = $('.showinfo').html('写下您对亲朋好友的祝福~');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					 }
+					$("#waiting").css('display','');
+					$("#blessing_form").submit(); 
+				});
+			})
+		</script>
+		<include file="public:footer" />
+		
+	</body>
+
+</html>

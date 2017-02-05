@@ -1,0 +1,200 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>评价晒单</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#comm ul li{
+				margin-top: 15px;
+			}
+			#comm ul li:first-child{
+				margin-top: 49px;
+			}
+			#order{
+				margin-top: 49px; background-color: white;
+			}
+			#order:first-child{
+				margin-top: 0px;
+			}
+			#order .num{
+				border-bottom: solid 1px rgb(237,237,237); padding: 7px; color: rgb(85,85,85);
+			}
+			
+			#order .pro-name{
+				margin-top: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 10px; color: rgb(85,85,85);
+			}
+			#order .pro-pri{
+				margin-top: 10px;color: rgb(138,138,138);padding-left: 10px; 
+			}
+			
+			#comment{
+				border-top: solid 1px rgb(236,236,236); position: relative; left: 0px;
+			}
+			#comment textarea{
+				width: 100%; border: none; background-color: rgb(243,243,243); padding-left: 10px; padding-top: 10px; padding-bottom: 5px; outline: none; color: rgb(85,85,85);
+			}
+			#comment p{
+				position: absolute; right: 10px; bottom: 3px; color: rgb(171,171,171);
+			}
+			
+			#upload-img{
+				background-color: white; padding: 7px; padding-bottom: 16px;
+			}
+			#upload-img .title{
+				color: rgb(85,85,85); font-size: 13px;
+			}
+			#upload-img .am-u-sm-4{
+				position: relative; left: 0px;
+			}
+			#upload-img .am-u-sm-4 img{
+				width: 68px; height:67px; margin: 0 auto;
+			}
+			#upload-img .am-u-sm-4 input{
+				width: 100%; height: 100%;border: solid 1px red; position: absolute; left: 0px; top: 0px; opacity: 0;
+			}
+			#submit{
+				width: 97%; height: 40px; line-height: 40px;background-color: rgb(240,93,0); color: white; text-align: center; font-size: 17px; margin: 0 auto; border-radius: 4px; margin-top: 25px; margin-bottom: 30px;
+			}
+			 /*验证消息弹出框*/
+			.showinfo {
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+		</style>
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+	</head>
+
+	<body style="background-color: rgb(243,243,243);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			评价晒单
+		</div>
+		
+		<div id="comm">
+		<form action="index.php?m=Order&a=orderBBS" method="post" name="comment_form" id="comment_form" enctype="multipart/form-data">
+			<ul>
+				<li>
+					<div id="order">
+						<p class="num">订单号：{$orderId} </p>
+						<div class="am-g" style="padding: 7px;">
+  							<div class="am-u-sm-3">
+  								<img src="data/upload/item/{$item['img']}" alt="商品" class="am-img-responsive" style="width:80px;"/>
+  							</div>
+  							<div class="am-u-sm-9">
+  								<p class="pro-name">{$item['title']}</p>
+  								<p class="pro-pri">优品价：<span style="color: rgb(240,93,0); ">￥{$item['price']}</span></p>
+  							</div>
+						</div>
+					</div>
+					<input type="hidden" name="orderId" value="{$orderId}">
+					<input type="hidden" name="itemId" value="{$itemId}">
+					<input type="hidden" name="size" value="{$item['size']}">
+					<div id="comment">
+						<textarea onkeyup="checkLength(this);" name="info" rows="5" cols="" placeholder="写点评价吧，其他饭团会很希望看到它..."></textarea>
+						<p><i class="am-icon-edit am-icon-sm"></i>&nbsp;您还可以输入<span id="sy" style="color:rgb(240,93,0);">120</span>个字</p>
+					</div>
+		
+					<div id="upload-img">
+						<p class="title">评价晒图</p>
+						<div class="am-g" style="margin-top: 10px;">
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img.png" id="img_1"  class="am-img-responsive"/>
+			  					<input type="file" name="picurl1" onchange="dochance(this,'1')"/>
+			  				</div>
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img2.png" id="img_2" class="am-img-responsive"/>
+			  					<input type="file" name="picurl2" onchange="dochance(this,'2')"/>
+			  				</div>
+			  				<div class="am-u-sm-4">
+			  					<img src="../Style/index-images/p-img2.png" id="img_3" class="am-img-responsive"/>
+			  					<input type="file" name="picurl3" onchange="dochance(this,'3')"/>
+			  				</div>
+						</div>
+					</div>
+					<img src="../Style/index-images/p-line.png" alt="" class="am-img-responsive" style="width: 100%; height: 3px;"/>
+				</li>
+			</ul>
+			<div id="submit">
+				提交评价&nbsp;<i class="am-icon-send"></i>
+			</div>
+		</div>
+		
+		
+		<div class="showinfo animated shake"></div>
+		<script>	
+			function dochance(input,j){
+				var objUrl = getObjectURL(input.files[0]) ;
+				console.log("objUrl = "+objUrl) ;
+				if (objUrl) {
+					$("#img_"+j).attr("src", objUrl) ;
+				}
+			}
+
+			//建立一個可存取到該file的url
+			function getObjectURL(file) {
+				var url = null ; 
+				if (window.createObjectURL!=undefined) { // basic
+					url = window.createObjectURL(file) ;
+				} else if (window.URL!=undefined) { // mozilla(firefox)
+					url = window.URL.createObjectURL(file) ;
+				} else if (window.webkitURL!=undefined) { // webkit or chrome
+					url = window.webkitURL.createObjectURL(file) ;
+				}
+				return url ;
+			}
+		</script>
+		<script type="text/javascript">
+			function checkLength(which) {
+				var maxChars = 120; //
+				if(which.value.length > maxChars){
+					var content = $('.showinfo').html('您输入的字数超过限制啦~');
+					var w = content.width()/2;
+					$(".showinfo").css("margin-left",-w);
+					$(".showinfo").show().delay(3000).fadeOut();
+					// 超过限制的字数了就将 文本框中的内容按规定的字数 截取
+					which.value = which.value.substring(0,maxChars);
+					return false;
+				}else{
+					var curr = maxChars - which.value.length; 
+					document.getElementById("sy").innerHTML = curr.toString();
+					return true;
+				}
+			}
+			
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#submit").on("click",function(){
+					var com = $("textarea[name='comment']").val();
+					if(com==''){
+						var content = $('.showinfo').html('写点评论语呗~');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					 }
+					$("#comment_form").submit(); 
+				});
+			})
+		</script>
+		<include file="public:footer" />
+		
+	</body>
+
+</html>

@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="../Style/assets/countUp.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			#content p {
+				text-align: center;font-size: 15px;color: #555;
+			}
+			/*积分中心*/
+			#score{
+				widows: 100%;height: 100px;margin-top: 49px;position: relative;left: 0px;
+			}
+			#score .rule{
+				position: absolute; top: 168px; right: 20px; color: rgb(85,85,85); font-size: 13px;
+			}
+			#score .share,#score .choose{
+				width: 63px; height: 63px; position: absolute; right: 15px; top: 0;
+			}
+			#score .choose{
+				opacity: 0;
+			}
+			
+			#score .all{
+				width: 100%; color: white; position: absolute;top:120px;text-align: center; margin-left: -40px; font-size: 12px;
+			}
+			#score .total{
+				width:100%;color: white; position: absolute; top: 145px; font-size: 25px; text-align: center;
+			}
+			
+			/*选项卡*/
+			.space{
+				position: absolute; z-index: 999; height: 40px;
+			}
+			.tab1{
+				width:100%;margin:50px auto 0 auto; margin-top: 100px;
+			}
+			.menu{
+				height:28px;
+			}
+			.menu li{             /*选项卡切换*/
+				float:left;text-align:center;font-size:14px;width: 50%; height: 40px; background-color: rgb(240, 93, 0);
+			}
+			.menu li img{
+				width: 25px; height: 25px; line-height: 40px;
+			}
+			.menu li.off{
+				background-color: rgb(240,93,0);
+			}
+
+			.menudiv{
+				border-left:#cccccc solid 1px;border-right:#cccccc solid 1px;border-top:0;background:#fefefe;
+			}
+			.menudiv div{
+				padding:5px 5px 0px 5px;line-height:28px;
+			}
+
+			#con_one_1 .title,#con_one_2 .title{
+				padding: 10px;width: 100%;border-bottom: 1px solid #eee; height: 40px; line-height: 20px;
+			}
+			#con_one_1 .title span:first-child,#con_one_2 .title span:first-child{             /*范票明细*/
+				border-left: solid 2px rgb(240,93,0); color: #555; font-size: 15px;
+			}
+			#con_one_1 .title span:last-child,#con_one_2 .title span:last-child{              /* 更多*/
+				float: right; font-size: 13px; color: rgb(171,171,171);
+			}
+			
+			#con_one_1 ul li,#con_one_2 ul li{
+				border-bottom: 1px solid #eee; height: 55px;padding:10px;
+			}
+			#con_one_1 ul li p:first-child,#con_one_2 ul li p:first-child{
+				line-height: 18px;
+			} 
+			#con_one_1 ul li .type,#con_one_2 ul li .type{                         /* 类型*/
+				color: rgb(85,85,85); font-size: 14px;
+			}
+			#con_one_1 ul li .num,#con_one_2 ul li .num{                          /* 积分*/
+				float: right; line-height: 40px; color: black;
+			}
+			#con_one_1 ul li .time,#con_one_2 ul li .time{                         /*时间*/
+				color: rgb(170,170,170); font-size: 13px;
+			}
+			
+			/*没有积分的时候*/
+			.no-score{
+				margin-top: 50px;text-align: center; margin-top: 30px;
+			}
+			.no-score img{
+				width: 90px; height: 90px;
+			}
+			.no-font1{
+				text-align: center; color: #555; margin-top: 5px;font-size:13px;
+			}
+			.no-font2{
+				text-align: center; color: #555; margin-bottom: 50px;font-size:13px;
+			}
+			/*动画*/
+			.dowebok{
+				animation-delay: 1s;
+				animation-iteration-count:15;
+			} 
+			
+			/*弹出选择框*/
+			.am-modal-hd{
+				padding: 11px 10px 10px 10px;
+			}
+			.am-close{
+				font-size: 28px;opacity: 0.9; color: white;
+			}
+			#doc-modal-1 .am-modal-hd{
+				background-color: rgb(240,93,0); color: white;
+			}
+			#doc-modal-1 .am-modal-bd .left{
+				width: 50%; float: left;
+			}
+			#doc-modal-1 .am-modal-bd .right{
+				width: 50%; float: right;
+			}
+			#doc-modal-1 .am-modal-bd .left img,#doc-modal-1 .am-modal-bd .right img{
+				width: 95px; height: 95px;margin: 0 auto; margin-top: 20px;
+			}
+			#doc-modal-1 .am-modal-bd button{
+				width: 130px; height: 28px; background-color: rgb(249,93,0); color: white; border: none; margin-top: 25px; border-radius: 4px; font-size: 13px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			我的范票
+		</div>
+		<!--积分中心-->
+		<div id="score">
+			<img src="../Style/index-images/jifen-bg.png" class="am-img-responsive" alt="背景图" style="width: 100%; height: 200px; " />
+			<!--<img class="animated swing dowebok share" src="../Style/index-images/fenxiang2.png" onclick="window.location.href='{:U('User/redbag_share',array('shares'=>$info['id']))}'" alt="分享范票" />-->
+			<img class="animated swing dowebok share" src="../Style/index-images/fenxiang2.png" alt="分享范票" />
+			<button type="button" class="am-btn am-btn-primary choose" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 295, height: 225}"></button>
+			<p class="rule" onclick="window.location.href='{:U('User/rule')}'"><img src="../Style/index-images/rule.png" alt="范票规则" style="width: 20px; height: 20px; line-height: 23px;" />&nbsp;范票规则</p>
+			<p class="total" id="myTargetElement3"></p>
+		</div>
+		
+		<!--弹出选择红包类型-->
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		  	<div class="am-modal-dialog">
+		    	<div class="am-modal-hd">
+		    		选择分享红包类型
+		     		<a href="javascript: void(0)" class="am-close am-close-spin btn-close" data-am-modal-close>&times;</a>
+		    	</div>
+		    	<div class="am-modal-bd">
+				
+		      		<div class="left" onclick="window.location.href='{:U('User/redbag_one',array('shares'=>$info['id']))}'" >
+		      			<img src="../Style/index-images/single.png" alt="单个发私包" class="am-img-responsive" />
+		      		</div>
+					
+		      		<div class="right" onclick="window.location.href='{:U('User/redbag_share',array('shares'=>$info['id']))}'">
+						<img src="../Style/index-images/duoge.png" alt="多个拼手气" class="am-img-responsive" />
+		      		</div>
+		      		<button class="btn-close" data-am-modal-close>取&nbsp;&nbsp;消</button>
+		      		<div style="clear: both;"></div>
+		    	</div>
+		  	</div>
+		</div>
+		
+		<script>
+			var options = {
+				useEasing : true, 
+				useGrouping : true, 
+				separator : ',', 
+				decimal : '.', 
+				prefix : '', 
+				suffix : '张'
+			};
+			var countpoint = new CountUp("myTargetElement3", 0, <?php echo $point_yuer; ?>, 0, 2.5, options);
+			countpoint.start();
+		</script>
+		
+		
+		<div class="tab1" id="tab1">
+			<div class="menu">
+				<ul>
+					<li id="one1" onclick="setTab('one',1)">
+						<p style="line-height: 40px; color: white;"><img src="../Style/index-images/zhuan.png" alt="赚"/>&nbsp;赚了多少</p>
+					</li>
+					<img class="space" src="../Style/index-images/space.png" alt="分割线"/>
+					<li id="one2" onclick="setTab('one',2)">
+						<p style="line-height: 40px; color: white; "><img src="../Style/index-images/hua.png" alt="花"/>&nbsp;花了多少</p>
+					</li>
+				</ul>
+			</div>
+			
+			
+			<div class="menudiv" style="margin-top: 20px;">
+				
+				<!--我要赚-->
+				<div id="con_one_1">
+					<p class="title"><span>&nbsp;范票明细</span><span onclick="window.location.href='{:U('User/point_detail',array('type'=>1))}'">更多明细>></span></p>
+					<notempty name="msglist">
+						<ul>
+							<volist name="msglist" id="val">
+									<li>
+										<p><span class="type">
+										<switch name="val.type">
+												<case value="5">购物奖励范票</case>
+												<case value="6">评论奖励范票</case>
+												<case value="8">红包奖励范票</case>
+												<case value="9">系统奖励范票</case>
+												<case value="11">红包退还范票</case>
+												<case value="12">范票充值成功</case>
+												<case value="20">转盘抽奖范票</case>
+												<case value="22">系统返还范票</case>
+												<case value="19">人气店铺奖励</case>
+										</switch>
+										<span><span class="num">+{$val.points}</span>
+										</p>
+										<p class="time">{$val.time|date='Y-m-d H:i:s',###}</p>
+									</li>
+								</volist>
+						</ul>
+						<else/>
+						<p class="no-score"><img src="../Style/index-images/no-jifen.png" alt="没积分"/></p>
+						<p class="no-font1">您还没有范票哦</p>
+						<p class="no-font2">赶紧看看<a href="{:U('User/rule')}" style="color:rgb(240,93,0);">范票规则</a>赚范票吧~</p>
+					</notempty>
+				</div>
+				
+				<!--我要花-->
+				<div id="con_one_2" style="display:none;">
+					<p class="title"><span>&nbsp;范票明细</span><span onclick="window.location.href='{:U('User/point_detail',array('type'=>2))}'">更多明细>></span></p>
+					<notempty name="declist">
+							<ul> 
+								<volist name="declist" id="val">
+									<li>
+										<p><span class="type">
+										<switch name="val.type">
+												<case value="7">购物抵扣范票</case>
+												<case value="10">范票红包分享</case>
+												<case value="21">抽奖机会抵扣</case>
+												<case value="25">系统回收范票</case>
+												<case value="26">范票商城兑换</case>
+										</switch>
+										<span><span class="num">-{$val.points}</span></p>
+										<p class="time">{$val.time|date='Y-m-d H:i:s',###}</p>
+									</li>
+								</volist>
+							</ul>
+							<else/>
+							<p class="no-score"><img src="../Style/index-images/no-jifen.png" alt="没积分"/></p>
+							<p class="no-font1">您还没有范票使用记录哦~</p>
+							<p class="no-font2">现在就去<a href="{:U('Index/index')}" style="color:rgb(240,93,0);">使用</a>范票</p>  
+					</notempty>
+				</div>
+				
+			</div>
+		</div>
+		
+		<include file="public:footer" />
+		<!--<script src="../Style/assets/js/amazeui.min.js"></script>-->
+		
+		<!--选项卡js-->
+		<script type="text/javascript">    
+			function setTab(name,cursel){ 
+				cursel_0=cursel;
+				for(var i=1; i<=links_len; i++){
+					var menu = document.getElementById(name+i);
+					var menudiv = document.getElementById("con_"+name+"_"+i);
+					if(i==cursel){
+						menu.className="off";
+						menudiv.style.display="block"; 
+					}
+					else{
+						menu.className="";
+						menudiv.style.display="none";
+					}
+				}
+			}
+			function Next(){                                                        
+				cursel_0++;
+				if (cursel_0>links_len)cursel_0=1
+				setTab(name_0,cursel_0);
+			} 
+			var name_0='one';
+			var cursel_0=1;
+			
+			var links_len,iIntervalId;
+			onload=function(){
+				var links = document.getElementById("tab1").getElementsByTagName('li')
+				links_len=links.length;
+				for(var i=0; i<links_len; i++){
+					links[i].onmouseover=function(){
+						clearInterval(iIntervalId);
+						this.onmouseout=function(){
+							iIntervalId = setInterval(Next,ScrollTime);
+						}
+					}
+				}
+				document.getElementById("con_"+name_0+"_"+links_len).parentNode.onmouseover=function(){
+					clearInterval(iIntervalId);  
+					this.onmouseout=function(){
+						iIntervalId = setInterval(Next,ScrollTime);;
+					}
+				}
+				setTab(name_0,cursel_0);
+				iIntervalId = setInterval(Next,ScrollTime);
+			}
+		</script>
+		<script>
+			$(function(){
+				$(".choose").on("click",function(){
+					if($("doc-modal-1").css("display")!="none")     //禁止页面滚动
+					{
+						window.ontouchmove=function(e){
+	        			e.preventDefault && e.preventDefault();
+	        			e.returnValue=false;
+	        			e.stopPropagation && e.stopPropagation();
+	        			return false;
+						}
+					}
+				});
+				
+			});
+			$(function(){
+				$(".btn-close").on("click",function(){        //当关闭选择红包页面的时候   页面可以滚动
+					window.ontouchmove=null; 
+				});
+			});
+		</script>
+	</body>
+
+</html>

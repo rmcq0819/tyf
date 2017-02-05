@@ -1,0 +1,172 @@
+﻿<include file="public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+	<table width="100%" cellspacing="0" class="search_form">
+    <tbody>
+      <tr>
+        <td>
+        <div class="explain_col" >
+            <form name="searchform" method="get" > 
+                <input type="hidden" name="g" value="admin" />
+                <input type="hidden" name="m" value="User_apply" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="id" value="{$id}" />
+                &nbsp;&nbsp;关键字 :
+                <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                支付时间 :
+                <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{$_REQUEST['time_start']}">
+                -
+                <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{$_REQUEST['time_end']}">
+
+                申请时间 :
+                <input type="text" name="add_time_start" id="time_start" class="date" size="12" value="{$_REQUEST['add_time_start']}">
+                -
+                <input type="text" name="add_time_end" id="time_end" class="date" size="12" value="{$_REQUEST['add_time_end']}">
+
+                申请类型 :
+                 <select name="part">
+                    <option value="2">请选择</option>
+                    <option value="1">店长</option>
+                    <option value="3">经纪人</option>
+                 </select>
+
+                <input type="submit" name="search" class="btn" value="搜索" />
+            </form>
+            <if condition="$id eq '2'">
+            <form action="{:U('User_apply/excelout')}" method="post">
+              <input type="hidden" name="time_start"  value="{$_REQUEST['time_start']}" />
+              <input type="hidden" name="time_end"  value="{$_REQUEST['time_end']}" />
+              <input type="submit" class="btn" style="float:right;top:-27px;" value="导出数据" /> 
+            </form>
+            </if>
+        </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+   
+    <div class="J_tablelist table_list" data-acturi="{:U('User_apply/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+             <th width="30"><span tdtype="order_by" fieldname="id">ID</span></th>
+             <th width="50" align="center"><span data-tdtype="order_by" data-field="username">用户名</span></th>
+             <th align="center"><span data-tdtype="order_by" data-field="wxname">微信号</span></th>
+             <th align="center"><span data-tdtype="order_by" data-field="part">申请类型</span></th>
+            <!--  <th width="100" align="center"><span data-tdtype="order_by" data-field="merchant">店面名称</span></th> -->
+             <th align="center"><span data-tdtype="order_by" data-field="phone_mob">联系方式</span></th>
+            <!--  <th width="100"><span data-tdtype="order_by" data-field="mail">电子邮箱</span></th> -->
+             <th width="130"><span data-tdtype="order_by" data-field="address">联系地址</span></th>
+             <th width="100" align="center"><span>团队上级</span></th>
+             <th width="100" align="center"><span>直接推荐人</span></th>
+			 <th width="150" align="center"><span data-tdtype="order_by" data-field="support_time">支付时间</span></th>
+			 <th width="150" align="center">申请时间</th>
+             <th width="130" align="center" style="display:none;"><span data-tdtype="order_by" data-field="up_do_time">上级审核时间</span></th>
+             <th width="100" align="center"><span data-tdtype="order_by" data-field="up_status">上级审核状态</span></th>
+             <th width="100"> <if condition="$val.up_status eq 1 and $val.hq_status eq 0">{:L('operations_manage')}<else />总部审核状态</if></th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.username}</td>
+                <td align="center">{$val.wxname}</td>
+                <td align="center"><if condition="$val.part eq 1">店长<elseif condition="$val.part eq 3"/><b style="color:blue;">经纪人</b><else/>店长</if></td>
+                 <!-- <td align="center">{$val.merchant}</td> -->
+                <td align="center">{$val.phone_mob}</td>
+              <!-- 	<td align="center">{$val.email}</td> -->
+              	<td align="center">{$val.address}</td>
+                <td align="center">{$val.shares_name}</td>
+                <td align="center">
+					<?php
+						if($val['recom'] == 0){
+							$where['id'] = $val['shares'];
+						}else{
+							$where['id'] = $val['recom'];
+						}
+						echo M('user')->where($where)->getField('username');
+					?>
+				</td>
+				  <td align="center">
+					<if condition="$val.part neq 3">
+						<empty name="val.support_time"><span data-tdtype="edit" data-field="support_time" data-id="{$val.id}" class="tdedit" style="color:red;">暂未支付会员费</span><else />{$val.support_time|date="Y-m-d H:i:s",###}</empty>
+						<else/>
+						无
+					</if>
+				  </td>
+                <td align="center">{$val.add_time|date="Y-m-d H:i:s",###}</td>
+              	<td align="center" style="display:none;"><empty name="val.up_do_time"><b style="color:#3A6DA4">默认通过，不显示时间</b><else />{$val.up_do_time|date="Y-m-d H:i:s",###}</empty></td>
+                <td align="center"><!-- <img data-tdtype="toggle" data-id="{$val.id}" data-field="up_status" data-value="{$val.id}" src="__STATIC__/images/admin/toggle_<if condition="$val.up_status eq 1">enabled<else/>disabled</if>.gif" /> -->
+                <switch name="val.up_status">
+                  <case value="1">审核通过</case>
+                  <case value="2">审核不通过</case>
+                  <default />未处理
+                </switch>  
+                </td>
+                <td align="center">
+                  <if condition="$val.up_status eq 1 and $val.hq_status eq 0">
+                    <!--<a href="{:U('User_apply/hq_pass')}&id={$val['id']}&act=1">审核通过</a>-->
+					<if condition="$val.support_time eq 0">
+						<span style="cursor:pointer;" onclick="to_apply({$val['id']})">审核通过</span>
+						<else/>
+						<a href="{:U('User_apply/hq_pass')}&id={$val['id']}&act=1" style="color:#3A6DA4;font-weight:bold;">审核通过</a>
+					</if>
+                    |
+                    <a href="{:U('User_apply/hq_pass')}&id={$val['id']}&act=2">不通过</a>
+                  <else />
+                    <switch name="val.hq_status">
+                      <case value="2"><a href="{:U('User_apply/delete',array('id'=>$val['id']))}" style="color:red">删除</a></case>
+                      <case value="1">审核通过</case>
+                      <default /><a href="{:U('User_apply/delete',array('id'=>$val['id']))}" style="color:red">删除</a>
+                    </switch>
+                  </if>
+                </td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+    inputField : "J_time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "J_time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "time_start",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+Calendar.setup({
+    inputField : "time_end",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : false,
+    timeFormat : "24"
+});
+
+function to_apply(id){
+	if(confirm('该用户还未支付会员费，您确定要审核通过吗？')){
+		window.location.href="{:U('User_apply/hq_pass')}&id="+id+"&act=1";
+	}else{
+		return false;
+	}
+}
+</script>

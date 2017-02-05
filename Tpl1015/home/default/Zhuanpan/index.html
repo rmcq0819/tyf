@@ -1,0 +1,415 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>转盘抽奖</title>
+		<include file="public:head" />
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			.topnav .back{
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			
+			/*转盘*/
+			#lottery{
+				width:98%;height:310px; margin: 0 auto; padding: 5px;margin-top: 0px; border: solid 2px rgb(240,93,0);
+			}
+			#lottery table td{
+				height:98px;text-align:center;vertical-align:middle;color:#333; border: solid 2px white;
+			}
+			#lottery table td img{
+				width: 100%; height: 75px; margin-top: 10px; 
+			}
+			#lottery table td a{
+				width:100%;height:100px;display:block;text-decoration:none;
+			}
+			#lottery table td.active{
+				/*background-color:#ea0000;*/
+				background-color: rgb(197,175,126);
+			}
+			.tip{
+				float: left; padding-left: 4px;
+			}
+			.tip p:first-child{
+				color: rgb(240,93,0); font-weight: bold; font-size: 14px;
+			}
+			.btn{
+				float: right; margin-top: 9px;
+			}
+			.btn img{
+				width: 76px; height: 32px;
+			}
+			
+			/*按钮*/
+			#btn{
+				margin-top: 20px; text-align: center; padding-bottom: 20px;
+			}
+			#btn button{
+				width: 110px;height: 29px;font-size: 13px;background-color: rgb(240,93,0);border: none; outline: none;color: rgb(251,212,92); border: solid 2px rgb(251,212,92); border-radius: 8px;box-shadow: 0px 1px 4px rgb(251,212,92);
+			}
+			#btn button:first-child{
+				margin-right: 20px;
+			}
+			
+			.am-modal-dialog{
+				background: none; position: relative;left: 0; margin-top: -90px;
+			}
+			.am-modal-dialog .btn-close{
+				width: 28px; height: 28px; position: absolute; top: 0; right: 10px;
+			}
+			.am-modal-dialog .zhong-pro{
+				width: 105px;height: 79px;position: absolute; top: 182px; left: 84px;
+			}
+			.am-modal-dialog .congra{
+				color: rgb(255,241,217); margin-top: -56px; font-size: 13px;
+			}
+			.am-modal-dialog .tips{
+				color: rgb(255,241,217);font-size: 13px;
+			}
+			
+			/*填写收货地址*/
+			.am-modal-hd{
+				background-color: rgb(240,93,0);color: white;padding:10px 10px 11px 10px;
+			}
+			.am-modal-bd .user-name,.am-modal-bd .user-phone{
+				text-align: left; margin-left: 55px; margin-top: 8px;
+			}
+			.am-modal-bd .user-name input,.am-modal-bd .user-phone input{
+				border-bottom: solid 1px rgb(172,172,172); outline: none;
+			}
+			.am-modal-bd .form-group{
+				padding: 0px; margin: 0px; text-align: left;margin-left: 55px; margin-top: 8px;
+			}
+			.am-modal-bd .form-group label{
+				font-size: 14px; margin-left: 9px; text-align: center; padding: 0px; margin: 0px;
+			}
+			.am-modal-bd .form-group select{
+				width: 131px;-webkit-appearance:none;appearance:none;border:none; border-bottom: solid 1px rgb(172,172,172); background-color: white;
+			}
+			.am-modal-bd .form-group i{
+				color: rgb(172,172,172);
+			}
+			.txtarea{
+				text-align: left; margin-top: 8px; margin-left: 31px;
+			}	
+			.txtarea span{
+				font-size: 14px;
+			}
+			#btn-save{
+				width: 100%;position: fixed; bottom: 0; left: 0; 
+			}	
+			#btn-save button{
+				width: 100%;height: 40px;border: none; background-color: rgb(240,93,0); color: white; font-size: 15px;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: rgb(252,233,201);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			转盘抽奖
+		</div>
+		
+		<div style="margin-top: 49px;">
+			<img src="../Style/index-images/activity/chou-header.jpg" alt="头部" class="am-img-responsive" />
+		</div>
+		
+		<!--温馨提示和抽奖说明-->
+		<div>
+			<div class="tip">
+				<p>温馨提示：</p>
+				<p style="color: rgb(240,93,0);">每天可免费抽奖一次，再次抽奖10张范票/次</p>
+			</div>
+			<div class="btn" onclick="location.href='{:U('Zhuanpan/desc')}'">
+				<img src="../Style/index-images/activity/chou-btn.png" alt="抽奖说明" />
+			</div>
+			<div style="clear: both;"></div>     <!--清楚浮动-->
+		</div>
+
+		<!--获奖名单-->
+		<!-- <div id="mar" style="color: rgb(38,33,99);">-->
+		<div id="mar" style="color: rgb(42,170,255);"> 
+			<marquee>
+				<i class="am-icon-volume-up"></i>&nbsp;&nbsp;
+				<volist name="list" id="vol">
+				<span>恭喜{$vol.username}获得{$vol.prize}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</volist>
+			</marquee>
+		</div>
+		<div style="margin-top: -5px; height: 20px; line-height: 16px; color: rgb(240,93,0);">
+			<p style="text-align: right; padding-right: 10px;color:rgb(180,180,180)">已有<span style="color: rgb(240,93,0);">{$count}</span>人参与</p>
+		</div>
+		<!--转盘-->
+		<div id="lottery">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="lottery-unit lottery-unit-0"><img src="../Style/index-images/activity/1.png"></td>
+					<td class="lottery-unit lottery-unit-1"><img src="../Style/index-images/activity/2.png"></td>
+					<td class="lottery-unit lottery-unit-2"><img src="../Style/index-images/activity/3.png"></td>
+				</tr>
+				<tr>
+					<td class="lottery-unit lottery-unit-7"><img src="../Style/index-images/activity/6.png"></td>
+					<td><img src="../Style/index-images/activity/choujiang.png" alt="立即抽奖" style="height: 100px; margin-top: 0px;" onclick="draw('free');"/></td>
+					<td class="lottery-unit lottery-unit-3"><img src="../Style/index-images/activity/7.png"></td>
+				</tr>
+				<tr>
+					<td class="lottery-unit lottery-unit-6"><img src="../Style/index-images/activity/4.png"></td>
+					<td class="lottery-unit lottery-unit-5"><img src="../Style/index-images/activity/8.png"></td>
+					<td class="lottery-unit lottery-unit-4"><img src="../Style/index-images/activity/5.png"></td>
+				</tr>
+			</table>
+		</div>
+		
+		<!--按钮-->
+		<div id="btn">
+			<button onclick="location.href='{:U('Zhuanpan/record')}'">我的中奖纪录</button>
+			<button onclick="share();">分享到朋友圈</button>
+		</div>
+		
+		<!--弹出框-->
+		<button id="btn2" type="button" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 280}" style="display:none;">
+  			你中奖了
+		</button>
+
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+			<div class="am-modal-dialog">
+				<img class="btn-close" data-am-modal-close src="../Style/index-images/activity/close.png" alt="关闭"/>
+			    <img src="../Style/index-images/activity/zhongjiang.png" alt="中奖了" style="width: 260px;" />
+			    <img class="zhong-pro animated rollIn" src="" id="prizeImg" alt="中奖商品"/>
+			    <p class="congra animated bounceInDown" id="prizeContent"></p>
+			    <p class="tips animated  bounceInDown">（奖品可在“我的中奖纪录”中查看）</p>
+			</div>
+		</div>
+			<!--收货地址S-->
+		<button id="btn-addr" type="button" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-2', closeViaDimmer: 0, width: 300, height: 330}" style="display: none;">
+  			Modal
+		</button>
+
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2" style="padding-top: 60px;">
+		  	<div class="am-modal-dialog" style="background-color: white;">
+			    <div class="am-modal-hd">
+			    	填写获奖品收货地址
+			      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close style="color: white;opacity: 1;">&times;</a>
+			    </div>
+			    <div class="am-modal-bd">
+					<form class="form-inline" method="post" action="{:U('Zhuanpan/addr')}" name="form">
+			      	<div class="container">
+	
+					
+							<p class="user-name"><span style="font-size: 14px;">姓&nbsp;名：</span><input type="text" name="name" placeholder="姓名" style="width: 142px;"/></p>
+							<p class="user-phone"><span style="font-size: 14px;">电&nbsp;话：</span><input type="text" name="phone" placeholder="电话" style="width: 142px;" /></p>
+						  	<div data-toggle="distpicker" style="padding: 0px; margin: 0px;">
+								<div class="form-group">
+								  	<label class="sr-only" for="province2" >省&nbsp;份：</label>
+								  	<select class="form-control" id="province2" name="province" data-province="---- 选择省 ----" ></select><i class="am-icon-chevron-down"></i>
+								</div>
+								<div class="form-group">
+								  	<label class="sr-only" for="city2">城&nbsp;市：</label>
+								  	<select class="form-control" id="city2" name="city" data-city="---- 选择市 ----" ></select><i class="am-icon-chevron-down"></i>
+								</div>
+								<div class="form-group">
+								  	<label class="sr-only" for="district2">地&nbsp;区：</label>
+								  	<select class="form-control" id="district2" name="district" data-district="---- 选择区 ----" ></select><i class="am-icon-chevron-down"></i>
+								</div>
+						  	</div>
+						  	<div class="txtarea" style="">
+						  		<span>详细地址：</span>
+						  		<textarea name="address" rows="" cols="" placeholder="详细地址" style="width: 140px; border: solid 1px rgb(172,172,172);"></textarea>
+						  	</div>
+						  	<p style="margin-top: 5px; color: #555;">该地址为奖品邮寄地址，请确认无误后再保存！</p>
+						
+
+					</div>
+					<div id="btn-save">
+						<button type="submit">保&nbsp;&nbsp;存</button>
+					</div>
+					</form>
+			    </div>
+			    
+		  	</div>
+		</div>
+		<input type="hidden" id="addrInfo" value="{$addrInfo}"/>
+		<!--收货地址E-->
+		
+		<!--分享S-->
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+			<img src="../Style/images/guide.png" />
+		</div>
+		<!--分享E-->
+		<include file="public:footer" />
+		<script src="../Style/js/distpicker.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Style/js/distpicker.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var addrInfo = $("#addrInfo").val();
+				
+				if(addrInfo!=='true'){
+					$("#btn-addr").click();
+					if($("doc-modal-2").css("display")!="none")     //禁止页面滚动
+					{
+						window.ontouchmove=function(e){
+						e.preventDefault && e.preventDefault();
+						e.returnValue=false;
+						e.stopPropagation && e.stopPropagation();
+						return false;
+						}
+					}
+				}
+			})
+			$(function(){
+				$(".am-close").on("click",function(){        //当关闭弹出框页面的时候   页面可以滚动
+					window.ontouchmove=null; 
+				});
+			});
+		</script>
+
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var lottery={
+				index:-1,	//当前转动到哪个位置，起点位置
+				count:0,	//总共有多少个位置
+				timer:0,	//setTimeout的ID，用clearTimeout清除
+				speed:20,	//初始转动速度
+				times:0,	//转动次数
+				cycle:50,	//转动基本次数：即至少需要转动多少次再进入抽奖环节
+				prize:-1,	//中奖位置
+				pic:"",
+				content:"",
+				prize_site:"-1",
+				init:function(id){
+					if ($("#"+id).find(".lottery-unit").length>0) {
+						$lottery = $("#"+id);	
+						$units = $lottery.find(".lottery-unit");
+						this.obj = $lottery;
+						this.count = $units.length;
+						$lottery.find(".lottery-unit-"+this.index).addClass("active");
+					};
+				},
+				roll:function(){
+					var index = this.index;
+					var count = this.count;
+					var lottery = this.obj;
+					$(lottery).find(".lottery-unit-"+index).removeClass("active");
+					index += 1;
+					if (index>count-1) {
+						index = 0;
+					};
+					$(lottery).find(".lottery-unit-"+index).addClass("active");
+					this.index=index;
+					return false;
+				},
+				stop:function(index){
+					this.prize=index;
+					return false;
+				}
+			};
+			
+			function roll(){
+				lottery.times += 1;
+				lottery.roll();
+				if (lottery.times > lottery.cycle+10 && lottery.prize==lottery.index) {
+					clearTimeout(lottery.timer);
+					lottery.prize=-1;
+					lottery.times=0;
+					click=false;
+					$("#prizeImg").attr("src","../Style/index-images/activity/"+lottery.pic);
+					$("#prizeContent").text("恭喜您获得"+lottery.content);
+					setTimeout(function(){
+						$("#btn2").click();
+					},1500);
+				}else{
+					if (lottery.times<lottery.cycle) {
+						lottery.speed -= 10;
+					}else if(lottery.times==lottery.cycle) {
+						lottery.prize = lottery.prize_site;		
+					}else{
+						if (lottery.times > lottery.cycle+10 && ((lottery.prize==0 && lottery.index==7) || lottery.prize==lottery.index+1)) {
+							lottery.speed += 110;
+						}else{
+							lottery.speed += 20;
+						}
+					}
+					if (lottery.speed<40) {
+						lottery.speed=40;
+					};
+					//console.log(lottery.times+'^^^^^^'+lottery.speed+'^^^^^^^'+lottery.prize+'^^^^^^^'+lottery.index);
+					lottery.timer = setTimeout(roll,lottery.speed);
+					
+				}
+				
+				return false;
+			}
+			
+			var click=false;
+			
+			window.onload=function(){
+				lottery.init('lottery');
+			};
+			function draw(type){
+				var url="{:U('Zhuanpan/draw')}";
+				$.getJSON(url,{cost:type},function(data){
+					//alert(data.prize_pic+"-"+data.prize_name+"-"+data.prize_site);
+					if(data.status=='true'){
+						if (click) {
+							return false;
+						}else{
+							lottery.speed=100;
+							lottery.prize_site=data.prize_site;
+							lottery.content=data.prize_name;
+							lottery.pic=data.prize_pic;
+							roll();
+							click=true;
+							return false;
+						}
+					}else if(data.status=='false'){
+						alert('非常抱歉出错了...');
+					}else{
+						if(data=='今天的免费抽奖次数已用完啦(>﹏<。)～用10张范票再抽一次？！'){
+							layer.open({
+								title: '提示',
+								content: data,
+								btn: ['确认', '取消'],
+								yes: function(index){
+									layer.close(index);
+									draw('pay');
+								}
+							});
+						}else{
+							layer.open({content: data, time: 3});
+							location.reload();
+						}
+					}
+				});
+			}
+			function share() {
+				$("#mcover").show();
+			}
+		</script>
+	</body>
+
+</html>

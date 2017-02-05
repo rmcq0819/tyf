@@ -1,0 +1,396 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+					'onMenuShareTimeline',
+					'onMenuShareAppMessage',
+				]
+			});
+
+			wx.ready(function() {
+				wx.onMenuShareTimeline({
+					title: "{$fx_info['merchant']}", // 分享标题
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fximg}", // 分享图标
+				});
+				wx.onMenuShareAppMessage({
+					title: "{$fx_info['merchant']}", // 分享标题
+					desc: "{$fx_info['m_desc']}", // 分享描述
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fximg}", // 分享图标
+					type: 'link',
+					dataUrl: '',
+				});
+			});
+		</script>
+		<style>
+			*{
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*立即关注S*/
+			#top{
+				width: 100%;
+				height: 35px;
+				background-color: white;
+			}
+			#top img{
+				width: 35px;
+				height: 35px;
+				margin-left: 5px;
+				padding: 3px;
+			}
+			#top span{
+				width: 50%;
+				height: 35px;
+				color: rgb(239,93,0);
+				line-height: 35px;
+				text-align: center;
+				font-size: 10px;
+			}
+			#top button{
+				width: 17%;
+				height: 25px;
+				color: white;
+				font-size: 9px;
+				float: right;
+				margin-top: 5px;
+				margin-right: 5px;
+				border-radius: 5px;
+				background-color: rgb(239,93,0);
+			}
+			/***立即关注E****/
+			
+			/***宣传图片***/
+			#xuanchuang{
+				width:100%;
+				height: 50px;
+				background-color: rgb(239,93,0);
+			}
+			
+			/******搜索S*******/
+			.am-g{
+				width: 100%;
+				height: 45px;
+				text-align: center;
+				background-color: #EF5D00;
+			}
+			.am-g span{
+				color: white;
+				text-align: center;
+				line-height: 45px;
+				font-size: 14px;
+			}
+			.am-g input{
+				width: 100px;
+				height: 25px;
+				margin-top: 9px;
+				padding-left: 25px;
+				border-bottom-right-radius: 0px;
+				border-top-right-radius: 0px;
+				border-bottom-left-radius: 10px;
+				border-top-left-radius: 10px;
+				background-image: url(../Style/index-images/maihz_03.png);
+				background-repeat: no-repeat;
+			}
+			.am-g button{
+				width: 55px;
+				height: 25px;
+				color: #EF5D00;
+				font-size: 12px;
+				margin-left: -2px;
+				margin-top: 9px;
+				background-color: white;
+				border-bottom-right-radius: 4px;
+				border-top-right-radius: 4px;
+				
+			}
+			/******搜索E*******/
+			
+			/******分类S*******/
+			#sort-top,#sort-bottom{
+				height: 65px;
+				background-color: rgb(243,243,243);
+			}
+			#sort-top img,#sort-bottom img{
+				width: 65px; 
+				margin-top: 10px;
+				margin-left: 11px;
+			}
+			
+			/******分类E*******/
+			
+/*产品展示S*/
+			#product-list{
+				border-bottom: solid 1px rgb(220,220,220); 
+				margin-top: 5px;
+			}
+			#product-name,#free-price,.price1,#market-price,.price2{
+				float: left;
+			}
+			#product-name{               /*产品名称*/
+				color: #555; 
+				font-size: 14px;
+				line-height: 30px; 
+				overflow: hidden; 
+				text-overflow: ellipsis; 
+				white-space: nowrap;
+			}
+			#free-price{                      /*免税价*/
+				color: black; 
+				line-height: 25px; 
+				font-size: 13px;
+			}
+			.price1{
+				line-height: 25px; 
+				color: rgb(240,93,0); 
+				font-size: 14px;
+			}
+			#market-price{
+				color: black; 
+				line-height: 25px; 
+				font-size: 12px;
+			}
+			.price2{                            /*市场价*/
+				line-height: 25px;
+				color: rgb(120,120,120);
+				font-size: 12px;
+			}
+			.nation{							 /*国籍*/
+				float: right;                           
+				line-height: 7px; 
+				font-size: 11px;
+			}
+			
+			/*产品展示E*/
+		</style>
+	</head>
+
+	<body style="margin-top:-22px;">
+		<div id="rtt"></div>
+		<!--关注-->
+		<!-- <div id="top">
+			<i class="am-icon-close am-icon-sm" style="margin-left: 5px;"></i>
+			<img src="../Style/images/logotyf.png" alt="logo"/>
+			<span>点击关注团洋范公众号更多优惠活动等你来</span>
+			<button>立即关注</button>		
+		</div> -->
+		<div id="xuanchuang">
+			<img src="../Style/index-images/xuanchuang.gif" class="am-img-responsive" alt="宣传" />
+		</div>
+		<!-- index banner -->
+		<div class="am-slider am-slider-default bannermain" data-am-flexslider id="demo-slider-0">
+			<ul class="am-slides">
+				<volist name="ad" id="vo">
+					<li <if condition="$vo.url neq ''">onClick="location.href='{$vo.url}'"</if>><img src="data/upload/advert/{$vo.content}" height="200" /></li>
+				</volist>
+			</ul>
+		</div>
+		<!-- 搜索 -->
+		<div class="am-g">
+  			<div class="am-u-sm-6">
+  				<span>在千万海外商品中搜索</span>
+  			</div>
+  			<div class="am-u-sm-6">
+  				<input type="text" id="search-input" name="keyword" onclick="window.location.href='{:U('User/search')}'"/>
+				<button type="button" id="search_btn">搜&nbsp;索</button>
+  			</div>
+  			<script>
+				$('#search_btn').click(function(){
+					var keyword=$('input[name=keyword]');
+					window.location.href= "{:U('User/search',array('keyword'=>'"+keyword.val()+"'))}";
+		
+				});
+
+		</script>
+		</div>
+		<!-- 分类  -->
+		<div id="sort-top" class="am-g">
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 53))}"><img src="../Style/index-images/meizhuang.png" class="am-img-responsive" alt="美妆"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 28))}"><img src="../Style/index-images/gehu.png" class="am-img-responsive" alt="个护"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 23))}"><img src="../Style/index-images/muying.png" class="am-img-responsive" alt="母婴"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 29))}"><img src="../Style/index-images/shipin.png" class="am-img-responsive" alt="食品"/></a>
+			</div>
+		</div>
+		<div id="sort-bottom" class="am-g">
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 30))}"><img src="../Style/index-images/baojian.png" class="am-img-responsive" alt="保健"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 64))}"><img src="../Style/index-images/xiangb.png" class="am-img-responsive" alt="箱包"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 51))}"><img src="../Style/index-images/chufang.png" class="am-img-responsive" alt="厨房"/></a>
+			</div>
+			<div class="am-u-sm-3">
+				<a href="{:U('Item/itemcate', array('pid' => 66))}"><img src="../Style/index-images/qita.png" class="am-img-responsive" alt="其他"/></a>
+			</div>
+		</div>
+	
+		<div class="am-tabs xuankamain" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
+			<div class="am-tabs-bd">
+				<div class="am-tab-panel am-active" style="padding: 0px 10px 10px 10px;
+">
+					<volist name="home_item" id="vo">
+<!-- 						<div id="product-list">
+						<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+						<img src="data/upload/item/{$vo.img}" width="100%" height="200" />
+						<p id="product-name">{$vo.title|msubstr=0,25,'UTF-8',true}</p>
+						<img src="./data/upload/flag/{$vo.name}.jpg" alt="" class="am-img-responsive" id="product-nation-img"/>{$vo.name}
+						<br/>
+						<br/>
+						<p class="free-price">免税价：<span class="price1">￥{$vo.price}</span></p>
+						<p class="market-price">市场价：<span class="price2"><del>￥{$vo.priceyuan}</del></span></p>
+						</a>
+						</div> -->
+
+
+
+
+		<div id="product-list">
+			<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+							<img src="data/upload/item/cover/{$vo.cover}" width="100%" height="200"/>
+							<div class="am-g" style="background-color: white;  height: 30px;">
+  								<div class="am-u-sm-10">
+  									<p id="product-name">{$vo.title|msubstr=0,25,'UTF-8',true}</p>
+  								</div>
+  								<div class="am-u-sm-2" >
+  									<img src="data/upload/flag/{$vo.flag}" alt="国籍" class="am-img-responsive" id="product-nation-img" style="width: 30px; height: 25px; float: right;"/>
+  								</div>
+							</div>
+							
+							<div class="am-g" style="background-color: white; height: 25px;">
+  								<div class="am-u-sm-5">
+  									<span id="free-price">优品价</span><font class="price1">￥{$vo.price}</font>
+  								</div>
+  								<div class="am-u-sm-5" style="display:none;">
+  									<span id="market-price">市场价：</span><font class="price2"><del>${$vo.priceyuan}</del></font>
+  								</div>
+  								<div class="am-u-sm-2">
+  									<p class="nation">{$vo.name}</p>
+  								</div>
+							</div>
+							</a>
+						</div>
+					</volist>
+
+
+				
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--<div class="index_product_list">
+			<ul class="am-avg-sm-2 am-thumbnails indexpromain">
+				<volist name="item" id="vo">
+					<li class="pdt_ser_li am-thumbnail">
+						<if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:40px;" /></if>
+						<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+							<img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif">
+							<div style="width:100%; height:65px;">
+								<div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+									<b style="font-size:15px; color:#FF0000;">¥{$vo.price}</b>
+									<if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+									<a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+								</div>
+								<div style="padding-left:2px;line-height:17px;">{$vo.title|msubstr=0,20,'UTF-8',false}</div>
+							</div>
+						</a>
+					</li>
+				</volist>
+			</ul>
+			<ul id="pagination">
+				<li class="next">{$page}</li>
+			</ul>
+		</div>-->
+
+		<!-- sreach -->
+		<div class="sreach">
+			<header data-am-widget="header" class="am-header am-header-default">
+				<div class="am-g">
+					<div class="am-u-sm-1">
+						<a href="javascript:;" id="back" class="am-icon-chevron-left" style="margin-top:18px;"></a>
+					</div>
+					<div class="am-u-sm-11">
+						<div class="am-input-group" style="width:80%;">
+							<input type="text" class="am-form-field serachimg" id="keyword" placeholder="请输入关键字">
+						</div>
+						<a href="javascript:void(0)" id="sousou" style="width: 50px;height: 22px;background: #ff6666;padding: 5px;margin-left: 10px;border-radius: 5px;color: #fff;">搜索</a>
+					</div>
+					<!--<div class="am-u-sm-1"><a href="javascript:;" class="am-icon-search"></a></div>-->
+				</div>
+			</header>
+			<!-- list -->
+			<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="itemlist" style="padding-bottom:150px;height:600px;overflow:auto">
+			</ul>
+		</div>
+
+		<include file="public:footer" />
+
+	</body>
+
+</html>
+<script src="../Style/js/jquery-ias.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function() {
+		var ias = $.ias({
+			container: ".index_product_list",
+			item: ".pdt_ser_li",
+			pagination: "#pagination",
+			next: ".next a"
+		});
+		ias.extension(new IASSpinnerExtension());
+		ias.extension(new IASTriggerExtension({
+			offset: 3
+		}));
+		ias.extension(new IASNoneLeftExtension({
+			text: '已加载全部'
+		}));
+	})
+</script>
+<script src="../Style/js/Y_lazyload.js" type="text/javascript"></script>
+
+<!--图片懒加载-->
+<script type="text/javascript">
+	$(function() {
+		/**
+		 *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+		 *
+		 *   event           //加载img的触发事件
+		 *   img             //随后加载 img 的dom
+		 *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+		 *   animate         //动画效果
+		 *   animate_delay   //动画等待时间，等待图片下载完成
+		 *   animate_time    //动画执行时间
+		 *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+		 **/
+		$(window).Y_lazyload({
+			time_out: 500
+		});
+	});
+
+	$(function(){
+		$()
+	});
+</script>

@@ -1,0 +1,48 @@
+﻿<include file="public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+    <div class="J_tablelist table_list" data-acturi="{:U('user_category/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="name">用户名</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="shares">推荐人</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="shares">代理商类型</span></th>
+               <!--  <th align="center"><span data-tdtype="order_by" data-field="score">银行卡号</span></th>
+               <th width="30"><span data-tdtype="order_by" data-field="daren">达人</span></th>-->
+              <th width="120" align="center"><span data-tdtype="order_by" data-field="lv">等级</span></th>
+              <!-- <th width="100" align="center"><span data-tdtype="order_by" data-field="ordid">状态</span></th>
+                <th width="100">{:L('operations_manage')}</th> -->
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.username}</td>
+               <td align="center">{$val.shares}</td>
+               <td align="center"><if condition="$val.uid eq 3">店长<elseif condition="$val.uid eq 2"/>掌柜<else/>经纪人</if></td>
+              <!--    <td align="center">{$val.zhanghao}</td> -->
+                
+              <!--  <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="daren" data-value="{$val.daren}" src="__STATIC__/images/admin/toggle_<if condition="$val.daren eq 0">disabled<else/>enabled</if>.gif" /></td>-->
+
+              <td align="center">{$val.level}</td>
+             <!--  <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.state}" src="__STATIC__/images/admin/toggle_<if condition="$val.state eq 0">enabled<else/>disabled</if>.gif" /></td>
+                <td align="center">
+                <if condition="$val.state eq 2"><a href="{:u('user/quer', array('id'=>$val['id'], 'menuid'=>$menuid))}">确认</a> |</if> 
+                  <a href="{:u('user/deletet', array('id'=>$val['id']))}">{:L('delete')}</a></td> -->
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>

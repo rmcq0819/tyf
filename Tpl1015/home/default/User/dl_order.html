@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>待结算分成订单</title>
+</head>
+<include file="public:headuser" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    var $tab_li = $('.fengxiaoti ul li');
+    $tab_li.click(function(){
+        $(this).addClass('zi2 hover').siblings().removeClass('zi2 hover').addClass('zi1');
+        var index = $tab_li.index(this);
+        $('div.fenxiaorenobj >div').eq(index).show().siblings().hide();
+    }); 
+});
+</script>
+<style>
+.topnav{ position:fixed;width:100%;height:49px;z-index:9999; background:#C54056; text-align:center; color:#fff; font-size:16px; line-height:49px; top:0;}
+.topnav .back{ position:absolute; left:8px;top:6px;}
+</style>
+<body>
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 待结算分成订单
+</div>
+<div class="fengxiaotibj" style="margin-top:52px;">
+<div class="fengxiaoti">
+<ul>
+<li <empty name="n"> class="zi2 hover" <else />class="zi1"</empty> ><a href="javascript:void(0)">掌柜待结算分成订单</a></li>
+<li <eq name="n" value="1"> class="zi2 hover" <else />class="zi1"</eq> ><a href="javascript:void(0)">店长待结算分成订单</a></li>
+</ul>
+</div>
+</div>
+<div class="fenxiaorenobj">
+    
+		<div class="fenxiaoren" <notempty name="n">style="display:none"</notempty>>
+			<notempty name="zg_order">
+				<volist name="zg_order" id="vo">
+					<dl <if condition="$i%2 neq 0">class="hover"</if> style="height:75px">
+					  <a href="{:U('User/fcorder_check',array('orderid'=>$vo['orderId']))}">
+						<dt style="width:12%;padding:0 3% 0 3%;">
+							<img <empty name="vo.cover">src="{:avatar($vo['id'], 32)}"<else />src="{$vo.cover}"</empty> width="100" height="100" style="border-radius:100px;" />
+						</dt>
+						<dd style="width:70%;">
+						  订单号：<span style="color:#35749c;">{$vo.orderId}</span><br />
+						  所属店铺：<span style="color:#35749c;">{$vo.merchant|msubstr=0,12,'UTF-8',true}</span><br />
+						  下单时间：<span style="color:#35749c;">{$vo.add_time|date='Y-m-d H:i:s',###}</span><br>
+						  合计：<span style="color:#35749c;">{$vo.order_sumPrice}</span><br />
+						</dd>
+						 <span style="float:right;height:75px;width:7%;line-haight:75px;padding:15px 3% 0 0"><img src="../Style/images/pic11.png" height="40px"></span>
+					  </a>   
+					</dl>
+				</volist>
+			<else />
+				<div style="height:150px;margin:25% auto;">
+					<div class="dingdangwuimg"><img src="../Style/images/pic8.png" width="100" height="100" /></div>
+					<div class="dingdangzi"><span style="color:#333; font-size:14px; font-family:'微软雅黑';">您还没有相关的订单</span></div>
+				</div>
+			</notempty>
+	</div>
+	
+    <div class="fenxiaoren" <neq name="n" value="1">style="display:none"</neq>>
+		<notempty name="xe_order">
+			<volist name="xe_order" id="vo">
+				<dl <if condition="$i%2 neq 0">class="hover"</if> style="height:75px">
+				  <a href="{:U('User/fcorder_check',array('orderid'=>$vo['orderId']))}">
+					<dt style="width:12%;padding:12px 3% 0 3%;height:75px;vertical-align: middle;">
+						<img <empty name="vo.cover">src="{:avatar($vo['id'], 32)}"<else />src="{$vo.cover}"</empty> width="100" height="100" style="border-radius:100px;" />
+					</dt>
+					<dd style="width:65%;height:75px;vertical-align: middle;">
+					  订单号：<span style="color:#35749c;">{$vo.orderId}</span><br />
+					  所属店铺：<span style="color:#35749c;">{$vo.merchant|msubstr=0,12,'UTF-8',true}</span><br />
+					  下单时间：<span style="color:#35749c;">{$vo.add_time|date='Y-m-d H:i:s',###}</span><br>
+					  合计：<span style="color:#35749c;">{$vo.order_sumPrice}</span><br />
+					</dd>
+					 <span style="float:right;height:75px;width:7%;line-haight:75px;padding:15px 3% 0 0;vertical-align: middle;"><img src="../Style/images/pic11.png" height="40px"></span>
+				  </a>
+				</dl>
+			</volist>
+		<else />
+			<div style="height:150px;margin:25% auto;">
+				<div class="dingdangwuimg"><img src="../Style/images/pic8.png" width="100" height="100" /></div>
+				<div class="dingdangzi"><span style="color:#333; font-size:14px; font-family:'微软雅黑';">您还没有相关的订单</span></div>
+			</div>
+		</notempty>
+    </div>
+</div>
+</body>
+</html>

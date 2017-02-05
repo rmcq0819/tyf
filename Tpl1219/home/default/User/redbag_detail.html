@@ -1,0 +1,297 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animate.min.css"/>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				<?php 
+					if($redbag_detail['bag_type']==1){
+				?>
+					title: "{$uinfo.username}给你分享了一个大红包，点我就能领取啦！ - 团洋范", // 分享标题
+				<?php 
+					}elseif($redbag_detail['bag_type']==2){
+				?>
+					title: "{$uinfo.username}给你分享了一个拼手气红包，点我就能领取啦！ - 团洋范", // 分享标题
+				<?php
+					}
+				?>
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/red_bag_small.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				<?php 
+					if($redbag_detail['bag_type']==1){
+				?>
+					title: "{$uinfo.username}给你分享了一个大红包，点我就能领取啦！ - 团洋范", // 分享标题
+				<?php 
+					}elseif($redbag_detail['bag_type']==2){
+				?>
+					title: "{$uinfo.username}给你分享了一个拼手气红包，点我就能领取啦！ - 团洋范", // 分享标题
+				<?php
+					}
+				?>
+				desc: "{$redbag_detail.message}", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/red_bag_small.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			/*头部*/
+			body{
+				background: url(../Style/index-images/hongbao-bg2.png);
+				background-size: cover;
+			}
+			/*弹出窗口活动S*/
+			.am-dimmer.am-active{
+				opacity: 0.9;
+			}
+			.am-dimmer{
+				background-color: rgba(0,0,0,0.7);
+			}
+			#main-img{
+				width: 95%; height: 330px; z-index: 999;
+			}
+			#close-img{
+				width: 25px; height: 25px; position: absolute; top: 50; left: 80%; z-index: 11000;
+			}
+			#fen .text-content,#fen-kai .text-content{
+				width: 170px;position: absolute; top: 230px; left: 120px; font-size: 15px; color: rgb(254,214,99); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+			}
+			
+			#fen-kai .text-content2{              /*分享红包说明*/
+				width: 170px;position: absolute; top: 230px; left: 120px; font-size: 13px; color: rgb(254,214,99); 
+			}
+			#fen-kai .text-name2 a{             /*查看大家的手气*/
+				position: absolute; top: 290px; left: 160px; font-size: 12px; color: white;
+			}
+			#fen .text-name,#fen-kai .text-name{
+				position: absolute; top: 255px; left: 177px; font-size: 12px; color: white;
+			}
+			.text-names{
+				position: absolute; top: 300px; left: 177px; font-size: 12px; color: white;
+			}
+			
+			#wei .text-content{
+				width: 170px;position: absolute; top: 275px; left: 120px; font-size: 15px; color: rgb(254,214,99); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;
+			}
+			
+			#close-img{
+				animation-iteration-count: 20;
+			}
+			#btn-open{                                        /*拆开按钮*/
+				position: absolute; left: 160px; top: 240px;
+			}
+			#fen-btn-open{                                     /*分享拆开按钮*/
+				position: absolute; left: 160px; top: 290px;
+			}
+			#btn-share{										  /*分享按钮*/
+				position: absolute; left: 160px; top: 285px;
+			}
+			#btn-open,#fen-btn-open,#btn-share{            				 /*拆开和分享红包按钮*/
+				background-color: rgb(240,93,0); color: rgb(253,223,143); border: solid 2px rgb(253,223,143); border-radius: 10px; padding: 3px 25px 3px 25px; font-size: 13px;
+			}
+			.div_count{
+				width: 97%; position: relative; left: 0; margin-top: -240px; z-index: 1000;
+			}
+			.count{                                           /* 范票数量*/
+				color: rgb(225,69,56); font-size: 30px;
+			}
+			.fanpiao{
+				position: absolute; left: 183px; top: 153px; color: rgb(240,93,0);
+			}
+			.gra{
+				position: absolute; left: 115px; top: 179px; color: rgb(225,69,56); font-size: 13px;
+			}
+			.tips{
+				width: 63%;color: rgb(253,223,143); position: absolute; z-index: 1000; left: 80px; top: 215px; font-size: 12px;
+			}
+			.layermcont{
+				padding: 15px 15px;
+			}
+			.layermbtn span, .layermchild h3{
+				color: rgb(240,93,0);
+			}
+			/*弹出窗口活动E*/
+			
+		</style>
+	<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<!--弹出框活动S-->
+		<button id="btns" type="button" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 410, height: 280}" style="display: none;"></button>
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+			<!--未拆开的红包-->
+			<!--singlemessage = 个人转发 timeline 朋友圈-->
+			<if condition="$redbag_detail.bag_type eq 1">
+			<div id="wei" class="am-modal-dialog" style="background: none;">
+			    <div class="am-modal-hd" style="margin-top: -35px; position: relative; left: 0; top: 0;">
+			      	<img id="main-img" src="../Style/index-images/hongbao-wei1.png" alt="活动"/>
+			      	<img id="close-img" onclick="window.location.href='{:U('User/redbag_center')}'" class="animated pulse" data-am-modal-close src="../Style/index-images/x.png" alt="关闭"/>
+					<p><button id="btn-open">拆&nbsp;开</button></p>
+					<if condition="$_GET['sharesid'] eq $userid">
+						<p id="ab"><button id="btn-share" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-2',width: 410, height: 50}">分&nbsp;享</button></p>
+						<else/>
+						<p class="text-content">{$redbag_detail.message}</p>
+						<p class="text-names" style="color: white;">快拆开吧&nbsp;!</p>
+					</if>
+			    </div>
+			</div>
+			<!--拆开的红包-->
+			<div id="kai" class="am-modal-dialog" style="background: none; display: none;">
+			    <div class="am-modal-hd" style="margin-top: -35px; position: relative; left: 0; top: 0;">
+			      	<img id="main-img" src="../Style/index-images/hongbao-kai1.png" alt="活动"/>
+			      	<img id="close-img"  onclick="window.location.href='{:U('User/redbag_center')}'" data-am-modal-close src="../Style/index-images/x.png" alt="关闭"/>
+			      	<div class="div_count">
+			      		<p class="count animated rotateInDownLeft">
+							{$redbag_detail.content}
+			      		</p>
+			      	</div>			      	
+			      	<p class="fanpiao">范票</p>
+			      	<p><button id="btn-open">拆&nbsp;开</button></p>
+						<p id="ab"><button id="btn-share" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-2',width: 410, height: 50}">分&nbsp;享</button></p>
+			    </div>
+			</div>
+				<else/>
+					<!--别人分享给自己的红包-->
+					<div id="fen" class="am-modal-dialog" style="background: none;">
+						<div class="am-modal-hd" style="margin-top: -35px; position: relative; left: 0; top: 0;">
+							<img id="main-img" src="../Style/index-images/hongbao-wei1.png" alt="活动"/>
+							<img id="close-img" onclick="window.location.href='{:U('User/redbag_center')}'" class="animated pulse" data-am-modal-close src="../Style/index-images/x.png" alt="关闭"/>
+							<p class="text-content">{$redbag_detail.message}</p>
+							<if condition="$_GET['sharesid'] eq $userid">
+								<p><button id="fen-btn-open" style="position:absolute;top:295px;">拆&nbsp;开</button></p>
+								<p id="ab"><button id="btn-share" style="position:absolute;top:260px;" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-2',width: 410, height: 50}">分&nbsp;享</button></p>
+								<else/>
+								<p class="text-name" style="color: white;">快拆开吧&nbsp;!</p>
+								<p><button id="fen-btn-open">拆&nbsp;开</button></p>
+							</if>
+					   </div>   
+					</div>
+					<div id="fen-kai" class="am-modal-dialog" style="background: none; display: none;">
+						<div class="am-modal-hd" style="margin-top: -35px; position: relative; left: 0; top: 0;">
+							<img id="main-img" src="../Style/index-images/hongbao-kai1.png" alt="活动"/>
+							<img id="close-img"  onclick="window.location.href='{:U('User/redbag_center')}'" data-am-modal-close src="../Style/index-images/x.png" alt="关闭"/>
+							<div class="div_count">
+								<p class="count animated rotateInDownLeft" id="redbag_point">
+									
+								</p>
+							</div>
+							<p class="fanpiao">范票</p>
+							<p class="text-content2">已存入“范票余额”，可到“我的范票”中查看</p>
+							<p class="text-name2"><a onclick="window.location.href='{:U('User/redbag_luck',array('id'=>$_GET['id']))}'">看看大家的手气>><a></p>
+						</div>
+					</div>
+			</if>
+		</div>
+		<!--弹出框活动E-->
+		
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-2">
+			<div class="am-modal-dialog" style="background: none; z-index: 100; height:50px;">
+			    <div class="am-modal-hd" style="margin-top: -270px; width: 93%;">
+			      	<img src="../Style/images/guide.png" alt="分享" style="width: 200px; height: 100px; float: right;" />
+			    </div>	    
+			</div>
+		</div>
+		
+		<!--页面加载完成触发红包弹出活动窗口-->
+		<script>
+			$(function(){
+				$("#btns").click();
+				if($("doc-modal-1").css("display")!="none")     //禁止页面滚动
+				{
+					window.ontouchmove=function(e){
+        			e.preventDefault && e.preventDefault();
+        			e.returnValue=false;
+        			e.stopPropagation && e.stopPropagation();
+        			return false;
+					}
+				}
+			});
+			
+			$(function(){
+				$("#btn-open").on('click',function(){         //打开红包的时候
+					$("#kai").css("display","");
+					$("#wei").css("display","none");
+					$("#kai #ab").hide("slow");
+					window.ontouchmove=null;                //清除事件
+					 $.post('{:U('User/redbag_detaildo')}',{'bagid':<?php echo $_GET['id']; ?>,'sharesid':<?php echo $_GET['sharesid']; ?>,'rand_point':<?php echo $redbag_detail['content']; ?>},function(data){
+							
+					 });
+			});
+			
+			//别人分享红包的事件
+			$(function(){
+				$("#fen-btn-open").on("click",function(){
+					$("#fen-kai").css("display","");
+					$("#fen").css("display","none");
+					window.ontouchmove=null;                //清除事件
+					<?php 
+						if($redbag_detail['bag_type']!=1){
+					?>
+						$.post('{:U('User/redbag_detaildo')}',{'bagid':<?php echo $_GET['id']; ?>,'sharesid':<?php echo $_GET['sharesid']; ?>},function(data){
+							if(data=='rand_out'){
+								layer.open({
+									title: '红包提醒',
+									content: '该红包已被人抢先一步领取！',
+									btn: ['看看是谁'],
+									yes: function(index){
+										layer.close(index);
+										window.location.href="{:U('User/redbag_luck')}&shares=<?php echo $info['id']; ?>&id=<?php echo $_GET['id']; ?>";
+									}
+								}); 
+							}else{
+								$('#redbag_point').html(data);
+							}
+						});
+					<?php
+						}
+					?>
+				});
+			});
+		});
+		</script>
+	</body>
+</html>
+

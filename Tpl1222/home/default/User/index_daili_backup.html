@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+<link href="../Style/dialog.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="../Style/jquery.css">
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
+</head>
+
+<body>
+<title>会员中心 - 主页</title>
+<include file="public:headuser" />
+<div class="content" style="background: #f1f9fb;">
+          <div class="vip_center">
+            <div class="img_font">
+                <div class="img">
+					<img src="{:avatar($visitor['id'], 32)}" />
+<!-- 					<img src="{$visitor['cover']}" /> -->
+                </div>
+                <div class="font">
+                    <h3><if condition="$visitor['nickname'] neq NULL">{$visitor.nickname}({$role})
+        <elseif condition="$visitor['username'] neq NULL"/>{$visitor.username}({$role})
+        <else/>{$visitor.wechatid}</if></h3>
+                    <a href="{:U('User/address')}"><img src="../Style/images/user_06.png" style="width:20px;" /><span>我的收货地址</span></a>
+                </div>
+                <div class="TC" style="">
+                	<a href="{:U('User/logout')}"><img src="../Style/images/User_03.png" width="55" /></a>
+                </div>
+            </div>
+			</div>
+	<a href="javascript:;" title="我的订单" style="color: #4a4a4a;font-family: 黑体;font-size: 18px;background: #fff;display: block;height: 41px;line-height: 41px;border-top: 1px solid #ccc;padding-left: 20px;">
+	我的订单<img src="../Style/images/User_goods_10.png" style="width: 109px;float: right;display:none ;"/></a>
+    <ul class="buyer_stat">
+          <li class="btn_1 <if condition='$status eq 1'>active</if> ">
+		  <a href="{:U('User/index',array('status'=>1))}"><img src="../Style/images/User_11.png" style="width: 46px;"/>({$count1})</a>
+		  <span style="color:red;"><img src="../Style/images/User_11.png" style="width: 46px;"/>({$count1})</span>
+		  </li>        
+          <li class="btn_2 <if condition='$status eq 2'>active</if> ">
+		  <a href="{:U('User/index',array('status'=>2))}"><img src="../Style/images/User_26.png" style="width: 40px;"/>({$count2})</a>
+		  <span style="color:red;"><img src="../Style/images/User_26.png" style="width: 40px;"/>({$count2})</span>
+		  </li>
+          <li class="btn_3 <if condition='$status eq 3'>active</if>">
+		  <a href="{:U('User/index',array('status'=>3))}"><img src="../Style/images/User_14.png" style="width: 39px;"/>({$count3})</a>
+		  <span style="color:red;"><img src="../Style/images/User_14.png" style="width: 39px;"/>({$count3})</span>
+		  </li>
+          <li class="btn_4 <if condition='$status eq 4'>active</if>">
+		  <a href="{:U('User/index',array('status'=>4))}"><img src="../Style/images/User_18.png" style="width: 41px;"/>({$count4})</a>
+		  <span style="color:red;"><img src="../Style/images/User_18.png" style="width: 41px;"/>({$count4})</span>
+		  </li>
+    </ul>
+	<script type="text/javascript">
+    $(function(){
+    $(".buyer_stat > li a").each(function() {
+                href="http://store.weiapps.cn/"+$(this).attr("href");
+                if(window.location.href==href){
+                    $(this).parent("li").addClass("active");
+                }
+            });
+    });
+    </script>
+    <div class="wrap">
+        <div class="public">
+        
+            <notempty name="item_orders">
+             <volist name='item_orders' id='vo' >
+            <div class="order_form">
+                    <p style="color:#495143;font-size:12px;">订单号: {$vo.orderId}
+					<span style="float: right;">
+					<if condition='$status eq 1'>待付款
+					<elseif condition='$status eq 2'/>待发货
+					<elseif condition='$status eq 3'/>待收货
+					<elseif condition='$status eq 4'/>待评价
+					<elseif condition='$status eq 5'/>退货保护期
+					<elseif condition='$status eq 6'/>申请退款中
+					<elseif condition='$status eq 7'/>申请退款失败
+					<elseif condition='$status eq 8'/>退款已退回您的帐号中心</if></span></p> 
+                    <volist name='vo.item' id='item' >
+                    <div class="con">
+                        <p class="ware_pic"><a href="{:U('Item/index',array('id'=>$item['itemId']))}" ><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" style="width:80px;height:80px;"/></a></p>
+                        <p class="ware_text"><a href="{:U('Item/index',array('id'=>$item['itemId']))}">{$item.title}</a><br><span class="attr"></span></p>
+                        <p class="price">价格: <span>¥
+						 <?php
+							$price =$item['price'];
+							if(isset($user_category)){  
+								$discount =$user_category['discount'];
+								$price = $price;
+							}
+							echo round($price,2);
+							?>元</span></p>
+                         <volist name='item.attr' id='attr' >
+                         <p class="price"> {$attr.name}: <span>{$attr.value}</span></p>
+                         </volist>
+                        <p class="amount">数量: <span>{$item.quantity}</span></p><br/><br/>
+						<p class="amount">净含量: <span>{$item.color}</span></p>
+                    </div>
+                  </volist>
+                    <div class="clear"></div>
+                    <div class="foot">
+                         <div class="handle" style="background: #000;">
+                            <div style="float:left;padding-left: 5px;">
+                                总价: <b id="order118_order_amount">¥{$vo.order_sumPrice}元&nbsp;&nbsp;</b>
+                            </div>   
+                         <switch name="vo.status" >
+                         <case value="1"><!--待付款 -->
+                           <a href="{:U('Order/pay',array('orderId'=>$vo['orderId']))}" id="order118_action_pay" class="btn">付款</a> | 
+                           <a href="{:U('Order/cancelOrder',array('orderId'=>$vo['orderId']))}" id="order118_action_cancel"> 取消</a> | 
+                            <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看</a>
+                         </case>
+                         <case value="2"><!--待发货 -->
+                            <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看</a>|
+							<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >申请退款</a>
+                         </case>
+                         <case value="3"><!-- 待收货 -->
+                            <a href="{:U('Order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" id="order118_action_confirm" >确认收货</a>| 
+                            <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看</a>
+                         </case>
+						<case value="4">
+                         <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >去评论</a>| 
+						  <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >申请退货</a>
+                         </case>
+						 <case value="5">
+						 <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看</a>| 
+						 <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >申请退货</a>
+						 </case>
+						<default />
+						<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}" >查看</a>
+						</switch>                     
+                        </div>
+                    </div>
+            </div>
+            </volist>
+            <else/>
+           <div class="order_form member_no_records" style="text-align:center;">
+                <span>没有符合条件的记录</span>
+            </div>
+              </notempty>
+        
+            
+            <div class="order_form_page">
+                <div class="page">
+            	</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="wrap_bottom"></div>
+    </div>     
+    <div class="wrap_line margin1" style="display:none;">
+            <div class="public_index">
+                <div class="information_index">
+                    <div class="awoke">
+                        您目前还没有已生成的订单<br>去<a href="#">商城首页</a>，挑选喜爱的商品，体验购物乐趣吧。
+                    </div>
+                </div>
+
+            </div>
+            <div class="wrap_bottom"></div>
+        </div>
+	<a href="{:U('User/index',array('status'=>5))}" title="订单历史记录" style="font-family: 黑体;font-size: 12px;display: block;height: 35px;line-height: 35px;margin-bottom: 20px;background: #000;width: 20%;color: #ccc;text-align: center;margin-left: 4%;float: left;">
+	历史记录</a>
+	<a href="{:U('User/index',array('status'=>6))}" title="订单退款申请" style="font-family: 黑体;font-size: 12px;display: block;height: 35px;line-height: 35px;margin-bottom: 20px;background: #000;width: 20%;color: #ccc;text-align: center;margin-left: 4%;float: left;">
+	退款申请</a>
+	<a href="{:U('User/index',array('status'=>7))}" title="订单退款失败" style="font-family: 黑体;font-size: 12px;display: block;height: 35px;line-height: 35px;margin-bottom: 20px;background: #000;width: 20%;color: #ccc;text-align: center;margin-left: 4%;float: left;">
+	申请失败</a>
+	<a href="{:U('User/index',array('status'=>8))}" title="订单退款成功" style="font-family: 黑体;font-size: 12px;display: block;height: 35px;line-height: 35px;margin-bottom: 20px;background: #000;width: 20%;color: #ccc;text-align: center;margin-left: 4%;float: left;">
+	退款成功</a>
+	<div class="clear"></div>
+
+	<a href="#" title="个人资料管理" style="display:none;color: #4a4a4a;font-family: 黑体;background: #fff;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	进行微信绑定后才能修改个人资料<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+
+	<a href="{:U('User/username')}" title="个人资料管理" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	个人资料管理<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+
+	<a href="{:U('User/jminfo')}" title="购货加盟商" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	购货加盟商<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+	<a href="{:U('User/gouhuo1')}" title="我要购货" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	我要购货<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+	<a href="{:U('User/ordermsgdl')}" title="购货记录" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	购货记录<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+	<a href="{:U('User/fencheng')}" title="我的下级代理商" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	我的下级代理商<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+	<a href="{:U('User/fencheng')}" title="提成明细" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	提成明细<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+	<a href="{:U('User/lvup')}" title="升级为加盟商" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 41px;line-height: 41px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	升级为加盟商<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+
+	<a href="{:U('User/dazhuanpan')}" title="我的大转盘" style="color: #4a4a4a;font-family: 黑体;font-size: 14px;background: #fff;display: block;height: 50px;line-height: 50px;padding-left: 20px;margin-bottom: 20px;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+	我的大转盘<img src="../Style/images/user_13.png" style="width: 54px;float: right;"/></a>
+    <div class="clear"></div>
+</div>
+<div class="clear" style="height:33px;"></div>
+<!-- <include file="public:footer" /> -->
+
+</body>
+</html>

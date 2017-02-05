@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <css file="__STATIC__/css/admin/style.css" />
+    <title>{:L('website_manage')}</title>
+    <script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
+</head>
+<body  class="pad_lr_10">
+<div class="subnav">
+ 
+</div>
+   <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0">
+        <thead>
+	        <tr>
+				<th width="30"><span data-tdtype="order_by" data-field="id">ID</span></th>
+				<th width="50"><span data-tdtype="order_by" data-field="id">姓名</span></th>
+				<th><span data-tdtype="order_by" data-field="id">联系电话</span></th>
+				<th><span data-tdtype="order_by" data-field="id">邮箱号码</span></th>
+				<th><span data-tdtype="order_by" data-field="id">留言内容</span></th>
+				<th><span data-tdtype="order_by" data-field="id">留言时间</span></th>
+			</tr>
+		</thead>
+		<tbody>
+		<volist name="list" id="item">	
+		<tr>
+	        <td align="center">{$item.id}</td>
+			<td align="center">{$item.user_name}</td>
+			<td align="center">{$item.tel}</td>
+			<td align="center">{$item.email}</td>
+			<td align="center">{$item.words_txt|msubstr=0,25}</td>
+			<td align="center">{$item.add_time}</td>
+		</tr>	
+		 </volist>  
+		 <tbody>
+		</table>
+    </div>
+     <div class="btn_wrap_fixed">
+       &nbsp;
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<script src="__STATIC__/js/jquery/jquery.js"></script>
+<script src="__STATIC__/js/pinphp.js"></script>
+<script>
+//初始化弹窗
+(function (d) {
+    d['okValue'] = lang.dialog_ok;
+    d['cancelValue'] = lang.dialog_cancel;
+    d['title'] = lang.dialog_title;
+})($.dialog.defaults);
+</script>
+<script src="../Style/js/index.js"></script>
+</body>
+</html>

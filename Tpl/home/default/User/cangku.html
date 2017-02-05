@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的仓库</title>
+<include file="public:headtop" />
+<style>
+#content ul,li{padding:0px;margin:0px}
+#content ul	{padding:5px;}
+#content ul li{border-bottom:1px solid #ccc;padding:10px;}
+#content ul li span{font-family:微软雅黑;}
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<h1 align="center" style="padding:10px 0 10px 0;border-bottom:1px solid #ccc;background:#eee">我的仓库</h1>
+<div id="content">
+	<ul>
+	<volist name="cangkuinfo" id="vo">
+		<li>
+			<a href="{:U('Item/index',array('id'=>$vo['goodsid']))}">
+			<span style="color:red;width:300px;">{$iteminfo[$vo['goodsid']]['title']|msubstr=0,9}--{$size[$vo['goodsid']][$vo['size']]|msubstr=4,11}</span>
+			</a>
+			<span style="float:right;">共{$vo['xskucun'] + $vo['xxkucun']}件</span>
+		</li>
+	</volist>
+	</ul>
+</div>
+ <div class="clear" style="height:30px;"></div>
+</body>
+</html>

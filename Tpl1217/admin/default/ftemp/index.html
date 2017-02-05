@@ -1,0 +1,53 @@
+<include file="public:header" />
+
+<style type="text/css">
+.box{ width:100%;  margin:15px;}
+.add{width:70px; height:23px; background:#498CD0; color:#FFFFFF; text-align:center; line-height:22px; border-radius:3px; display:block;cursor:pointer;}
+.line{ border-bottom:1px solid #CCCCCC; padding-bottom:8px;}
+.list{margin-top:10px;border-color:#EAF0F7; border:1px solid #EAF0F7; width:95%;}
+.list tr td{  padding:12px 50px;}
+.list .t1{ background:#EAF0F7; color:#31598A; font-weight:bold; font-size:10px;}
+.sub{ background:#3399FF; padding:10px 20px; color:#FFFFFF; }
+</style>
+<script type="text/javascript">
+function check_all(obj,cName)
+{
+    var checkboxs = document.getElementsByName(cName);
+    for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
+}
+</script>
+<div class="box">
+	<div class="line">
+		<span class="add" onclick="javascript:location.href='./index.php?g=admin&m=ftemp&a=addft'">新增模板</span>
+	</div>
+	<form name="myForm" method="post" action="./index.php?g=admin&m=ftemp&a=dels">
+	<table class="list">
+		<tr class="t1">
+			<td><input type="checkbox" name="all" onclick="check_all(this,'id[]')" />全选</td>
+			<td>运费模板名称</td>
+			<td>计算方式</td>
+			<td>配送区域</td>
+			<td>配送参数</td>
+			<td>管理操作</td>
+		</tr>
+		<volist name="lists" id="list">
+		<tr>
+			<td><input type="checkbox"   name="id[]" value="{$list.id}"></td>
+			<td>{$list.ft_name}</td>
+			<td>
+			<if condition="$list.ft_mode eq 1 ">按件数<elseif condition="$list.ft_mode eq 2 "/> 按重量<else />按体积</if>		
+			</td>
+			<td>{$list.ft_city}</td>
+			<td>原条件：{$list.ft_curr}/费用：{$list.ft_currf}<br/>后续条件：{$list.ft_add}/费用：{$list.ft_addf}</td>
+			<td><a href="./index.php?g=admin&m=ftemp&a=update&id={$list.id}">查看 </a>| 
+			       <a href="./index.php?g=admin&m=ftemp&a=del&id={$list.id}" onClick="return confirm('你确定要将该记录删除吗？');">删除</a>
+		    </td>
+		</tr>
+		</volist>
+	</table>
+	<br/>
+	<a href="javascript:;" onclick="document.myForm.submit();" class="sub">批量删除</a>
+	</form>
+</div>
+</body>
+</html>

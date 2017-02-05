@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<title>会员中心 - 查看物流</title>
+	<link rel="stylesheet" href="../Style/css/style.css" />
+	<link rel="stylesheet" href="../Style/css/wuliu_style.css" />
+</head>
+<body>
+	<header class="header">
+		<div class="header-left">
+			<a href="javascript:void(0)" onclick="history.go(-1);"></a>
+		</div>
+		<div class="header-title">查看物流</div>
+	</header>
+	<div class="main" id="log">
+		<volist name="exp" id="vo" >
+		<section class="log-list">
+			<!-- log-top -->
+			<!-- log-contact -->
+			<div class="new-log">
+				<img src="data/upload/item/{:get_thumb($vo['goods_img'], '_b')}" alt="">
+				<p>订单号：<em style="font-style: normal;color: #df5d10;">{$vo.order_sn}</em></p>
+				<p>物流公司：{$vo.wl_name}</p>
+				<p>物流单号：{$vo.wl_no}</p>
+				<p style="position: relative;">物流电话：<a href="tel:{$vo.wl_tel}"><em style="font-style: normal;color: #41cb9f;">{$vo.wl_tel}</em></a></p>
+				
+				<em style="font-style: normal;font-size: 0.5em;float: right;position: relative;left:68%;top: 22px;">查看详情：</em>
+				<a href="javascrit:;" class="log-more" data-switch="on"></a>
+				
+			</div><!-- new-log -->
+
+			<div class="log-detail">
+			<volist name="vo.wl_info" id="vv" key="kk">
+				<div class="line_01"><img src="../Style/images/line_01.png" alt=""></div>
+				<div class="detList clearfix">
+					<div class="col-xs-1 text-center">
+						<span class="line"></span>
+						<span class="circle <if condition='$kk eq "1"'>cirlceOut</if>"></span><!--签收样式 cirlceOut-->
+					</div>
+					<div class="col-xs-11 borderB">
+						<div class="detInfo">
+							<p >{$vv.content}</p>
+							<div class="detTime">{$vv.time}</div>
+						</div>
+					</div>
+				</div>
+			</volist>
+			</div><!-- log-detail -->
+			<div class="line_02"><img src="../Style/images/line_02.png" alt=""></div>
+
+		</section><!-- log-list -->
+		</volist>
+
+
+	</div><!-- log -->
+	<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			function logLineStyle(){
+				$('.line').each(function(index){
+					$('.line').length
+					var h=$(this).parent().parent().height();
+					$(this).css({
+					'height':h,
+					});
+				});		
+			
+				var lineLength=$('.line').length-1;
+				$('.line').eq(lineLength).css({
+					'height':'25px'
+				});
+				$('.line').eq(0).css({
+					'top':'43px',
+				});
+				var carBottom=(-$('.startCar').parent().parent().height()+10)+'px';
+				$('.startCar').css({
+					'bottom':carBottom
+				});				
+			}
+			logLineStyle();
+			$('.log-more').on('click',function(){
+				if($(this).attr('data-switch') =="off"){
+					$(this).parent().next('.log-detail').slideDown();
+					$(this).css({
+						background　: 'url(../Style/images/ico_more_up.png) no-repeat right'
+					}).attr('data-switch','on');				
+				}else{
+					$(this).parent().next('.log-detail').slideUp();
+					$(this).css({
+						background　: 'url(../Style/images/ico_more_down.png) no-repeat right'
+					}).attr('data-switch','off');					
+				}
+				logLineStyle();
+			});
+		});
+	</script>
+</body>
+</html>

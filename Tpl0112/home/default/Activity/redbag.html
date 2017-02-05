@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>公益红包</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;  
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#header{
+				margin-top: 49px;
+			}
+			#main{
+				background-color: rgb(252,74,74); position: relative; left: 0px;
+			}
+			#main .line{
+				width: 95%;height: 5px;background-color: black; margin: 0 auto; border-radius: 10px; opacity: 0.6;
+			}
+			#main .content{
+				width: 90%;background-color: rgb(255,217,144); margin: 0 auto; overflow-y: scroll; min-height: 110px; max-height: 400px;
+			}
+			#main .content .am-g{
+				background-color: white;
+			}
+			#main .content ul{
+				padding: 8px;
+			}
+			#main .content li{
+				margin-top: 8px;
+			}
+			#main .content li:first-child{
+				margin-top: 0px;
+			}
+			/*按钮*/
+			.btn1,.btn2{
+				margin: 0 auto; text-align: center;
+			}
+			.btn1 button{
+				width: 200px;  height: 40px;background-color: rgb(255,217,144); color: rgb(85,85,85); border: none; border-radius: 3px; font-size: 15px; margin-top: 25px;
+			}
+			.btn2 button{
+				width: 200px; height: 40px;background-color: rgb(255,217,144); color: rgb(85,85,85); border: none; border-radius: 3px;font-size: 15px; margin-top: 15px; margin-bottom: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"> 
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			公益红包
+		</div>
+		<div id="header">
+			<img src="../Style/index-images/activity/huanwei-header.png" alt="头部" class="am-img-responsive" />	
+			<img src="../Style/index-images/activity/huanwei-header2.png" alt="头部" class="am-img-responsive" />
+		</div>
+		<div id="main">
+			<p class="line"></p>
+			<div class="content">
+				<ul>
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4">
+  								<img src="../Style/index-images/activity/fan-main.png" alt="" class="am-img-responsive" style="width: 100px; height: 92px;"/>
+  							</div>
+  							<div class="am-u-sm-8">
+  								<p style="text-align: center; margin-top: 10px;">团洋范购物平台专用范票</p>
+  								<p style="text-align: center; margin-top: 10px;"><img src="../Style/index-images/activity/fanpiao-fan.png" alt="" style="width: 35px;"/>&nbsp;&nbsp;<span style="color: rgb(240,93,0); font-size: 15px;">x{$points}</span></p>
+  							</div>
+						</div>
+					</li>
+					<volist name="coupon" id="vol">
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4" style="position: relative; left: 0px; color: white;">
+  								<img src="../Style/index-images/lan.png" alt="" class="am-img-responsive" style="width: 100px; height: 92px;"/>
+  								<p style="position: absolute; left: 5px; top: 5px;">优惠券</p>
+  								<p style="position: absolute; left: 17px; top: 40px; font-size: 17px; border-bottom: solid 1px white; padding:0px 5px 5px 5px">￥<span style="font-size: 26px;">{$vol.disPrice}</span></p>
+  							</div>
+							
+  							<div class="am-u-sm-8">
+  								<p style="text-align: center;">活动奖励优惠券</p>
+  								<p style="text-align: center;"><img src="../Style/index-images/line-1.png" alt="" style="width: 100px;"/></p>
+  								<p style="text-align: center;">满{$vol.condition}元可用</p>
+  								<p style="text-align: right; margin-right: 5px; border-top: dashed 1px rgb(155,155,155);">{$vol.stime|date="Y.m.d",###}~{$vol.etime|date="Y.m.d",###}</p>
+  							</div>
+							
+						</div>
+					</li>
+					</volist>
+				</ul>
+				
+			</div>
+			<img src="../Style/index-images/activity/a-line.png" alt="线" class="am-img-responsive" style="width: 90%; margin: 0 auto;"/>
+			<p style="width:90%;color: white; text-align: center; font-size: 15px; margin-top: 10px; margin-left: 5%;">恭喜获得团洋范分享的“爱心传递”红包，已存入“我的-会员中心”中</p>
+			<p class="btn1"><button onclick="location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去商城购物</button></p>
+			<p class="btn2"><button onclick="location.href='{:U('vote/index',array('voteId'=>$info['id'],'shares'=>$info['id']))}'">去分享拉票</button></p>
+		</div>
+
+		<include file="public:footer" />  
+	</body>
+
+</html>

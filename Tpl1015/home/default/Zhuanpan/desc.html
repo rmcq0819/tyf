@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			#time{
+				margin-top: 55px;
+			}			
+			#time,#fanshi,#fajiang{
+				padding: 10px;
+			}
+			#time .title,#fanshi .title,#fajiang .title{
+				color: rgb(240,93,0); font-size: 14px;
+			}
+			#time .content,#fanshi .content,#fajiang .content{
+				color: rgb(81,81,81); font-size: 13px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:white;">
+		
+		<div class="topnav">
+			<a href="{:U('Zhuanpan/index')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			抽奖说明
+		</div>
+		
+		<!--活动说明-->
+		<div id="time">
+			<p class="title">
+				活动时间
+			</p>
+			<p class="content">
+				本抽奖活动为商城平台活动，长期有效。
+			</p>
+		</div>
+		
+		<div id="fanshi">
+			<p class="title">参加方式</p>
+			<p class="content">
+				1、点击转盘中间的抽奖按钮转动转盘，一定时间后转盘自动停止，暗格所停留位置即为中奖位置。
+			</p>
+			<p class="content">
+				2、商城平台每天为用户提供一次的免费抽奖机会。
+			</p>
+			<p class="content">
+				3、免费抽奖机会用完后，若想继续抽奖，每次需花费商城专属的范票10张。
+			</p>
+		</div>
+		
+		<div id="fajiang">
+			<p class="title">
+				奖品发放
+			</p>
+			<p class="content">
+				1、活动抽到抵扣券、范票之类的平台专属非物质奖品，系统将自动为您存放到相应位置。
+			</p>
+			<p>
+				2、T恤、充电宝、手机等实物奖品在中奖5个工作日后寄往中奖者所填写的收货地址处。
+
+			</p>
+			<p style="text-align:center; margin-top:20px;font-size:13px;">
+				本活动最终解释权归团洋范平台所有
+			</p>
+		</div>
+		
+		
+	</body>
+
+</html>

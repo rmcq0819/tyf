@@ -1,0 +1,219 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "全民砍价 - 团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/guoqing.jpg", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "全民砍价 - 团洋范", // 分享标题
+				desc: "没有最低，只有更低", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/guoqing.jpg", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			
+			#guess-likess {
+            	height: 50px;
+            	line-height: 50px;
+            	font-size: 15px;
+            	text-align: center;
+            	position: relative;
+            	color: #555;
+        	}
+        	#guess-likess .spanss-1,#guess-likess .spanss-2 {
+            	border-top: 1px solid rgb(190,190,190);
+            	width:25%;
+            	position: absolute;
+            	top: 25px;
+        	}
+        	#guess-likess .spanss-1{
+            	left: 0px;
+        	}
+        	#guess-likess .spanss-2{
+            	right: 0px;
+        	}
+        	
+        	#pro{
+        		background-color: white; margin-top: 20px;
+        	}
+        	#pro ul li{
+        		border-top: solid 1px rgb(181,181,181); padding: 6px; height: 165px;
+        	}
+        	#pro .lefts{
+        		width: 40%; float: left; height: 165px;
+        	}
+        	#pro .lefts fieldset{
+        		border: dashed 1px rgb(117,117,117); margin: 0px;
+        	}
+        	#pro .lefts legend{
+        		border-bottom: none; text-align: center; font-size: 13px; padding-bottom: 0px; margin-bottom: 0px;
+        	}
+        	#pro .rights{
+        		width: 60%; height: 165px ;float: right; position: relative; left: 0; padding-left:8px;
+        	}
+        	#pro .rights .title{
+        		color: rgb(83,83,83);margin-top: 10px; font-size: 13px;
+        	}
+        	#pro .rights .btn-price{
+        		background-color: white; border: none ;border-bottom: solid 1px rgb(240,93,0); color: rgb(240,93,0); font-size: 14px; position:absolute;left: 8px; top: 70px; 
+        	}
+        	#pro .rights .btn-kan{
+        		width: 95%;height: 26px;background-color: rgb(240,93,0); border: solid 1px rgb(240,93,0); color: white; border-radius:3px; position: absolute;left: 8px; bottom: 19px;
+        	}
+
+			/*倒计时*/
+			#clock{
+				text-align: center; font-size: 20px; color: rgb(240,93,0);
+			}
+			.clock{
+				border: solid 1px rgb(240,93,0); padding: 0px 4px 0px 4px; border-radius: 20%;
+			}
+			.day,.hour,.min,.sec{
+				font-size: 13px; color: #555;
+			}
+
+			#guess-like {
+			height: 50px;
+			line-height: 50px;
+			font-size: 13px;
+			text-align: center;
+			position: relative;
+			color: #555;
+			clear:both;
+			}
+			#guess-like .span-1,#guess-like .span-2 {
+			border-top: 1px dashed rgb(190,190,190);
+			width: 35%;
+			position: absolute;
+			top: 25px;
+			}
+			#guess-like .span-1{
+			left: 0px;
+			}
+			#guess-like .span-2{
+			right: 0px;
+		}
+		</style>
+
+	</head>
+
+	<body style="background:rgb(243,243,243);">
+		
+		<div class="topnav">
+			<a href="" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			全民砍价
+		</div>
+		
+		<div style="margin-top: 49px;">
+			<img src="../Style/index-images/activity/header.jpg" alt="头部" class="am-img-responsive" />
+			<img src="../Style/index-images/activity/guoqing.jpg" alt="国庆活动" class="am-img-responsive" />
+			<p style="width: 100%;height: 28px; font-size: 13px ;line-height: 28px; background-color: white; color: rgb(240,93,0); padding-left: 5px;">您找人砍掉多少，团洋范为您买单多少</p>
+		</div>
+		
+		<div>
+			<p id="guess-likess">
+        		<span class="spanss-1"></span>
+        			距离活动结束时间还剩
+        		<span class="spanss-2"></span>
+			</p>
+			<!--倒计时-->
+			<p id="clock"></p>
+		</div>
+		
+		<div id="pro">
+			<ul>
+				<volist name="itemlist" id="val">
+				<li>
+					<div class="lefts">
+						<fieldset >
+							<legend>逢看必砍</legend>
+							<img onclick="window.location.href='{:U('bargain/index',array('id'=>$val['id'],'sharesid'=>$active_uid,'shares'=>$info['id']))}'" src="data/upload/item/{:get_thumb($val['img'], '_b')}" alt="商品图片" class="am-img-responsive" style="width: 100%; height: 110px;" />
+						</fieldset>
+					</div>
+					<div class="rights">
+						<p class="title">{$val.title}</p>
+						<p><button class="btn-price">￥&nbsp;{$val.price}</button></p>
+						<p><button class="btn-kan" onclick="window.location.href='{:U('bargain/index',array('id'=>$val['id'],'sharesid'=>$active_uid,'shares'=>$info['id']))}'"><i class="am-icon-legal"></i>&nbsp;发起砍价</button></p>
+					</div>
+					<div style="clear: both;"></div>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		
+		<script type="text/javascript" src="../Style/js/jquery.countdown.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#clock').countdown('2016/10/8', function(event) {
+				  $(this).html(event.strftime('<span class="clock">%D</span> <span class="day">&nbsp;&nbsp;天&nbsp;&nbsp;</span> <span class="clock">%H</span> <span class="hour">&nbsp;&nbsp;时&nbsp;&nbsp;</span> <span class="clock">%M</span> <span class="min">&nbsp;&nbsp;分&nbsp;&nbsp;</span> <span class="clock">%S</span> <span class="sec">&nbsp;&nbsp;秒</span>'));
+				});
+			});
+		</script>
+
+		<script>
+			$(document).ready(function(){ 
+				//限制字符个数 
+				$(".title").each(function(){ 
+					var maxwidth=23; 
+					if($(this).text().length>maxwidth){
+						 $(this).text($(this).text().substring(0,maxwidth)); 
+						 $(this).html($(this).html()+'...'); 
+					} 
+				}); 
+			});
+		</script>
+		<!--底线-->
+		<p id="guess-like">
+			<span class="span-1" style="border-top: solid 1px rgb(210,210,210);"></span>
+				我是有底线的
+			<span class="span-2" style="border-top: solid 1px rgb(210,210,210);"></span>
+		</p>
+		<include file="public:footer" />
+	</body>
+
+</html>

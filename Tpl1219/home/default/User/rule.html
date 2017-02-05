@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>范票规则</title>
+		<include file="public:head" />
+		<link rel="stylesheet" type="text/css" href="../Style/assets/zzsc.css"/>
+		<script src="../Style/assets/js.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			.topnav .back{
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			
+
+			#tab .tabList p{
+				line-height: 40px; font-size: 15px;
+			}
+			#tab .tabList img{
+				position: absolute; z-index: 999; height: 40px;
+			}
+			
+			#tab .tabCon .title{
+				color: #555;
+				font-size: 14px;
+				margin-bottom:10px;
+			}
+			
+			#tab .tabCon .content{
+				color:#555;
+				font-size:13px;
+				line-height:25px;
+				margin-bottom:10px;
+			}
+			
+			
+			.tabList input{
+				display: none;
+			}
+			.current{
+				color: rgb(240,93,0);
+			}
+			
+			
+		</style>
+	</head>
+
+	<body style="background-color: white;">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			范票规则
+		</div>
+		
+		<!--范票规则内容-->
+		<!--选项卡-->
+		<div id="tab" style="width: 100%;margin-top: 50px;">
+			<div class="tabList">
+				<ul id="ab" style="width: 100%;">
+					<li class="cur" style="width: 50%; height: 40px; background-color: white; border-bottom: solid 1px #eee;">
+						<input type="radio" name="name"/>
+						<p class="size_radioToggle current">	
+							<span>如何使用</span>
+						</p>
+					</li>
+					<img src="../Style/index-images/space.png" alt="分割线"/>
+					<li style="width: 50%; height: 40px; background-color: white;border-bottom: solid 1px #eee;">
+						<input type="radio" name="name"/>
+						<p class="size_radioToggle">
+							<span>如何赚取</span>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div class="tabCon" style="width: 0%;">
+				<!--赚-->
+				<div class="cur" style="margin-top: 45px;">
+					<p class="title">1、购物抵扣</p>
+					<p class="content">
+						范票可直接用于支付团洋范商品订单，范票和现金抵扣的比例为100:1，可使用范票数量为100的整数倍，如100、200、300等范票数，超出1000则不受此限制。<br/>
+					</p>
+					
+					<p class="title">2、如何使用</p>
+					<p class="content">
+						在订单结算页面“使用范票/抵用”处，选择范票数量，即可减免相应付款金额，范票数量小于100是看不到的哦 ~ 具体如下图：
+					</p>
+					
+					<img src="../Style/index-images/point_tips.png" style="margin-bottom:20px;" alt="提示" style="margin:0 auto;" class="am-img-responsive"/>
+					
+				</div>
+				<!--花-->
+				<div style="margin-top: 45px;">
+					
+					<p class="title">1、购买商品</p>
+					<p class="content">
+						通过分享链接购买的，当购买商品后用户和店铺可享受范票回馈，范票回馈值为10 (100张范票等于1元现金)，店长或掌柜在自身店铺购买则只享受单向范票回馈 (10)，取消订单则会扣除相应范票 。
+					</p>
+					
+					<p class="title">2、商品评价</p>
+					<p class="content">
+						使用商品评价功能，我们将在您评价成功后对店铺和您给予相应的范票回馈，范票反馈值为5，用户只能评价该用户名下购买过的商品 。   
+					</p>
+					
+					<p class="title">3、平台游戏</p>
+					<p class="content">
+						通过团洋范开放的游戏可获得范票回馈，回馈值可参考相应的游戏规则。  
+					</p>
+					
+					<p class="title">4、有奖征集</p>
+					<p class="content">
+						关注团洋范或团洋范微讯公众号，参加正在进行的「有奖征集活动」，可获得与活动规则规定的范票回馈。 
+					</p>
+					
+					<p class="title">5、红包互动</p>
+					<p class="content">
+						通过平台的红包功能，可与朋友圈或微信群的朋友进行红包互动，拆开红包后可获得相应的范票收入。
+					</p>
+					
+					<p class="content" style="font-size:14px;">
+						<span style="color:#555;">提示：小范票，大有用，多赚一些囤起来~~</span>
+					</p>
+				</div>
+				
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				$('#ab li p').click(function(){
+					var thisToggle = $(this).is('.size_radioToggle') ? $(this) : $(this).prev();
+					var checkBox = thisToggle.prev();
+					checkBox.trigger('click');
+					$('.size_radioToggle').removeClass('current');
+					thisToggle.addClass('current');
+					return false;
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>

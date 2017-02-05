@@ -1,0 +1,91 @@
+<include file="public:header" />
+<style type="text/css">
+.daijin-a{ background:#EAEEF4; padding:5px 15px; border:1px solid #999999}
+</style>
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="djlist" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$search}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+					<a href="./index.php?g=admin&m=djlist&a=djadd" class="daijin-a">发放代金券</a>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+<script type="text/javascript">
+function check_all(obj,cName)
+{
+    var checkboxs = document.getElementsByName(cName);
+    for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
+}
+</script>
+    <div class="J_tablelist table_list" data-acturi="{:U('score_log/ajax_edit')}">
+	<form name="myForm" method="post" action="./index.php?g=admin&m=djlist&a=dels">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="30">
+					<input type="checkbox" name="all" onclick="check_all(this,'id[]')" />
+				</th>
+				<th width="50">ID</th>
+				<th width="150">所属会员</th>
+				<th width="180">活动名称</th>
+                <th width="150">代金劵名称</th>
+				<th width="50">金额</th>
+				<th width="150">满多少金额可使用</th>
+				<th width="110">开始日期</th>
+				<th width="110">结束日期</th>
+				<th width="150">使用订单号</th>
+				<th width="120">使用情况</th>
+				<th width="90">操作</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="lists" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox"   name="id[]" value="{$val.id}"></td>
+				<td align="center">{$val.id}</center>
+				<td align="center">{$val.djusername}</td>
+				<td align="center">{$val.t_name}</td>
+				<td align="center">{$val.djname}</td>
+                <td align="center">{$val.djmoney}</td>
+				<td align="center"><img src="__STATIC__/images/admin/jb.png" width="14"/>   {$val.djcondition}</td>
+				<td align="center"><if condition="$val.djstart eq 0"><else />{$val.djstart|date="Y-m-d",###}</if></td>
+				<td align="center"><if condition="$val.djend eq 0"><else />{$val.djend|date="Y-m-d",###}</if></td>
+				<td align="center"><empty name="val.order">无<else />{$val.order}</empty></td>
+				<td align="center">
+					<switch name="val.djstatus">
+						<case value="0">未使用</case>
+						<case value="1">已使用</case>
+						<case value="2">已过期</case>
+					</switch>
+				</td>
+				<td align="center"><a href="./index.php?g=admin&m=djlist&a=del&id={$val.id}" onClick="return confirm('你确定要将该记录删除吗？');">删除</a></td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+	<!--<a href="javascript:;" onclick="document.myForm.submit();" class="daijin-a">批量删除</a>-->
+      <label class="select_all mr10"><input type="checkbox" name="all" onclick="check_all(this,'id[]')" />{:L('select_all')}/{:L('cancel')}</label>
+        <a href="javascript:;" onclick="document.myForm.submit();" class="daijin-a">{:L('delete')}</a>
+        <div id="pages">{$page}</div>
+    </div>
+	
+	</form>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>

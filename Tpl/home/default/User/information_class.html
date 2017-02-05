@@ -1,0 +1,206 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<!-- 格式化价格JS，改变数量更新价格JS -->
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			#content p {
+				text-align: center;
+				font-size: 15px;
+				color: #555;
+			}
+			/*信息中心*/
+			#info{
+				margin-top: 55px;
+			}
+			#info li{
+				padding: 5px;
+				border:0px;
+				margin-top:10px;
+			}
+			#info img{
+				width: 50px;
+				height: 50px;
+			}
+			#info p:first-child{
+				margin-top: 5px; 
+				color: #555; 
+				margin-left: 5px;
+			}
+			#info p:last-child{
+				color: rgb(150,150,150); margin-left: 5px;
+			}
+			.topnav .clear-all{     
+				position:absolute; 
+				top:0; 
+				right:6px; 
+				font-size:15px; 
+				line-height:49px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		
+		<div class="topnav">
+			<a href="{:U('User/information_center')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			消息中心({$count})
+			<if condition="$count neq 0">
+				<span class="clear-all"><span style="color:white;"  onclick="clear_msg({$_GET['id']})">清空</span></span>
+			</if>
+		</div>
+
+		<!-- 有通知消息的页面 -->
+		<notempty name="messagelist">
+		
+		<div id="info" data-am-widget="list_news" class="am-list-news am-list-news-default">
+			<div class="am-list-news-bd">
+			  	<ul class="am-list">
+				<volist name="messagelist" id="vo">
+					<switch name="vo.type" >
+						<case value="1">
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<if condition="$vo.status eq 1"><img src="../Style/index-images/fahuo_yes.png" alt="团洋范" />
+									<else/>
+									<img src="../Style/index-images/fahuo_no.png" alt="团洋范" />
+									</if>
+								</div>
+								<div class="am-u-sm-10" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">发货通知 <span style="float:right;font-weight:normal;color:#aaabab;">{$vo.time|date='m月d日',###}</span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">{$vo.content}</p>
+								</div>
+								
+							</div>		
+						</li>
+						</case>
+						
+						<case value="2">
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<if condition="$vo.status eq 1"><img src="../Style/index-images/xinjin_yes.png" alt="团洋范" />
+									<else/>
+									<img src="../Style/index-images/xinjin_no.png" alt="团洋范" />
+									</if>
+								</div>
+								<div class="am-u-sm-10" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">新进代理 <span style="float:right;font-weight:normal;color:#aaabab;">{$vo.time|date='m月d日',###}</span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">{$vo.content}</p>
+								</div>
+								
+							</div>		
+						</li>
+						</case>
+						
+						<case value="3">
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<if condition="$vo.status eq 1"><img src="../Style/index-images/jiesuan_yes.png" alt="团洋范" />
+									<else/>
+									<img src="../Style/index-images/jiesuan_no.png" alt="团洋范" />
+									</if>
+								</div>
+								<div class="am-u-sm-10" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">待结算 <span style="float:right;font-weight:normal;color:#aaabab;">{$vo.time|date='m月d日',###}</span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">{$vo.content}</p>
+								</div>
+								
+							</div>		
+						</li>
+						</case>
+						
+						<case value="4">
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<if condition="$vo.status eq 1"><img src="../Style/index-images/shouhuo_yes.png" alt="团洋范" />
+									<else/>
+									<img src="../Style/index-images/shouhuo_no.png" alt="团洋范" />
+									</if>
+								</div>
+								<div class="am-u-sm-10" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">确认收货 <span style="float:right;font-weight:normal;color:#aaabab;">{$vo.time|date='m月d日',###}</span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">{$vo.content}</p>
+								</div>
+								
+							</div>		
+						</li>
+						</case>
+						</default>
+					</switch>
+			      	
+					
+				</volist>
+			  	</ul>
+			</div>
+		
+		</div>
+		
+		<else />
+		<div class="noshop">
+				<img src="../Style/index-images/xinxizhongxin.png" style="width: 120px; height: 120px;"/>
+			</div>
+			<br />
+			<div id="content">
+					<p>暂无消息</p>
+			</div>
+		</notempty>
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script>
+	function edit(id) {
+		window.location.href = "{:U('User/edit_message')}&id=" + id;
+	}
+
+	function del(id) {
+		if(confirm("确认删除吗?")) {
+			window.location.href = "{:U('User/del_message')}&id=" + id;
+		}
+	}
+	
+	function clear_msg(id) {
+		layer.open({
+			title: '提示',
+			content: '您确定要清空消息记录吗？',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href = "{:U('User/clear_msg')}&id=" + id;
+				layer.open({content: '消息清空成功', time: 1});
+				layer.close(index);
+			}
+		});
+	}
+	
+</script>

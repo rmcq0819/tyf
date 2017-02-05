@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title><eq name="up" value="1">代理升级列表<else />代理申请列表({$count})</eq></title>
+<link href="../Style/css/amazeui.css" rel="stylesheet" type="text/css" />
+<link href="../Style/css/css.css" rel="stylesheet" type="text/css" />
+<include file="public:headtop" />
+</head>
+<body>
+<include file="public:headuser" />
+<header data-am-widget="header"
+          class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+          <a href="javascript:history.go(-1);" class="">
+
+              <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;" alt=""/>
+          </a>
+      </div>
+      <h1 class="am-header-title"><eq name="up" value="1">申请总数({$count})<else />代理总数({$count})</eq></h1>
+</header>
+
+
+
+<div data-am-widget="list_news" class="am-list-news am-list-news-default kashumain" >
+<div class="am-list-news-bd">
+  <ul class="am-list">
+  	<empty name="list">
+		
+  	<else />
+	<volist name="list" id="vo">
+      <li class="am-g am-list-item-dated kashu">
+                <a href="{:U('User/dl_info',array('id'=>$vo['id'],'up'=>$up))}" class="am-list-item-hd  kashu"><img src="{$vo.cover}" >
+                    <P style="color:black;">{$vo.merchant}
+                        <br>{$vo.m_desc}
+                    </P>
+                </a>
+          <span class="am-list-date shengon" style=" color:#fff;">
+            <a href="javascript:;" <eq name="vo.up_status" value="0">class="back" </eq>>
+			   <if condition="$vo.uid eq 3"> <span style="color:#7c7c7c;">店长</span>
+					<elseif condition="$vo.uid eq 2"/> <span style="color:#7c7c7c;">掌柜</span>
+					<else/><span style="color:#7c7c7c;">经纪人</span>
+               </if>
+          </span>
+		</a>
+      </li>
+  	</volist>
+  	</empty>
+  </ul>
+  </div>
+
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../Style/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="../Style/js/amazeui.min.js"></script>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+				
+			/*评价成功的时候*/		
+			#com-success{
+				width: 100%; height: 170px; margin-top: 50px; background-color: white;
+			}
+			#com-success .am-u-sm-5{
+				padding-top: 20px;
+			}
+			#com-success .am-u-sm-7{
+				height: 122px;padding-top: 40px; padding-left: 10px;
+			}
+			#com-success .am-u-sm-7 p:first-child{
+				color: rgb(240,93,0); font-size: 19px;
+			}
+			#com-success .am-u-sm-7 p:last-child{
+				color:black; font-size: 16px; margin-top: 5px;
+			}
+			#com-success .fenxiang{
+				color: rgb(170,172,171); font-size: 13px; text-align: center;
+			}
+			/*分割线*/
+			#guess-like { 
+				width: 100%; height: 50px; line-height: 50px; font-size: 15px; text-align: center; position: relative; color: #555;
+        	}
+	        #guess-like .span-1,#guess-like .span-2 {
+	            border-top: 1px solid rgb(190,190,190); width: 20%; position: absolute; top: 25px;
+	        }
+	        #guess-like .span-1{
+	            left: 0px;
+	        }
+	        #guess-like .span-2{
+	            right: 0px;
+	        }
+	        
+	         /*有订单评价的时候*/
+	        #other-com{
+	        	width: 100%; background-color: white;
+	        }
+	        #other-com ul li{
+	        	border-bottom: solid 1px rgb(210,210,210);
+	        }
+	         #other-com .am-u-sm-4 img{
+	         	width: 106px; height: 106px ;padding: 5px;
+	         }
+	        #other-com .am-u-sm-5 .title{
+	        	overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: black; margin-top: 13px; font-size: 14px;
+	        }
+	        #other-com .am-u-sm-5 .nice{
+	        	margin-top: 5px; color: rgb(170,172,171); padding-top: 10px;
+	        }
+	        #other-com .am-u-sm-3{
+	        	height: 106px ;position: relative; left: 0;
+	        }
+	        #other-com .am-u-sm-3 button{
+	        	width: 52px; height: 22px;border: solid 1px rgb(240,93,0); background-color: white; color: rgb(240,93,0); position: absolute; right: 10px; bottom: 7px; margin: 0 auto;
+	        }
+	        
+	        /*没有订单评价*/
+	        #none{
+	        	width: 100%; background-color: white; padding-bottom:30px;
+	        }
+	        #none button{
+	        	width: 80px; height: 25px; background-color: white; margin-top:30px;
+	        }
+	        #none .all{
+	        	color: black; border-radius: 2px; margin-right: 15px; border: solid 2px black;
+	        }
+	        #none .go{
+	        	color: rgb(240,93,0); margin-left: 15px; border-radius: 2px; border: solid 2px rgb(240,93,0);
+	        }
+	       /* 动画推迟执行*/
+	        #piao{
+	        	animation-delay: 1s;
+	        }
+	        #ping{
+	        	animation-delay: 1.7s;
+	        }
+		</style>
+		
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		
+		<div class="topnav">
+			<a href="{:U('User/address')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			评价成功
+		</div>
+		
+		<!--评价成功-->
+		<div id="com-success" class="am-g">
+  			<div class="am-u-sm-5">
+  				<img src="../Style/index-images/finish.png" alt="已完成" class="am-img-responsive" style="width: 100px; height: 100px; float: right;"/>
+  			</div>
+  			<div class="am-u-sm-7">
+  				<p id="piao" class="animated slideInRight">范票+5 </p>
+  				<p id="ping" class="animated bounceInDown" style="color:#555;">感谢您的评价！</p>
+  			</div>
+  			<p class="fenxiang">您的评价将是其他用户购买前的重要参考！</p>
+		</div>
+		
+		<!--分割线-->
+		<p id="guess-like">
+        	<span class="span-1"></span>
+        		<span style="font-size: 13px; color: rgb(85,85,85);">心情不错，继续评价赚范票~</span>
+        	<span class="span-2"></span>
+    	</p>
+		
+		<!--有商品可评价-->
+		<div id="other-com">
+			<ul>
+				<notempty name="comm_list">
+					<volist name="comm_list" id="val">
+						<li>
+							<div class="am-g" style="height: 106px;">
+								<div class="am-u-sm-4">
+									<img src="data/upload/item/{$val.img}" alt="商品" class="am-img-responsive" />
+								</div>
+								<div class="am-u-sm-5">
+									<p class="title" style="color:#555;">{$val.title}</p>
+									<p class="nice" style="color:#999;">晒单可获更多范票</p>
+								</div>
+								<div class="am-u-sm-3">
+									<button onclick="window.location.href='{:U('User/comment',array('orderId'=>$val['orderId'],'status'=>$val['status'],'comment'=>1))}'">去评论</button>
+								</div>
+							</div>
+						</li>
+				</volist>
+					<else/>
+					<div id="none" style="text-align: center;">
+						<br />
+						<img src="../Style/index-images/none.png" alt="没有可评价" class="am-img-responsive" style="width: 120px; height: 120px; margin: 0 auto;"  />
+						<p style="color: rgb(170,172,171); font-size: 13px;">您暂时没有更多的待评论订单</p>
+						<button class="all" onclick="window.location.href='{:U('User/order_list')}'">全部订单</button>
+						<button class="go" onclick="window.location.href='{:U('Index/index')}'" >再去逛逛</button>
+					</div>
+				</notempty>
+
+			</ul>
+		</div>
+
+		<include file="public:footer" />
+	</body>
+
+</html>

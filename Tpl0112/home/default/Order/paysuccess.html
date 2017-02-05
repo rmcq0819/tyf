@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			/*头部S*/
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240, 93, 0);text-align: center;color: #fff;font-size: 16px;line-height: 49px;top: 0;
+			}
+			.topnav .back {
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			
+			.topnav img {
+				position: absolute;top: 14px;left: 5px;
+			}
+			/*头部E*/
+			.topnav .clear-all {
+				position: absolute;top: 0;right: 6px;font-size: 15px;line-height: 49px;
+			}
+			/*购物车没有产品的时候*/
+			
+			#col-img {
+				text-align: center;
+			}
+			
+			#col-content {
+				text-align: center;font-size: 15px;margin: 0 10px;text-align: left;color: #555;
+			}
+			
+			/*按钮*/
+			#btn {
+				text-align: center;margin-bottom: 10px;
+			}
+			
+			#btn a {
+				font-size: 14px;padding: 3px 9px;border-radius: 4px;
+			}
+			#btn a:first-child {                  /*支付按钮*/
+				border: 1px solid black;color: black;margin-right: 52px;
+			}
+			#btn a:last-child {                    /*返回首页按钮*/
+				color: #e15f11;border: 1px solid #e15f11;
+			}
+			
+			#success {
+				padding-top: 48px;background: #fff;padding-bottom: 10px;
+			}
+			#col-content p{
+				font-size:13px;color:rgb(85,85,85);
+			}
+			#col-content span{
+				color: rgb(240,93,0);
+			}
+			#col-img img{
+				width:70px; height: 70px;margin-top: 22px;animation: shake 2s;animation-delay: 2px;
+			}
+			@keyframes shake{ 
+				10%{
+					transform: translate(0px,-3px);
+				}
+				30%{
+					transform: translate(0px,7px);
+				}
+				50%{
+					transform: translate(0px,-3px);
+				}
+				70%{
+					transform: translate(0px,7px);
+				}
+				90%{
+					transform: translate(0px,-3px);
+				}
+			}
+			/*猜你喜欢*/
+			
+			#guess-like {
+				height: 50px;line-height: 50px;font-size: 15px;text-align: center;position: relative;color: #555;
+			}
+			#guess-like img{
+				width:15px;height:15px;transform: rotate(180deg);
+			}
+			
+			#guess-like .span-1 {
+				border-top: 1px solid;width: 36%;display: inline-block;position: absolute;left: 0;top: 25px;border-top-color: rgb(190,190,190);
+			}
+			
+			#guess-like .span-2 {
+				border-top: 1px solid;width: 36%;display: inline-block;position: absolute;right: 0;top: 25px;border-top-color: rgb(190,190,190);
+			}
+			
+			.am-avg-sm-2 > li{
+				margin: 7px 1px 0px 4px;
+			}
+			#like-1 ul li{
+				background-color:white;padding:5px;
+			}
+			#you-like {
+				width: 100%;height: 50px;
+			}
+			/*产品标题*/
+			
+			#like-1 .title {
+				font-size: 14px;color: black;line-height: 17px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+			}
+			/*产品价格*/
+			
+			#like-1 .price {
+				line-height: 30px;
+			}
+			
+			#item-money {
+				width: 50%;float: left;height: 102px;
+			}
+			
+			#item-money p span {
+				color: #e15f11;font-size: 15px;
+			}
+			
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+	<body>
+	
+		<div class="topnav">
+			<a href="{:U('User/index',array('shares'=>$info['id']))}"  class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			订单支付成功
+		</div>
+		
+		<div id="success">
+			<div style="overflow:hidden;margin-top:15px;">
+				<div id="col-img" style="width:50%;float:left;">
+					<img src="../Style/index-images/succ.png" alt="支付成功"/>
+				</div>
+				<div id="item-money">
+					<div style="height:46px;margin-top:22px;font-size:14px;">
+						<p style="margin-bottom:5px; margin-left: -15px;">卖家店铺：<span style="font-size: 14px;">{$shop_name.merchant}{$uid}</span></p>
+						<p style="font-size: 14px;margin-left: -15px;">订单金额：<span>￥{$order_info.order_sumPrice}</span></p>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div id="btn">
+				<a href="{:U('Order/checkOrder',array('orderId'=>$order_info['orderId']))}">查看订单</a>
+				<a href="{:U('Index/index',array('shares'=>$info['id']))}">返回首页</a>
+			</div>
+			</br>
+			
+			<if condition="($order_info.order_sumPrice egt 99) and ($uid eq 4)">
+			<div id="col-content">
+				<p><span>温馨提示：</span>恭喜您已购满99元，可以申请成为商城经纪人，拥有一家自己的线上商城。<span style="color: rgb(240,93,0); text-decoration: underline;" onclick="location.href='{$url}'">去成为经纪人吧>></span></p>
+			</div>
+			<else />
+			<div id="col-content">
+				<p><span>温馨提示：</span>团洋范海外购物平台不会以订单异常、系统升级为由要求你点击任何网址链接进行退款操作。</p>
+			</div>
+			</if>
+			<if condition="$lb eq 1">
+			<div style="padding: 10px;">
+				<p style="color: rgb(240,93,0); text-align: left;">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;亲爱的范团，凡是购买新年礼包的，可以添加自己想对家人或者亲人朋友说祝福语，
+					还可以上传图片和视频来表达您的祝福，我们会将祝福和礼包一起送到~<span style="color: rgb(85,85,85);">（点击“添加祝福”图标进入祝福通道）</span>
+				</p>
+				<p style="text-align: center;"><img src="../Style/index-images/activity/up.png" alt="添加祝福"  onclick="location.href='{:U('Blessing/write_blessing',array('phone'=>$order_info['mobile'],'orderId'=>$order_info['orderId']))}'" style="width: 68px; margin-top: 0px;"/></p>
+			</div>
+			</if>
+		</div>
+		
+		<!--猜你喜欢-->
+		<div id="you-like">
+			<p id="guess-like">
+				<span class="span-1"></span>&nbsp;
+				<img src="../Style/index-images/top.png"/>&nbsp;为您推荐&nbsp;
+				<span class="span-2"></span>
+			</p>
+		</div>
+		<!-- 为你推荐 -->
+		<div id="like-1" style="margin-top: -10px;">
+			<ul class="am-avg-sm-2 am-thumbnails" >
+				<volist name="itemsbuy" id="vo">
+					<li>
+						<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+							<img class="am-thumbnail" src="data/upload/item/{$vo.img}" />
+							<p class="title">{$vo.title}</p>
+							<p class="price"><span style="color: black;">优品价：</span><span style="color: rgb(240,93,0); font-size: 15px;">￥{$vo.price}</span></p>
+							<p class="price"><b>{$vo.buy_num}</b>人已购买</p>
+						</a>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+			<img src="../Style/images/guide.png" />
+		</div>
+		
+		<button type="button" id="give_redbag" class="am-btn am-btn-primary" style="display:none" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 400, height: 225}">
+  			弹框
+		</button>
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		  	<div class="am-modal-dialog" style="background: none;">
+			    <div class="am-modal-hd">
+			    </div>
+			    <div class="am-modal-bd" style="position: relative; left: 0px;">
+			      	<img src="../Style/index-images/activity/libao-d.png" alt="弹框背景" class="am-img-responsive"/>
+			      	<img src="../Style/index-images/activity/activity-close.png" alt="关闭按钮" data-am-modal-close style="width: 27px;position: absolute; right: 60px; top: -40px;"/>
+			      	<p style="width: 220px;color: rgb(227,255,1); position: absolute; left: 51%; top: 17px; margin-left: -110px; font-size: 16px; text-align: center;">恭喜您获得公益红包</p>
+		      		<p style="width: 230px;position: absolute; left: 50%; top: 52px; margin-left: -110px; font-size: 14px; text-align: center;">
+		      			感谢您为公益做出的一份贡献。团洋范送给你一个“公益红包”，可到“我的-用户中心”查看！
+		      		</p>
+		      		
+			    </div>
+		  	</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				give_redbag = {$give_redbag};
+				if(give_redbag==1){
+				
+					$("#give_redbag").click();//弹出红包
+				}
+			});
+		</script>
+		
+		<include file="public:footer" />
+	</body>
+</html>

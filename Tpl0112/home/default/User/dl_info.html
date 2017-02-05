@@ -1,0 +1,142 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>{$page_seo.title}</title>
+<include file="public:headtop" />
+<link href="../Style/css/amazeui.css" rel="stylesheet" type="text/css" />
+</head>
+<include file="public:headuser" />  
+<style>
+  .am-active{background-color: rgba(0, 0, 0, 0.6);width:100%;}
+</style>
+<body>
+<header data-am-widget="header" class="am-header am-header-default">
+  <div class="am-header-left am-header-nav">
+      <a href="javascript:history.go(-1);" class="">
+          <img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;" alt=""/>
+      </a>
+  </div>
+  <h1 class="am-header-title">{$list.merchant}</h1>
+</header>  
+<div class="shenghe">
+<div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+<div class="am-list-news-bd">
+<ul class="am-list">
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main shenghelogo">
+
+<div class="am-list-item-text " style="display:block"><img src="{$list.cover}"><P>{$list.merchant}<br>{$list.m_desc}</P></div>
+</div>
+</li>
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghemaneicon">姓名：{$list.username}</div>
+</div>
+</li>
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghetelicon">联系电话：{$list.phone_mob}</div>
+</div>
+</li>
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghemailicon">E-mail:{$list.email}</div>
+</div>
+</li>
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghehomeicon">联系地址:{$list.address}</div>
+</div>
+</li>
+<eq name="up" value="1">
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghemaneicon">总人数:{$list.num}(条件:{$list.upgrade})<span style="color:red">符合条件</span></div>
+</div>
+</li>
+<li class="am-g am-list-item-desced">
+<div class=" am-list-main">
+<div class="am-list-item-text shenghemaneicon">直推人数:{$list.num1}(条件:{$list.upgrade1})<span style="color:red">符合条件</span></div>
+</div>
+</li>
+</eq>
+</ul>
+</div>
+</div>
+    
+</div>
+<eq name="uid" value="3">
+	<eq name="list.up_status" value="0">
+		<div class="shenghebtnmain" style="text-align:center;color:red">温馨提示:该代理的审核由您的上级掌柜审核，请联系您的上级掌柜完成审核。</div>
+	</eq>
+</eq>
+<lt name="uid" value="3">
+<eq name="list.up_status" value="0">
+<div class="shenghebtnmain">
+<button type="submit"  data-val="1" class="am-btn am-btn-primary shenghebtn">通过审核</button>
+</div>
+<div class="shenghebtnmain">
+<button type="submit" data-val="2" class="am-btn am-btn-primary shenghebtn" style="background:#ff6700">审核不通过</button>
+</div>
+</eq>
+</lt>
+<div class="am-modal am-modal-confirm" tabindex="-1" id="my-confirm">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">温馨提示</div>
+    <div class="am-modal-bd" id="confire">
+      
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+      <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+    </div>
+  </div>
+</div>
+
+<button type="button" class="am-btn am-btn-primary" id="alert" data-am-modal="{target: '#my-alert'}" style="display:none"></button>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd" id="notic1">温馨提示</div>
+    <div class="am-modal-bd" id="notic">
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript" src="../Style/js/amazeui.min.js"></script>
+<script type="text/javascript">
+	$(".shenghebtn").click(function(){
+    var up_status = $(this).attr("data-val");
+    if (up_status == 1) {
+        $("#confire").html("您确定通过{$list.username}申请吗?");
+    }else{
+        $("#confire").html("您确定拒绝{$list.username}申请吗?");
+    }
+    $('#my-confirm').modal({
+      relatedTarget: this,
+      onConfirm: function(options) {
+          var url = "{:U('User/send_lvup')}";
+          var id  = "{$list.id}";
+		  var up  = "{$up}";
+          var $link = $(this.relatedTarget);
+        	$.post(url,{id:id,up_status:$link.data("val"),up:up},function(data){
+        		if (data.status != 1) {
+              $("#notic1").html("错误提示");
+        			$("#notic").html(data.msg);
+        		}else{
+              $("#notic").html(data.msg);
+            }
+            $("#alert").click();
+        	},'json')
+      }
+    });
+	})
+</script>

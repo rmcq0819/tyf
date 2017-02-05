@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<include file="public:head" />
+		<link rel="stylesheet" type="text/css" href="../Style/jquery.css">
+		<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js"></script>
+		<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
+		<style>
+			*{
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav{
+				height: 49px;
+				color: white;
+				font-size: 16px;
+				text-align: center;
+				line-height:49px ;
+				background-color: rgb(240,93,0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			/*订单*/
+			
+			#order ul li{
+				padding: 5px;
+			}
+			.product-img .img{             /*产品图片大小*/
+				width: 80px;
+				height: 80px;
+			}
+			#free-name,#pro-num{            /*免税价和数量的颜色*/
+				color:rgb(137,137,137);
+			}
+			#free-price,#total-price{
+				font-size: 14px;
+			}
+			#free-price,#qing-price,#fare-price,#total-price{                 /*免税价、清关费、运费、总价颜色*/
+				color: rgb(219,101,14); 
+			}
+			/*结算总价*/
+			#account{
+				float: right; 
+				margin-right: 5px;
+			}
+	
+
+				/*支付按钮*/
+			#btn-prices{
+				float: right;
+				margin-right:5px; 
+				height: 25px;
+				color: rgb(16,96,147);
+				border: solid 1px rgb(16,96,147);
+				background-color: white; 
+				border-radius: 3px;
+			}
+			#btn-prices2{
+				float: right;
+				margin-right:5px; 
+				height: 25px;
+				color: rgb(240,93,0);
+				border: solid 1px rgb(240,93,0);
+				background-color: white; 
+				border-radius: 3px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<title>订单状态列表</title>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+			<if condition="$status eq 1">待付款({$count})</if>
+			<if condition="$status eq 3">待收货({$count})</if>
+			<if condition="$status eq 2">待发货({$count2})</if>
+		</div>
+		
+		<!--订单列表-->	
+		<notempty name="item_orders">
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default" id="order">
+			
+			<div class="am-list-news-bd">
+				<volist name="item_orders" id="vo">
+				<ul class="am-list">
+					
+					<!--订单号-->
+					<li class="am-g am-list-item-dated" class="order-number">
+						<span style="font-size:13px;">订单号：<span><span>{$vo.orderId}</span>
+					</li>
+					<!--订单商品-->
+					<volist name="vo.item" id="vo1">
+					<li class="am-g am-list-item-dated">	
+						<div class="am-g">
+							<volist name="vo.item" id="vo1">
+  							<div class="am-u-sm-2" class="product-img">
+  								<img src="data/upload/item/{$vo1.img}" alt="商品" class="am-img-responsive"/>
+  							</div>
+  							<div class="am-u-sm-9" class="product-detail">
+  								<p style="font-size:13px;">{$vo1.title}</p>
+  								<span id="free-name">优品价：</span><span id="free-price">￥{$vo1.price}</span>&nbsp;&nbsp;<span id="pro-num">x{$vo1.quantity} </span>
+								<if condition="$vo.status neq 1">
+									<if condition="$vo.fahuo_time gt $order_time or $vo1.send_time gt $order_time">
+										<span style="float:right;color:#555;margin-right:15px;">
+											状态：
+											<switch name="vo1.status">
+												<case value="1">待付款</case>
+												<case value="2">待发货</case>
+												<case value="3">待收货</case>
+											</switch>
+										</span>
+									</if>
+								</if>
+  							</div>
+
+  							<div class="am-u-sm-1" style="line-height: 62px;">
+  							
+  										<if condition="$vo.status eq 3">
+											<a href="{:U('Order/logistics',array('detail_id'=>$vo1['detail_id'],'status'=>$vo['status']))}">
+											<i class="am-icon-chevron-right"></i>
+									   </a><else/>
+											<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$vo['status']))}">
+											<i class="am-icon-chevron-right"></i>
+									   </a>
+										</if>
+  							</div>
+  							
+						</div>
+					</li>
+					</volist>
+					<!--订单费用-->
+					<li class="am-g am-list-item-dated">
+						<p>
+							<!-- <span>运费:</span><span id="fare-price" >￥<if condition="$vo.totalprice gt 99">0<else />10</if></span> -->
+							<span id="account">
+								<span>共<span class="total-num">{$vo.count}</span>件商品</span>&nbsp;&nbsp;
+								<span>合计:</span><span id="total-price">￥{$vo.totalprice}</span>
+							</span>
+							
+						</p>
+						<br/>
+						<!--支付按钮-->
+						<if condition="$status eq 1">
+						<button id="btn-prices" >
+						<span  onclick="window.location.href='{:U('Order/pay',array('orderId' => $vo['orderId'],'sharesid'=>$vo['userId']))}'">支&nbsp;&nbsp;&nbsp;&nbsp;付<span></button>
+						<button id="btn-prices2" >
+						<!-- onclick="window.location.href='{:U('Order/del_order',array('orderId' => $vo['orderId']))}'" --> 
+						<span onclick="del('{$vo.orderId}');">删&nbsp;&nbsp;&nbsp;&nbsp;除</span></button>
+						</if>
+						
+						<if condition="$status eq 2">
+								<button id="btn-prices" >
+								<span  onclick="window.location.href='{:U('Order/orderTK',array('orderId'=>$vo['orderId'],'status'=>$vo['status']))}'">申请退款<span></button>
+								<button id="btn-prices2" ><span onclick="do_urgent('{$vo.orderId}');">提醒发货</span></button>
+						</if>
+						<if condition="$status eq 3">
+							<button id="btn-prices" onclick="window.location.href='{:U('Order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}'">确认收货</button>
+						</if>
+						<if condition="$status eq 6">
+							<button id="btn-prices2" ><span onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</span></button>
+						</if>
+						<if condition="$status eq 4"><if condition="$vo.c_status eq 0"><button id="btn-price">评&nbsp;&nbsp;&nbsp;&nbsp;价</button><else /><button id="btn-prices">已&nbsp;完&nbsp;成</button></if></if>
+						
+					</li>
+				</ul>
+				</volist>
+			</div>
+		</div>
+		<else/>
+		<div style="text-align: center; margin-top: 100px;">
+				<img src="../Style/index-images/tuihua.png" alt="无退还货" style="width: 120px; height: 120px;" />
+				<br />
+				<br />
+				<p style="font-size: 14px;">暂无该类订单</p>
+		</div>
+		</notempty>
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+<script>
+//删除订单
+function del(id){
+	layer.open({
+			title: '提示',
+			content: '您确定要删除该订单吗？与之相关的保税或完税订单都会被删除',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href= "{:U('Order/delOrder')}&orderId="+id;
+				layer.open({content: '删除成功', time: 1});
+				layer.close(index);
+			}
+	});
+}
+
+//支付订单
+function topay(id){
+	layer.open({
+			title: '提示',
+			content: '与该订单相关的保税或完税订单会被一起支付',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href="{:U('Order/pay')}&orderId="+id;
+				//layer.open({content: '提交支付成功', time: 1});
+				//layer.close(index);
+			}
+	});
+}
+
+ function do_urgent(orderId){
+           $.get('{:U('Order/do_urgent')}',{'orderId':orderId},function(data){
+           if(data=='成功'){ 
+              layer.open({
+					title: '提醒发货',
+					content: '您已经成功提醒发货，感谢您对团洋范的支持',
+					btn: ['我知道了'],
+					yes: function(index){
+						//location.reload();
+						layer.close(index);
+					}
+				});              
+            }else if(data=="yes成功"){
+				layer.open({content: '您已经提醒过了哦，我们会尽快发货呢', time: 2});
+			}           
+         });
+     }  
+</script>

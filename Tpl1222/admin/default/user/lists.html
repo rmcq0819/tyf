@@ -1,0 +1,69 @@
+﻿<include file="public:header" />
+<!--会员列表-->
+
+<div class="pad_10" >
+	<form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="user" />
+                    <input type="hidden" name="a" value="lists" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+    <div class="J_tablelist table_list" data-acturi="{:U('user_category/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
+				<th width="100" align="center">会员名称</span></th>
+                <th width="100" align="center"><span data-tdtype="order_by" data-field="name">开户银行</span></th>
+                <th width="100" align="center"><span data-tdtype="order_by" data-field="discount">持卡人名</span></th>
+                <th width="100" align="center"><span data-tdtype="order_by" data-field="score">银行卡号</span></th>
+				<th width="100" align="center">联系方式</span></th>
+                <th width="130"><span data-tdtype="order_by" data-field="add_time">申请时间</span></th>
+				<th width="100" align="center"><span data-tdtype="order_by" data-field="ordid">提现金额</span></th>
+                <th width="100">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$val.id}</td>
+				<td align="center"><a href="{:U('user/index',array('keyword'=>$val['username']))}">{$val.username}</a></td>
+                <td align="center">{$val.bank}</td>
+                <td align="center">{$val.huming}</td>
+                <td align="center">{$val.zhanghao}</td>
+				<td align="center">{$val.phone_mob}</td>
+				<td align="center">{$val.add_time|date="Y-m-d",###}</td>
+				<td align="center">{$val.fencheng}</td>
+                <td align="center">
+					<a href="{:u('user/index', array('id'=>$val['uid']))}">查看</a>&nbsp;|&nbsp;
+					<if condition="$val.state eq 2"><a href="{:u('user/quer', array('id'=>$val['id'], 'menuid'=>$menuid))}">确认</a></if>
+					&nbsp;|&nbsp;
+					<a href="javascript:void(0);" class="J_confirmurl" data-uri="{:u('Fenchenglist/delete', array('id'=>$val['id']))} data-acttype="ajax" data-msg="{:sprintf(L('confirm_delete_one'),这条申请记录)}">{:L('delete')}</a>
+				</td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>

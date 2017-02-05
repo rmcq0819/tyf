@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的代金卷</title>
+<include file="public:headtop" />
+<style>
+#content ul,li{padding:0px;margin:0px}
+#content ul	{padding:5px;}
+#content ul li{border-bottom:1px solid #ccc;padding:10px;}
+#content ul li span{font-family:微软雅黑;}
+.vip_my-Money .center{ background:#f1f1f1; width:94%;margin-left:20px;}
+.vip_my-Money_tit{ height:48px; background:#4594fd;}
+.vip_my-Money_tit_box{ float:left; width:79px; height:29px; border:1px dashed #c6deff; line-height:29px; text-align:center; margin:8px 0 0 11px; color:#fff;}
+.vip_my-Money_tit_font{ float:left;}
+.vip_my-Money_tit_font a{ color:#fff; text-decoration:underline; height:48px; line-height:48px; margin:0 0 0 10px;}
+.vip_my-Money_content li{ background:url(../Style/images/vip_my-Money_content_bg.png) no-repeat 0 0; width:309px; height:47px; margin:11px 0 0 9px; overflow:hidden;}
+.vip_my-Money_content_left{ background:url(../Style/images/vip_my-Money_content_left_bg.png) no-repeat 0 0; width:56px; height:31px; line-height:31px; text-align:center; color:#f46338; margin:9px 0 0 15px; float:left;}
+.vip_my-Money_content_right{ background:url(../Style/images/vip_my-Money_content_right_bg.png) no-repeat 0 0; width:86px; height:28px; float:right; margin:9px 15px 0 0px; line-height:28px; text-align:center; color:#2468c9;}
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<h1 align="center" style="padding:10px 0 10px 0;border-bottom:1px solid #ccc;background:#eee">我的代金卷</h1>
+
+	 <div class="vip_my-Money">
+    	<div class="center">
+            <div class="vip_my-Money_content">
+            	<ul>
+					<volist name="daijin" id="vo">
+                	<li style="background:#124d7d">
+                    	<div class="vip_my-Money_content_left">
+                        	￥{$vo.djmoney}元
+                        </div>
+                        <div style="margin-top:15px;width:100px;float:left;margin-left:10px;color:#fff">{$vo.djname}</div>
+                        <switch name="vo.djstatus">
+							<case value="0">
+								<div class="vip_my-Money_content_right" >
+									<a href="{:U('Index/index')}" style="color:#f46338;">立即使用</a>
+								</div>
+							</case>
+							<case value="1">
+								<div class="vip_my-Money_content_right" >
+									<a style="color:#f46338;">已使用</a>
+								</div>
+							</case>
+							<case value="2">
+								<div class="vip_my-Money_content_right" >
+									<a style="color:#f46338;">已过期</a>
+								</div>
+							</case>
+						</switch>	
+                    </li>
+					</volist>
+                </ul>
+            </div>
+        </div>
+    </div>  
+ <div class="clear" style="height:30px;"></div>
+</body>
+</html>

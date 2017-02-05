@@ -1,0 +1,243 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<include file="public:head" />
+		<script src="../Style/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			
+			#pro{
+				margin-top: 49px;
+			}
+			#pro ul li{
+				border-bottom: solid 1px #dcdcdc; background-color: white;
+			}
+			#pro .tips{
+				height: 30px; line-height: 30px; padding-left: 10px; color: rgb(153,153,153); border-bottom: solid 1px #dcdcdc;
+			}
+			#pro .del-img{
+				width: 22px; height: 22px; float: right; margin: 4px 10px 0px 0px;
+			}
+			#pro .name{
+				overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; padding-left: 5px;
+			}
+			#pro .price{
+				padding-top: 13px; padding-left: 5px;
+			}
+			#pro .price .price-cur{
+				color: rgb(240,93,0); font-size: 14px;
+			}
+			#pro .next-img{
+				width: 20px; height: 20px;
+			}
+			#pro .details{
+				text-align: right; padding: 5px; border-top: solid 1px #dcdcdc; color: rgb(102,102,102); font-size: 12px;
+			}
+			#pro .details .price{
+				color: rgb(240,93,0); font-size: 14px;
+			}
+			#pro .all-btn{
+				text-align: right; padding: 8px;
+			}
+			#pro .btn1{
+				width: 80px;height: 24px;background-color: rgb(255,204,0); color: #666; border: none; border-radius: 3px;
+			}
+			#pro .btn2{
+				width: 80px;height: 24px;background-color: rgb(204,102,1); color: white; border: none; border-radius: 3px;
+			}
+			
+			/*没有砍价商品的的时候*/
+			#no-kan img{
+				width: 90px; height: 90px; margin: 0 auto; margin-top: 100px;
+			}
+			#no-kan .title{
+				margin-top: 15px;
+			}
+			#no-kan .title,#no-kan .title2{
+				text-align: center;color: #555; font-size: 13px;
+			}
+			#no-kan .title2 span{
+				color: rgb(240,93,0);
+			}
+			.cartmsg{width:100%;height:auto; padding:10px 7px;;background:#000;opacity:0.7;-moz-opacity:0.7;filter:alpha(opacity=70);display:none;margin-top:4px;color:#FFFFFF; position:fixed;z-index:9999;font-size:16px;}
+		</style>
+
+	</head>
+
+	<body style="background:rgb(243,243,243);">
+		<div class="cartmsg"></div>
+		<input type="hidden" id="cart_price" value="{$cart_price}">
+		<input type="hidden" id="cart_count" value="{$cart_count}">
+		<div class="topnav">
+			<a href="{:U('User/address')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			我发起的砍价
+		</div>
+		<!--砍价商品-->
+		<div id="pro">
+			<ul>
+				<notempty name="bargainlist">
+						<volist name="bargainlist" id="val">
+						<li style="background-color: white;" id="del_{$val.mainid}">
+							<div>
+								<p class="tips">
+									<?php
+										if($val['price'] <= $val['bargain_price']){
+											echo "<span style='color:rgb(240, 93, 0);'>您的人品真好，此商品已被砍至最低价</span>";
+										}elseif(time() >= $val['bargain_time']+3600*12){
+											echo "此商品砍价时间已结束，可以购买啦";
+										}elseif(time() >= $val['bargain_time']+3600*36){
+											echo "<span style='color:red;'>砍价结束后24小时内未购买，价格已恢复至原价。</span>";
+										}else{
+											echo "正在砍价或者砍价结束，都可以购买支付";
+										}
+									?>									
+								</p>
+								<div class="am-g" style="padding: 8px;" onclick="window.location.href='{:U('bargain/index',array('id'=>$val['id'],'sharesid'=>$val['uid'],'shares'=>$info['id']))}'">
+									<div class="am-u-sm-3" style="line-height:87px ;">
+										<img src="data/upload/item/{:get_thumb($val['img'], '_b')}" alt="商品" class="am-img-responsive" />
+									</div>
+									<div class="am-u-sm-8">
+										<p class="name">{$val.name}</p>
+										<p class="price"><span style="color: rgb(154,154,154);">原价：</span><span class="price-cur">{$val.source_price}</span></p>
+									</div>
+									<div class="am-u-sm-1" style="line-height: 87px;">
+										<img class="next-img" src="../Style/index-images/jt03.png" alt="箭头"/>
+									</div>
+								</div>
+								<p class="details">
+									好友帮忙砍了
+									<span class="price">
+										<?php 
+											$help_cont = M('bargainlist')->where(array('bid'=>$val['id'],'shares'=>$actuid))->sum('price');
+											if($help_cont ==''){
+												echo 0;
+											}else{
+												echo round($help_cont,2);
+											}
+										?>
+									</span>元&nbsp;&nbsp;&nbsp;
+									<span style="color: black;">
+										当前价格：
+									</span>
+									<span class="price">
+										￥{$val.price}
+									</span>
+									
+								</p>
+								<p class="all-btn">
+									<button class="btn1"  onclick="bargain_del({$val.mainid},{$val.uid},{$val.id})">删除商品</button>&nbsp;&nbsp;
+									<button class="btn2" onclick="add_cart({$val.id},{$val.itemtype},1,'{$val.name}','{$val.img}',{$val.price},{$info.id},{$val.price},0,{$val.cost},{$val.baseid},{$val.mainid},1,{$val.uid},{$val.id})">加入购物车</button>
+								</p>
+								<p class="all-btn"> 
+									<span style="color:red;">砍价结束后24小时内未加入购物车支付，系统将恢复原价</span>
+								</p>
+								
+							</div>
+						</li>
+						</volist>
+					<else/>
+						<!--没有砍价商品的时候-->
+						<div id="no-kan">
+							<img src="../Style/index-images/activity/haimei.png" alt="还没有商品" class="am-img-responsive"/>
+							<p class="title">您暂时没有参与砍价的商品 -_-#</p>
+							<p class="title2">赶紧去挑选心爱的<a href="{:U('Item/bargain',array('shares'=>$info['id']))}" style="color:rgb(240,93,0);">「宝贝」</a>参与砍价吧 : )</p>
+						</div>
+				</notempty>
+				
+				<div id="no-kan" style="display:none;">
+						<img src="../Style/index-images/activity/haimei.png" alt="还没有商品" class="am-img-responsive"/>
+						<p class="title">您暂时没有参与砍价的商品 -_-#</p>
+						<p class="title2">赶紧去挑选心爱的<a href="{:U('Item/bargain',array('shares'=>$info['id']))}" style="color:rgb(240,93,0);">「宝贝」</a>参与砍价吧 : )</p>
+				</div>
+			</ul>
+		</div>
+		
+		<script>
+			//加入购物车
+			function add_cart(goodId,itemtype,quantity,title,img,price,shopid,yhprice,size,cost,baseid,mainid,is_bargain,uid,bid)	//商品ID，购买数量，相应分类的价格，分类名称
+			{
+	
+				var cart_count = parseInt($("#cart_count").val())+parseInt(quantity);
+				var cart_price = parseFloat($("#cart_price").val())+parseFloat(price)*parseInt(quantity);
+				$("#cart_price").val(cart_price);
+				$("#cart_count").val(cart_count);
+				var url  = "{:U('Shopcart/add_cart')}";
+				$.post(url,{goodId:goodId,itemtype:itemtype,quantity:quantity,title:title,img:img,price:price,shopid:shopid,yhprice:yhprice,size:size,cost:cost,baseid:baseid,is_bargain:is_bargain},function(data){
+				   if(data.status==1)
+					{	
+						htm='<span>'+data.msg+'！购物车共有'+cart_count+'件商品,共计：'+cart_price+'元</span>';
+						$('.cartmsg').html(htm);
+						$('.cartmsg').slideDown(500);
+						$('#cart_count').html(cart_count);
+						$('.am-icon-cart-plus').fadeOut(600);
+						setTimeout(slideUp_fn, 6000);
+					}else
+					{
+						htm='<span>'+data.msg+'！购物车共有'+cart_count+'件商品,共计：'+cart_price+'元</span>';
+						$('.cartmsg').html(htm);
+						$('.cartmsg').slideDown(1200);
+						$('#cart_count').html(cart_count);
+						$('.am-icon-cart-plus').fadeOut(600);
+						setTimeout(slideUp_fn, 6000);
+					}
+				},'json');
+
+				$.post('{:U('User/bargain_del')}',{'mainid':mainid,'uid':uid,'bid':bid},function(data){
+						$('#del_'+mainid).fadeOut();
+						if(data == 1){
+								$('#no-kan').fadeIn();
+						}
+				});
+				
+				
+			}
+			
+			function slideUp_fn(){
+				$('.cartmsg').slideUp(1200);
+			} 
+			
+			function share() {
+				$("#mcover").show();
+			}
+			
+			function bargain_del(id,uid,bid){
+				layer.open({
+					title: '提示',
+					content: '您确定要删除正在进行砍价的商品吗？',
+					btn: ['确认', '取消'],
+					yes: function(index){
+						$.post('{:U('User/bargain_del')}',{'mainid':id,'uid':uid,'bid':bid},function(data){
+							$('#del_'+id).fadeOut();
+							if(data == 1){
+								$('#no-kan').fadeIn();
+							}
+						});
+						layer.close(index);
+					}
+				});
+			}
+		</script>
+		<include file="public:footer" />
+	</body>
+</html>

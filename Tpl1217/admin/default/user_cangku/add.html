@@ -1,0 +1,61 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+<!--编辑库存-->
+<form id="info_form" action="{:u('user_cangku/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">添加库存信息</li>
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+            <tr>
+				<th width="45%">会员名 :</th>
+				<td><span>{$userinfo.username}</span></td>
+			</tr>
+            <tr>
+				<th>商品名 :</th>
+				<td>
+					<volist name="items" id="vo">
+						<input type="radio" name="goodsid" value="{$vo.id}"/>{$vo.title}<br/>
+					</volist>
+				</td>
+			</tr>
+			<tr>
+				<th>规格:</th>
+				<td>
+					<volist name="size" id="vo">
+						<input type="radio" name="size" value="{$i}"/>{$vo}<br/>
+					</volist>
+				</td>
+			</tr>
+            <tr>
+				<th>线上支付的库存 :</th>
+				<td><input  type="text" name="xskucun" class="input-text" size="30" value=""></td>
+			</tr>
+			
+            <tr>
+				<th>线下支付的库存:</th>
+				<td><input  type="text" name="xxkucun" class="input-text" size="30" value=""></td>
+			</tr>
+			
+			<tr align="center">
+				<td colspan="2"><input  type="submit" name="submit" class="btn btn_submit" value="添加"></td>
+			</tr>
+			
+
+		</table>
+		</div>
+
+        </div>
+<!-- 		<div class="mt10"><input type="submit" value="{:L('submit')}" id="dosubmit" name="dosubmit" class="btn btn_submit" style="margin:0 0 10px 100px;"></div> -->
+	</div>
+</div>
+<input type="hidden" name="ac" value="addok" />
+<input type="hidden" name="userid" value="{$userinfo.id}" />
+</form>
+<include file="public:footer" />
+
+</body>
+</html>

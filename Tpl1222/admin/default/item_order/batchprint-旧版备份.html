@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<style type="text/css">
+body,td{font-size:14px;}
+</style>
+</head>
+
+<body>
+<!-- 订单模板S -->
+<volist name="orderList" id="vo">
+<table width="100%" cellpadding="1" style="margin-top:10px;">
+<tr>
+<td>下单时间：</td><td>{$vo.add_time|date='Y-m-d H:i:s',###}</td>
+<td>订单类型：</td><td><if condition="$vo.itemtype eq 0">保税订单<else />完税订单</if></td>
+<td>订单编号：</td><td>{$vo.orderId}</td>
+</tr>
+<tr>
+<td>收货人信息：</td><td>{$vo.address_name},{$vo.address},{$vo.mobile}</td>
+<td>客户留言:</td><td><if condition="$vo.note neq ''">{$vo.note}<else />--</if></td>
+<td>打印日期：<?php echo date('Y-m-d H:i:s',time());?></td>
+</tr>
+</table>
+<table width="100%" border="1" style="border-collapse:collapse;border-color:#ccc;">
+<tr style="background:#f0f0f0;line-height:32px;">
+<td>产品图片</td>
+<td>产品名称</td>
+<td>产品属性</td>
+<td>购买数量</td>
+<td>产品价格</td>
+<td>需付小计</td>
+</tr>
+<volist name="vo.goodsifno" id="vo1">
+<tr>
+<td><img src="data/upload/item/{$vo1.img}" width="60px" /></td>
+<td>{$vo1.title}</td>
+<td><if condition="$vo1.size neq ''">{$vo1.size}<else />--</if></td>
+<td>{$vo1.quantity}</td>
+<td>￥{$vo1.price}</td>
+<td>{$vo1.price}X{$vo1.quantity}</td>
+</tr>
+</volist>
+<tr><td align="right" colspan="6" style="line-height:32px;font-weight:bold;">共计金额:￥{$vo1.sigsumprice}</td></tr>
+</table>
+<div style="margin-top:20px;width:100%;border:1px dashed #ccc;"></div>
+</volist>
+<!-- 订单模板E -->
+</body>
+</html>
+
+

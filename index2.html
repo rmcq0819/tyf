@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>团洋范</title>
+<meta name="keywords" content="团洋范" />
+<meta name="description" content="团洋范" />
+<style type="text/css">
+
+@charset "utf-8";
+*{margin:0;padding:0}
+body,div,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+body{font-size:14px;line-height:150%;text-align:left;color:#666;font-family:"Microsoft Yahei","Simsun","Arial Black","verdana";background:#ffffff;}
+img{border:0;-ms-interpolation-mode:bicubic;}
+a:link{color:#666;text-decoration:none;outline:none;}
+a:visited{color:#666;text-decoration:none;}
+a:hover{color:#510449;text-decoration:none;}
+a:active{color:#510449;text-decoration:none;}
+.clear{ clear:both; height:0px; overflow:hidden}
+ul,li{list-style:none;}
+ul,li,dl,dt,dd{margin:0; padding:0; list-style-type:none;}
+
+.pc{width:400px; margin:auto; padding:0px; margin-top:80px}
+.pc h1{ height:40px; line-height:40px; font-size:28px; font-family:"寰蒋闆呴粦"; color:#B4B7BC; font-weight:normal; text-align:center; display:block}
+.pc p{width:400px; padding:20px 0px;text-align:center; display:block}
+.pc span{width:100%; height:30px; text-align:center;color: #242627;color:#242627\9; text-shadow: 0 1px 0 #5B5C5E; display:block}
+.pc .info1{font-size:20px; line-height:40px; color:#FFF; text-align:center; padding-bottom:50px}
+body{ background:url(images/pcbg.png)}
+/*鍥剧墖鐗规晥*/
+.swipebox-overflow-hidden {
+  overflow: hidden!important;
+}
+
+#swipebox-overlay img {
+  border: none!important;
+	z-index:99999999;
+}
+
+#swipebox-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 9999;
+  overflow: hidden;
+  display: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+#swipebox-slider {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  position: absolute;
+}
+
+#swipebox-slider .slide {
+  background: url("images/loader.gif") no-repeat center center;
+  height: 100%;
+  line-height: 1px;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
+
+#swipebox-slider .slide:before {
+  content: "";
+  display: inline-block;
+  height: 50%;
+  width: 1px;
+  margin-right: -1px;
+}
+
+#swipebox-slider .slide img {
+  display: inline-block;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+}
+
+#swipebox-action, #swipebox-caption {
+  position: absolute;
+  left: 0;
+  z-index: 99999;
+  height: 50px;
+  width: 100%;
+}
+
+#swipebox-action {
+  bottom: -50px;
+}
+#swipebox-action.visible-bars {
+  bottom: 0;
+}
+
+#swipebox-action.force-visible-bars {
+  bottom: 0!important;
+}
+
+#swipebox-caption {
+  top: -50px;
+  text-align: center;
+}
+#swipebox-caption.visible-bars {
+  top: 0;
+}
+
+#swipebox-caption.force-visible-bars {
+  top: 0!important;
+}
+
+#swipebox-action #swipebox-prev, #swipebox-action #swipebox-next,
+#swipebox-action #swipebox-close {
+  background-image: url("../images/icons.png");
+  background-repeat: no-repeat;
+  border: none!important;
+  text-decoration: none!important;
+  cursor: pointer;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+}
+
+#swipebox-action #swipebox-close {
+  background-position: 15px 12px;
+  left: 40px;
+}
+
+#swipebox-action #swipebox-prev {
+  background-position: -32px 13px;
+  right: 100px;
+}
+
+#swipebox-action #swipebox-next {
+  background-position: -78px 13px;
+  right: 40px;
+}
+
+#swipebox-action #swipebox-prev.disabled,
+#swipebox-action #swipebox-next.disabled {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+
+#swipebox-slider.rightSpring {
+  -moz-animation: rightSpring 0.3s;
+  -webkit-animation: rightSpring 0.3s;
+}
+
+#swipebox-slider.leftSpring {
+  -moz-animation: leftSpring 0.3s;
+  -webkit-animation: leftSpring 0.3s;
+}
+
+@-moz-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-moz-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes rightSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: -30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+@-webkit-keyframes leftSpring {
+  0% {
+    margin-left: 0px;
+  }
+
+  50% {
+    margin-left: 30px;
+  }
+
+  100% {
+    margin-left: 0px;
+  }
+}
+
+/* Skin 
+--------------------------*/
+#swipebox-overlay {
+  background: #0d0d0d;
+}
+
+#swipebox-action, #swipebox-caption {
+  text-shadow: 1px 1px 1px black;
+  background-color: #0d0d0d;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0d0d0d), color-stop(100%, #000000));
+  background-image: -webkit-linear-gradient(#0d0d0d, #000000);
+  background-image: -moz-linear-gradient(#0d0d0d, #000000);
+  background-image: -o-linear-gradient(#0d0d0d, #000000);
+  background-image: linear-gradient(#0d0d0d, #000000);
+  -webkit-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  -moz-box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  box-shadow: 0 1px 1px 1px #212121, inset 0 1px 1px 1px black;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+  opacity: 0.95;
+}
+
+#swipebox-action {
+  -webkit-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+  -moz-box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+  box-shadow: 0 -1px -1px 1px #212121, inset 0 -1px -1px 1px black;
+}
+
+#swipebox-caption {
+  color: white!important;
+  font-size: 15px;
+  line-height: 43px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.links{text-align:center;padding-top:5px; }
+</style>
+</head>
+
+<body>
+    <div class="pc">
+        <h1>团洋范</h1>
+      	<p><img src="code.jpg"  /></p>
+      	<div class="info1">扫一扫，关注团洋范微信</div>
+      	<span>copyright &copy; 中国团洋范</span>
+    </div>
+</body>
+</html>

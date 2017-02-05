@@ -1,0 +1,88 @@
+﻿<include file="public:header" />
+<!--会员列表-->
+<div class="pad_10" >
+    
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                     <form action="{:U('xiaoshou_list/excelout')}" method="post"><input type="submit" class="btn" style="float:right;" value="导出数据"> </form>
+                    <form name="searchform" method="get" >
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="xiaoshou_list" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+                    下单时间 :
+                    <input type="text" name="time[time_start]" id="J_time_start" class="date" size="12" value="{$search.time_start}">
+                    -
+                    <input type="text" name="time[time_end]" id="J_time_end" class="date" size="12" value="{$search.time_end}">
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                    </form> 
+
+                </div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+      
+
+    <div class="J_tablelist table_list" data-acturi="{:U('user/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th width="150" align="left"><span data-tdtype="order_by" data-field="title">商品名称</span></th>
+                <th width="100"align="left"><span data-tdtype="order_by" data-field="orderId">订单号</span></th>
+                <th width="50" align="left"><span data-tdtype="order_by" data-field="quantity">数量</span></th>
+                <th width="30"><span data-tdtype="order_by" data-field="price">售价</span></th>
+                <!-- <th width="60" align="right"><span data-tdtype="order_by" data-field="shares">分享</span></th>
+                <th width="60" align="right"><span data-tdtype="order_by" data-field="albums">专辑</span></th>-->
+                <th width="60"><span data-tdtype="order_by" data-field="order_count">总价</span></th>
+                <th width="60"><span data-tdtype="order_by" data-field="support_time">付款时间</span></th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center">{$val.id}</td>
+                <td align="left">{$val.title}</td>
+                <td align="left">{$val['orderId']}</td>
+                <td align="left">{$val.quantity}</td>
+                <td align="center">
+                    {$val.price}
+                </td>
+                <td align="center">{$val['quantity']*$val['price']}</td>
+               <td align="center">{$val['add_time']|date="Y-m-d H:i:s",###}</td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script type="text/javascript">
+    Calendar.setup({
+        inputField: "J_time_start",
+        ifFormat: "%Y-%m-%d",
+        showsTime: false,
+        timeFormat: "24"
+    });
+    Calendar.setup({
+        inputField: "J_time_end",
+        ifFormat: "%Y-%m-%d",
+        showsTime: false,
+        timeFormat: "24"
+    });
+</script>

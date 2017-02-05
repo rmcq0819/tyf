@@ -1,0 +1,6 @@
+[ 2016-12-10T14:21:35+08:00 ] ERR: (ThinkException) Column 'uname' cannot be null
+ [ SQL语句 ] : INSERT INTO `weixin_signup` (`userId`,`uname`,`phone`,`teamId`) VALUES (78,null,'15731142372',1)
+[ 2016-12-10T14:24:26+08:00 ] ERR: (ThinkException) Column 'uname' cannot be null
+ [ SQL语句 ] : INSERT INTO `weixin_signup` (`userId`,`uname`,`phone`,`teamId`) VALUES (78,null,'15731142372',1)
+[ 2016-12-10T14:24:54+08:00 ] ERR: (ThinkException) Column 'uname' cannot be null
+ [ SQL语句 ] : INSERT INTO `weixin_signup` (`userId`,`uname`,`phone`,`teamId`) VALUES (78,null,'15731142372',1)

@@ -1,0 +1,224 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>庆上市 共享3个亿</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+       		/*向右*/
+        	#pro ul li{
+        		border-top: solid 1px rgb(181,181,181); padding: 6px; height: 165px;background-color: white; margin-top: 0px;
+        	}
+        	#pro ul li:first-child{
+        		margin-top: -10px;
+        	}
+        	#pro ul li:last-child{
+        		border-bottom: solid 1px rgb(181,181,181);
+        	}
+        	#pro .lefts{
+        		width: 40%; float: left; height: 158px;
+        	}
+        	#pro .lefts img,#pro .f-lefts img{
+        		width: 100%; height: 110px;
+        	}
+        	#pro .lefts fieldset,#pro .f-lefts fieldset{
+        		border: dashed 1px rgb(117,117,117); margin: 0px;
+        	}
+        	#pro .lefts legend,#pro .f-lefts legend{
+        		border-bottom: none; text-align: center; font-size: 13px; padding-bottom: 0px; margin-bottom: 0px;
+        	}
+        	#pro .rights{
+        		width: 60%; height: 158px ;float: right; position: relative; left: 0; padding-left:8px;
+        	}
+        	#pro .rights .title,#pro .f-rights .title{
+        		color: rgb(83,83,83);margin-top: 1px; font-size: 13px;
+        	}
+        	#pro .rights .price,#pro .f-rights .price{
+        		color: rgb(340,93,0); font-size: 16px;
+        	}
+        	#pro .rights .del-price,#pro .f-rights .del-price{
+        		color: rgb(177,177,177);
+        	}
+        	
+        	
+        	/*反向*/
+        	#pro .f-lefts{
+        		width: 40%; float: right; height: 158px;
+        	}
+        	#pro .f-rights{
+        		width: 60%; height: 158px ;float: left; position: relative; left: 0; padding-left:8px; padding-right: 5px;
+        	}
+
+        	/*进度条*/
+        	.am-progress-bar-warning{
+        		background-color: rgb(250,206,179);
+        		border-top-right-radius: 6px;
+        		border-bottom-right-radius: 6px;
+        	}
+        	.am-progress{
+        		background-color: white;border: solid 1px rgb(240,93,0); border-radius: 6px; height: 17px; margin-top: 2px; position: relative; left: 0px;
+        	}
+        	.am-progress .content{
+        		position: absolute; left: 31%; top: -3px; font-size: 11px; color: rgb(240,93,0);
+        	}
+			.am-progress .content-white{
+        		position: absolute; left: 25%; top: -4px; font-size: 11px; color: white;
+        	}
+        	.am-progress-bar{
+        		color: rgb(240,93,0);
+        		line-height: 15px;
+        	}
+        	.am-active{
+        		width: 70%;margin-top: 5px;
+        	}
+        	
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			活动专场
+		</div>
+		
+		<div style="margin-top: 49px;">
+			<img src="../Style/index-images/activity/head.png" alt="头部" class="am-img-responsive" />
+			<img src="../Style/index-images/activity/shangshi_<?php echo date('j'); ?>.jpg" alt="国庆活动" class="am-img-responsive" style="margin-top: 1px"/>
+			<img data-am-sticky="{top:48}" src="../Style/index-images/activity/tips.png" alt="活动提示" class="am-img-responsive" style="margin-top: 1px;"/>
+		</div>
+		
+		<div style="background-color: rgb(237,28,67); margin-top: 1px;">
+			<img src="../Style/index-images/activity/line.jpg" alt="分界线" class="am-img-responsive" />
+			<!--活动商品-->
+			<div id="pro" style="margin: 10px;">
+				<ul>
+				<volist name="items" id="vol" mod="2">
+				<eq name="mod" value="0">
+					<li onclick="location='{:U('Item/index',array('id'=>$vol['id'],'shares'=>$info['id']))}'">
+						<div class="lefts">
+							<fieldset >
+								<legend>爆款必抢</legend>
+								<img src="data/upload/item/{:get_thumb($vol['img'], '_b')}" alt="商品图片" class="am-img-responsive"/>
+							</fieldset>
+						</div>
+						<div class="rights">
+							<p class="title">{$vol.title}</p>
+							<p class="price"><span>￥{$vol.aprice}</span></p>
+							<p class="del-price"><del>原价：￥{$vol.price}</del></p>
+							<div class="am-progress am-progress-striped am-progress-sm am-active">
+  								<div class="am-progress-bar am-progress-bar-<if condition="$vol.salelv gt 90">danger<else/>warning</if>" style="width:{$vol.salelv}%;"></div>
+  								<p class="<if condition="$vol.salelv gt 90">content-white<else/>content</if>">已抢{$vol.salelv}%</p>
+							</div>
+							
+							<div class="am-g btn-left" style="margin-top: -13px;">
+  								<div class="am-u-sm-12">
+  									<if condition="$vol.sale_quantity gt 0"><img src="../Style/index-images/activity/btn-left.png" alt="立即抢购" class="am-img-responsive" style="width: 95%; height: 26px;"/>
+  									<else/><img src="../Style/index-images/activity/btn-left2.png" alt="原价购买" class="am-img-responsive" style="width: 95%; height: 26px;"/></if>
+  								</div>
+							</div>
+							<!--<p><if condition="$vol.sale_quantity gt 0"><button class="btn-kan">立即抢购&nbsp;&nbsp;>></button>
+							   <else/><button class="btn-kan-d">原价购买&nbsp;&nbsp;>></button></if>
+							</p>-->
+							
+						</div>
+						<div style="clear: both;"></div>
+					</li>
+					<img src="../Style/index-images/activity/first-line.png" alt="分界线" class="am-img-responsive" style="margin: 0 auto; width: 90%;"/>
+				</eq>
+				<eq name="mod" value="1">
+					<li onclick="location='{:U('Item/index',array('id'=>$vol['id'],'shares'=>$info['id']))}'">
+						<div class="f-rights">
+							<p class="title">{$vol.title}</p>
+							<p class="price"><span>￥{$vol.aprice}</span></p>
+							<p class="del-price"><del>原价：￥{$vol.price}</del></p>
+							<div class="am-progress am-progress-striped am-progress-sm am-active">
+  								<div class="am-progress-bar am-progress-bar-<if condition="$vol.salelv gt 90">danger<else/>warning</if>" style="width: {$vol.salelv}%"></div>
+  								<p class="<if condition="$vol.salelv gt 90">content-white<else/>content</if>">已抢{$vol.salelv}%</p>
+							</div>
+							
+							<div class="am-g btn-right" style="margin-top: -13px;">
+  								<div class="am-u-sm-12">
+  									<if condition="$vol.sale_quantity gt 0"><img src="../Style/index-images/activity/btn-right.png" alt="立即抢购" class="am-img-responsive" style="width: 95%; height: 26px;"/>
+  									<else/><img src="../Style/index-images/activity/btn-right2.png" alt="原价购买" class="am-img-responsive" style="width: 95%; height: 26px;"/></if>
+  								</div>
+							</div>
+							<!--<p><if condition="$vol.sale_quantity gt 0"><button class="btn-kan">立即抢购&nbsp;&nbsp;>></button>
+							   <else/><button class="btn-kan-d">原价购买&nbsp;&nbsp;>></button></if>
+							</p>-->
+						</div>
+						<div class="f-lefts">
+							<fieldset>
+								<legend>爆款必抢</legend>
+								<img src="data/upload/item/{:get_thumb($vol['img'], '_b')}" alt="商品图片" class="am-img-responsive"/>
+							</fieldset>
+						</div>
+						<div style="clear: both;"></div>
+					</li>
+					<img src="../Style/index-images/activity/second-line.png" alt="分割线" class="am-img-responsive" style="margin: 0 auto; width: 90%;"/>
+				</eq>
+				</volist>
+				</ul>
+			</div>
+		</div>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+				  'onMenuShareTimeline',
+				  'onMenuShareAppMessage',
+				]
+			  });
+			  
+			  wx.ready(function () {
+				 wx.onMenuShareTimeline({
+					title: "庆上市，抢爆款 - 团洋范", // 分享标题
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/main.jpg", // 分享图标
+				});
+				wx.onMenuShareAppMessage({
+					title: "精选全球爆款庆祝上市 - 团洋范", // 分享标题
+					desc: "全球爆款低至10.28元限量抢 - 团洋范", // 分享描述
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/main.jpg", // 分享图标
+					type: 'link', 
+					dataUrl: '',
+				});
+			  });
+		</script>
+		<script>
+			$(document).ready(function(){ 
+				//限制字符个数 
+				$(".title").each(function(){ 
+					var maxwidth=23; 
+					if($(this).text().length>maxwidth){
+						 $(this).text($(this).text().substring(0,maxwidth)); 
+						 $(this).html($(this).html()+'...'); 
+					} 
+				}); 
+			});
+		</script>
+		
+		<include file="public:footer" />
+	</body>
+
+</html>

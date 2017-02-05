@@ -1,0 +1,279 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			/*头部S*/
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240, 93, 0);
+				text-align: center;
+				color: #fff;
+				font-size: 16px;
+				line-height: 49px;
+				top: 0;
+			}
+			.topnav .back {
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			
+			.topnav img {
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			/*头部E*/
+			.topnav .clear-all {
+				position: absolute;
+				top: 0;
+				right: 6px;
+				font-size: 15px;
+				line-height: 49px;
+			}
+			/*购物车没有产品的时候*/
+			
+			#col-img {
+				text-align: center;
+			}
+			
+			#col-content {
+				text-align: center;
+				font-size: 15px;
+				margin: 0 10px;
+				text-align: left;
+				color: #555;
+			}
+			
+			/*按钮*/
+			#btn {
+				text-align: center;
+				margin-bottom: 10px;
+			}
+			
+			#btn a {
+				font-size: 14px;
+				padding: 3px 9px;
+				border-radius: 4px;
+			}
+			#btn a:first-child {                  /*支付按钮*/
+				border: 1px solid black;
+				color: black;
+				margin-right: 52px;
+			}
+			#btn a:last-child {                    /*返回首页按钮*/
+				color: #e15f11;
+				border: 1px solid #e15f11;
+			}
+			
+			#success {
+				padding-top: 48px;
+				background: #fff;
+				padding-bottom: 10px;
+			}
+			#col-content p{
+				font-size:13px;
+				color:#555;
+			}
+			#col-content span{
+				color: rgb(240,93,0);
+			}
+			#col-img img{
+				width:70px; 
+				height: 70px;
+				margin-top: 22px;
+				animation: shake 2s;
+				animation-delay: 2px;
+			}
+			@keyframes shake{ 
+				10%{
+					transform: translate(0px,-3px);
+				}
+				30%{
+					transform: translate(0px,7px);
+				}
+				50%{
+					transform: translate(0px,-3px);
+				}
+				70%{
+					transform: translate(0px,7px);
+				}
+				90%{
+					transform: translate(0px,-3px);
+				}
+			}
+			/*猜你喜欢*/
+			
+			#guess-like {
+				height: 50px;
+				line-height: 50px;
+				font-size: 15px;
+				text-align: center;
+				position: relative;
+				color: #555;
+			}
+			#guess-like img{
+				width:15px;
+				height:15px;
+				transform: rotate(180deg);
+			}
+			
+			#guess-like .span-1 {
+				border-top: 1px solid;
+				width: 36%;
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 25px;
+				border-top-color: rgb(190,190,190);
+			}
+			
+			#guess-like .span-2 {
+				border-top: 1px solid;
+				width: 36%;
+				display: inline-block;
+				position: absolute;
+				right: 0;
+				top: 25px;
+				border-top-color: rgb(190,190,190);
+			}
+			
+			.am-avg-sm-2 > li{
+				margin: 7px 1px 0px 4px;
+			}
+			#like-1 ul li{
+				background-color:white;
+				padding:5px;
+			}
+			#you-like {
+				width: 100%;
+				height: 50px;
+			}
+			/*产品标题*/
+			
+			#like-1 .title {
+				font-size: 14px;
+				color: black;
+				line-height: 17px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			/*产品价格*/
+			
+			#like-1 .price {
+				line-height: 30px;
+			}
+			
+			#item-money {
+				width: 50%;
+				float: left;
+				height: 102px;
+			}
+			
+			#item-money p span {
+				color: #e15f11;
+				font-size: 15px;
+			}
+			/*弹出窗口活动S*/
+			.am-dimmer{
+				background-color: rgba(0,0,0,0.7);
+			}
+			#main-img{
+				width: 95%; height: 330px; z-index: 999;
+			}
+			#close-img{
+				width: 25px; height: 25px; position: absolute; top: 30; left: 80%; z-index: 999;
+			}
+			#btn-open{
+				background-color: rgb(240,93,0); color: rgb(253,223,143); border: solid 2px rgb(253,223,143); border-radius: 10px; padding: 3px 25px 3px 25px; 
+			}
+			#btn-close{
+				background-color: rgb(240,93,0); color: rgb(253,223,143); border: solid 2px rgb(253,223,143); border-radius: 10px; padding: 3px 25px 3px 25px;margin-right: 20px;
+			}
+			.count{
+				position: absolute; left: 190px; top: 90px; color: rgb(225,69,56); font-size: 21px;
+			}
+			.gra{
+				position: absolute; left: 115px; top: 179px; color: rgb(225,69,56); font-size: 13px;
+			}
+			.tips{
+				width: 63%;color: rgb(253,223,143); position: absolute; z-index: 1000; left: 80px; top: 215px; font-size: 12px;
+			}
+			.layermcont{
+				padding: 15px 15px;
+			}
+			.layermbtn span, .layermchild h3{
+				color: rgb(240,93,0);
+			}
+
+			/*弹出窗口活动Es*/
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+	<body>
+	
+		<div class="topnav">
+			<a href="{:U('User/index',array('shares'=>$info['id']))}"  class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			订单支付成功
+		</div>
+		
+		<div id="success">
+			<div style="overflow:hidden;margin-top:15px;">
+				<div id="col-img" style="width:50%;float:left;">
+					<img src="../Style/index-images/succ.png" alt="支付成功"/>
+				</div>
+				<div id="item-money">
+					<div style="height:46px;margin-top:22px;font-size:14px;">
+						<p style="margin-bottom:5px; margin-left: -15px;">卖家店铺：<span style="font-size: 14px;">{$shop_name.merchant}</span></p>
+						<p style="font-size: 14px;margin-left: -15px;">订单金额：<span>￥{$order_info.order_sumPrice}</span></p>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div id="btn">
+				<a href="{:U('Order/checkOrder',array('orderId'=>$order_info['orderId']))}">查看订单</a>
+				<a href="{:U('Index/index',array('shares'=>$info['id']))}">返回首页</a>
+			</div>
+			</br>
+			<div id="col-content">
+				<p><span>温馨提示：</span>团洋范海外购物平台不会以订单异常、系统升级为由要求你点击任何网址链接进行退款操作。</p>
+			</div>
+		</div>
+		<!--猜你喜欢-->
+		<div id="you-like">
+			<p id="guess-like">
+				<span class="span-1"></span>&nbsp;
+				<img src="../Style/index-images/top.png"/>&nbsp;为您推荐&nbsp;
+				<span class="span-2"></span>
+			</p>
+		</div>
+		<!-- 为你推荐 -->
+		<div id="like-1" style="margin-top: -10px;">
+			<ul class="am-avg-sm-2 am-thumbnails" >
+				<volist name="itemsbuy" id="vo">
+					<li>
+						<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+							<img class="am-thumbnail" src="data/upload/item/{$vo.img}" />
+							<p class="title">{$vo.title}</p>
+							<p class="price"><span style="color: black;">优品价：</span><span style="color: rgb(240,93,0); font-size: 15px;">￥{$vo.price}</span></p>
+							<p class="price"><b>{$vo.buy_num}</b>人已购买</p>
+						</a>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		<include file="public:footer" />
+	</body>
+</html>

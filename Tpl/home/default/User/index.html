@@ -1,0 +1,401 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>用户中心</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			
+			.topnav .back {
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			/*个人信息S*/
+			#user-info{
+				width: 100%;height: 130px;background: url(../Style/index-images/bg.jpg) no-repeat;background-size:cover;
+			}
+			#user{
+				line-height: 130px;
+			}
+			#user img{
+				width: 75px;height: 75px;line-height: 130px;
+			}
+			.user-name{
+				width: 131px;float:left;color: white; line-height: 130px;font-size: 15px;text-overflow: ellipsis;overflow: hidden;white-space:nowrap;
+
+			}
+			#user-info-next span{
+				float:right; line-height: 130px;color: white; margin-right: 5px; font-size: 14px;
+			}
+			/*个人信息E*/
+			
+			/*勋章*/
+			#xunzhang{
+				width: 100%; height: 30px;background-color: rgb(187,96,39);
+			}
+			#xunzhang .am-u-sm-3{
+				text-align: center; line-height: 30px;
+			}
+			#xunzhang .am-u-sm-3 img{
+				width: 19px; display: inline; margin-top: -3px;
+			}
+			#xunzhang .am-u-sm-3 .liang{   /*点亮颜色*/
+				color: rgb(255,232,3);
+			}
+			#xunzhang .am-u-sm-3 .hui{     /*未点亮颜色*/
+				color: rgb(222,222,222);
+			}
+			/*内容列表S*/
+			#content {
+			<?php 
+				if($update_user == 4){
+					echo 'height:401px;';
+				}else{
+					echo 'height:352px;';
+				}
+			?>
+			}
+			#content li{
+				font-size: 14px;
+			}
+			#content li:nth-child(2n+1){
+				background-color: white;
+			}
+			#content img{
+				width:32px;height: 32px;
+			}
+			/*内容列表E*/
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animations.css"/>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+			</a>
+			会员中心
+		</div>
+		<div id="user-info" style="margin-top: 49px;">
+			<div class="am-g">
+				<a href="{:U('User/user_info')}">
+  				<div id="user" class="am-u-sm-3" style="text-align:center;position: relative; left: 0px;">
+  					<if condition="$visitor.hyimg neq ''"><img src="{$visitor.hyimg}"class="am-img-thumbnail am-circle"  alt="头像"/>
+						<else /><img src="{$weiheader.cover}" class="am-img-thumbnail am-circle"  alt="头像"/></if>
+					
+  				</div>
+  				<div class="am-u-sm-8" style="height:56px;padding-top:34px;font-size:16px;color: #fff;padding-left:16px;">
+  					{$visitor.username}
+					<if condition="$userinfo.uid neq 4">
+							<span style="display:block;font-size:13px;margin-top:8px;">您是第{$unumber}号饭团</span>
+							<span style="display:block;font-size:13px;margin-top:8px;">今天是您开始创业的第{$utime}天</span>
+						<else/>
+							<span style="display:block;font-size:13px;margin-top:8px;">您是第{$unumber}号饭团</span>
+							<span style="display:block;font-size:13px;margin-top:8px;">注册时间：{$visitor.reg_time|date='Y年m月d日',###}</span>
+					</if>
+  				</div>
+  				<div id="user-info-next" class="am-u-sm-1">
+  					<i class="am-icon-angle-right" style="font-size: 32px;line-height: 130px;color: #fff;"></i>
+  				</div>
+  			</a>
+			</div>
+		</div>
+		
+		
+		<if condition="$satisfy gt 0">
+			<div class="am-alert am-alert-warning" data-am-alert style="margin:0px;">
+				<p>亲爱的{$visitor.username}，您已满足申请经纪人的条件，赶紧加入团洋范抢战市场吧！
+					<span onclick="window.location.href='{$urls}'" style="background:red;color:#fff;border-radius:3px;height:80%;vertical-align:center;padding:3px;">去申请</span>
+				</p>
+			</div>
+		</if>
+		
+		<notempty name="url">
+			<div class="am-alert am-alert-warning" data-am-alert style="margin:0px;">
+				<p>亲爱的{$visitor.username}，您还没有支付代理商费用，点击支付加入团洋范抢战市场吧！
+					<span style="background:red;color:#fff;border-radius:3px;height:80%;vertical-align:center;padding:3px;" id="pay">去支付</span>
+				</p>
+			</div>
+		</notempty>
+		
+		<!--
+		<notempty name="read_msg">
+		<div class="am-alert am-alert-warning" data-am-alert style="margin:0px">
+				<p>亲爱的{$visitor.username}，您有{$msg_cont}条未读消息
+					<span style="background:red;color:#fff;border-radius:3px;height:80%;vertical-align:center;padding:3px;" id="read">浏览</span>
+				</p>
+		</div>
+		</notempty>
+		-->
+		
+		<!--勋章-->
+		
+		<if condition="$userinfo.login_days egt 7 AND $userinfo.uid neq 4 AND $userinfo.v1 eq 1">
+			<div id="xunzhang">
+				<div class="am-g">
+						<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'renqi'))}'">
+							<if condition="$userinfo.login_days egt 7">
+								<img src="../Style/index-images/renqishangjia.png" alt="人气店铺" class="am-img-responsive"/>&nbsp;<span class="liang">人气店铺</span>
+								<else/>
+								<img src="../Style/index-images/renqishangjia-hui.png" alt="人气店铺" class="am-img-responsive"/>&nbsp;<span class="hui">人气店铺</span>
+							</if>
+						</div>
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'huangguan'))}'">
+						<!--<img src="../Style/index-images/huangguanshangjia.png" alt="皇冠商家" class="am-img-responsive"/>&nbsp;<span class="liang">皇冠商家</span>-->
+						<img src="../Style/index-images/huangguanshangjia-hui.png" alt="皇冠商家" class="am-img-responsive"/>&nbsp;<span class="hui">皇冠商家</span>
+					</div>
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'jinpai'))}'">
+						<!--<img src="../Style/index-images/jinpaifuwu.png" alt="金牌服务" class="am-img-responsive"/>&nbsp;<span class="liang">金牌服务</span>-->
+						<img src="../Style/index-images/jinpaifuwu-hui.png" alt="金牌服务" class="am-img-responsive"/>&nbsp;<span class="hui">金牌服务</span>
+					</div>
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'wangpai'))}'">
+						<!--<img src="../Style/index-images/wangpaizhanggui.png" alt="王牌掌柜" class="am-img-responsive"/>&nbsp;<span class="liang">王牌掌柜</span>-->
+						<img src="../Style/index-images/wangpaizhanggui-hui.png" alt="王牌掌柜" class="am-img-responsive"/>&nbsp;<span class="hui">王牌掌柜</span>
+					</div>
+				</div>
+			</div>
+			<elseif condition="$userinfo.uid neq 4"/>
+			<div id="xunzhang">
+				<div class="am-g">
+				
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'renqi'))}'">
+							<img src="../Style/index-images/renqishangjia-hui.png" alt="人气店铺" class="am-img-responsive"/>&nbsp;<span class="hui">人气店铺</span>
+					</div>
+					
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'huangguan'))}'">
+						<img src="../Style/index-images/huangguanshangjia-hui.png" alt="皇冠商家" class="am-img-responsive"/>&nbsp;<span class="hui">皇冠商家</span>
+					</div>
+					
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'jinpai'))}'">
+						<img src="../Style/index-images/jinpaifuwu-hui.png" alt="金牌服务" class="am-img-responsive"/>&nbsp;<span class="hui">金牌服务</span>
+					</div>
+					
+					<div class="am-u-sm-3" onclick="window.location.href='{:U('User/dec_rule',array('desc'=>'wangpai'))}'">
+						<img src="../Style/index-images/wangpaizhanggui-hui.png" alt="王牌掌柜" class="am-img-responsive"/>&nbsp;<span class="hui">王牌掌柜</span>
+					</div>
+				</div>
+			</div>
+		</if>
+		
+		<ul class="am-avg-sm-4 am-thumbnails dingdanimg">
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>1))}">
+					<if condition="$count1 neq '0'"><span class="am-badge am-round dingdangcarshu bounce">{$count1}</span></if>
+					<img src="../Style/images/img24.png"><span>待付款</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>2))}">
+					<if condition="$count2 neq '0'"><span class="am-badge am-round dingdangcarshu bounce">{$count2}</span></if>
+					<img src="../Style/index-images/shipped.png"><span>待发货</span>
+				</a>
+			</li>
+			
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>3))}">
+					<if condition="$count3 neq '0'"><span class="am-badge am-round dingdangcarshu bounce">{$count3}</span></if>
+					<img src="../Style/images/img26.png"><span>待收货</span>
+				</a>
+			</li>
+
+			<li>
+				<a href="{:U('User/order_list')}">
+					<span class="am-badge am-round dingdangcarshu bounce">{$count}</span>
+					<img src="../Style/index-images/all-order.png"><span>全部订单	<i class="am-icon-angle-right" style=""></i></span>
+				</a>
+			</li>
+
+		</ul>
+
+		<ul id="content" class="am-avg-sm-1 am-thumbnails remberli" style="margin-top: 6px; height:auto;">
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/shoucang')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/collect.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的收藏
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/address')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/adder.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						地址管理
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="am-g"><a href="{:U('User/id_manage')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/ID.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						身份证管理
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+					</a>
+				</div>
+			</li>
+			<!--
+			<li>
+				<div class="am-g"><a href="{:U('User/store_qrcode')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/store_qrcode.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的二维码
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			-->
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/history')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/search.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的足迹
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</a>
+				</div>
+			</li>
+			
+			<li>
+				<div class="am-g"><a href="{:U('User/integral')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/jifen.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的范票
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			<li>
+				<div class="am-g"><a href="{:U('coupon/coupon_center')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/youhuijuan.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						优惠券
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			
+			<!--
+			<li>
+				<div class="am-g"><a href="{:U('User/bargainlist')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/kanjia.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的砍价
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			-->
+			
+			<li>
+				<div class="am-g"><a href="{:U('User/redbag_center')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/red-bag-center.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的红包
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			
+			<!--
+			<li>
+				<div class="am-g"><a href="{:U('User/information_center')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/info.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						消息中心
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			-->
+			
+			<li>
+				<div class="am-g"><a href="{:U('User/help')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/help.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						帮助中心
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+			</a>
+			</li>
+			
+			<!--只有经纪人可见-->
+			<if condition="$update_user eq 5">
+				<li>
+				<div class="am-g"><a href="{:U('Recom/index',array('user'=>1))}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/update-home.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						一键升级为店长
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+					</span>
+				</div>
+				</li>
+				</a>
+			</if>
+		</ul>
+		<!--退出账户-->
+		<if condition="$shop neq 0">
+			<include file="public:footer" />
+		</if>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<script>
+			$(document).ready(function() {
+				$("#pay").on("click",function() {
+					window.location.href = "{$url}";
+				})
+			})
+			
+			$(document).ready(function() {
+				$("#read").on("click",function() {
+					window.location.href = "{:U('User/information_center')}";
+				})
+			})
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>

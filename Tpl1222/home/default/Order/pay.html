@@ -1,0 +1,621 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<style type="text/css">
+			* {
+				font-family: "微软雅黑";
+			}
+			
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240, 93, 0);
+				text-align: center;
+				color: #fff;
+				font-size: 16px;
+				line-height: 49px;
+				top: 0;
+			}
+			#note{
+				width: 300px;
+				border: none; 
+				outline: none; 
+				border-bottom: solid 1px rgb(165,165,165);
+			}
+			/*模态框*/
+			.modal {position: fixed;left: 0;right: 0;top: 0;bottom: 0;background: rgba(0, 0, 0, 0.46);;z-index: 9999;}
+			.modal-dialog {width:74%;margin:140px auto 0 auto;}
+			.modal-content {background:#fff;}
+			.modal-content p{height:40px;background:#e15f11;color: #fff;font-size:16px;text-align:center;line-height: 40px;}
+			#success{height:182px;padding-top:24px;background:#fff;}	
+			#item-money{width:60%;float:left;height:72px;font-size: 13px;}
+			#item-money p span{color:#e15f11;font-size: 13px;}
+			#col-img{text-align: center;width:40%;float:left;}
+			#col-content{text-align: center; font-size: 13px; margin:0 10px;text-align:left;color:#555;}
+			#buttons{width:100%;}
+			#buttons a{text-align:center;width:50%;float:left;font-size:14px;border: none;height:44px;line-height:44px;border-top:1px solid #eee;}
+			
+			/*美化下拉框*/
+			#select{line-height: 15px;-webkit-appearance:none;appearance:none;border:none; border-bottom:solid 1px rgb(240,93,0);background:#fff;color:#333333;border-radius:4px; outline: none;}	
+			/*优惠券*/
+			.zhang{
+				color: rgb(240,93,0);font-size: 15px;
+			}
+			#my-popup{                     /*选择优惠券弹出框*/
+				width: 90%;height: 350px;text-align: center;position: fixed; left: 50%; margin-left:-45%; top: 60px;
+			}
+			.am-popup-bd{
+				padding: 5px;
+			}
+			.am-checkbox, .am-radio, .am-checkbox-inline, .am-radio-inline{
+				font-size: 12px;
+			}
+			dt{
+				font-weight: 400;
+			}
+			#all{
+				border: dashed 1px rgb(170,170,170); background-color: white; position: relative; left: 0;
+			}
+			#wei-left{
+				float: left;width: 30%;height: 99px;color: white;padding: 5px 0px 0px 10px;text-align:left;
+			}
+			#wei-right .info,#wei-right .time{
+				color: rgb(85,85,85);
+			}
+			#wei-left .you{
+			}
+			#wei-left .num{
+				width: 65%; margin: 0 auto ;text-align: center;padding: 5px 0px 2px 0px;  border-bottom: solid 1px white;
+			}
+			#wei-left .wei{
+				text-align: center; padding: 3px 0px 3px 0px;font-size: 12px;
+			}
+			#wei-right .un-line{
+				width: 100px; height: 4px; margin-top: -10px;
+			}
+			#wei-right{
+				width:68%;height: 80px;float: left;text-align: center;position: relative;left: 0;
+			}
+			#wei-right .you1{
+				text-align: center; padding: 10px 0px 0px 0px; font-size: 14px;
+			}
+			#wei-right .con{
+				margin-top: -5px; text-align: center; font-size: 14px;
+			}
+			#wei-right .doted{
+				margin-top: 10px;
+			}
+			#detail1 .time{
+				float: right; margin-right: 1px;
+			}
+			/*折叠面板样式调整*/
+			.am-accordion-gapped .am-accordion-title:after{
+				top: 65%;
+			}
+			.am-accordion-gapped .am-accordion-title:after{
+				position: static;font-size: 16px;margin-left: 0px;margin-top: 0px;
+			}	
+			.am-accordion-gapped .am-accordion-title:after{
+				margin-left: 2px;
+			}
+			/*优惠券的关闭按钮 */
+			.am-close{
+				opacity: 0.8;
+				font-size: 24px;
+			}
+			/*单选按钮的调整*/
+			.am-popup-bd .am-ucheck-icons{
+				margin-top: 45px;
+			}
+			
+			/*其他优惠券和通用优惠券的分界线*/
+			#guess-like {
+			 	height: 50px;line-height: 50px;font-size: 15px;text-align: center;position: relative;color: #555;
+        	}
+       		 #guess-like .span-1,#guess-like .span-2 {
+            border-top: 1px solid rgb(190,190,190);width: 35%;position: absolute;top: 25px;
+        	}
+        	#guess-like .span-1{
+           		left: 0px;
+        	}
+        	#guess-like .span-2{
+            	right: 0px;
+        	}
+        	
+        	/*选择地址和身份证*/
+        	#choose-ad,#choose-id{
+        		width: 100%; background-color: white; color: black; margin-top: 5px; border: none;
+        	}
+        	#choose-ad p,#choose-id p{
+        		font-size: 13px; color: rgb(85,85,85); text-align: left;
+        	}
+        	.ch-title{
+        		height: 40px;background-color: white;line-height: 40px; font-size: 15px;border-bottom: solid 1px rgb(222,222,222); color: #555;
+        	}
+        	.am-modal-actions-header{
+					height: 50px;padding: 5px;font-size: 12px;
+			}
+			#my-actions .am-radio .am-icon-checked:before, .am-radio-inline .am-icon-checked:before{
+				    content: "\f046";
+			}
+			#my-actionss .am-radio .am-icon-checked:before, .am-radio-inline .am-icon-checked:before{
+				    content: "\f046";
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			支付中心
+		</div>
+
+		<form action="{:U('Order/end')}" method="POST" id="goto_pay">
+			<input type="hidden" name="orderid" value="{$orderid}" /><!-- id -->
+			<input type="hidden" name="dingdanhao" value="{$dingdanhao}" /><!-- 订单号 -->
+			<div class="diangdangpagezhuangtai" style="margin-top: 50px; border-top: none; font-size: 13px;"><i class="am-icon-file-text-o"></i>&nbsp;订单号：{$dingdanhao}</div>
+
+			<div class="dingdangbj" <if condition="$_GET['orderId'] neq ''">data-am-modal="{target: '#my-actions'}"</if> onclick="return true">
+				<div class="am-g am-g dingdang">
+					<div class="am-u-sm-1 dingdandizhileft"><img src="../Style/images/pic16.png"></div>
+					<div class="am-u-sm-11 dingdandizhimiddle">
+						<P><span><php>echo substr_replace($orderaddr['mobile'],'****',3,4);</php></span>收货人：{$orderaddr.address_name}</P>
+						<p style="color:#666;">收货地址：{$orderaddr.address}</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="dingdangdian" style="margin-top: 10px;">
+				<ul>
+					<volist name="orderinfo" id="vo">
+						<li>
+							<div class="am-g am-g-fixed">
+								<div class="am-u-sm-12 dianming">
+									<a href="#"><img src="../Style/images/pic15.png">商家：{$vo.0}</a>
+								</div>
+								<div class="am-u-sm-12">
+									<div class="am-list-news-bd">
+										<ul class="am-list">
+
+											<volist name="vo.goods" id="vo2">
+												<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left" style="width:99%;padding:0;">
+													<a href="javascript:;">
+														<div class="am-u-sm-3 am-list-thumb dianproimg"><img src="{:attach(get_thumb($vo2['img'], '_m'), 'item')}"></div>
+
+														<div class=" am-u-sm-9 am-list-main" style="width:70%;">
+															<table class="am-table am-table-bordered am-table-striped am-table-compact dianprotablezi">
+																<tbody>
+																	<tr>
+																		<td>{$vo2.title}</td>
+																		<td><span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$vo2.price}</span></td>
+																	</tr>
+																	<tr>
+																		<td colspan="2">
+																			商品类型：
+																			<if condition="$vo2.itemtype eq 1">完税商品
+																				<else />保税商品</if><br/>
+																			<if condition="$vo2.size neq ''">
+																				商品规格：<span style="color:#e26000; font-family:'微软雅黑'; font-size:12px;">{$vo2.size}</span><br/>
+																			</if>
+																			购买数量：x{$vo2.quantity}</td>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</a>
+												</li>
+											</volist>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+					</volist>
+				</ul>
+			</div>
+
+			<div class="am-g diangdangpageliuyan">
+				<div class="am-u-sm-2">留言：<input type="text" id="note" name="postscript" placeholder="您的留言...">
+
+				</div>
+				<div class="am-u-sm-10">{$orderaddr.note}</div>
+			</div>
+
+			<div class="am-g am-g-fixed dingdangpagezhifu">
+				<div class="am-u-sm-12">
+					<div class="am-g dingdangpagezhifuzi">
+						<div class="am-u-sm-4 " style="font-size: 13px;">&nbsp;<i class="am-icon-cny"></i>&nbsp;&nbsp;支付方式</div>
+						<div class="am-u-sm-8 dingdangpagezhifuzi2" style="line-height:25px;">
+							<if condition="$wxpaystatus eq 1">
+								<input id="payment_wxpay" name="payment_id" value="3" checked type="hidden" style="position: absolute;right: 34%;top: 16%;">
+								<img src="../Style/index-images/weixin.png" width="20" height="20"><span>微信支付</span>
+							</if>
+							</dl>
+						</div>
+
+					</div>
+				</div>
+				<div class="am-u-sm-12 dingdangpeisong">
+					<P style="font-size: 13px;"><i class="am-icon-truck"></i>&nbsp;配送方式</P>
+					<if condition="$pointitem.is_fictitious eq 1">
+						<input type="radio" name="freetype" value="0" data-am-ucheck checked id="select_def">
+						<input type="hidden" name="is_yunfei" value="0" />
+						您购买的商品({$pointitem.title})，为虚拟商品，无需快递费用，购买成功后，后台将自动充值到“我的范票”，请注意查看 :)
+						<else/>
+						<input type="hidden" name="is_yunfei" value="1" />
+						<label class="am-radio">
+	      				<input type="radio" name="freetype" value="0" data-am-ucheck checked id="select_def">
+	      					<span style="font-size: 12px;">由商家选择合作快递为您配送<span>
+						</label>
+						<!--
+						<label class="am-radio">
+							<input type="radio" name="freetype" value="10" data-am-ucheck id="sf">
+								<span style="font-size: 12px;">顺丰速运 (10元)<span>
+						</label>
+						-->
+					</if>
+					
+					<if condition="date('H') gt 16">
+						<p>
+							<span style="color:#ff0000;font-weight:bold;">亲爱的饭团：</span>下午16：00点前的订单当天发货，下午16：00点之后的订单第二天发货哦，祝您购物愉快！
+						</p>
+					</if>
+				</div>
+				
+				<switch name="orders.is_fping">
+					<case value="0">
+					<div class="am-u-sm-12 dingdangpeisong" style="border-top:1px solid #dcdcdc;">
+					<P style="font-size: 13px;"><i class="am-icon-money"></i>&nbsp;使用范票/抵用</P>
+					<if condition="$point lt 100">
+						账户共有{$point}张范票，不符合范票<a href="{:U('User/rule')}" style="color:#222;font-weight:bold;">使用规则</a>，无法使用
+						<else/>
+						<if condition="$userfreeze.is_freeze eq 1">
+								<p style="font-weight:bold;">
+									<span style="color:#ff0000;">警告：</span>您的账户存在风险行为，范票账户目前已被冻结，无法使用范票抵扣，如有疑问请联系客服！
+								</p>
+							<else/>
+								<p>账户共有{$point}张范票，本次使用
+									<select id="select" name="point">
+										<option value="0">0张</option>
+											<volist name="point_yuer" id="point_yuer">
+													<option value="{$point_yuer}">{$point_yuer}张</option>
+											</volist>
+									</select>
+									<i class="am-icon-caret-down"></i>
+									&nbsp;抵扣:<span style="color:rgb(240,93,0);"><b>￥<span id="equ">0</span>元</b></span>
+								</p>
+							</if>
+					</if>
+				</div>
+				<!--优惠券-->
+				<div class="am-u-sm-12 dingdangpeisong" style="border-top:1px solid #dcdcdc;">
+					<P style="font-size: 13px;"><i class="am-icon-credit-card"></i>&nbsp;使用优惠券/抵用</P>
+						您可使用的优惠券&nbsp;<span class="zhang">{$count}</span>&nbsp;张 
+					<button type="button" class="am-btn am-btn-danger" data-am-modal="{target: '#my-popup'}" style="padding: 0px 8px 0px 8px;font-size: 12px;<if condition="$count elt 0">display:none</if>"> 您选择了<span id="youhuijuan">0</span>元 , 点击选择</button>
+					</br>
+					<span>提示：使用兑换券时不能范票抵扣，优惠活动与通用现金券以外的券不能叠加！</span>
+					<div class="am-popup" id="my-popup">
+						<div class="am-popup-inner">
+						    <div class="am-popup-hd" style="z-index: 1000;">
+						      	<h4 class="am-popup-title">选择优惠券</h4>
+						      	<span data-am-modal-close class="am-close">&times;</span>
+						    </div>
+						    <div class="am-popup-bd">
+								<dl>
+									<p style="color: #555; text-align:left;">提示：若您有通用现金券，可与其他券叠加使用（限一张）！</p>
+									
+																	
+									<p id="guess-like">
+        								<span class="span-1"></span>
+        									现金券&nbsp;<i class="am-icon-hand-o-down"></i>
+       		 							<span class="span-2"></span>
+    								</p>
+
+									<label class="am-radio am-warning" style="height: 99px; line-height: 99px; margin-top: -5px;">
+											<input type="radio" name="cpup" value="0" data-am-ucheck checked>
+											<div style="background-color: white; height: 100%; border: dashed 1px rgb(170,170,170); font-size: 14px;">暂不使用</div>
+									</label>
+									<volist name="coupon3" id="vol">
+										<dt>
+											<label class="am-radio am-warning">
+												<input type="radio" name="cpup" value="{$vol.disPrice}-{$vol.ucId}-{$vol.kind}" data-am-ucheck>
+												<div id="all">
+													<if condition="$vol.etime lt $time">
+														<img src="../Style/index-images/kuaidaoqi.png" alt="快到期" style="width:45px;height:45px;position:absolute;right:0;top:0;"/>
+													</if>
+													<div id="wei-left" style="background: url(../Style/index-images/lan.png);background-size: cover;">
+					  									<p class="you">现金券</p>
+					  									<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 30px;">{$vol.disPrice}</span></p>
+					  									<if condition="$vol.kind eq 3"><p class="wei">{$vol.exchangeCond}范票兑换</p></if>
+													</div>
+													<div id="wei-right">
+														<p class="you1">{$vol.title}</p>
+														<p><img src="../Style/index-images/line-1.png" alt="线" class="un-line"/></p>
+														<p class="con">全场通用</p>
+														<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+													</div>
+													<div style="clear: both;"></div> 
+													<div id="detail1" style="margin-top: -30px;" >
+														<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+														      <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+														        <dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 30%;">
+														         	<span style="color: rgb(85,85,85);">详细信息</span>
+														         	<span class="time" style="color: rgb(85,85,85);">到期日期:{$vol.etime|date="Y-m-d",###}</span>
+														        </dt>
+														        <dd class="am-accordion-bd am-collapse">
+														           	<p style="padding: 5px; color: rgb(85,85,85);">
+														           		{$vol.desc}
+														           	</p>
+														        </dd>
+														      </dl>
+														</section>
+													</div> 								
+												</div>
+											</label>
+										</dt>
+									</volist>
+									
+									<p id="guess-like">
+        								<span class="span-1"></span>
+        									其他券&nbsp;<i class="am-icon-hand-o-down"></i>
+       		 							<span class="span-2"></span>
+    								</p>
+									<label class="am-radio am-secondary" style="height: 99px; line-height: 99px; margin-top: -5px;">
+										<input type="radio" name="radio3" value="0" data-am-ucheck checked>
+										<div style="background-color: white; height: 100%; border: dashed 1px rgb(170,170,170); font-size: 14px;">暂不使用</div>
+									</label>
+									<volist name="coupon" id="vol">
+										<dt>
+											<label class="am-radio am-secondary">
+												<input type="radio" name="radio3" value="{$vol.disPrice}-{$vol.ucId}-{$vol.kind}" data-am-ucheck>
+												<div id="all">
+													<if condition="$vol.etime lt $time">
+														<img src="../Style/index-images/kuaidaoqi.png" alt="快到期" style="width:45px;height:45px;position:absolute;right:0;top:0;"/>
+													</if>
+													<div id="wei-left" style="background: url(../Style/index-images/<if condition="$vol.kind eq 4">pink</if><if condition="$vol.kind eq 1">lan</if><if condition="$vol.kind eq 2">green</if><if condition="$vol.kind eq 3">yellow</if>.png);background-size: cover;">
+																	   <if condition="$vol.kind eq 2">品类券</if>
+																	   <if condition="$vol.kind eq 1">通用券</if>
+																	   <if condition="$vol.kind eq 3">兑换券</if>
+																	   <if condition="$vol.kind eq 4">新人券</if>
+														</p>
+					  									<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 30px;">{$vol.disPrice}</span></p>
+					  									<if condition="$vol.kind eq 3"><p class="wei">{$vol.exchangeCond}范票兑换</p></if>
+													</div>
+													<div id="wei-right">
+														<p class="you1">{$vol.title}</p>
+														<p><img src="../Style/index-images/line-1.png" alt="线" class="un-line"/></p>
+														<p class="con">满{$vol.condition}元可用</p>
+														<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+													</div>
+													<div style="clear: both;"></div> 
+													<div id="detail1" style="margin-top: -30px;" >
+														<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+														      <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+														        <dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 30%;">
+														         	<span style="color: rgb(85,85,85);">详细信息</span>
+														         	<span class="time" style="color: rgb(85,85,85);">截止日期:{$vol.etime|date="Y-m-d",###}</span>
+														        </dt>
+														        <dd class="am-accordion-bd am-collapse">
+														           	<p style="padding: 5px; color: rgb(85,85,85);">
+														           		{$vol.desc}
+														           	</p>
+														        </dd>
+														      </dl>
+														</section>
+													</div> 								
+												</div>
+											</label>
+										</dt>
+									</volist>
+									</div>
+								</dl>
+						    </div>
+						</div>
+					</div>
+					</case>
+				</switch>
+				</div>
+			</div>
+				<input type="hidden" name="ucId" value="" >
+				<input type="hidden" name="coup" value="" >
+			<!--身份证选择-->
+			
+			<button id="choose-id" style="display:none;" type="button" class="am-btn am-btn-secondary" data-am-modal="{target: '#my-actionss'}">
+				<p>选择身份证<i class="am-icon-angle-right" style="float: right; color: rgb(196,196,196);"></i></p>
+			</button>
+			
+
+			<!--地址选择弹框-->
+			<div class="am-modal-actions" id="my-actions">
+				<div class="am-modal-actions-group" style="border: solid 1px white;">
+					<p class="ch-title">选择收货地址&nbsp;<i class="am-icon-map-marker"></i></p>
+			    	<ul class="am-list" style="min-height: 50px ;max-height: 142px; overflow-y: scroll;">
+						<volist name='address_list2' id='vo2'>
+			      		<li class="am-modal-actions-header">
+			      			<div class="am-g">
+  								<div class="am-u-sm-12">
+  									<label class="am-radio" style="position: relative; left: 0px;">
+										<switch name="vo2.id">
+											<case value="$orders.address_id">
+												<input type="radio" name="radio1" onclick="save_address({$vo2.id},'{$_GET['orderId']}')" data-am-ucheck checked="checked" />
+											</case>
+											<default/>
+											<input type="radio" name="radio1" onclick="save_address({$vo2.id},'{$_GET['orderId']}')" data-am-ucheck  />
+										</switch>
+      									<p style="text-align: left; position: absolute; left: 30px; top: -9px; color: rgb(125,125,125);">{$vo2.sheng}{$vo2.shi}{$vo2.qu}{$vo2.towns}</p>
+      									<p style="text-align: left; white-space: normal; position: absolute; left: 30px; top: 10px; color: rgb(125,125,125);">{$vo2.address}</p>
+    								</label>
+  								</div>
+							</div>
+			      		</li>
+						</volist>
+			    	</ul>
+			    	<p onclick="window.location.href='{:U('User/addaddress')}'" style="height: 30px;line-height: 30px;background-color: white; border-top: solid 1px rgb(222,222,222); text-align: right; padding-right: 20px; color: #555;">添加新的地址&nbsp;<i class="am-icon-plus-square"></i></p>
+				</div>
+			    <div class="am-modal-actions-group">
+			    	<button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close style="background-color: rgb(240,93,0); border: none;">取&nbsp;消</button>
+			  	</div>
+			</div>
+			<!--身份证选择弹框-->
+			<div class="am-modal-actions" id="my-actionss">
+				<div class="am-modal-actions-group" style="border: solid 1px white;">
+					<p class="ch-title">选择身份证&nbsp;<i class="am-icon-cc-paypal"></i></p>
+			    	<ul class="am-list" style="min-height: 50px ;max-height: 142px; overflow-y: scroll; ">
+					<volist name="cards" id="card">
+			      		<li class="am-modal-actions-header">
+			      			<div class="am-g">
+  								<div class="am-u-sm-12">
+  									<label class="am-radio" style="position: relative; left: 0px;">
+      									<input type="radio" name="radio1" onclick="save_carid({$card.Id},'{$_GET['orderId']}')" data-am-ucheck>
+      									<p style="text-align: left; position: absolute; left: 40px; top: -9px; color: rgb(125,125,125);">{$card.c_name}</p>
+      									<p style="text-align: left; white-space: normal; position: absolute; left: 40px; top: 10px; color: rgb(125,125,125);"><php> echo strlen($card['c_id'])==15?substr_replace($card['c_id'],"****",8,4):(strlen($card['c_id'])==18?substr_replace($card['c_id'],"****",10,4):"身份证位数不正常！"); </php></p>
+    								</label>
+  								</div>
+							</div>
+			      		</li>
+					</volist>
+			    	</ul>
+			    	<p onclick="window.location.href='{:U('User/addid')}'" style="height: 30px;line-height: 30px;background-color: white; border-top: solid 1px rgb(222,222,222); text-align: right; padding-right: 20px; color: #555;">添加新的身份证&nbsp;<i class="am-icon-plus-square"></i></p>
+				</div>
+			    <div class="am-modal-actions-group">
+			    	<button class="am-btn am-btn-secondary am-btn-block" data-am-modal-close style="background-color: rgb(240,93,0); border: none;">取&nbsp;消</button>
+			  	</div>
+			</div>
+			
+			<!-- 确认支付 -->
+			<div class="am-g am-g-fixed dingdanjiashu" style="padding:0;">
+				<div class="am-u-sm-9 dingdangyinfukuan"><span>应付款：￥<span class="price" id="price">{$order_sumPrice}</span>
+				<span><if condition="$orderinfo[0][yunfei] gt 0">(含运费：￥{$orderinfo[0][yunfei]})<else /></if></span></span></div>
+				<div class="am-u-sm-3 dingdangyinfukuanon" style="background-color:#e15f11;color:#fff;">
+					<if condition="$orders_detail.itemtype eq 0 AND $orders_detail.idcname eq '' AND $orders_detail.idcnum eq ''">
+						<a href="javascript:;" onclick="carid_out()" style="color:white;">确认支付</a>
+						<else/>
+						<a href="javascript:$('#goto_pay').submit();" style="color:white;">确认支付</a>
+					</if>
+				</div>
+			</div>
+		</form>
+		
+		<script>
+			$('#layer_close').click(function(){
+					$('.modal').fadeOut(500);
+			});
+		</script>
+	<script type="text/javascript">
+			var x=0;
+			var y=0;
+			var z=0;
+			var q=0;
+			function js(){
+				var price=parseFloat($('#price').text()); 
+				var add1=parseInt($('input[name=freetype]:checked').val());    //获取运费的值
+				var minu=parseInt($('#select option:selected').val())*0.01;    //获取下拉框积分的值
+				var youhui=$("input:radio[name='radio3']:checked").val();   //获取优惠券的值
+				var youhui2=$("input:radio[name='cpup']:checked").val();   //获取优惠券的值
+				
+				var arr = youhui.split('-');
+				var discount=parseInt(arr[0]);
+				
+				var arr2 = youhui2.split('-');
+				var discount2=parseInt(arr2[0]);
+				
+				var len=$("#select option").length;
+				if(len<=1)
+				{
+					$('#price').text((price+add1-discount-discount2-x+y+z+q).toFixed(2));            //改变价格
+					$("#youhuijuan").text(discount+discount2);
+					x=add1;
+					z=discount;
+					q=discount2;
+					price=price+add1-discount-discount2-x+y+z+q;
+				}
+				if(len>=2)
+				{
+					if(arr[2]==3){
+						alert('您在选择兑换券的同时不能使用范票抵扣');
+						$("#equ").text(0); 
+						$('#select option:eq(0)').attr('selected','selected');
+						$('#price').text((price+add1-discount-discount2-x+y+z+q).toFixed(2));            //改变价格
+						$("#youhuijuan").text(discount+discount2);
+						x=add1;
+						y=0;
+						z=discount;
+						q=discount2;
+					}else{
+						$("#equ").text(minu);  
+						$('#price').text((price+add1-minu-discount-discount2-x+y+z+q).toFixed(2));            //改变价格
+						$("#youhuijuan").text(discount+discount2);
+						x=add1;                                                     
+						y=minu;
+						z=discount;
+						q=discount2;
+					}
+					
+				}
+				$('input[name=ucId]').val(arr[1]);
+				$('input[name=coup]').val(arr2[1]);
+				
+			}			
+			$('input[name=freetype]').on('change',js);                        //触发运费
+			$('#select').on('change',js);									  //触发下拉框
+			$('input[name=radio3]').on('change',js);                 	  //优惠券
+			$('input[name=cpup]').on('change',js);                 	  //优惠券
+			
+			//保存地址信息
+			function save_address(id,orderId){
+				$.post('{:U('Order/save_address')}',{'id':id,'orderId':orderId},function(res){
+						var data = eval("("+res+")");
+						if(data.status == 1){
+							layer.open({
+								content: '地址已成功保存'
+								,skin: 'msg'
+								,time: 3 //2秒后自动关闭
+							});
+							window.location.reload()
+						}else{
+							layer.open({
+								content: '您已保存过该地址，请更换其他地址'
+								,skin: 'msg'
+								,time: 3 //2秒后自动关闭
+							});
+							window.location.reload()
+						}
+				});
+			}
+			
+			//保存身份证信息
+			function save_carid(id,orderId){
+				$.post('{:U('Order/save_carid')}',{'id':id,'orderId':orderId},function(res){
+						var data = eval("("+res+")");
+						if(data.status == 1){
+							layer.open({
+								content: '身份证信息已成功保存'
+								,skin: 'msg'
+								,time: 3 //2秒后自动关闭
+							});
+							window.location.reload()
+						}else{
+							layer.open({
+								content: '您已保存过该身份证'
+								,skin: 'msg'
+								,time: 3 //2秒后自动关闭
+							});
+							window.location.reload()
+						}
+				});
+			}
+			//弹出身份证
+			function carid_out(){
+				$('#choose-id').click();
+			}
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>

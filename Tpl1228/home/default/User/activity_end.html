@@ -1,0 +1,77 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>活动已结束</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#over{
+				margin: 0 auto;margin-top: 100px; text-align: center;
+			}
+			#over img{
+				width: 200px; height: 200px; margin: 0 auto;
+			}
+			#over p{
+				color: #555; font-size: 12px; 
+			}
+			#over .home,#over .refresh{
+				width: 95px;height: 23px;line-height: 23px;margin: 0 auto; background-color: rgb(240,93,0); color: white; border: none; border-radius: 5px; margin-top: 20px; 
+			}
+			#over .home{
+				margin-right: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onclick="window.location.href='index.php?m=Index&a=index&shares=<?php echo $_GET['shares']; ?>'" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			很抱歉，活动已结束
+		</div>
+		<div id="over">
+			<img src="../Style/index-images/activity/yijieshu.png" alt="活动已结束" class="am-img-responsive"/>
+			<p style="margin-top: 20px;">您来晚了，活动已经结束</p>
+			<p>页面将在5秒后跳转，还剩&nbsp;<span id="num" style="color: rgb(240,93,0); font-size: 13px;">5</span>&nbsp;秒</p>
+			<p>如果您的浏览器页面没有跳转，您可以</p>
+			<button class="home" onclick="window.location.href='index.php?m=Index&a=index&shares=<?php echo $_GET['shares']; ?>'"><i class="am-icon-long-arrow-left"></i>&nbsp;返回首页</button>
+			<button class="refresh"><i class="am-icon-refresh"></i>&nbsp;刷新试试</button>
+		</div>
+		
+		<!--倒计时跳转-->
+		<script src="../Style/js/TimeCountDown.js"></script>
+		<script>
+			$(function(){
+				function jump(count) {    
+                	window.setTimeout(function(){    
+                   		count--;    
+                    	if(count > 0) {    
+                        	$('#num').attr('innerHTML', count);    
+                        	jump(count);    
+                    	} 
+                 		else {
+							
+                      		window.location.href = "index.php?m=Index&a=index&shares=<?php echo $_GET['shares']; ?>";
+                  		}    
+                	}, 1000);    
+           		}    
+            	jump(5); 
+			});
+		</script>
+	</body>
+
+</html>

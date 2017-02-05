@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<include file="public:headuser" />
+<body>
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<div class="tixianqian" style="margin-top:15px;">
+<dl>
+<dt>防伪码：<input name="fwm" id="fwm" onafterpaste="this.value=this.value.replace(/\D/g,'')" onKeyUp="this.value=this.value.replace(/\D/g,'')"  placeholder="请输入防伪码" type="text" value="" /></dt>
+<dd></dd>
+</dl>
+</div>
+<div class="kazizushion">
+<div class="kazizushion1"><a id="check" >查询</a></div>
+
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#check").click(function(){
+			var code = $("#fwm").val();
+			$.post('{:U('Fwcheck/index')}',{code:code},function(data){
+					if (data.success){
+						alert(data.success);
+					}else{
+						alert(data.error);
+					}
+			},'json')
+
+		})
+	})
+</script>

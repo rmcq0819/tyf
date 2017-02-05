@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>我的分享会员层级结构图</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+</head>
+<body>
+<include file="public:headuser" />
+<style>
+.fc_A1,.fc_B2,.fc_C3,.fc_D4,.fc_E5 {
+	float:left;
+	border-width: 1px;
+	border-color: gray;
+	border-style: solid;
+	margin-left: 5px;
+	min-width: 17%;
+	text-align: center;
+}
+.fc_A1_title,.fc_B2_title,.fc_C3_title,.fc_D4_title,.fc_E5_title {
+	border-bottom-width: 1px;
+	border-bottom-color: gray;
+	border-bottom-style: solid;
+	background-color: #EEE;
+	height: 28px;
+	line-height: 28px;
+}
+.fc_A1_item,.fc_B2_item,.fc_C3_item,.fc_D4_item,.fc_E5_item {
+	margin-bottom: 5px;
+	margin-top: 5px;
+	height: 24px;
+	line-height: 24px;
+}
+.fc_B2 {
+	float:left;
+}
+.fc_select {
+	background-color: gray;
+	color: white;
+	font-weight: block;
+	height: 24px;
+	line-height: 24px;
+}
+#content {
+	min-height: 400px;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		//点击4级D的时候,渲染5级E
+		function fc_D4_itemClk(usrSlt) {
+			var fc_E5_mlt = $(".fc_E5_mlt");
+			$.getJSON("./index.php?m=User&a=fc_B2C3D4E5_mlt",{id:usrSlt.id},function(usrArr){
+				for(var i=0; i<usrArr.length; i++) {
+					var usr = usrArr[i];
+					var fc_E5_item = $("<div class='fc_E5_item'>"+usr.username+"</div>");
+					fc_E5_item[0].usrEny = usr;
+					fc_E5_item.appendTo(fc_E5_mlt);
+					fc_E5_item.click(function(){
+						var usrSlt = this.usrEny;
+						//fc_E5_itemClk(usrSlt);
+						fc_E5_mlt.find(".fc_select").removeClass("fc_select");
+						$(this).addClass("fc_select");
+					});
+				}
+			});
+		}
+		//点击3级C的时候,渲染4级D
+		function fc_C3_itemClk(usrSlt) {
+			var fc_D4_mlt = $(".fc_D4_mlt");
+			$.getJSON("./index.php?m=User&a=fc_B2C3D4E5_mlt",{id:usrSlt.id},function(usrArr){
+				for(var i=0; i<usrArr.length; i++) {
+					var usr = usrArr[i];
+					var fc_D4_item = $("<div class='fc_D4_item'>"+usr.username+"</div>");
+					fc_D4_item[0].usrEny = usr;
+					fc_D4_item.appendTo(fc_D4_mlt);
+					fc_D4_item.click(function(){
+						var usrSlt = this.usrEny;
+						fc_D4_itemClk(usrSlt);
+						fc_D4_mlt.find(".fc_select").removeClass("fc_select");
+						$(this).addClass("fc_select");
+						var fc_E5_mlt = $(".fc_E5_mlt")
+						fc_E5_mlt.empty();
+					});
+				}
+			});
+		}
+		//点击二级B的时候,渲染三级C
+		function fc_B2_itemClk(usrSlt) {
+			var fc_C3_mlt = $(".fc_C3_mlt");
+			$.getJSON("./index.php?m=User&a=fc_B2C3D4E5_mlt",{id:usrSlt.id},function(usrArr){
+				for(var i=0; i<usrArr.length; i++) {
+					var usr = usrArr[i];
+					var fc_C3_item = $("<div class='fc_C3_item'>"+usr.username+"</div>");
+					fc_C3_item[0].usrEny = usr;
+					fc_C3_item.appendTo(fc_C3_mlt);
+					fc_C3_item.click(function(){
+						var usrSlt = this.usrEny;
+						fc_C3_itemClk(usrSlt);
+						fc_C3_mlt.find(".fc_select").removeClass("fc_select");
+						$(this).addClass("fc_select");
+						var fc_D4_mlt = $(".fc_D4_mlt");
+						var fc_E5_mlt = $(".fc_E5_mlt")
+						fc_D4_mlt.empty();
+						fc_E5_mlt.empty();
+					});
+				}
+			});
+		}
+		//点击一级A的时候,渲染二级B
+		function fc_A1_itemClk(usrSlt) {
+			var fc_B2_mlt = $(".fc_B2_mlt");
+			$.getJSON("./index.php?m=User&a=fc_B2C3D4E5_mlt",{id:usrSlt.id},function(usrArr){
+				for(var i=0; i<usrArr.length; i++) {
+					var usr = usrArr[i];
+					var fc_B2_item = $("<div class='fc_B2_item'>"+usr.username+"</div>");
+					fc_B2_item[0].usrEny = usr;
+					fc_B2_item.appendTo(fc_B2_mlt);
+					fc_B2_item.click(function(){
+						var usrSlt = this.usrEny;
+						fc_B2_itemClk(usrSlt);
+						fc_B2_mlt.find(".fc_select").removeClass("fc_select");
+						$(this).addClass("fc_select");
+						var fc_C3_mlt = $(".fc_C3_mlt");
+						var fc_D4_mlt = $(".fc_D4_mlt");
+						var fc_E5_mlt = $(".fc_E5_mlt")
+						fc_C3_mlt.empty();
+						fc_D4_mlt.empty();
+						fc_E5_mlt.empty();
+					});
+				}
+			});
+		}
+		var fc_A1_mlt = $(".fc_A1_mlt");
+		$.getJSON("./index.php?m=User&a=fc_A1_mlt",{},function(usrArr){
+			for(var i=0; i<usrArr.length; i++) {
+				var usr = usrArr[i];
+				var fc_A1_item = $("<div class='fc_A1_item'>"+usr.username+"</div>");
+				fc_A1_item[0].usrEny = usr;
+				fc_A1_item.appendTo(fc_A1_mlt);
+				fc_A1_item.click(function(){
+					var usrSlt = this.usrEny;
+					fc_A1_itemClk(usrSlt);
+					fc_A1_mlt.find(".fc_select").removeClass("fc_select");
+					$(this).addClass("fc_select");
+					var fc_B2_mlt = $(".fc_B2_mlt");
+					var fc_C3_mlt = $(".fc_C3_mlt");
+					var fc_D4_mlt = $(".fc_D4_mlt");
+					var fc_E5_mlt = $(".fc_E5_mlt");
+					fc_B2_mlt.empty();
+					fc_C3_mlt.empty();
+					fc_D4_mlt.empty();
+					fc_E5_mlt.empty();
+				});
+			}
+		});
+	});
+</script>
+<div style="color: red;text-align: center;height: 35px;line-height: 35px;font-weight: 700;">点击一级A进行层层往下找的查看</div>
+<div id="content">
+	<div class="fc_A1">
+		<div class="fc_A1_title">
+			一级A
+		</div>
+		<div class="fc_A1_mlt">
+			
+		</div>
+	</div>
+	<div class="fc_B2">
+		<div class="fc_B2_title">
+			二级B
+		</div>
+		<div class="fc_B2_mlt">
+			
+		</div>
+	</div>
+	<div class="fc_C3">
+		<div class="fc_C3_title">
+			三级C
+		</div>
+		<div class="fc_C3_mlt">
+			
+		</div>
+	</div>
+	<div class="fc_D4">
+		<div class="fc_D4_title">
+			四级D
+		</div>
+		<div class="fc_D4_mlt">
+			
+		</div>
+	</div>
+	<div class="fc_E5" style="display:none;">
+		<div class="fc_E5_title">
+			五级E
+		</div>
+		<div class="fc_E5_mlt">
+			
+		</div>
+	</div>
+	<div class="clear"/>
+</div>
+</div>
+<div class="clear" style="height:33px;"></div>
+<include file="public:footer" />
+</body>
+</html>

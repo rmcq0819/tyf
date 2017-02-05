@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			/*头部*/
+			
+			/*选项卡*/
+			.tab1{
+				width:100%;margin:50px auto 0 auto;
+			}
+			.menu{
+				width: 100%;height:28px;border-right:#cccccc solid 1px;
+			}
+			.menu li{
+				float:left;width:33.3%;text-align:center;line-height:35px;height:35px;cursor:pointer;border-left:#cccccc solid 1px;color:#666;font-size:14px;overflow:hidden;background-color: white;
+			}
+			.menu li.off{
+				background:#FFFFFF;color:rgb(240,93,0);
+			}
+			.menu li.off span{	
+				padding: 0px 17px 7px 17px; border-bottom: solid 1px rgb(240,93,0);
+			}
+			
+			
+			/*内容列表*/
+			#con_one_1 dl dt,#con_one_2 dl dt,#con_one_3 dl dt{
+				padding: 8px; font-weight: 400; margin-top: 0px;
+			}
+			
+			/*没有红包的时候*/
+			.no-bag{
+				text-align: center; margin-top: 50px;
+			}
+			.no-bag img{
+				width: 120px; height: 120px; margin: 0 auto;margin-top:30px;
+			}
+			.no-bag p{
+				margin-top: 15px; font-size: 13px; color: #555;
+			}
+			
+			
+			.main{																					 /*红包列表*/
+				background-color: rgb(224,224,224); padding-bottom: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;
+			}
+			.red-bag{
+				padding:15px 0px 0px 3px
+			}
+			.title{
+				color:rgb(240,93,0); font-size: 13px; padding-left: 15px; padding-top: 12px;
+			}
+			.start-time,.end-time{                                                                 /*开始和截止日期*/
+				color:rgb(98,96,97); padding-left: 15px;
+			}
+			.right-img{                                                                            /*右上角固定图片*/
+				width: 45px; height: 45px; float: right;
+			}
+			.guoqi-img{                                            									/*过期图片*/
+				width: 80px; height: 70px; position: absolute; left: 70%; top: -65%; z-index: 999;
+			}
+			.content{                                                 								/*内容*/
+				width: 100%; height: 50px; background-image: url(../Style/index-images/quxian.png); background-size: cover; margin-top: -5px; line-height: 55px; padding: 0px 0px 0px 10px; position: relative; left: 0;
+			}
+			.content .content-left{                                                                    /*左边内容*/
+				color: rgb(98,96,97); font-size: 12px;
+			}
+			.content .btn{             																/*分享按钮*/
+				border: solid 1px rgb(240,93,0); background-color: white; color: rgb(240,93,0);
+			}
+			.count{                        															/*积分数量*/
+				color: rgb(240,93,0); font-size: 16px;
+			}
+			
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="{:U('User/index')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			我的红包
+		</div>
+		
+		<div class="tab1" id="tab1" style="margin-top: 90px;">
+			<div class="menu" style="position:fixed;top:50px; left:0px; z-index: 1000;">
+				<ul>
+					<li id="one1" onclick="setTab('one',1)"><span>未拆开</span></li>
+					<li id="one2" onclick="setTab('one',2)"><span>已拆开</span></li>
+					<li id="one3" onclick="setTab('one',3)"><span>已分享</span></li>
+				</ul>
+			</div>
+
+			<div class="menudiv">
+				<!--未拆开的-->
+				<div id="con_one_1">
+					<dl>
+						<notempty name="bag_list">
+							<volist name="bag_list" id="val">
+										<dt>
+											<div class="am-g main" onclick="window.location.href='{:U('User/redbag_detail',array('sharesid'=>$val['userId'],'id'=>$val['Id']))}'">
+												<div class="am-u-sm-3">
+													<img src="../Style/index-images/hongbao.png" alt="红包" class="am-img-responsive red-bag"/>
+												</div>
+												<div class="am-u-sm-7">
+													<p class="title">
+														<switch name="val.source">
+															<case value="0">活动奖励红包</case>
+															<case value="1">好友分享红包</case>
+															<case value="2">范票分享红包</case>
+														</switch>
+													</p>
+													<p class="start-time">生效日期：{$val.start_time|date='n月j日 H:i:s',###}</p>
+													<p class="end-time">
+														<if condition="$val.bag_type eq 1">
+															红包类型：单人红包
+															<elseif condition="$val.bag_type eq 2"/>
+															红包类型：拼手气红包
+															<else/>
+															点我就可以分享到朋友圈或拆开啦
+														</if>
+														
+													</p>
+												</div>
+												<div class="am-u-sm-2">
+													<img class="right-img" src="../Style/index-images/daichai1.png" alt="待拆开"/>
+												</div>
+											</div>
+											<div class="content">
+												<div class="am-g">
+													<div class="am-u-sm-9">
+														<p class="content-left">与好友分享您的红包惊喜吧</p>
+													</div>
+													<div class="am-u-sm-3" style="text-align: center;">
+														<button class="btn" onclick="window.location.href='{:U('User/redbag_detail',array('sharesid'=>$val['userId'],'id'=>$val['Id']))}'"><i class="am-icon-share"></i>&nbsp;分享</button>
+													</div>
+												</div>
+											</div>
+										</dt>
+								
+								</volist>
+							<else/>
+								<div class="no-bag">
+									<img src="../Style/index-images/no-bag.png" alt="没有红包"/>
+									<p>您还没有获得过红包哦 -_-# </p>
+									<p>赶紧去挑选心爱的<a href="{:U('Index/index')}" style="color:rgb(240,93,0);">「宝贝」</a>抢红包吧 : )</p>
+								</div>
+						</notempty>
+
+					</dl>
+
+				</div>
+
+				<!--已拆开的-->
+				<div id="con_one_2" style="display:none;">
+					<dl>
+						<notempty name="bag_list1">
+							<volist name="bag_list1" id="val">
+								<dt>
+											<div class="am-g main" onclick="window.location.href='{:U('User/redbag_luck',array('shares'=>$info['id'],'id'=>$val['Id']))}'">
+												<div class="am-u-sm-3">
+													<img src="../Style/index-images/hongbao.png" alt="红包" class="am-img-responsive red-bag" />
+												</div>
+												<div class="am-u-sm-7">
+													<p class="title">
+														<switch name="val.source">
+																<case value="0">活动奖励红包</case>
+																<case value="1">好友分享红包</case>
+																<case value="2">范票分享红包</case>
+														</switch>
+													</p>
+													<p class="start-time">生效日期：{$val.start_time|date='n月j日 H:i:s',###}</p>
+													<p class="end-time">{$val.message}</p>
+												</div>
+												<div class="am-u-sm-2">
+													<img src="../Style/index-images/yichai1.png" alt="已拆开" class="right-img"/>
+												</div>
+											</div>
+											<div class="content">
+												<div class="am-g">
+													<div class="am-u-sm-12">
+														<p>
+															<span class="count">+
+															{$val.points}
+															</span>
+															<span>&nbsp;
+															<switch name="val.content_cate">
+																<case value="0">范票</case>
+															</switch>
+															已存入&nbsp;“我的范票”</span>
+														</p>
+													</div>
+												</div>
+											</div>
+									</dt>
+							</volist>
+							<else/>
+							<!--没有红包的时候-->
+								<div class="no-bag">
+									<img src="../Style/index-images/no-bag.png" alt="没有红包"/>
+									<p>您还没有拆开红包的记录 : )</p>
+								</div>
+						</notempty>
+						
+					</dl>
+					
+					
+				</div>
+				
+				<!--已分享的-->
+				<div id="con_one_3" style="display:none;">
+					<dl>
+						<notempty name="bag_list2">
+							<volist name="bag_list2" id="val">
+								<dt>
+									<div class="am-g main">
+										<div class="am-u-sm-3">
+											<img src="../Style/index-images/hongbao.png" alt="红包" class="am-img-responsive red-bag"/>
+										</div>
+										<div class="am-u-sm-7">
+											<p class="title">
+												<switch name="val.source">
+														<case value="0">活动奖励红包</case>
+														<case value="1">好友分享红包</case>
+														<case value="2">范票分享红包</case>
+												</switch>
+											</p>
+											<p class="start-time">生效日期：{$val.start_time|date='n月j日 H:i:s',###}</p>
+											<p class="end-time">{$val.message}</p>
+										</div>
+										<div class="am-u-sm-2">
+											<img src="../Style/index-images/yifenxiang.png" alt="已分享" class="right-img"/>
+										</div>
+									</div>
+									<div class="content">
+										<div class="am-g">
+											<div class="am-u-sm-12">
+												<p class="content-left" onclick="window.location.href='{:U('User/redbag_luck',array('id'=>$val['Id']))}'">
+													看看大家的手气 >>
+												</p>
+											</div>
+										</div>
+									</div>
+								</dt>
+							</volist>
+							<else/>
+							<!--没有红包的时候-->
+								<div class="no-bag">
+									<img src="../Style/index-images/no-bag.png" alt="没有红包"/>  
+									<p>您还没有红包分享的记录 : )</p>
+								</div>
+						</notempty>
+						
+					</dl>
+					
+				</div>
+			</div>
+		</div>
+
+		<include file="public:footer" />
+		
+		<!--选项卡JS-->
+		<script type="text/javascript">
+			function setTab(name,cursel){
+				cursel_0=cursel;
+				for(var i=1; i<=links_len; i++){
+					var menu = document.getElementById(name+i);
+					var menudiv = document.getElementById("con_"+name+"_"+i);
+					if(i==cursel){
+						menu.className="off";
+						menudiv.style.display="block";
+					}
+					else{
+						menu.className="";
+						menudiv.style.display="none";
+					}
+				}
+			}
+			function Next(){                                                        
+				cursel_0++;
+				if (cursel_0>links_len)cursel_0=1
+				setTab(name_0,cursel_0);
+			} 
+			var name_0='one';
+			var cursel_0=1;
+			
+			var links_len,iIntervalId;
+			onload=function(){
+				var links = document.getElementById("tab1").getElementsByTagName('li')
+				links_len=links.length;
+				for(var i=0; i<links_len; i++){
+					links[i].onmouseover=function(){
+						clearInterval(iIntervalId);
+						this.onmouseout=function(){
+							iIntervalId = setInterval(Next,ScrollTime);;
+						}
+					}
+				}
+				document.getElementById("con_"+name_0+"_"+links_len).parentNode.onmouseover=function(){
+					clearInterval(iIntervalId);
+					this.onmouseout=function(){
+						iIntervalId = setInterval(Next,ScrollTime);;
+					}
+				}
+				setTab(name_0,cursel_0);
+				iIntervalId = setInterval(Next,ScrollTime);
+			}
+		</script>
+	</body>
+
+</html>
+

@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "团洋范双11送红包专场 - 团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/hongbao-header.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "团洋范双11送红包专场 - 团洋范", // 分享标题
+				desc: "一起来团洋范领红包吧！ - 团洋范", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/hongbao-header.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			/*头部*/
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			/*头部*/
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animations.css"/>
+	</head>
+
+	<body style="background:rgb(240,240,240);">
+		
+		<div class="topnav">
+			<a onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			红包大放送
+		</div>
+		
+		<div style="margin-top: 28px;">
+			<img src="../Style/index-images/activity/hongbao-header.png" alt="头部" class="am-img-responsive" />
+		</div>
+		
+		<div style="background-color: rgb(253,213,79); padding-bottom: 20px;">
+			<p style="color: red; font-size: 20px; text-align: center; padding-top: 17px; font-weight: bold;">领红包啦~&nbsp;~</p>
+			<div style="position: relative; left: 0px;">
+				<img src="../Style/index-images/activity/hongbao.png" alt="红包" class="am-img-responsive" style="width: 195px; margin: 0 auto; margin-top: 20px;"/>
+				<p style="width:145px;text-align:center;position: absolute; left: 50%; top: 120px; margin-left: -73px; color: rgb(253,217,80); font-size: 15px;font-weight: bold;">
+					<if condition="$is_start eq 0">
+						活动暂未开始，请等待下一轮
+						<else/>
+						50~500张范票随机赠送
+					</if>
+				</p>
+				<if condition="$is_start eq 0">
+						<if condition="$is_give eq 1">
+							<button  style="border: solid 2px rgb(253,217,80); border-bottom: solid 4px rgb(253,217,80); position: absolute; left: 50%; top: 180px; margin-left: -50px; background-color: #666; color: rgb(253,217,80); border-radius: 10px; padding: 3px 24px 3px 24px;">已经领取</button>
+							<else/>
+							<button  style="border: solid 2px rgb(253,217,80); border-bottom: solid 4px rgb(253,217,80); position: absolute; left: 50%; top: 180px; margin-left: -50px; background-color: #666; color: rgb(253,217,80); border-radius: 10px; padding: 3px 24px 3px 24px;">暂未开始</button>
+						</if>
+					<else/>
+					<if condition="$is_give eq 1">
+						<button  style="border: solid 2px rgb(253,217,80); border-bottom: solid 4px rgb(253,217,80); position: absolute; left: 50%; top: 180px; margin-left: -50px; background-color: #666; color: rgb(253,217,80); border-radius: 10px; padding: 3px 24px 3px 24px;">已经领取</button>
+						<else/>
+						<button id="give_btn" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 250, height: 225}" style="border: solid 2px rgb(253,217,80); border-bottom: solid 4px rgb(253,217,80); position: absolute; left: 50%; top: 180px; margin-left: -50px; background-color: rgb(241,93,53); color: rgb(253,217,80); border-radius: 10px; padding: 3px 24px 3px 24px;">领取红包</button>
+					</if>
+				</if>
+			</div>
+			<img src="../Style/index-images/activity/hongbao-shi.png" alt="时间轴" class="am-img-responsive" style="padding-top: 15px;"/>
+			
+			<div style="background-color: rgb(252,221,128); color: red; padding: 10px; margin: 10px;">
+				<p style="text-align: center; font-size: 16px;">-----活动规则-----</p>
+				<p>1、活动时间：2016年11月10日20点~24点；</p>
+				<p>2、每次领取红包时间为5分钟；</p>
+				<p>3、领到的范票将存入"范票余额"中，详情可到"会员中心-我的范票"中查看，范票可用于购物支付时抵扣；</p>
+				<p>4、本活动最终解释权归团洋范全球购物平台所有；</p>
+			</div>
+		</div>
+ 		
+ 		<!--弹出红包页面-->
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+		  	<div class="am-modal-dialog" style="background: none;">
+			    <div class="am-modal-bd" style="position: relative;left: 0px;">
+			    	<img onclick="window.location.href='{:U('Index/redbag_give',array('shares'=>$info['id']))}'" src="../Style/index-images/activity/close.png" data-am-modal-close alt="关闭按钮" style="width: 28px;position: absolute; right:-10px; top: 0px;" />
+			     	<img src="../Style/index-images/activity/hongbao-kai.png" alt="拆开的红包" class="am-img-responsive" style="width: 250px;"/>
+			     	<p class="bigEntrance" style="width: 120px;position: absolute; left: 26.5%; top: 45px; color: rgb(235,77,52); font-size: 25px; text-align: center;"><?php echo $points = rand(20,75); ?></p>
+			     	<p style="position: absolute; left: 106px; top: 97px; color: rgb(235,77,52); font-size: 17px;">范票</p>
+			     	<p style="width: 155px;position: absolute; left: 20%; top: 197px; color: rgb(253,217,80);">恭喜您领到&nbsp;<span style="font-size: 15px;"><?php echo $points; ?></span>&nbsp;张范票，可用于平台购物时抵扣哦！</p>
+			     	<button onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'" style="border: solid 2px rgb(253,217,80); border-bottom: solid 4px rgb(253,217,80); position: absolute; left: 50%; top: 270px; margin-left: -56px; background-color: rgb(241,93,53); color: rgb(253,217,80); border-radius: 10px; padding: 3px 24px 3px 24px;">去商场首页</button>
+			    </div>
+		  	</div>
+		</div>
+		<script>
+			$(function(){
+				$("#give_btn").on('click',function(){
+					 $.post('{:U('Index/redbag_givedo')}',{'points':<?php echo $points; ?>},function(data){
+							
+					 });
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+</html>

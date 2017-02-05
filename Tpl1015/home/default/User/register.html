@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js"></script></head>
+<body>
+<title>注册会员</title>
+<include file="public:headuser" />
+<script type="text/javascript">
+//注册表单验证
+$(function(){
+	jQuery.validator.addMethod("isTelCode", function(value, element) {   
+		var tel = /\d+$/;
+		return (tel.test(value));
+	}, "请正确填写您的手机号码");
+	
+	jQuery.validator.addMethod("isTongyi", function(value, element) {   
+		return element.checked;
+	}, "请同意");
+	
+    $('#register_form').validate({
+    	
+    	/*errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+           var errors = validator.numberOfInvalids();
+           if(errors)
+           {
+               $('#warning').show();
+           }
+           else
+           {
+               $('#warning').hide();
+           }
+        },*/
+      /*  errorPlacement: function(error, element){
+            var error_td = element.next("label");
+            error_td.append(error);
+        },*/
+        success  : function(label){
+            //label.addClass('validate_right').text('OK!');
+        },
+        onkeyup: false,
+        rules : {
+            user_name : {
+                required : true,
+                byteRange: [6,30,'utf-8'],
+                remote   : {
+                    url :'index.php?m=Index&a=ajaxRegister',
+                    type:'post',
+                    dataType:"json",  
+                    data:{
+                        user_name : function(){
+                        return $('#user_name').val();
+                        }
+                    },
+                   beforeSend:function(){
+                        var _checking = $('#checking_user');
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_user').show();
+                    }
+                }
+            },
+            password : {
+                required : true,
+                minlength: 6
+            },
+            password_confirm : {
+                required : true,
+                equalTo  : '#password'
+            },
+            email : {
+                required : true,
+                email    : true
+            },
+           phone_mob: {
+				required : true,
+				isTelCode: true
+		   },
+		   checkbox1: {
+				isTongyi: true
+		   }
+        },
+        messages : {
+            user_name : {
+                required : '您必须提供一个用户名',
+                byteRange: '用户名必须在6-15个字符之间',
+                remote : '您提供的用户名已存在'
+            },
+            password  : {
+                required : '您必须提供一个密码',
+                minlength: '密码长度应在6-20个字符之间'
+            },
+            password_confirm : {
+                required : '您必须再次确认您的密码',
+                equalTo  : '两次输入的密码不一致'
+            },
+            email : {
+                required : '您必须提供您的电子邮箱',
+                email    : '这不是一个有效的电子邮箱'
+            },
+			phone_mob : {
+                required : '您必须提供您的手机号码',
+                isTelCode    : '这不是一个有效的手机号码'
+            }
+        }
+    });
+});
+
+
+
+</script>
+
+<div id="content">
+    <form name="" id="register_form" method="post" action="{:U('User/register')}">
+		<h3>用户名</h3>
+        <input id="user_name" name="user_name" placeholder="请输入用户名" class="text width10" type="text">
+        <label id="checking_user" class="checking"></label>
+		<h3>密码</h3>
+        <input id="password" name="password" placeholder="请输入密码" class="text width10" type="password">
+		<h3>确认密码</h3>
+        <input name="password_confirm" placeholder="请输入确认密码" class="text width10" type="password">
+		<h3>电子邮箱</h3>
+        <input name="email" placeholder="请输入电子邮箱" class="text width10" type="text">
+		<h3 style="display: none;">详细地址</h3>
+        <input name="address" placeholder="请输入详细地址" class="text width10" type="hidden">
+		<h3>手机号码</h3>
+        <input name="phone_mob" placeholder="请输入您常用的手机号码" class="text width10" type="text">
+        
+        <h3>推荐人用户名</h3>
+        <input id="share_name" name="share_name" placeholder="请输入推荐人" class="text width10" type="text">
+        <label id="checking_share" class="checking"></label>
+        
+		<div class="login" style="padding:0;">
+    	<ul>
+		<li>
+		<h3>您的生日(生日格式:06-22)</h3>
+		<input name="bmonth" placeholder="月" class="Location" type="text">－
+		<input name="bday" placeholder="日" class="Location" type="text">
+         </li>
+		 <li style="font-size:14px; color:#000; padding-top:30px;">
+			<input type="checkbox" name="checkbox1" value="checkbox" style="border:none;">我已阅读并同意<a href="./index.php?m=aboutus&a=xieyi">《爱肌艳后用户注册协议》</a>
+		 </li>
+		 </ul>
+         </div>
+        
+		<input type="hidden" name="role" value="{$role}"/>
+        <input name="Submit" value="提交申请" id="tijiao" class="login_btn" title="提交申请" type="submit" style="margin-top: 20px;margin-bottom: 30px;background:#000;color:#ccc;font-family:微软雅黑;">
+        <input name="ret_url" value=" " type="hidden">
+    </form>
+</div>
+<div class="clear" style="height:33px;"></div>
+</body>
+</html>
+<script>
+function checkshare(){
+	var share_name = $(this).val();
+	if(share_name == ''){
+		$("#checking_share").html('<br/><font color="#018901">推荐人用户名不能为空！</font>');return false;
+	}
+	
+	//发送ajax，验证用户是否存在
+	$.post("?m=Index&a=sharecheck",{'share_name':share_name},function(msg){
+		$("#checking_share").html(' ');
+		if(msg == 0){
+			$("#checking_share").html('<br/><font color="#018901">推荐人用户名不存在！</font>');return false;
+		}else{
+			$("#checking_share").html('');
+		}
+	},'text');
+}
+
+$("#share_name").bind('blur',checkshare);
+$("#tijiao").bind('click',checkshare);
+
+</script>

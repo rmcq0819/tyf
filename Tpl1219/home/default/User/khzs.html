@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>客户总数</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+<style>
+.topnav{ position:fixed;width:100%;height:49px;z-index:9999; background:#C54056; text-align:center; color:#fff; font-size:16px; line-height:49px; top:0;}
+.topnav .back{ position:absolute; left:8px;top:6px;}
+</style>
+</head>
+<body>
+<include file="public:headuser" />
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 客户总数
+</div>
+<div class="clear" style="height:45px"></div>
+<div class="fenxiaorenobj">
+<div class="fenxiaoren" <notempty name="n">style="display:none"</notempty>>
+<volist name="list" id="vo">
+<dl <if condition="$i%2 neq 0">class="hover"</if> >
+<dt><img src="{$vo.cover}" width="120" height="120" /></dt>
+<dd>
+昵称：<span style="color:#35749c;">{$vo.username}</span><br />
+联系方式：<span style="color:#35749c;">{$vo.phone_mob}</span><br />
+下单数：<span style="color:#35749c;">{$vo.order_num}</span>
+<span style="float:right;margin-right:25px">
+订单总金额：<span style="color:#35749c;">{$vo.order_sum}</span>
+</span>
+</dd>
+</dl>
+</volist>
+<div class="clear"></div>
+</div>
+
+<!-- <div class="fenxiaoren" <neq name="n" value="1">style="display:none"</neq>>
+<volist name="lv2" id="vo">
+<dl <if condition="$i%2 neq 0">class="hover"</if> >
+<dt><img <empty name="vo.cover">src="{:avatar($vo['id'], 32)}"<else />src="{$vo.cover}"</empty> width="120" height="120" /></dt>
+<dd>会员ID：<span style="color:#35749c;">{$vo.id}</span><br />
+昵称：<span style="color:#35749c;">{$vo.username}</span><br />
+关注时间：<span style="color:#35749c;">{$vo.reg_time|date='Y-m-d',###}</span></dd>
+</dl>
+</volist>
+
+<div class="clear"></div>
+</div> -->
+<div class="fenxiaoren" <neq name="n" value="2">style="display:none"</neq> >
+<volist name="lv3" id="vo">
+<dl <if condition="$i%2 neq 0">class="hover"</if> >
+<dt><img <empty name="vo.cover">src="{:avatar($vo['id'], 32)}"<else />src="{$vo.cover}"</empty> width="120" height="120" /></dt>
+<dd>会员ID：<span style="color:#35749c;">{$vo.id}</span><br />
+昵称：<span style="color:#35749c;">{$vo.username}</span><br />
+关注时间：<span style="color:#35749c;">{$vo.reg_time|date='Y-m-d',###}</span></dd>
+</dl>
+</volist>
+
+<div class="clear"></div>
+</div>
+
+</div>
+</body>
+</html>

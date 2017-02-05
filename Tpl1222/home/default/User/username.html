@@ -1,0 +1,194 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+<script type="text/javascript" language="javascript" src='../Style/js/uploadimg.js'></script>
+<style type="text/css">
+
+.uploadWallpaperButton
+{
+	height: 25px;
+	width: 80px;
+	cursor: pointer;
+	margin: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	position: relative; 
+	background: url('../Style/images/registerThree_body_content_table_right_FontButton.png') no-repeat;
+	background-size:80px 25px;
+}
+ .f
+{
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	overflow: hidden;
+	font-size: 90px;
+	width: 101px;
+	height: 45px;
+}
+
+
+.showinfo{ position:absolute;top:60%;left:35%;border-radius:5px;background:#000;opacity:0.8;-moz-opacity:0.8;filter:alpha(opacity=80);width:auto;height:38px;box-shadow:0px 0px 10px #000;margin:-60px auto;color:#FFFFFF; text-align:center; line-height:38px;font-size:14px;display:none;z-index:999;}
+.am-list.xinxili li{ height:45px; line-height:45px; margin-top:6px; padding:0 10px;}
+.am-list.xinxili li input{ width:100%; border:1px #fff solid; padding:0;}
+.am-list.xinxili li select{ border:1px #fff solid; color:#666;}
+
+
+.am-btn.am-btn-default.am-btn-sm.chuanon{background:#c53f57;}
+.am-btn.am-btn-default.am-radius.xinxilion{ width:94%; background:#c53f57; margin-left:3%;}
+</style>
+<script>
+$(function(){
+	$("#check").click(function(){
+		var username = $("input[name='username']").val();
+		var phone_mob = $("input[name='phone_mob']").val();
+		var email = $("input[name='email']").val();
+		var bmonth = $("input[name='bmonth']").val();
+		var bday = $("input[name='bday']").val();
+		var zhanghao = $("input[name='zhanghao']").val();
+		var huming = $("input[name='huming']").val();
+		
+		if(username==""||phone_mob==""||email==""){
+			var str = "带红色*必填，请完善."
+			$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+		}
+		
+		$("form").submit();
+		
+	});
+});
+</script>
+</head>
+
+<body>
+ <header data-am-widget="header" class="am-header am-header-default">
+      <div class="am-header-left am-header-nav">
+	  <a href="javascript:;" onClick="window.history.back(-1);" class="am-icon-chevron-left"></a>
+      </div>
+
+      <h1 class="am-header-title">
+          基本信息
+      </h1>
+</header>
+
+<div class="showinfo"></div>
+<form method="post" action="{:U('User/username')}" id="editusername_form" enctype="multipart/form-data">
+<ul class="am-list xinxili">
+<li>
+<div class="am-g">
+<div class="am-u-sm-4"><b style="color:#990000">*</b>用户名称：</div>
+<div class="am-u-sm-8"><input type="text" name="username" class="am-form-field am-radius" placeholder="填写用户名" value="{$info['username']}" /></div>
+</div>
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4"><b style="color:#990000">*</b>联系方式：</div>
+<div class="am-u-sm-8"><input type="text" name="phone_mob" class="am-form-field am-radius" placeholder="填写联系号码" value="{$info['phone_mob']}" /></div>
+</div>
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4"><b style="color:#990000">*</b>联系地址：</div>
+<div class="am-u-sm-8"><input type="text" name="address" class="am-form-field am-radius" placeholder="填写联系地址" value="{$info['address']}" /></div>
+</div>
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4"><b style="color:#990000">*</b>电子邮箱：</div>
+<div class="am-u-sm-8"><input type="text" name="email" class="am-form-field am-radius" placeholder="填写电子邮箱" value="{$info['email']}" /></div>
+</div>
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4">出生日期：</div>
+<div class="am-u-sm-4" style="border-right:1px solid #CCC;">
+<input type="text" class="am-form-field am-radius" name="bmonth" style=" text-align:center;" placeholder="出生月" value="{$info['bmonth']}" /></div>
+<div class="am-u-sm-4"><input type="text" name="bday" class="am-form-field am-radius" style="text-align:center;" placeholder="出生日" value="{$info['bday']}" /></div>
+</div>
+</li>
+<li style="height:70px;">
+<div class="am-u-sm-4">会员头像：</div>
+<div class="uploadWallpaperButton upload" id="uploadWallpaperButton" style="float:left;">
+	<input type="file" name="avatar" class="f" id="file0" multiple="multiple" capture="camera" style="display: block;"/>
+</div>
+<div style="border-radius:3px;margin-top:5px;border-radius:5px;">
+    <img id="img0" src="{:avatar($info['id'], 32)}" width="50" height="50" />
+</div>
+<script>	
+$("#file0").change(function(){
+	var objUrl = getObjectURL(this.files[0]) ;
+	console.log("objUrl = "+objUrl) ;
+	if (objUrl) {
+		$("#img0").attr("src", objUrl) ;
+	}
+}) ;
+
+//建立一個可存取到該file的url
+function getObjectURL(file) {
+	var url = null ; 
+	if (window.createObjectURL!=undefined) { // basic
+		url = window.createObjectURL(file) ;
+	} else if (window.URL!=undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file) ;
+	} else if (window.webkitURL!=undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file) ;
+	}
+	return url ;
+}
+</script>	
+
+<!--<div id="file-list" style="width:100px;height:30px;position:absolute;margin-left:120px"></div>
+<div class="am-form-group am-form-file">
+  <button type="button" class="am-btn am-btn-danger am-btn-sm">
+    <i class="am-icon-cloud-upload"></i>选择上传您的头像</button>
+  <input id="doc-form-file" capture="camera" type="file" name="avatar" multiple>
+</div>
+<script>
+  $(function() {
+    $('#doc-form-file').on('change', function() {
+      var fileNames = '';
+      $.each(this.files, function() {
+        fileNames += '<span class="am-badge">' + this.name + '</span> ';
+      });
+      $('#file-list').html(fileNames);
+    });
+  });
+</script>-->
+
+<!--<input name="avatar" type="file" capture="camera" multiple>-->
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4">收款账号：</div>
+<div class="am-u-sm-8"><input type="text" name="zhanghao" class="am-form-field am-radius" placeholder="银行卡卡号/支付宝账号/财付通账号" value="{$info['zhanghao']}" /></div>
+</div>
+</li>
+<li>
+<div class="am-g">
+<div class="am-u-sm-4">收款人姓名：</div>
+<div class="am-u-sm-8"><input type="text" name="huming" class="am-form-field am-radius" placeholder="与银行卡或支付宝/财付通姓名相同" value="{$info['huming']}" /></div>
+</div>
+</li>
+
+<li>
+<div class="am-g">
+<div class="am-u-sm-4">开户银行/支付平台：</div>
+<div class="am-u-sm-8">
+<select id="doc-select-1" name="kaihuhang">
+<volist name="bank" id="vo">
+<option value="{$vo.id}" <eq name="info.kaihuhang" value="$vo.id"> selected</eq> >{$vo.bank}</option>
+</volist>
+</select>
+</div>
+</div>
+</li>
+</ul>
+
+<button type="button" class="am-btn am-btn-default am-radius xinxilion" id="check" style="margin-bottom:80px;">确认修改</button>
+</form>
+
+</body>
+</html>

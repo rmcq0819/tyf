@@ -1,0 +1,478 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "{$uinfo.username}邀请你帮他一起砍价，点我就可以参与啦！ - 团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/data/upload/item/{:get_thumb($itemdetail['img'], '_b')}", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "{$uinfo.username}邀请你帮他一起砍价，点我就可以参与啦！ - 团洋范", // 分享标题
+				desc: "{$itemdetail.title}", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/data/upload/item/{:get_thumb($itemdetail['img'], '_b')}", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			.topnav .back{
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			/*头部*/
+			#header{
+				width: 100%;height: 240px;position: relative; left: 0; margin-top: 49px;
+			}
+			#header .bg{
+				width: 100%; height: 228px;
+			}
+			#header .pro{
+				width: 155px; height: 145px; position: absolute; left: 50%; top: 5px; margin-left: -77px;
+			}
+			#header .title{
+				position: absolute; left: 50%; top: 10px; margin-left: -42px; color: rgb(240,93,0); font-size: 13px;
+			}
+			#header .product{
+				width: 60px;height: 60px;position: absolute; left: 50%; top: 38px; margin-left: -28px;
+			}
+			#header .user-img{
+				width: 45px; height: 45px; position: absolute; left: 17%; top: 150px;
+			}
+			#header .user-name{
+				position: absolute; left: 32%; top: 155px; font-size: 13px; color: rgb(90,80,81);
+			}
+			#header .content{
+				position: absolute; left: 32%; top: 175px; font-size: 12px; color: white;
+			}
+			
+			/*价格*/
+			#price{
+				width: 75%; position: relative; left: 0; z-index: 99; margin: 0 auto; margin-top: -35px;
+			}
+			#price .num-img{
+				width: 100%; height: 75px;
+			}
+			#price .cur-price{
+				position: absolute; left: 17%; top: 16px; color: white; font-size: 16px;
+			}
+			#price .old-price{
+				position: absolute; left: 32%; top: 45px; color: white; font-size: 14px;
+			}
+			#price .price{
+				position: absolute; left: 52%; top:18px; color: white; font-size: 24px;
+			}
+			
+			#main{
+				text-align: center; padding-bottom: 15px; margin-top: 10px;
+			}
+			#main .title{
+				text-align: center; font-size: 14px; color: rgb(86,84,85);
+			}
+			#main .time{
+				text-align: center; font-size: 13px; color: rgb(86,84,85); margin-top: 10px;
+			}
+			#main .btn1{
+				margin-right: 20px;
+			}
+			#main .btn1,#main .btn2{
+				width: 110px;height: 30px;margin-top: 15px;border: solid 2px rgb(251,212,92);background-color: rgb(240,93,0); color: rgb(251,212,92);border-radius: 8px;border-bottom: solid 4px rgb(251,212,92);
+			}
+			
+			
+			#user-rec{
+				width: 95%; margin: 0 auto;
+			}
+			#user-rec #head{
+				padding: 5px; border-bottom: solid 1px rgb(170,171,173);
+			}
+			#user-rec #head .am-u-sm-5{
+				text-align: left; color: rgb(85,81,87); font-size: 13px; font-weight: bold;
+			}
+			#user-rec #head .am-u-sm-7{
+				text-align: right; color: rgb(170,171,173);
+			}
+			
+			/*砍价记录*/
+			#user-rec ul li{
+				padding: 5px; border-bottom: solid 1px rgb(170,171,173);
+			}
+			#user-rec ul li:last-child{
+				border-bottom: none;
+			}
+			#user-rec ul li img{
+				width: 40px; height: 40px;
+			}
+			#user-rec ul li .time{
+				text-align: right;line-height: 35px; color: rgb(170,171,173);
+			}
+			
+			/*活动规则*/
+			#rule{
+				padding: 10px; border: solid 1px rgb(174,172,174); margin: 10px; background-color: rgb(240,198,138); border-radius: 5px;line-height:30px;
+			}
+			#rule .title{
+				text-align: center; color: rgb(240,93,0); font-size: 15px;
+			}
+			
+			/*分割线*/
+			#ge1,#ge2{
+				width: 100%; height: 10px; background-color: rgb(220,220,220);
+			}
+			
+			/*弹出框*/
+			#tan .am-modal-hd{
+				background-color: rgb(240,93,0); color: white; padding: 9px 10px 10px 10px;
+			}
+			#tan .am-modal-bd .kanle{
+				width: 150px; height: 120px;margin: 0 auto; margin-top: 6px;
+			}
+			#tan .am-modal-bd .p1{
+				font-size: 16px; color: rgb(85,85,85); margin-top: 10px; font-weight: bold;
+			}
+			#tan .am-modal-bd .p2{
+				font-size: 13px; color: rgb(85,85,85); margin-top: 5px;
+			}
+			#tan .am-modal-bd .btn-left{
+				width: 50%; position: fixed; bottom: 0; left: 0;
+			}
+			#tan .am-modal-bd .btn-right{
+				width: 50%; position: fixed; bottom: 0; right: 0;
+			}
+			#tan .am-modal-bd .btn-left button{
+				width: 100%; height: 38px; font-size: 13px; background-color: rgb(253,192,16); border: none; color: rgb(85,85,85);
+			}
+			#tan .am-modal-bd .btn-right button{
+				width: 100%;height: 38px;font-size: 13px; background-color: rgb(240,93,0); border: none; color: white;
+			}
+			
+			#tan .am-modal-bd .kanguo{
+				width: 90px; height: 90px;margin: 0 auto; margin-top: 6px;
+			}
+			#tan .am-modal-bd .p3{
+				font-size: 16px; color: rgb(85,85,85); margin-top: 15px; font-weight: bold;
+			}
+			#tan .am-modal-bd .p4{
+				font-size: 13px; color: rgb(85,85,85); margin-top: 10px;
+			}
+			.layermbtn span{
+				height: 39px;
+			}
+		</style>
+		
+	</head>
+
+	<body style="background-color: rgb(241,225,200);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			呼朋唤友来砍价
+		</div>
+		
+		<!--头部-->
+		<div id="header">
+			<img class="bg" src="../Style/index-images/activity/kan.png" alt="背景" class="am-img-responsive"/>
+			<img class="pro" src="../Style/index-images/activity/dao.png" alt="刀" class="am-img-responsive"/>
+			<p class="title">我在团洋范买了</p>
+			<img class="product" src="data/upload/item/{:get_thumb($itemdetail['img'], '_b')}" alt="产品"/>
+			<if condition="$uinfo.hyimg neq ''"><img src="{$uinfo.hyimg}" class="am-circle user-img" /><else/><img src="{$uinfo.cover}" class="am-circle user-img"  /></if>
+			<p class="user-name">{$uinfo.username}</p>
+			<p class="content">找您帮忙砍价，来一刀吧！</p>
+		</div>
+		
+		<!--价格-->
+		<div id="price">
+			<img src="../Style/index-images/activity/jia.png" alt="价格背景" class="am-img-responsive num-img"/>
+			<p class="cur-price">当前价格：</p>
+			<p class="old-price"><del>原价<span>￥{$itemdetail.price}</span></del></p>
+			<p class="price">￥<if condition="$is_binfo eq 1">{$binfo.price}<else/>{$itemdetail.price}</if></p>
+		</div>
+		
+		<!--中间-->
+		<div id="main">
+			<p class="title">
+			<if condition="$is_binfo eq 1">
+				目前累计已帮忙砍掉<span style="color: rgb(240,93,0);"><if condition="$price_count eq ''">0<else/>{$price_count}</if></span>元
+				<else/>
+				此商品暂未开始砍价活动，等待您的开启。
+			</if>
+			
+			
+			</p>
+			<p class="time">
+			<if condition="$is_binfo eq 1">
+				本次砍价结束时间还剩下：
+				<div id="rC_A" class="redCountdownDemo"></div>
+			</if>
+				
+			</p>
+			<if condition="$_GET['sharesid'] eq $active_uid">
+				<button class="btn1" id="bargain_btn">发起砍价</button>
+				<else/>
+				<button class="btn1" onclick="window.location.href='{:U('Item/bargain',array('shares'=>$info['id']))}'">我也要发起砍价</button>
+			</if>
+			
+			<if condition="$is_help eq 1 and $_GET['sharesid'] neq $active_uid">
+					<button class="btn2" style="background:#666;">您已砍过价</button>
+				<else/>
+				<if condition="$_GET['sharesid'] eq $active_uid or $is_binfo eq ''">
+					<button class="btn2" style="background:#666;">帮他砍价</button>
+					<else/>
+					<switch name="is_end">
+						<case value="1"><button class="btn2" style="background:#666;">时间已结束</button></case>
+						<case value="2"><button class="btn2" style="background:#666;">已砍至最低价</button></case>
+						<default/>
+							<button id="help_bargain" class="btn2" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width:310, height: 270}">帮他砍价</button>
+					</switch>
+				</if>
+			</if>
+		</div>
+		<div id="ge1"></div>
+		
+		<!--砍价记录-->
+		<div id="user-rec">
+			<div id="head" class="am-g">
+  				<div class="am-u-sm-5">砍价记录</div>
+				<notempty name="bargainlist">
+						<div class="am-u-sm-7" onclick="window.location.href='{:U('bargain/userlist',array('id'=>$_GET['id'],'sharesid'=>$_GET['sharesid'],'shares'=>$_GET['shares']))}'">更多 >></div>
+						<else/>
+						<div class="am-u-sm-7">更多 >></div>
+				</notempty>
+			</div>
+			<ul>
+				<volist name="bargainlist" id="val">
+					<li>
+						<div class="am-g">
+							<div class="am-u-sm-2">
+								<if condition="$val.hyimg neq ''"><img src="{$val.hyimg}" class="am-circle" /><else/><img src="{$val.cover}" class="am-circle"  /></if>
+							</div>
+							<div class="am-u-sm-8">
+								<p style="line-height:35px;overflow:hidden;text-overflow: ellipsis; white-space: nowrap;">{$val.username}&nbsp帮忙砍了&nbsp<span style="color: rgb(240,93,0);">{$val.price}</span>&nbsp元</p>
+							</div>
+							<div class="am-u-sm-2">
+								<p class="time">{$val.time|date='H:i',###}</p>
+							</div>
+						</div>
+					</li>
+				</volist>
+			</ul>
+		</div>
+		
+		<div id="ge2"></div>
+		
+		<!--活动规则-->
+		<div id="rule">
+			<p class="title">活动规则</p>
+			<p>1、发起砍价12小时内，可分享当前活动页面至微信好友/朋友圈来一起帮忙砍价。</p>
+			<p>2、砍价结束或进行中您都可以随时进行购买支付，同时当前商品砍价结束，不允许其他用户参与砍价。</p>
+			<p>3、发起砍价需点击上方的「发起砍价」按钮，然后将此页面分享至朋友圈，即砍价活动开始。</p>
+			<p>4、发起砍价后，可前往会员中心的「<a href="{:U('User/bargainlist')}" style="color:rgb(240,93,0);">我的砍价</a>」查看明细，您可以随时进行购买操作。</p>
+			<p>5、砍价结束后24小时内未加入购物车支付，系统将恢复原价。</p>
+			<p>6、团洋范对本次砍价活动保留最终的解释权。</p>
+			
+		</div>
+		
+		<!--弹出框-->
+		<div id="tan">
+
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+			  	<div class="am-modal-dialog">
+				    <div class="am-modal-hd">
+				    	<span class="success_tip"><?php if($ishelp['price'] <= $ishelp['bargain_price']){echo "砍价失败"; }else{ echo "砍价成功"; } ?></span>
+				      	<a href="" onclick="window.location.href='{:U('bargain/index',array('id'=>$_GET['id'],'shares'=>$_GET['shares'],'sharesid'=>$_GET['sharesid']))}'" class="am-close am-close-spin" data-am-modal-close style="color: white; opacity: 1;">&times;</a>
+				    </div>
+				    <div class="am-modal-bd" style="padding: 0px;">
+				      	<img class="kanle" src="../Style/index-images/activity/kanle.png" alt="砍了" class="am-img-responsive"/>
+				      	<?php 
+							if($ishelp['price'] <= $ishelp['bargain_price']){
+							
+						?>
+							<p class="p1">砍价失败<span style="color: rgb(240,93,0);">
+								<?php 
+									$lowprice = $itemdetail['price'] - $itemdetail['bargain_price']; 
+									$rand_price = round($lowprice * rand(1,10)/300,2);
+								?>
+							</span>
+							</p>
+							<p class="p2">此商品价格已被砍至最低价 :)</p>
+						<?php
+							}else{
+						?>
+							<p class="p1">成功砍价<span style="color: rgb(240,93,0);">
+								<?php 
+									$lowprice = $itemdetail['price'] - $itemdetail['bargain_price']; 
+									$rand_price = round($lowprice * rand(1,10)/300,2);
+									echo $rand_price;
+								?>
+							</span>元
+							</p>
+							<p class="p2">
+								<?php 
+									if($rand_price <= 0.3){
+										echo "您此次的运气貌似不是太好哦，继续努力吧~";
+									}elseif($rand_price >= 0.4 && $rand_price <= 0.9){
+										echo "您的运气真好，只有10%的人能看到这句话哦~";
+									}elseif($rand_price >= 1 && $rand_price <= 10){
+										echo "哇！您的人品爆发啦！你这个朋友我交定啦！";
+									}else{
+										echo "您的运气真好，只有5%的人能看到这句话哦~";
+									}
+								?>
+							</p>
+						<?php
+							}
+						?>
+				      	<div class="btn-left">
+				      		<button onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">首页有惊喜</button>
+				      	</div>
+				      	<div class="btn-right">
+				      		<button onclick="window.location.href='{:U('Item/bargain',array('shares'=>$info['id']))}'">我也要参加</button>	
+				      	</div>
+				      	<div style="clear: both;"></div>
+				    </div>
+			  	</div>
+			</div>
+		</div>
+		<!--分享S-->
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+			<img src="../Style/images/guide.png" />
+		</div>
+		<!--分享E-->
+		<!--倒计时js-->
+		<script src="../Style/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Style/js/jquery.knob.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Style/js/jquery.ba-throttle-debounce.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Style/js/jquery.redcountdown.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('#rC_PA').redCountdown({ preset: "flat-colors", end: $.now() + 10000 });
+		
+			$('#rC_A').redCountdown({
+				end: '<?php echo $end_time; ?>',
+				now: '<?php echo time(); ?>',
+				labels: true,
+				style: {
+					element: "",
+					textResponsive: .5,
+					daysElement: {
+						gauge: {
+							thickness: .08,
+							bgColor: "rgba(0,0,0,0.05)",
+							fgColor: "#1abc9c"
+						},
+						textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+					},
+					hoursElement: {
+						gauge: {
+							thickness: .08,
+							bgColor: "rgba(0,0,0,0.05)",
+							fgColor: "#2980b9"
+						},
+						textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+					},
+					minutesElement: {
+						gauge: {
+							thickness: .08,
+							bgColor: "rgba(0,0,0,0.05)",
+							fgColor: "#8e44ad"
+						},
+						textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+					},
+					secondsElement: {
+						gauge: {
+							thickness: .08,
+							bgColor: "rgba(0,0,0,0.05)",
+							fgColor: "#f39c12"
+						},
+						textCSS: 'font-family:\'Open Sans\'; font-size:25px; font-weight:300; color:#34495e;'
+					}
+					
+				},
+				onEndCallback: function() { console.log("时间已完!"); }
+			});
+			
+			//发起砍价
+			$('#bargain_btn').click(function(){
+					var itemid = <?php echo $itemdetail['id'];  ?>; //商品id
+					var uid = <?php echo $_GET['sharesid']; ?>; //砍价发起者id
+					var name = '<?php echo $itemdetail['title']; ?>'; //商品名称
+					var price = <?php echo $itemdetail['price']; ?>; //商品价格
+					var num = 1; //商品数量
+					var img = '<?php echo $itemdetail['img']; ?>'; //图片名称
+					var itemtype = <?php echo $itemdetail['itemtype']; ?>; //商品类型，保税，完税
+					var cost = <?php echo $itemdetail['cost']; ?>; //成本价
+					var shopid = <?php echo $_GET['shares']; ?>; //商家id
+					var baseid = <?php echo $itemdetail['baseid']; ?>; //免税仓id
+					var bargain_price = '<?php echo $itemdetail['bargain_price']; ?>'; //最低价格
+					
+					layer.open({
+					content: '您确定要发起砍价活动吗？'
+					,btn: ['确定', '取消']
+					,yes: function(index){
+						layer.close(index);
+						$("#mcover").show();
+						$.post('{:U('bargain/add_bargain')}',{'itemid':itemid,'uid':uid,'name':name,'price':price,'num':num,'img':img,'itemtype':itemtype,'cost':cost,'shopid':shopid,'baseid':baseid,'bargain_price':bargain_price},function(data){
+							//alert(data);
+						});
+					}
+				});
+			});
+			
+			//帮忙砍价
+			$('#help_bargain').click(function(){
+				$.post('{:U('bargain/help_bargain')}',{'bid':<?php echo $_GET['id']; ?>,'sharesid':<?php echo $_GET['sharesid']; ?>,'rand_price':<?php echo $rand_price; ?>},function(data){
+					//砍到最低价时
+					if(data == 1){
+						//提示窗口主标题
+						//$('.success_tip').html('砍价失败');
+						//$('.p1').html('此商品已砍到最低价');
+					}
+				});
+			});
+			
+		</script>
+
+		<include file="public:footer" />
+	</body>
+
+</html>

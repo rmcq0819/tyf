@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$page_seo.title}--商品类别</title>
+<include file="public:headtop" />
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+	<style type="text/css">
+div,ul,li{padding:0px;margin:0px;}
+	.itemlist {padding:8px;background:#f3f3f3}
+	.itemlist .item{border:1px solid #e0e0e0;background:#fff;padding:6px;margin-bottom:10px;}
+	.itemlist .item .title{font-size:14px;}
+	.itemlist .item span{text-decoration:line-through;color:#ccc;float:right;}
+	</style>
+<!-- 	logo -->
+<!-- <volist name="ad3" id="vo"> -->
+<!-- 	<div class="logo"><img style="width:100%;margin-bottom:-3px;" src="data/upload/advert/{$vo.content}" /></div> -->
+<!-- </volist> -->
+<!-- 	幻灯片 -->
+	<link href="./Tpl/home/default/Style/ke_css.css" rel="stylesheet" type="text/css" />
+	<script src="./Tpl/home/default/Style/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="./Tpl/home/default/Style/js/ke_slider.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	 var flexslider = $('.flexslider').flexslider;
+		$(function () {
+					flexslider.call($('.flexslider'),{
+						animation: "slide",
+						start: function (slider) {
+							$('body').removeClass('loading');
+						}
+					});
+				});
+	
+	</script>
+<!-- 	轮播图 -->
+	<div class="pro-switch" style="display:none;">
+		<div class="flexslider">
+			<ul class="slides" >
+			<volist name="ad1" id="vo">
+					<li>
+						<div class="img">
+							<a href="{$vo.url}"><img width="100%" src="data/upload/advert/{$vo.content}" alt=""/></a></div>
+					</li>
+			</volist>	
+			</ul>
+		</div>
+	</div>
+	<notempty name="search">
+		<div class="search product_search">
+			  <form action="{:U('book/good')}" method="post">
+			 <input style="width:84%;height:30px;boder:1px #dcaeff"  type="text" name="keyword" value="{$keyword}" placeholder="输入商品名称..."/>
+			   <input   type="submit" style="width:15%;height:30px;" value="搜索"/>
+			  </form>
+		</div>
+	</notempty>		
+<!-- 	产品 -->
+<div class="itemlist">
+	<volist name="items" id="vo">
+	<a href="{:U('Item/index',array('id'=>$vo['id']))}">
+	<div class="item">
+		<div><img alt="" src="{:attach(get_thumb($vo['img'], '_b'), 'item')}" width="100%" height="auto" ></div>
+		<div class="title">{$vo.title}</div>
+		<div>
+		￥{$vo.yhprice}元
+		<input type="hidden" class="price" value="{$vo.price}"/>
+		<span>￥{$vo.price} </span>
+		</div>
+	</div></a>
+	</volist>
+</div>
+<!-- <include file="public:footer" /> -->
+</body>
+</html>
+<!-- <script>
+$().ready(function (){
+	$('.price').each(function(i,item){
+		var oPrice = ($(item).val() * 1.2).toFixed(2);
+		$(item).next().html("￥" + oPrice + "元");
+	});
+});
+</script> -->

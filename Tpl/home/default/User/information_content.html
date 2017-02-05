@@ -1,0 +1,112 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<!-- 格式化价格JS，改变数量更新价格JS -->
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<style>
+			* {
+				font-family: "微软雅黑"
+			}
+			/*头部S*/
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			/*头部E*/			
+			#info-content{
+				width: 95%;
+				margin: 0 auto;
+				margin-top: 60px;
+				padding: 5px;
+				background-color: white;
+				line-height:30px;
+				color:#555;
+				font-size:13px;
+			}
+			#info-content p{
+				font-size: 12px;
+				color: rgb(85,85,85);
+				
+			}
+			/*删除按钮*/
+			#btn{
+				width: 95%;
+				height: 40px;
+				margin: 0 auto;
+				margin-top: 5px;
+				color: rgb(240,93,0);
+				text-align: center;
+				line-height: 40px;
+				font-size: 15px;
+				background-color: white;
+			}
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+		
+		<div class="topnav">
+			<a href="{:U('User/address')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			消息中心
+		</div>
+		<div id="info-content" >
+		<if condition="$msg.order_id neq 0">
+			<p style="color: black; font-size: 14px;"><span>订单号：</span><span>{$msg.order_id}</span></p>
+			</if>
+<!-- 			<p><span>2016年7月18日</span>&nbsp;&nbsp;<span>周五</span></p> 
+			<p style="margin-top: 10px;">尊敬的XXX您好！您有一笔新的收入提醒。</p>
+			<p>详情如下：</p>
+			<p style="margin-top: 10px;">收入类型：<span>店铺零售奖金</span></p>
+			<p>收入金额：<span> 163.2</span></p>
+			<p>到账时间：<span>343434234235</span></p>
+			<p>如有疑问请在公众号内咨询在线客服！</p> -->
+			{$msg.content}
+		</div>
+		<div id="btn">
+			<p onclick="del('{$msg.id}');">删除信息&nbsp;&nbsp;<i class="am-icon-trash"></i></p>
+		</div>
+
+		
+
+		<!-- 底部 -->
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script>
+	function edit(id) {
+		window.location.href = "{:U('User/edit_message')}&id=" + id;
+	}
+
+	function del(id) {
+		layer.open({
+			title: '提示',
+			content: '您确定要删除该条消息吗？',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href = "{:U('User/del_message')}&id=" + id;
+				layer.open({content: '消息删除成功', time: 1});
+				layer.close(index);
+			}
+		});
+	}
+</script>

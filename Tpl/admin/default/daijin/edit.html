@@ -1,0 +1,113 @@
+<include file="public:header" />
+<style type="text/css">
+	.t{ margin:15px; border:1px solid #CCCCCC;width:80%}
+	.t tr td{border:1px solid #CCCCCC; padding:12px;}
+	.t .r{ text-align:right;}
+	.text{ height:30px; width:203px;}
+	.code{ height:30px; width:210px;}
+	.btn{ width:150px;}
+</style>
+<script>
+function check(){
+
+	var name = document.getElementById('djname').value;
+	var time1 = document.getElementById('J_time_start').value;
+	var time2 = document.getElementById('J_time_end').value;
+	var djcondition = document.getElementById('djcondition').value;
+
+	var notice = document.getElementById('notice');
+	var notice1 = document.getElementById('notice1');
+	var notice2 = document.getElementById('notice2');
+	var notice3 = document.getElementById('notice3');
+	
+	   var d = new Date();
+	   var time3 = d.getFullYear()+"-"+((d.getMonth()+1)<10?"0":"")+(d.getMonth()+1)+"-"+(d.getDate()<10?"0":"")+d.getDate();
+	   var arr1 = time1.split("-");
+	   var arr2 = time2.split("-");
+	   var arr3 = time3.split("-");
+	   var date1=new Date(parseInt(arr1[0]),parseInt(arr1[1])-1,parseInt(arr1[2]),0,0,0); 
+	   var date2=new Date(parseInt(arr2[0]),parseInt(arr2[1])-1,parseInt(arr2[2]),0,0,0);
+	   var date3=new Date(parseInt(arr3[0]),parseInt(arr3[1])-1,parseInt(arr3[2]),0,0,0);
+		if(date1.getTime()<date3.getTime()){
+			notice1.innerHTML = "开始时间不能小于当前时间";
+			return false;
+		}
+	   if(date1.getTime()>date2.getTime()) {                                
+			notice2.innerHTML = "结束时间不能小于开始时间";
+			return false;
+		 }
+
+	if(name==""){
+		notice.innerHTML = "*";
+		return false;
+	}
+	if(djcondition==""){
+		notice3.innerHTML = "*";
+		return false;
+	}
+	if(isNaN(djcondition)){	
+		notice3.innerHTML = "*不是数字";
+		return false;	
+	}
+
+	if(parseInt(djcondition)<0){
+		notice3.innerHTML = "*数字不能少于0";
+		return false;
+	}
+
+}
+</script>
+
+<script type="text/javascript" src="__STATIC__/js/showdate.js"></script>
+<form name="form" method="post" action="./index.php?g=admin&m=daijin&a=updatedj" onsubmit="return check()">
+<input type="hidden" name="id" value="{$res.id}"/>
+<table class="t" border="1">
+	<tr>
+	<td width="15%" class="r">模板名称：</td>
+	<td><input type="text" name="temp"class="text" value="{$res.temp}" id="temp"/></td></tr>
+	<tr><td width="15%" class="r">优惠码名称：</td>
+	<td><input type="text" name="djname"class="text" value="{$res.djname}" id="djname"/>&nbsp;&nbsp;<span style="color:#990000;" id="notice"></span></td></tr>
+	<tr><td class="r">优惠金额：</td>
+	<td><select name="djmoney">
+	<option <if condition="$res.djprice eq 5">selected="selected"</if>>5</option>
+	<option <if condition="$res.djprice eq 10">selected="selected"</if>>10</option>
+	<option <if condition="$res.djprice eq 20">selected="selected"</if>>20</option>
+	<option <if condition="$res.djprice eq 50">selected="selected"</if>>50</option>
+	<option <if condition="$res.djprice eq 100">selected="selected"</if>>100</option>
+	<option <if condition="$res.djprice eq 200">selected="selected"</if>>200</option>
+	<option <if condition="$res.djprice eq 500">selected="selected"</if>>500</option></select>[元]</td></tr>
+	<tr><td class="r">满金额条件可使用：</td>
+	<td><input type="text" value="{$res.djcondition}" name="djcondition" class="text" />元[0为不限]&nbsp;&nbsp;<span style="color:#990000;" id="notice3"></span></td></tr>
+	<tr><td class="r">开始时间：</td>
+	<td><input type="text" name="djstart" id="J_time_start" class="date text" size="12" value="<if condition="$res.start eq 0"><else />{$res.start|date="Y-m-d",###}</if>">&nbsp;&nbsp;<span style="color:#990000;" id="notice1"></span></td></tr>
+	<tr><td class="r">过期时间：</td>
+	<td><input type="text" name="djend" id="J_time_end" class="date text" size="12" value="<if condition="$res.end eq 0"><else />{$res.end|date="Y-m-d",###}</if>">&nbsp;&nbsp;<span style="color:#990000;" id="notice2"></span></td></tr>
+	<tr><td colspan="3"><input type="submit" value="提交" class="btn"/>&nbsp;&nbsp;
+	<input type="reset" value="重置" class="btn"/>&nbsp;&nbsp;
+	<input type="button" value="返回" onclick="javascript:history.go(-1);" class="btn"/></td></tr>
+</table>
+</form>
+<include file="public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+	inputField : "J_time_start",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "J_time_end",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+
+$('.J_preview').preview(); //查看大图
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+</script>
+
+</body>
+</html>

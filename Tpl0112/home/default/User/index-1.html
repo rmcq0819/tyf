@@ -1,0 +1,287 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>用户中心</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			
+			.topnav .back {
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			/*个人信息S*/
+			#user-info{
+				width: 100%;
+				height: 130px;
+				background: url(../Style/index-images/bg.jpg) no-repeat top center;
+			}
+			#user{
+				line-height: 130px;
+			}
+			#user img{
+				width: 75px;
+				height: 75px;
+				line-height: 130px;
+			}
+			.user-name{
+				width: 131px;
+				float:left;
+				color: white; 
+				line-height: 130px;
+				font-size: 15px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space:nowrap;
+
+			}
+			#user-info-next span{
+				float:right; 
+				line-height: 130px;
+				color: white; 
+				margin-right: 5px; 
+				font-size: 14px;
+			}
+
+			/*个人信息E*/
+			
+			/*内容列表S*/
+			#content {height:304px;}
+			#content li{
+				font-size: 14px;
+			}
+			#content li:nth-child(2n+1){
+				background-color: white;
+			}
+			#content img{
+				width:32px;
+				height: 32px;
+			}
+			/*内容列表E*/
+			
+			/*退出账户S*/
+			#quit{
+				width: 100%; 
+				height: 60px; 
+				background-color: white;
+			}
+			#quit p{
+				text-align: center; 
+				line-height: 50px; 
+				font-size: 16px;
+			}
+			/*退出账户E*/
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<!--<img src="../Style/images/fanhui1.png" width="25" />-->
+			</a>
+			会员中心
+		</div>
+		<!--<div class="remberbj" style="margin-top: 49px;">
+			<div class="am-g">
+				<div class="am-u-sm-3 rembertoptuo">
+					<a href="{:U('User/username')}">
+						<if condition="$visitor.hyimg neq ''"><img src="{$visitor.hyimg}" width="120" height="120" />
+							<else /><img src="{$weiheader.cover}" width="120" height="120" /></if>
+						
+					</a>
+				</div>
+				<div class="am-u-sm-8 rembertopzi">{$visitor.username}<span>注册时间：{$visitor.reg_time|date='Y-m-d H:i:s',###}</span></div>
+				<div class="am-u-sm-1 remberrighticon">
+					<a href="{:U('User/username')}"><i class="am-icon-angle-right"></i></a>
+				</div>
+			</div>
+		</div>-->
+		<div id="user-info" style="margin-top: 49px;">
+			<div class="am-g">
+				<a href="{:U('User/user_info')}">
+  				<div id="user" class="am-u-sm-3">
+  					<!-- <img class="am-img-thumbnail am-circle" src="{$weiheader.cover}" alt="头像" /> -->
+  					
+  					<if condition="$visitor.hyimg neq ''"><img src="{$visitor.hyimg}"class="am-img-thumbnail am-circle"  alt="头像"/>
+						<else /><img src="{$weiheader.cover}" class="am-img-thumbnail am-circle"  alt="头像"/></if>
+					
+  				</div>
+  				<div class="am-u-sm-6">
+  					<span class="user-name">{$visitor.username}</span>
+  				</div>
+  				
+  				<div id="user-info-next" class="am-u-sm-3">
+  					<span>个人信息&nbsp;&nbsp;></span>
+  				</div>
+  			</a>
+			</div>
+		</div>
+
+		<!--<notempty name="url">
+			<div class="am-alert am-alert-warning" data-am-alert style="margin-top:0">
+				<p>温馨提示:亲爱的{$visitor.username},点击支付,加入团洋范抢战市场吧!
+					<span style="background:red;color:#fff;border-radius:3px;height:80%;vertical-align:center;padding:3px;" id="pay">
+		支付
+	 </span>
+				</p>
+			</div>
+		</notempty>-->
+		<!--<div class="am-g mydangbj">
+			<div class="am-u-sm-7 mydangleft">
+				<a href="javascript:;">我的订单</a>
+			</div>
+			<div class="am-u-sm-5 mydangright">
+				<a href="{:U('User/order_list',array('time'=>one))}">查看全部订单></a>
+			</div>
+		</div>-->
+
+		<ul class="am-avg-sm-4 am-thumbnails dingdanimg">
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>1))}">
+					<if condition="$count1 neq '0'"><span class="am-badge am-round dingdangcarshu">{$count1}</span></if>
+					<img src="../Style/images/img24.png"><span>待付款</span></a>
+			</li>
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>3))}">
+					<if condition="$count3 neq '0'"><span class="am-badge am-round dingdangcarshu">{$count3}</span></if>
+					<img src="../Style/images/img26.png"><span>待收货</span></a>
+			</li>
+			<li>
+				<a href="{:U('User/orderlist',array('status'=>6))}">
+					<if condition="$count6 neq '0'"><span class="am-badge am-round dingdangcarshu">{$count6}</span></if>
+					<img src="../Style/index-images/repair.png"><span>退换货</span></a>
+			</li>
+			
+			<li>
+				<a href="{:U('User/order_list')}">
+					<span class="am-badge am-round dingdangcarshu">{$count}</span>
+					<img src="../Style/index-images/all-order.png"><span>全部订单	<i class="am-icon-angle-right" style=""></i></span>
+				  
+				</a>
+			</li>
+
+		</ul>
+		
+		
+
+		<ul id="content" class="am-avg-sm-1 am-thumbnails remberli" style="margin-top: 6px;">
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/shoucang')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/collect.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						我的收藏
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/address')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/adder.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						地址管理
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="am-g">
+					<a href="{:U('User/history')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/search.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						浏览记录
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</a>
+				</div>
+			</li>
+		<!-- 	<li>
+				<div class="am-g">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/ch-password.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						<a href="{:U('User/change_password')}">修改密码</a>
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<a href="{:U('User/change_password')}"><i class="am-icon-angle-right"></i></a>
+					</div>
+				</div>
+			</li> -->
+			<li>
+				<div class="am-g"><a href="{:U('User/information_center')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/info.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						消息中心
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+				</a>
+			</li>
+			
+			<li>
+				<div class="am-g"><a href="{:U('User/help')}">
+					<div class="am-u-sm-2 remberlileft"><img src="../Style/index-images/help.png"></div>
+					<div class="am-u-sm-9 remberlimidlezi">
+						帮助中心
+					</div>
+					<div class="am-u-sm-1 remberlirightzi">
+						<i class="am-icon-angle-right"></i>
+					</div>
+				</div>
+			</a>
+			</li>
+			<!--
+			<li id="quit">
+				<p>退出账户</p>
+			</li>
+			-->
+		</ul>
+		<!--退出账户-->
+		
+		
+		
+		
+
+		<if condition="$shop neq 0">
+			<include file="public:footer" />
+		</if>
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script>
+	$(document).ready(function() {
+		$("#pay").click(function() {
+			window.location.href = "{$url}";
+		})
+	})
+</script>

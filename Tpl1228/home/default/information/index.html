@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<include file="public:headtop" />
+</head>
+<body style="margin: 0 auto;">
+<include file="public:head" />
+
+	<div class="here">
+		<h2><span></span>您当前的位置：{$info.name}</h2>
+		</div>
+		
+<div class="info_li">
+  <volist name='cid_li' id="item">
+	<a href="{:U('information/index',array('id'=>$item['id']))}" <if condition="$item['id'] == $_GET['id']">class="hover"</if>>{$item.name}</a>
+	</volist>
+</div>
+
+           <div class="wrap_child">
+                 <div class="wrapinfo">
+						<div class="wrap_child">
+							<div class="inform">
+							<ul>
+							  <volist name="item_list" id="item">
+								<li><span></span><a href="{:U('information/show',array('id'=>$item['id']))}">{$item.title}</a>
+								<p>{$item.add_time|date='Y-m-d',###}</p></li>
+								<div style="border-bottom: 2px solid #e8e8e8;margin-right: 10px;margin-left: 10px;"></div>
+								 </volist>   
+							</ul>
+							</div>
+						</div>
+					<present name="page_bar">
+					<div class="wall_page" style="margin-left:10px;" <present name="show_page">style="display:block;"</present>>
+						<div class="page_bar">{$page_bar}</div>
+					</div>
+					</present>
+					</div>
+            </div>
+			<div style="height:30px;background: #fff;"></div>
+<div class="clear" style="height:33px;"></div>	
+<include file="public:footer" />
+</body>
+</html>

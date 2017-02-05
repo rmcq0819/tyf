@@ -1,0 +1,85 @@
+[ 2016-12-13T09:42:38+08:00 ] 0.0.0.0 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000635s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000021s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001291s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003607s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004780s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.007607s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000429s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.688448s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001445s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.689929s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.012154s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.702132s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.703053s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.703430s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.703749s ]
+INFO: Run content_replace Behavior [ RunTime:-0.704152s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002463s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.704626s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000496s ]
+
+[ 2016-12-13T09:42:41+08:00 ] 0.0.0.0 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000346s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000020s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000840s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002520s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003829s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003391s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 70 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000293s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004695s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 70 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000285s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 117 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000211s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 378 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000205s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 382 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000199s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 384 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000207s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.024664s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000878s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.025567s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.035306s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.060894s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.061180s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.061438s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.061639s ]
+INFO: Run content_replace Behavior [ RunTime:-0.061929s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001373s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.062295s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000373s ]
+
+[ 2016-12-13T11:37:35+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:08+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:13+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:25+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:27+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:27+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:28+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:40+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T11:38:49+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T13:27:39+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T13:28:03+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T14:11:49+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.people_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  
+[ 2016-12-13T14:21:55+08:00 ] ERR: (ThinkException) You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT b.vote_time,b.cover,b.username,c.vote_num,c.people_num,c.id,c.team FROM `weixin_signup` a left join weixin_user b on a.userId = b.id left join weixin_team c on a.teamId = c.id WHERE a.userId= LIMIT 1  

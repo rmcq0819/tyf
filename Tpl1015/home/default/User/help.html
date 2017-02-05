@@ -1,0 +1,137 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>帮助中心</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			.topnav .back{
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;
+				top: 14px;
+				left: 5px;
+			}
+			
+			.am-panel-hd{
+				height: 43px;
+			}
+			.am-panel-hd span{
+				line-height: 30px;
+				font-size: 14px;
+				color: #555;
+			}
+			#do-not-say-2 p,#do-not-say-3 p,#do-not-say-1 p{
+				color:rgb(240,93,0);
+				font-size: 14px;
+			}
+			h4{font-weight: normal;}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			帮助中心
+		</div>
+		
+		<!--帮助中心内容-->
+		<div class="am-panel-group" id="accordion" style="margin-top: 60px;">
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd">
+					<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
+		        		<span>·&nbsp;&nbsp;如何安全上传身份证信息？&nbsp;&nbsp;&nbsp;&nbsp;<i class="am-icon-angle-double-down"></i></span>
+		      		</h4>
+				</div>
+				<div id="do-not-say-1" class="am-panel-collapse am-collapse" >
+					<div class="am-panel-bd">
+						<p>1、进入会员中心找到身份证管理</p><br />
+						<img src="../Style/index-images/id-photo1.png" alt="方法" class="am-img-responsive"/><br />
+						<p>2、添加一个新的身份证信息</p><br />
+						<img src="../Style/index-images/id-photo2.png" alt="方法" class="am-img-responsive"/><br />
+						<p>3、填写正确的身份证号码及姓名</p><br />
+						<img src="../Style/index-images/id-photo3.png" alt="方法" class="am-img-responsive"/><br />
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd">
+					<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
+		        		<span>·&nbsp;&nbsp;苹果手机微信缓存清理方法&nbsp;&nbsp;&nbsp;&nbsp;<i class="am-icon-angle-double-down"></i></span>
+		      		</h4>
+				</div>
+				<div id="do-not-say-2" class="am-panel-collapse am-collapse">
+					<div class="am-panel-bd">
+						<p>1、在手机进入微信设置</p><br />
+						<img src="../Style/index-images/IMG_0151.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>2、接着选择通用</p><br />
+						<img src="../Style/index-images/IMG_0152.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>3、然后再点击清理缓存存储空间</p><br />
+						<img src="../Style/index-images/IMG_0153.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>4、进行扫描清理垃圾缓存</p><br />
+						<img src="../Style/index-images/IMG_0154.PNG" alt="方法" class="am-img-responsive"/>
+						<img src="../Style/index-images/IMG_0155.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>5、完成清理，还可以点击查看微信存储空间，管理里面的存储文件</p><br />
+						<img src="../Style/index-images/IMG_0156.PNG" alt="方法" class="am-img-responsive"/>
+
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="am-panel am-panel-default">
+				<div class="am-panel-hd">
+					<h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">
+						<span>·&nbsp;&nbsp;安卓手机微信缓存清理方法&nbsp;&nbsp;&nbsp;&nbsp;<i class="am-icon-angle-double-down"></i></span>
+					</h4>
+				</div>
+				<div id="do-not-say-3" class="am-panel-collapse am-collapse">
+					<div class="am-panel-bd">
+						<p>1、在手机进入微信设置</p><br />
+						<img src="../Style/index-images/and-1.jpg" alt="方法" class="am-img-responsive"/><br />
+						<p>2、接着选择通用</p><br />
+						<img src="../Style/index-images/and-2.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>3、然后再点击清理缓存存储空间</p><br />
+						<img src="../Style/index-images/and-3.PNG" alt="方法" class="am-img-responsive"/><br />
+						<p>4、进行扫描清理垃圾缓存</p><br />
+						<img src="../Style/index-images/and-4.PNG" alt="方法" class="am-img-responsive"/>
+						<img src="../Style/index-images/and-5.PNG" alt="方法" class="am-img-responsive"/><br />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+
+</html>
+<!--<script>
+	$(document).ready(function() {
+		$("#pay").click(function() {
+			window.location.href = "{$url}";
+		})
+	})
+</script>-->

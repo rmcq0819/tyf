@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+</head>
+<body>
+<!-- mian -->
+<div id='rtt'></div>
+<header data-am-widget="header" class="am-header am-header-default" style="position:fixed;top:0;z-index:999;">
+    <div class="am-input-group">    
+      <input type="text" class="am-form-field serachimg" id="sreach" placeholder="请输入关键字">
+    </div>
+</header>
+<volist name="itemcatelist" id="vo">
+<div class="leibanner" style="margin-top:48px;">
+<a href="{:U('Item/itemlist',array('id'=>$vo['id']))}">
+<div class="leibannerbj">
+<P style="font-size:16px;line-height:44px;display:none;">{$vo.name}</P></div>
+</a>
+<img src="data/upload/item_cate/{$vo.img}" style="height:110px"></div>
+
+<ul class="am-avg-sm-4 am-thumbnails leilogomain">
+<volist name="vo.0" id="vo1">
+<li class="leilogo"><a href="{:U('Item/itemlist',array('id'=>$vo1['id']))}"><img src="data/upload/item_cate/{$vo1.img}"><P>{$vo1.name}</P></a></li>
+</volist>
+</ul>
+</volist>
+
+<!-- sreach -->
+<div class="sreach">
+<header data-am-widget="header"class="am-header am-header-default">
+	<div class="am-g">
+		<div class="am-u-sm-1"><a href="javascript:;" id="back" class="am-icon-chevron-left"></a></div>
+		<div class="am-u-sm-11"><div class="am-input-group" style="width:80%;">	 
+		<input type="text" class="am-form-field serachimg" id="keyword" placeholder="请输入关键字">
+		</div>
+		<a href="javascript:void(0)" id="sousou" style="width: 50px;height: 22px;background: #ff6666;padding: 5px;margin-left: 10px;border-radius: 5px;color: #fff;">搜索</a>
+	</div>
+	<!--<div class="am-u-sm-1"><a href="javascript:;" class="am-icon-search"></a></div>-->
+</div>
+</header>
+<!-- list -->
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="itemlist" style="padding-bottom:150px;height:600px;overflow:auto">
+</ul>
+</div>
+
+<include file="public:footer" />
+</body>
+</html>
+

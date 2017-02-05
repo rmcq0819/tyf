@@ -1,0 +1,225 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>用户中心</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.showinfo{ position:absolute;top:60%;left:35%;border-radius:5px;background:#000;opacity:0.8;-moz-opacity:0.8;filter:alpha(opacity=80);width:auto;height:38px;box-shadow:0px 0px 10px #000;margin:-60px auto;color:#FFFFFF; text-align:center; line-height:38px;font-size:14px;display:none;z-index:999;}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			
+			.topnav .back {
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			
+			/*个人信息S*/
+			#user-info{
+				margin-top: 55px;
+			}
+			#user-info li{
+				height: 40px; 
+				line-height: 20px; 
+			}
+			#user-info li:first-child img{     /*头像*/
+				float: right; 
+				width: 70px; 
+				height: 70px;
+			}
+			#user-info li,#user-info li:first-child,#user-info li:last-child{
+				padding: 10px;
+			}
+			#user-info li:first-child{
+				height: 90px;
+				line-height: 70px;
+			}
+			#user-info li:last-child{
+				height: 60px; 
+				line-height: 40px; 
+			}
+			#user-info  ul li span:first-child{
+				color: #555;
+				font-size: 13px;
+			}
+			#user-info  ul li span:last-child{
+				color: rgb(102,102,102);
+				font-size: 14px;
+			}
+			#user-info .upload-bg{
+				width:120px; 
+				height: 40px; 
+				margin-top: -5px; 
+				margin-left: 5px;
+			}
+			/*个人信息E*/
+			
+			/*保存信息*/
+			#save-info{
+				width: 94%; 
+				height: 50px; 		
+				font-size: 15px; 
+				text-align: center; 
+				line-height: 50px; 
+				margin: 0 auto;
+				margin-top: -10px;
+				color: rgb(240,93,0); 
+				background-color: white; 
+			}
+	        #upload-pic{
+  			  position: relative;
+  			  width: 12%;  
+  			  top: -41px;
+    		  left: 73px;
+	        }
+	        #upload-pic input
+	        {
+	            opacity:0;
+	            filter:alpha(opacity=0);
+	            height: 100%;
+	            width: 100%;
+	            position: absolute;
+	            top: 0;
+	            left: 5px;
+	            z-index: 9;
+	        }
+		</style>
+		
+		<script>
+		$(function(){
+			$("#check").click(function(){
+				var username = $("input[name='username']").val();
+				var phone_mob = $("input[name='phone_mob']").val();
+				var email = $("input[name='email']").val();
+				var zhanghao = $("input[name='zhanghao']").val();
+				var huming = $("input[name='huming']").val();
+				if(username==""){
+					var str = "昵称还未填写"
+					$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+				}
+				
+				if(phone_mob==""){
+					var str = "手机号码还未填写"
+					$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+				}
+				
+				if(email==""){
+					var str = "邮箱地址还未填写"
+					$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+				}
+				
+				if(zhanghao==""){
+					var str = "收款帐号还未填写"
+					$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+				}
+				
+				if(huming==""){
+					var str = "收款人姓名还未填写"
+					$(".showinfo").html(str).show().delay (3000).fadeOut();return;
+				}
+				$("form").submit();
+				
+			});
+		});
+		</script>
+	</head>
+
+	<body>
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			个人信息
+		</div>
+		<div class="showinfo"></div>
+		<!--个人信息-->
+		<form method="post" action="{:U('User/user_info')}" name="myForm" enctype="multipart/form-data">
+		<div id="user-info">
+			<div data-am-widget="list_news" class="am-list-news am-list-news-default" >
+				<div class="am-list-news-bd">
+					<input type="hidden" name="id" value="{$info.id}" />
+					<ul class="am-list">
+						
+						<li class="am-g am-list-item-dated">
+							<span>头像</span>
+							<!-- <img src="{$info.cover}" alt="用户头像" class="am-img-thumbnail am-circle"/> -->
+							<if condition="$info.hyimg neq ''"><img src="{$info.hyimg}"alt="用户头像" class="am-img-thumbnail am-circle"/>
+							<else /><img src="{$info.cover}" alt="用户头像" class="am-img-thumbnail am-circle"/></if>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>昵称：</span>
+							<span><input type="text" name="username" value="{$info.username}" style="line-height:15px;background-color: transparent;border:none;"/></span>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>手机号码：</span>
+							<span><input type="text" name="phone_mob" value="{$info.phone_mob}" placeholder="输入手机号码" style="line-height:15px;background-color: transparent;border:none;"/></span>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>邮箱地址：</span>
+							<span><input type="text" name="email" value="{$info.email}" placeholder="输入邮箱地址" style="line-height:15px;background-color: transparent;border:none;"/></span>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>收款账号：</span>
+							<span><input type="text" name="zhanghao" value="{$info.zhanghao}" placeholder="银行卡卡号/支付宝账号" style="width:70%;line-height:15px;background-color: transparent;border:none;"/></span>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>收款人姓名：</span>
+							<span><input type="text" name="huming" value="{$info.huming}" placeholder="与银行卡姓名相同"  style="width:60%;line-height:15px;background-color: transparent;border:none;"/></span>
+						</li>
+						
+						<li class="am-g am-list-item-dated">
+							<span>开户银行/支付平台：</span>
+							<span><select id="doc-select-1" name="kaihuhang" style="border:1px solid #dcdcdc;">
+							<volist name="bank" id="vo">
+							<option value="{$vo.id}" <eq name="info.kaihuhang" value="$vo.id"> selected</eq> >{$vo.bank}</option>
+							</volist>
+							</select></span>
+						</li>
+					
+						<li class="am-g am-list-item-dated">
+							<span style="height: 60px;">更换头像：</span>
+							<div id="upload-pic">
+							<input type="file" name="avatar" id="up-pic">
+							<span ><img class="upload-bg" src="../Style/index-images/upload.jpg" alt="上传" style="width:125px"/></span></div>
+						</li>	
+					</ul>
+				</div>
+		
+			</div>
+		</div>
+		<!--保存信息-->
+		<div id="save-info">
+			<input type="button"  value="保存信息" class="submit_btn" style="background-color: transparent; height: 100%; width: 100%;" id="check"/>
+		</div>
+		</form>
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script type="text/javascript">
+function subm(){
+    document.myForm.submit();
+}
+</script>
+

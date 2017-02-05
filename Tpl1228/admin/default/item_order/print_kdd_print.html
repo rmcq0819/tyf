@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link href="__STATIC__/css/admin/style.css" rel="stylesheet" />
+    <link href="__STATIC__/js/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+    <title>打印快递单</title>
+    <script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+   <style>
+   .temp span{ background:#fff; float:left; position:absolute; padding:5px; overflow:hidden; padding-right:16px;}
+   .temp span h2{ font-size:16px; font-family:"宋体"}
+   </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var kdtemp = '{$temp.kstr}';
+            if (kdtemp != "") {
+                var dataset = $.parseJSON(kdtemp);
+                var htmlstr = "";
+                for (var i = 0; i < dataset.Texts.length; i++) {
+                    htmlstr += "<span id=\"show\" class=\"show" + (i + 1) + "\" style=\"left: " + (parseInt(dataset.Texts[i].Left) - 46) + "px; top: " + (parseInt(dataset.Texts[i].Top)-96) + "px; height: " + dataset.Texts[i].Height + "px; width: " + dataset.Texts[i].Width + "px;\"><h2>" + dataset.Texts[i].Text + "</h2></span>";
+                }
+                $("#gallery").html(htmlstr);
+            }
+        })
+  
+     </script>
+</head>
+<body>
+<div class="temp kd_temp1" id="gallery">
+
+</div>
+</body>
+</html>

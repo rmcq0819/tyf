@@ -1,0 +1,49 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>简单地图</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<style type="text/css">
+html,body{
+    width:100%;
+    height:100%;
+}
+*{
+    margin:0px;
+    padding:0px;
+}
+body, button, input, select, textarea {
+    font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+}
+p{
+    width:603px;
+    padding-top:3px;
+    overflow:hidden;
+}
+.btn{
+    width:142px;
+}
+</style>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<script>
+
+function init() {
+	var center = new qq.maps.LatLng(<?php echo ($jingdu); ?>,<?php echo ($weidu); ?>);
+    var map = new qq.maps.Map(document.getElementById("container"), {
+        // 地图的中心地理坐标。
+        center: center,
+		zoom: 13
+    });
+	var marker = new qq.maps.Marker({
+        position: center,
+        map: map
+    });
+	marker.setVisible(true);
+}
+</script>
+</head>
+<body onload="init();">
+<div style="width:100%;height:100%;" id="container"></div>
+</body>
+</html>

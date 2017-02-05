@@ -1,0 +1,454 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			/*头部*/
+			
+			/*选项卡*/
+			.tab1{
+				width:100%;margin:50px auto 0 auto;
+			}
+			.menu{
+				width: 100%;height:28px;border-right:#cccccc solid 1px;
+			}
+			.menu li{
+				float:left;width:33.3%;text-align:center;line-height:35px;height:35px;cursor:pointer;border-left:#cccccc solid 1px;color:#666;font-size:14px;overflow:hidden;background-color: white;
+			}
+			.menu li.off{
+				background:#FFFFFF;color:rgb(240,93,0);
+			}
+			.menu li.off span{	
+				padding: 0px 17px 7px 17px; border-bottom: solid 1px rgb(240,93,0);
+			}
+			dt{
+				font-weight: 400;
+			}
+			#all{
+				border: dashed 1px rgb(170,170,170); background-color: white; position: relative; left: 0;
+			}
+			#all>img{           /*快到期*/
+				width: 47px;height: 47px;position: absolute; top: 0; right: 0;
+			}
+			
+			#wei-left{
+				float: left;width: 32%;height: 110px;color: white;
+			}
+			#yiguo-left,#yiyong-left{
+				float: left;width: 32%;height: 110px;color: white;background: url(../Style/index-images/hui.png);background-size: cover;
+			}
+			
+			#wei-right .info,#wei-right .time,#yiyong-right .info,#yiyong-right .time{
+				color: rgb(85,85,85);
+			}
+			#wei-left .you,#yiguo-left .you,#yiyong-left .you{
+				padding: 5px 0px 0px 10px;
+			}
+			#wei-left .num,#yiguo-left .num,#yiyong-left .num{
+				width: 65%; margin: 0 auto ;text-align: center;padding: 10px 0px 5px 0px;  border-bottom: solid 1px white;
+			}
+			#wei-left .wei,#yiguo-left .yiguo,#yiyong-left .yiyong{
+				text-align: center; padding: 3px 0px 3px 0px;font-size: 14px;
+			}
+			
+			#wei-right .un-line,#yiguo-right .un-line,#yiyong-right .un-line{
+				width: 100px; height: 4px; margin-top: -10px;
+			}
+			#wei-right,#yiguo-right,#yiyong-right{
+				width:68%;height: 80px;float: left;text-align: center;position: relative;left: 0;
+			}
+			#wei-right .you1,#yiguo-right .you1,#yiyong-right .you1{
+				text-align: center; padding: 10px 0px 0px 0px; font-size: 14px;
+			}
+			#wei-right .con,#yiguo-right .con,#yiyong-right .con{
+				margin-top: -5px; text-align: center; font-size: 14px;
+			}
+			#wei-right .doted,#yiguo-right .doted,#yiyong-right .doted{
+				margin-top: 10px;
+			}
+			#detail1 .time,#detail2 .time,#detail3 .time{
+				float: right; margin-right: 1px;
+			}
+			
+			/*没有优惠券的时候*/
+			.no-discount{
+				text-align: center; margin-top: 160px;
+			}
+			.no-discount img{
+				width: 120px; height: 120px;
+			}
+			.no-discount p{
+				margin-top: 10px; font-size: 12px;
+			}
+			
+			/*折叠面板样式调整*/
+			.am-accordion-gapped .am-accordion-title:after{
+				top: 65%;
+			}
+			.am-accordion-gapped .am-accordion-title:after{
+				position: static;font-size: 16px;margin-left: 0px;margin-top: 0px;
+			}
+			.go,.go-2{
+				height: 23px;font-size: 12px; background-color: rgb(240,93,0);color: white; border: none;
+			}
+			.go{
+				width: 140px;float: right; margin: 5px 0px 0px 0px; border-bottom-left-radius: 4px; border-top-left-radius: 10px;
+			}
+			.go-2{
+				width:90px;border-radius:4px; margin-top:20px;	
+			}
+			
+			/*使用规则*/
+			
+			.am-modal-bd{
+				height: 310px; overflow: auto; background-color: rgb(239,243,247);padding: 0px;padding-bottom: 5px;
+			}
+			.am-modal-bd .intro,.am-modal-bd .rule,.am-modal-bd .get{
+				background-color: white; padding: 5px; text-align: left; border-bottom: solid 1px rgb(219,214,219); margin-top: 10px;
+			}
+			.am-modal-bd .intro .title,.am-modal-bd .rule .title,.am-modal-bd .get .title{
+				font-size: 15px; color: black; border-bottom: solid 1px rgb(219,214,219); padding-top: 5px; padding-bottom: 5px;
+			}
+			.am-modal-bd .intro .content,.am-modal-bd .rule .content,.am-modal-bd .get .content{
+				padding-top: 3px; padding-bottom: 3px; font-size: 13px;
+			}
+			/*弹出框关闭按钮*/
+			.am-close{
+				font-size: 24px;
+				opacity: 0.6;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="{:U('User/index')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			优惠券
+			<button style="position: absolute; top: 11px; right: 0; background-color: rgb(240,93,0); border: none; font-size: 13px;" type="button" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width: 305, height: 350}">
+  				使用规则
+			</button>
+
+		</div>
+		<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  			<div class="am-modal-dialog">
+    			<div class="am-modal-hd" style="padding: 10px; background-color: white;">
+    				<span>使用规则</span>
+      				<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    			</div>
+    			<div class="am-modal-bd">
+      				<div class="intro">
+      					<p class="title">优惠券介绍</p>
+      					<p class="content">
+      						优惠券包括：通用现金券、通用满减券、品类券、兑换券<!-- 和新人券 -->。除通用现金券外设有消费限额，下单时满足使用条件可以抵扣商品金额。
+      					</p>
+      				</div>
+      				<div class="rule">
+      					<p class="title">使用规则</p>
+      					<p class="content">
+      						1.一张订单只能使用一张除通用现金券外的优惠券，另外可选一张通用现金券叠加使用；<br/>
+							2.使用兑换券时，范票不能抵扣；<br/>
+							3.订单内所有商品都符合品类券品类要求才能使用；<br/>
+							4.活动产品与优惠券不能叠加；<br/>
+      					</p>
+      				</div>
+      				<div class="get">
+      					<p class="title">获取途径</p>
+      					<p class="content">
+							1.兑换券，可由范票兑换，张数不限；<br/>
+							2.通用现金券，可在商城免费限量领取；<br/>
+							3.通用满减券，可在商城免费限量领取；<br/>
+							4.品类券，在商城有品类活动时出现，用户可免费领取。<br/>
+      					</p>
+      				</div>
+    			</div>
+  			</div>
+		</div>
+		
+		<div class="tab1" id="tab1" style="margin-top: 90px;margin-bottom:20px;">
+			<div class="menu" style="position:fixed;top:50px; left:0px; z-index: 1000;">
+				<ul>
+					<li id="one1" onclick="setTab('one',1)"><span>未使用</span></li>
+					<li id="one2" onclick="setTab('one',2)"><span>已过期</span></li>
+					<li id="one3" onclick="setTab('one',3)"><span>已使用</span></li>
+				</ul>
+			</div>
+
+			<div class="menudiv">
+				
+				<!--未使用的-->
+				<div id="con_one_1">
+					<notempty name="coupon">
+					<volist name="coupon" id="vol">
+					<dl>
+						<dt style="padding: 5px;">
+							<div id="all">
+								<if condition="$vol.etime lt $time">
+								<img src="../Style/index-images/kuaidaoqi.png" alt="快到期"/>
+								</if>
+								<div id="wei-left" style="background: url(../Style/index-images/<if condition="$vol.kind eq 1">lan</if><if condition="$vol.kind eq 4">pink</if><if condition="$vol.kind eq 2">green</if><if condition="$vol.kind eq 3">yellow</if>.png);background-size: cover;">
+  									<p class="you"><if condition="$vol.kind eq 1">
+														<if condition="$vol.condition eq 0">现金券<else />通用券</if>
+												   </if>
+												   <if condition="$vol.kind eq 2">品类券</if>
+												   <if condition="$vol.kind eq 3">兑换券</if>
+												   <if condition="$vol.kind eq 4">新人券</if>
+									</p>
+  									<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 38px;">{$vol.disPrice}</span></p>
+  									<if condition="$vol.kind eq 3"><p class="wei">{$vol.exchangeCond}范票兑换</p></if>
+								</div>
+								<div id="wei-right">
+									<p class="you1">{$vol.title}</p>
+									<p><img src="../Style/index-images/line-1.png" alt="线" class="un-line"/></p>
+									<p class="con"><if condition="$vol.condition eq 0">全场通用<else />满{$vol.condition}元可用</if></p>
+									<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+								</div>
+								<div style="clear: both;"></div>    <!--清除浮动-->
+								<!--折叠面板-->
+								<div id="detail1" style="margin-top: -30px;" >
+									<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+									      <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+									        <dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 34%;">
+									         	<span style="color: rgb(85,85,85);">详细信息</span>
+									         	<span class="time" style="color: rgb(85,85,85);">{$vol.stime|date="Y.m.d",###}~{$vol.etime|date="Y.m.d",###}</span>
+									        </dt>
+									        <dd class="am-accordion-bd am-collapse">
+									           	<p style="padding: 5px; color: rgb(85,85,85);">
+									           		{$vol.desc}
+									           	</p>
+									        </dd>
+									      </dl>
+									</section>
+								</div> 								
+							</div>
+						</dt>
+					</dl>
+					</volist>
+					<!--<button class="go"  onclick="location.href='{:U('coupon/coupon_templet')}'">更多好券，去领取&nbsp;<i class="am-icon-share"></i></button>-->
+					<else/>
+					<div class="no-discount">
+						<img src="../Style/index-images/no-discount.png" alt="没有优惠券"/>
+						<p style="color:#555;">您暂时还没有该类优惠券</p>
+						<!--
+						<p>				
+							<button class="go-2" onclick="location.href='{:U('coupon/coupon_templet')}'">去领取&nbsp;<i class="am-icon-share"></i></button>
+						</p>
+						-->
+					</div>
+					</notempty>
+					<!--<input type="button" onclick="location.href='{:U('coupon/coupon_templet')}'" style="float:right;" value="更多好券，去领取->">-->
+				</div>
+				
+				
+				<!--已过期的-->
+				<div id="con_one_2" style="display:none;">
+					<notempty name="coupon_overdue">
+					<volist name="coupon_overdue" id="vol">
+					<dl>
+						<dt style="padding: 5px;">
+							<div id="all">
+								<!--<img src="../Style/index-images/kuaidaoqii.png" alt="快到期"/>-->
+								<div id="yiguo-left">
+  									<p class="you"><if condition="$vol.kind eq 1">
+														<if condition="$vol.condition eq 0">现金券<else />通用券</if>
+												   </if>
+												   <if condition="$vol.kind eq 2">品类券</if>
+												   <if condition="$vol.kind eq 3">兑换券</if>
+												   <if condition="$vol.kind eq 4">新人券</if>
+									</p>
+  									<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 38px;">{$vol.disPrice}</span></p>
+  									<p class="yiguo">已过期</p>
+								</div>
+								<div id="yiguo-right" style="color: rgb(171,171,171);">
+									<p class="you1">{$vol.title}</p>
+									<p><img src="../Style/index-images/line-2.png" alt="线" class="un-line"/></p>
+									<p class="con"><if condition="$vol.condition eq 0">全场通用<else />满{$vol.condition}元可用</if></p>
+									<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+									<img src="../Style/index-images/guoqii.png" alt="已过期" class="am-img-responsive" style="width: 60px;height:50px;position: absolute; left: 71%; top: 27px;"/>
+								</div>
+								<!--折叠面板-->
+								<div style="clear: both;"></div>    <!--清除浮动-->
+								<div id="detail2" style="margin-top: -30px;" >
+									<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+									      <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+									        <dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 34%; color: rgb(171,171,171);">
+									         	<span class="info">详细信息</span>
+									         	<span class="time">{$vol.stime|date="Y.m.d",###}~{$vol.etime|date="Y.m.d",###}</span>
+									        </dt>
+									        <dd class="am-accordion-bd am-collapse">
+									           	<p style="padding: 5px; color: rgb(171,171,171);">
+									           		{$vol.desc}
+									           	</p>
+									        </dd>
+									      </dl>
+									</section>
+								</div> 								
+							</div>
+						</dt>	
+					</dl>
+					</volist>
+					<else/>
+					<div class="no-discount">
+						<img src="../Style/index-images/no-discount.png" alt="没有优惠券"/>
+						<p>您暂时还没有该类优惠券</p>
+					</div>
+					</notempty>
+				</div>
+
+
+				<!--已使用的-->
+				<div id="con_one_3" style="display:none;">
+					<notempty name="coupon_userd">
+					<volist name="coupon_userd" id="vol">
+					<dl>
+						<dt style="padding: 5px;">
+							<div id="all">
+								<!--<img src="../Style/index-images/kuaidaoqii.png" alt="快到期"/>-->
+								<div id="yiyong-left">
+  									<p class="you"><if condition="$vol.kind eq 1">
+														<if condition="$vol.condition eq 0">现金券<else />通用券</if>
+												   </if>
+												   <if condition="$vol.kind eq 2">品类券</if>
+												   <if condition="$vol.kind eq 3">兑换券</if>
+												   <if condition="$vol.kind eq 4">新人券</if>
+									</p>
+  									<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 38px;">{$vol.disPrice}</span></p>
+  									<p class="yiyong">已使用</p>
+								</div>
+								<div id="yiyong-right">
+									<p class="you1">{$vol.title}</p>
+									<p><img src="../Style/index-images/line-1.png" alt="线" class="un-line"/></p>
+									<p class="con"><if condition="$vol.condition eq 0">全场通用<else />满{$vol.condition}元可用</if></p>
+									<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+								</div>
+								<!--折叠面板-->
+								<div style="clear: both;"></div>    <!--清除浮动-->
+								<div id="detail3" style="margin-top: -30px;" >
+									<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+									      <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+									        <dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 34%;">
+									         	<span style="color: rgb(85,85,85);">详细信息</span>
+									         	<span class="time" style="color: rgb(85,85,85);">{$vol.stime|date="Y.m.d",###}~{$vol.etime|date="Y.m.d",###}</span>
+									        </dt>
+									        <dd class="am-accordion-bd am-collapse">
+									           	<p style="padding: 5px; color: rgb(85,85,85);">
+									           		{$vol.desc}
+									           	</p>
+									        </dd>
+									      </dl>
+									</section>
+								</div> 								
+							</div>
+						</dt>	
+					</dl>
+					</volist>
+					<else/>
+					<div class="no-discount">
+						<img src="../Style/index-images/no-discount.png" alt="没有优惠券"/>
+						<p>您暂时还没有该类优惠券</p>
+					</div>
+					</notempty>
+				</div>
+			</div>
+		</div>
+
+		<include file="public:footer" />
+		
+		<!--选项卡JS-->
+		<script type="text/javascript">
+			function setTab(name,cursel){
+				cursel_0=cursel;
+				for(var i=1; i<=links_len; i++){
+					var menu = document.getElementById(name+i);
+					var menudiv = document.getElementById("con_"+name+"_"+i);
+					if(i==cursel){
+						menu.className="off";
+						menudiv.style.display="block";
+					}
+					else{
+						menu.className="";
+						menudiv.style.display="none";
+					}
+				}
+			}
+			function Next(){                                                        
+				cursel_0++;
+				if (cursel_0>links_len)cursel_0=1
+				setTab(name_0,cursel_0);
+			} 
+			var name_0='one';
+			var cursel_0=1;
+			
+			var links_len,iIntervalId;
+			onload=function(){
+				var links = document.getElementById("tab1").getElementsByTagName('li')
+				links_len=links.length;
+				for(var i=0; i<links_len; i++){
+					links[i].onmouseover=function(){
+						clearInterval(iIntervalId);
+						this.onmouseout=function(){
+							iIntervalId = setInterval(Next,ScrollTime);;
+						}
+					}
+				}
+				document.getElementById("con_"+name_0+"_"+links_len).parentNode.onmouseover=function(){
+					clearInterval(iIntervalId);
+					this.onmouseout=function(){
+						iIntervalId = setInterval(Next,ScrollTime);;
+					}
+				}
+				setTab(name_0,cursel_0);
+				iIntervalId = setInterval(Next,ScrollTime);
+			}
+		</script>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#btn-open").on("click",function(){
+					if($("#doc-modal-1").css("display")!="none")     //禁止页面滚动
+					{
+						
+						window.ontouchmove=function(e){
+	        			e.preventDefault && e.preventDefault();
+	        			e.returnValue=false;
+	        			e.stopPropagation && e.stopPropagation();
+	        			return false;
+						}
+					}
+				});
+				
+			});
+			$(function(){
+				$(".am-close").on("click",function(){        //当关闭按钮的时候   页面可以滚动
+					window.ontouchmove=null;
+				});
+			});
+		</script>
+
+	</body>
+
+</html>
+

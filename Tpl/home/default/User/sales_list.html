@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>店铺销售额</title>
+	<style>
+		* {
+			font-family: "微软雅黑"; text-decoration: none;
+		}
+		.topnav {
+				width: 100%; height: 49px; line-height: 49px; color: white; font-size: 18px; text-align: center; position: fixed; top: 0; z-index: 1001; background-color: rgb(181, 43, 66);
+		}
+		.topnav img{
+			position: absolute; left:5px; top: 14px;
+		}
+		/*查找订单状态S*/
+		#search_order{
+			height: 50px;
+		}
+		#search_order .left {
+			width: 90px; height: 50px; line-height: 56px; padding-left: 2%;
+		}
+		#search_order .right {
+			height: 50px; line-height: 50px; width: 70%; margin-right: 0; text-align: right;
+		}
+		#search_order .right .text {
+			height: 28px; padding-left: 28px; padding-right: 20px; outline: none;
+		}
+		#search_order .right img {
+			position: absolute; top: 18px; left: 29px; height: 20px;
+		}
+		/*查找订单状态E*/
+		
+		
+		#header{
+			margin-top: 49px; background-color: rgb(251,208,157); height: 135px;
+		}
+		#header img{
+			height: 75px; width: 65px; margin: 0 auto; margin-top: 30px;
+		}
+		#header .xiaoshou,#header .lirun{
+			font-size: 14px; color: rgb(85,85,85); margin-top: 50px;
+		}
+		#header .xiaoshou-price,#header .lirun-price{
+			font-size: 16px; color: rgb(240,93,0);
+		}
+		
+		#prod ul li{
+			margin-top: 10px; background-color: white; padding: 0px 10px 0px 10px;
+		}
+		#prod .fir{
+			border-bottom: solid 1px rgb(244,244,244); padding-top:5px; padding-bottom: 5px; color: rgb(85,85,85);
+		}
+		#prod .sec{
+			padding-top:5px; padding-bottom: 5px;border-bottom: solid 1px rgb(244,244,244);
+		}
+		#prod .thi{
+			margin-top: 5px; padding-bottom: 5px;
+		}
+		#prod .fir .lirun{
+			color: rgb(240,93,0); font-size: 13px;
+		}
+		#prod .sec .title{
+			padding: 10px 5px 0px 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; color: rgb(85,85,85); 
+		}
+		#prod .sec .price{
+			padding: 5px 5px 0px 5px; color: rgb(174,174,174);
+		}
+		#prod .sec .price-num{
+			color: rgb(240,93,0); font-size: 13px;
+		}
+		#prod .thi .weixin-user{
+			color: rgb(85,85,85); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+		}
+		#prod .thi .time{
+			text-align: right; color: rgb(174,174,174);
+		}
+		/*为空的时候*/
+		#null{
+			text-align: center; margin-top: 80px;
+		}
+		#null img{
+			width: 90px; height: 90px;
+		}
+		#null p{
+			color: #555; margin-top: 5px;
+		}
+	</style>
+</head>
+<include file="public:head" />
+<include file="public:headuser" />
+<body>
+	<!-- 头部 -->
+	<div class="topnav">
+		<a href="" onClick="window.history.back(-1);" class="back">
+			<img src="../Style/images/fanhui1.png" width="25" />  
+		</a>
+		店铺销售额
+	</div>
+	
+	<notempty name="order_list">
+	<div id="header">
+		<div class="am-g" style="text-align: center;">
+  			<div class="am-u-sm-4">
+  				<p class="xiaoshou">销售总额</p>
+  				<p class="xiaoshou-price">￥{$order_sumPrice}元</p>
+  			</div>
+  			<div class="am-u-sm-4">
+  				<img src="../Style/index-images/xiaoshou.jpg" alt="销售额" class="am-img-responsive"/>
+  			</div>
+  			<div class="am-u-sm-4">
+  				<p class="lirun">利润总额</p>
+  				<p class="lirun-price">￥{$profit_sum}元</p>
+  			</div>
+		</div>
+	</div>
+	
+	
+	<!--列表-->
+	<div id="prod">
+		<ul>
+			<volist name="order_list" id="val">
+				<li onclick="window.location.href='{:U('User/fcorder_check',array('orderid'=>$val['orderId'],'self'=>1,'profit'=>$val['profit'],'oid'=>$val['id']))}'">
+					<div class="am-g fir">
+						<div class="am-u-sm-8">
+							订单号：{$val.orderId}
+						</div>
+						<div class="am-u-sm-4" >
+							<p style="text-align: right;">利润：<span class="lirun">￥{$val.profit}元</span></p>
+						</div>
+					</div>
+					<div class="am-g sec">
+						<div class="am-u-sm-3">
+							<img src="http://yooopay.com/data/upload/item/{:get_thumb($val['img'], '_b')}" alt="商品" />
+						</div>
+						<div class="am-u-sm-8">
+							<p class="title">{$val.title}</p>
+							<p class="price">优品价：<span class="price-num">￥{$val.price}</span>&nbsp;&nbsp;&nbsp;&nbsp;x{$val.quantity}</p>
+						</div>
+						<div class="am-u-sm-1" style="text-align: right;">
+							<img src="./Tpl/home/default/Style/index-images/jt03.png" style="width: 20px;margin-top: 37px;">
+						</div>
+					</div>
+					<div class="am-g thi">
+						<div class="am-u-sm-7">
+							<p class="weixin-user">下单用户：{$val.uname}</p>
+						</div>
+						<div class="am-u-sm-5" style="color: rgb(174,174,174);">
+							<p class="time">{$val.add_time|date='Y年n月j日 H:i:s',###}</p>
+						</div>
+					</div>
+				</li>
+			</volist>
+		</ul>
+	</div>
+		<else/>
+			<div id="null">
+				<img src="../Style/index-images/none-xiao.png" alt="没有相关的订单"/>
+				<p>您还没有相关的订单，请继续努努力 :)</p>
+			</div>
+	</notempty>
+	
+	<include file="public:footer" />
+	<!--引入layer-->
+	<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	<script>
+		$('#search_btn').click(function() {
+			var keyword = $('input[name=keyword]');
+			var shopid = $('input[name=shopid]');
+			if(keyword.val() == '') {
+				layer.open({
+						title: '提示',   
+						content: '你还是输点什么再点我吧~',
+						btn: ['我知道了'],
+						yes: function(index){
+							//location.reload();
+							layer.close(index);
+						}
+					});
+			} 
+			else {
+				window.location.href = "index.php?m=User&a=order_list&keyword=" + keyword.val() + "&shopid=" + shopid.val();
+			}
+		});
+	</script>
+</body>
+
+</html>

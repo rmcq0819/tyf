@@ -1,0 +1,288 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "我要和美容师“嘿嘿嘿”，快来投我一票，为爱助力！", // 分享标题
+				link: "http://yooopay.com/index.php?m=vote&a=index&voteId={$voteId}&shares={$userId}", // 分享链接
+				imgUrl: "http://yooopay.com/tpl/home/default/Style/index-images/activity/xin-5.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "我要和美容师“嘿嘿嘿”，快来投我一票，为爱助力！", // 分享标题
+				desc: "我在团洋范传递爱心，给我投一票吧", // 分享描述
+				link: "http://yooopay.com/index.php?m=vote&a=index&voteId={$voteId}&shares={$userId}", // 分享链接
+				imgUrl: "http://yooopay.com/tpl/home/default/Style/index-images/activity/xin-5.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			/*倒计时*/
+			#guess-like {
+            	height: 50px; line-height: 50px; font-size: 15px; text-align: center; position: relative; color: #555;
+        	}
+        	#guess-like .span-1,#guess-like .span-2 {
+            	border-top: 1px solid rgb(190,190,190); width:23%; position: absolute; top: 25px;
+        	}
+        	#guess-like .span-1{
+            	left: 0px;
+        	}
+        	#guess-like .span-2{
+            	right: 0px;
+        	}
+			#clock{
+				text-align: center; font-size: 20px; color: rgb(240,93,0);
+			}
+			.clock{
+				border: solid 1px rgb(240,93,0); padding: 0px 4px 0px 4px; border-radius: 20%;
+			}
+			.day,.hour,.min,.sec{
+				font-size: 13px; color: #555;  
+			}
+			/*报名*/
+			#sign{
+				border: solid 2px rgb(240,93,0); position: relative; left: 0px; margin: 10px; margin-top: 25px; border-radius: 4px; background-color: rgb(255,217,144);
+			}
+			#sign .s-title{
+				text-align: center; font-size: 15px; color: rgb(240,93,0); font-weight: bold; margin-top: 8px;
+			}
+			#sign .s-input{
+				width: 70%; height: 25px;border: solid 1px rgb(163,151,130); border-radius: 3px; background-color: rgb(237,224,205); color: rgb(85,85,85); margin-left: -35%; padding-left: 10px;
+			}
+			#sign .s-c-title{
+				padding-left: 5%; margin-top: -7px; color: rgb(85,85,85); font-size: 13px;
+			}
+			#sign .s-btn{
+				text-align: center; margin-top: -25px; margin-bottom: 15px;
+			}
+			#sign .s-btn button{
+				width: 125px; height: 30px;background-color: rgb(240,93,0); color: rgb(237,224,205); border: solid 2px rgb(254,216,100); border-bottom: solid 4px rgb(254,216,100); border-radius: 7px; font-size: 13px;
+			}
+			.am-radio .am-icon-checked:before, .am-radio-inline .am-icon-checked:before{
+			    content: "\f004"; color: red;
+			}
+			
+			/*投票*/
+			#vote{
+				margin-top: 15px; padding: 10px;
+			}
+			#vote .dui{
+				width: 50px;position: absolute; left: 50%; top: 26px; color: black;margin-left: -25px; color: white; font-size: 20px;
+			}
+			#vote .add-one{
+				color: red; font-size: 22px; position: absolute; left: 68%; top:5px; display: none;
+			}
+			#vote .aixin-num{
+				text-align: center; margin-top: 10px; color: red; font-size: 14px;
+			}
+			#vote button{
+				width: 100px; height: 25px; background-color: rgb(241,93,53); border-radius: 4px; color: rgb(254,234,151); border: solid 1px rgb(223,178,24); margin-top: 22px;
+			}
+			/*活动规则*/
+			#tips{
+				width: 94%; padding: 5px; background-color: rgb(255,217,144); border: solid 1px rgb(195,183,164); border-radius: 3px; margin: 0 auto; color: rgb(85,85,85); margin-top: 25px;margin-bottom: 20px;
+			}
+			#tips .title{
+				text-align: center; font-size: 14px; color: rgb(240,93,0); margin-top: 5px;
+			}
+			.am-divider-default{
+			    border-top: 1px solid rgb(85,85,85);
+			}
+			/*验证消息弹出框*/
+			.showinfo-t{
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+		</style> 
+		<link rel="stylesheet" type="text/css" href="../Style/css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animate.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animations.css"/>
+		<script src="../Style/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../Style/js/swiper.animate.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background-color: rgb(255,245,179);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">  
+				<img src="../Style/images/fanhui1.png" width="25" />  
+			</a>
+			公益报名
+		</div>
+		<div style="margin-top: 70px;">
+			<img src="../Style/index-images/activity/oneyear-title.png" alt="标题" class="am-img-responsive"/>
+		</div>
+		
+		<div class="swiper-container" style="margin-top: 49px;">
+			<div class="swiper-wrapper p1">
+				<section class="swiper-slide">
+					<div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="1.7s"><img src="../Style/index-images/activity/xin-1.png" class="am-img-responsive"/></div>
+					<div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="2.6s"><img src="../Style/index-images/activity/xin-2.png" class="am-img-responsive"/></div>
+					<div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="3.0s"><img src="../Style/index-images/activity/xin-3.png" class="am-img-responsive"/></div>
+					<div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="3.5s"><img src="../Style/index-images/activity/xin-4.png" class="am-img-responsive"/></div>
+					<div class="ani" swiper-animate-effect="zoomInLeft" swiper-animate-duration="3.9s"><img src="../Style/index-images/activity/xin-5.png" class="am-img-responsive"/></div>
+				</section>   
+			</div>
+		</div>
+		<!--活动倒计时时间-->
+		<div>
+			<p id="guess-like">
+        		<span class="span-1"></span>
+        			距离活动结束时间还剩
+        		<span class="span-2"></span>
+    		</p>
+			<!--倒计时-->
+			<p id="clock"></p>
+		</div>
+		
+		<div class="am-g" style="text-align: center; margin-top: 30px; color: rgb(240,93,0); font-size: 14px;">
+  			<div class="am-u-sm-4" style="border-right: solid 1px rgb(240,93,0);">
+  				<p>已报名</p>
+  				<p style="margin-top: 5px;">{$people_nums}</p>
+  			</div>
+  			<div class="am-u-sm-4" style="border-right: solid 1px rgb(240,93,0);">
+  				<p>投票数</p>
+  				<p style="margin-top: 5px;">{$vote_nums}</p>
+  			</div>
+  			<div class="am-u-sm-4">
+  				<p>浏览量</p>
+  				<p style="margin-top: 5px;">{$pv}</p>
+  			</div>
+		</div>
+
+
+		<!------------投票------------->
+		<div id="vote">
+			<div class="am-g" style="color: rgb(85,85,85);">
+			  	<div class="am-u-sm-3">
+			  		<p><img src="{$cover}" alt="" class="am-img-responsive am-circle" style="width: 60px;height:60px; margin: 0 auto;"/></p>
+			  		<p style="text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{$username}</p>
+			  	</div>
+			  	<div class="am-u-sm-9">
+			  		<p style="padding-left:10px;">我参加了团洋范举办的“和环卫工人一起过平安夜”公益活动，我在{$team}，快为我们队伍投个爱心吧！</p>
+			  	</div>
+			</div>
+			<div class="aixin" style="margin-top: 20px;">
+				<p style="text-align: center; position: relative; left: 0px; ">
+					<img src="../Style/index-images/activity/aixin.png" alt="爱心" style="width: 95px;" class="pulse"/>
+					<span class="dui">{$team}</span>
+					<span class="add-one">+1</span>
+				</p>
+				<p class="aixin-num">（已有&nbsp;<span id="ai-num" style="font-size: 16px;">{$vote_num}</span>&nbsp;颗爱心）</p>
+			</div>
+			<div style="text-align: center;">
+				<button class="toupiao" onclick="cl()">投TA一票</button></span>
+				<button style="margin-left: 20px;" onclick="location.href='{:U('Activity/signup')}'">我也参加</button>
+			</div>
+		</div>
+		
+		<!---------活动规则---------->
+		<div id="tips">
+			<p class="title">活动说明</p >
+			<p>1、<b>将本页面转发给好友或分享至朋友圈，可邀请朋友帮忙投票及报名参加活动。</b></p >
+			<p>2、活动时间：2016年12月16日—12月24日</p >
+			<p>3、活动地点：广州天河区天河CBD商圈</p >
+			<p>4、团洋范经纪人、店长可免费参与1周年活动，新用户成为经纪人可获得参与资格</p >
+			<p>5、活动奖励分发到个人，团队或个人报名，都需要参与人按照报名所需资料填写完整</p >
+			<p>6、每人每天可以投出一票</p >
+			<p>7、团洋范对本次活动保留最终解释权</p >
+		</div>
+		<div class="showinfo-t animated shake"></div>
+
+	
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<script type="text/javascript">
+
+			var url = "{:U('vote/index',array('voteId'=>$voteId))}";
+			function cl(){
+				$.post(url,function(data){
+					layer.open({
+						title: data.title,
+						content: data.content,
+						btn: [data.btn],
+						yes: function(index){
+							layer.close(index);
+							if(data.code==1){
+								$(".toupiao").one("click",function(){
+									var num = parseInt($("#ai-num").html())+1;
+									$(".add-one").addClass("bounce");
+									$(".add-one").show().delay(650).fadeOut();
+									$("#ai-num").text(num);
+								});
+							}
+							location.reload();
+						}
+					});
+
+
+				},'json');
+			}
+
+
+		
+		</script>
+
+		
+		<!----单选按钮----->
+		<script type="text/javascript">
+			$(function(){
+				$(".am-radio input").on("change",function(){
+					$(this).parents("label").css({"color":"red"});
+					$(this).parents("label").siblings().css({"color":"rgb(85,85,85)"});
+				})
+			})
+		</script>
+		<!--初始化图片动画-->
+		<script>        
+		  	var mySwiper = new Swiper ('.swiper-container', {
+			  	onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+			    swiperAnimateCache(swiper); //隐藏动画元素 
+			    swiperAnimate(swiper); //初始化完成开始动画
+		  	}, 
+			  onSlideChangeEnd: function(swiper){ 
+			    swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+			  } 
+  		})        
+  		</script>
+		<!--倒计时-->
+		<script type="text/javascript" src="../Style/js/jquery.countdown.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#clock').countdown('2016/12/24', function(event) {
+				  $(this).html(event.strftime(
+				  	'<span class="clock">%D</span><span class="day">&nbsp;&nbsp;天&nbsp;&nbsp;</span><span class="clock">%H</span> <span class="hour">&nbsp;&nbsp;时&nbsp;&nbsp;</span><span class="clock">%M</span><span class="min">&nbsp;&nbsp;分&nbsp;&nbsp;</span><span class="clock">%S</span> <span class="sec">&nbsp;&nbsp;秒</span>'));
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>

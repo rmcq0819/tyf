@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<include file="public:head" />
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>洋洋得意</title>
+<style>
+.topnav{ position:fixed;width:100%;height:49px;z-index:9999; background:#C54056; text-align:center; color:#fff; font-size:16px; line-height:49px; top:0;}
+.topnav .back{ position:absolute; left:8px;top:0px;}
+</style>
+</head>
+
+<body>
+<body>
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 我的奖金
+</div>
+
+
+
+<div class="tixianshu" style="padding-top:50px;"><img src="../Style/images/tixianimg.png">
+<p>可提现金额</p><p style="font-size:18px; font-family: '微软雅黑';">￥{$keti}</p></div>
+<a href="{:U('User/tixian')}"><button type="button" class="am-btn am-btn-default am-radius tixianon">申请提现</button></a>
+
+<ul class="am-list tixiantimain">
+  <li><a href="#"><span>￥0.00<img src="../Style/images/pic11.png"></span>待结算金额</a></li>
+  <li><a href="#"><span>￥{$keti}<img src="../Style/images/pic11.png"></span>可提现金额</a></li>
+  <li><a href="#"><span>￥{$zhengtx}<img src="../Style/images/pic11.png"></span>提现中金额</a></li>
+  <li><a href="#"><span>￥{$yiti}<img src="../Style/images/pic11.png"></span>已提现金额</a></li>
+</ul>
+
+
+<ul class="am-list tixiantimain">
+  <li><a href="{:U('User/fenchenglist',array('time'=>one))}"><span><img src="../Style/images/pic11.png"></span>奖金明细</a></li>
+</ul>
+
+<include file="public:footer" />
+</body>
+</html>

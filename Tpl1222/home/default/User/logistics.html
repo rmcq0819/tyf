@@ -1,0 +1,260 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>用户中心</title>
+		<include file="public:head" />
+		
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				font-family: "微软雅黑";
+				list-style-type: none;
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			
+			.topnav .back {
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			/*订单详情*/
+			#state{
+				width: 100%;
+				height: 30px;
+				padding: 5px;
+				color: black;
+				font: 13px "微软雅黑";
+			}
+			#state .state-type{                    /*订单状态*/
+				color: rgb(240,93,0);
+			}
+			/*订单号*/
+			#code{
+				min-height: 30px;
+				padding: 5px;
+				font: 13px "微软雅黑";
+				background-color: white;
+				color:#555;
+				line-height:30px;
+			}
+			#code .code-time{           /* 订单时间*/
+				float: right;
+				margin-right: 2px;
+			}
+			
+			/****物流状态S****/	
+			.demo{width:100%; margin: 0 auto; margin-top: 20px; }
+			.history{background:url(../Style/index-images/line04.gif) repeat-y 107px 0;overflow:hidden;position:relative;}
+			.history-date{overflow:hidden;position:relative;}
+			.history-date ul li{background:url(../Style/index-images/icon07.png) no-repeat 100px 0;padding-bottom:30px;zoom:1;}
+			.history-date ul li:last-child{background:url(../Style/index-images/icon07.png) no-repeat 100px 0;padding-bottom:5px;zoom:1;}
+			.history-date ul li.last{padding-bottom:0;}
+			.history-date ul li:after{content:" ";display:block;height:0;clear:both;visibility:hidden;}
+			.history-date ul li h3{float:left;width:110px;text-align:right;padding-right:19px;color:rgb(130,130,130);font:normal 13px/16px Arial;}
+			.history-date ul li h3 span{display:block;color:rgb(130,130,130);font-size:12px; text-align: center;}
+			.history-date ul li dl{float:left;padding-left:30px;margin-top:-5px;font-family:微软雅黑; padding-left:20px ; width: 210px; margin-top: 0px;}
+			.history-date ul li dl dt{font:16px/16px 微软雅黑;color:#737373;}
+			.history-date ul li dl dt span{display:block;color:rgb(130,130,130);font-size:13px;}
+			.history-date ul li:first-child dl dt span{display:block;color:rgb(240,93,0);font-size:13px;}
+			.history-date ul li:first-child h3{color:#1db702;}      /*改变第一个时间颜色*/
+			.history-date ul li:first-child h3 span{color:#1db702; text-align: center;}    /*改变第一个时间颜色*/
+			.history-date ul li.green dl{margin-top:-2px;}
+			.history-date ul li.green dl dt{font-size:16px;}
+			/***物流状态E****/	
+			
+			
+			/*产品*/
+			#product{
+				height: 75px; 
+				margin-top: 10px;
+				padding: 5px;
+				background-color: white; 
+			}
+			/*产品图片*/
+			#product img{
+				width: 60px;
+				height: 60px;
+			}
+			/*结算总价*/
+			#settle-price{
+				background-color: white; 
+				margin-top: 5px; 
+				padding: 5px;
+			}
+			/*收货地址*/
+			#addr{
+				background-color: white; 
+				margin-top: 5px; 
+				min-height: 50px; 
+				font-size: 13px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			订单详情
+		</div>
+		<div id="state" style="margin-top: 50px;"> 
+			<if condition="$itemorder.status neq 4">
+				<span>状态：</span><span class="state-type">
+					<switch name="order.status">
+						<case value="1">待付款</case>
+						<case value="2">待发货</case>
+						<case value="3">待收货</case>
+						<case value="4">已完成</case>
+						<case value="6">退货中</case>
+						<case value="7">退货失败</case>
+						<case value="8">退货成功</case>
+						<case value="9">待收货&nbsp;(清关中)</case>
+						<case value="10">异常订单</case>
+						<default/>未发货
+					</switch>
+				</span>
+				<else/>
+				<span>状态：</span><span class="state-type">
+				已完成
+			</if>
+			
+		</div>
+		<div id="code">
+			<p><span class="code-num">订单号：</span><span>{$order.orderId}</span></p>
+			<if condition="$order.status neq 0">
+				<p>发货时间：
+					{$order.send_time|date='Y年n月j日 H:i:s',###}
+				</p>
+				<p>物流单号：{$order.freecode} ({$order.userfree})</p>
+			</if>
+			<p>宝贝名称：{$order.title}</p>
+			<p>宝贝规格：<if condition="$order.size neq ''"><span style="color:rgb(240,93,0);">{$order.size}</span><else/>默认</if></p>
+			<p>宝贝价格：¥{$order.price}</p>
+		</div>
+		<!--物流状态-->
+		<div id="logistics">
+			<div class="demo">
+				<div class="history">
+					<div class="history-date">
+						<ul>
+							<volist name="result.data" id="vv" key="kk">
+								<li>
+									<h3></span>{$vv.time}</span></h3>
+									<dl>
+										<dt><span>{$vv.context}</span></dt>
+									</dl>
+								</li>
+							</volist>
+						</ul>
+					</div>		
+				</div>
+			</div>	
+		</div>
+		<!--产品-->
+		<volist name="goods" id="good">
+		<div id="product">
+			<div class="am-g">
+  				<div class="am-u-sm-2" style="padding: 5px;">
+  					<img src="data/upload/item/{$good.img}" alt="产品" class="am-img-responsive"/>
+  				</div>
+  				<div class="am-u-sm-8">
+  					<p>{$good.title}</p>
+  					<span style="color: rgb(137,137,137);">免税价：</span><span class="free-price" style="color: rgb(240,93,0); font-size: 14px;">￥{$good.price}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="number" style="color: rgb(137,137,137);">x{$good.quantity}</span>
+  				</div>
+  				<div class="am-u-sm-2" style="text-align: center ;line-height: 75px;">
+  					<a href="{:U('Item/index',array('id'=>$good['itemId'],'shares'=>$info['id']))}"><i class="am-icon-chevron-right"></i></a>
+  				</div>
+			</div>
+		</div>
+		</volist>
+	
+		<!--结算总价-->
+		<div id="settle-price"> 
+  			<span style="font-size: 13px">&nbsp;&nbsp;运费:</span><span style="color: rgb(240,93,0); font-size: 13px;">￥<empty name="order.yunfei">0.00<else />{$order.yunfei}</empty></span>
+  			<span style="float:right; color: black; font-size: 13px;">合计:<span style="color: rgb(240,93,0); font-size: 14px;">￥{$order.order_sumPrice}</span></span>
+  		</div>
+
+  		<!--收货地址-->
+  		<div id="addr">
+  			<div class="am-g">
+  				<div class="am-u-sm-10" style="width:100%;">
+  					<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="user-name">{$order.address_name}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="phone"><php>echo substr_replace($order['mobile'],'****',3,4);</php></span></p>
+  					<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="address">{$order.address}</span></p>
+  				</div>
+			</div>
+  		</div>
+  		<div style="width: 100%;">
+  			<img src="../Style/index-images/addr-img.jpg" alt="图片" class="am-img-responsive"/>
+  		</div>
+		<if condition="$order.status neq 6">
+				<div class="am-g am-g-fixed dingdanjiashu">
+					<div class="am-u-sm-12 dingdangyinfukuanon">
+					<a href="index.php?m=Order&a=orderTK&detail_id={$_GET['detail_id']}&status={$_GET['status']}"  style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">申请退款</a>
+				</div>
+		</div>
+		</if>
+		<br/>
+		<br/>
+		
+		<if condition="$shop neq 0">
+			<include file="public:footer" />
+		</if>
+		<include file="public:footer" />
+		
+		<!--快递时间轴的动画-->
+		<script type="text/javascript">
+		$(function(){
+			systole();
+		});
+		function systole(){
+			if(!$(".history").length){
+				return;
+			}
+			var $warpEle = $(".history-date"),
+				$targetA = $warpEle.find("h2 a,ul li dl dt a"),
+				parentH,
+				eleTop = [];
+			
+			parentH = $warpEle.parent().height();
+			$warpEle.parent().css({"height":59});
+			
+			setTimeout(function(){
+				
+				$warpEle.find("ul").children(":not('h2:first')").each(function(idx){
+					eleTop.push($(this).position().top);
+					$(this).css({"margin-top":-eleTop[idx]}).children().hide();
+				}).animate({"margin-top":0}, 1600).children().fadeIn();
+		
+				$warpEle.parent().animate({"height":parentH}, 1500);
+		
+				$warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
+				
+			}, 600);
+		
+			$targetA.click(function(){
+				$(this).parent().css({"position":"relative"});
+				$(this).parent().siblings().slideToggle();
+				$warpEle.parent().removeAttr("style");
+				return false;
+			});
+		};
+		</script>
+	</body>
+	
+</html>
+

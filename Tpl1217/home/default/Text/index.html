@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0048)http://store.weiapps.cn/index.php -->
+<html>
+<head>
+<title>护肤测试</title>
+<include file="public:headtop" />
+</head>
+
+<body>
+<include file="public:headuser" />
+<style>
+.enter {
+	background-color: #cfe2e0;
+	color: #4c5a41;
+}
+.enter_slt {
+	background-color:#4c5a41;
+	color: white;
+}
+</style>
+<script type="text/javascript">
+	$(function(){
+		$(".enter1").show();
+		$(".enter2").hide();
+		$(".enter3").hide();
+		$(".enter4").hide();
+		$(".enter1_1").click(function(){
+			$(".enter1_1").addClass("enter_slt");
+			$(".enter1_2").removeClass("enter_slt");
+		});
+		$(".enter1_2").click(function(){
+			$(".enter1_2").addClass("enter_slt");
+			$(".enter1_1").removeClass("enter_slt");
+		});
+		$(".enter2_1").click(function(){
+			$(".enter2_1").addClass("enter_slt");
+			$(".enter2_2").removeClass("enter_slt");
+			$(".enter2_3").removeClass("enter_slt");
+			$(".enter2_4").removeClass("enter_slt");
+		});
+		$(".enter2_2").click(function(){
+			$(".enter2_1").removeClass("enter_slt");
+			$(".enter2_2").addClass("enter_slt");
+			$(".enter2_3").removeClass("enter_slt");
+			$(".enter2_4").removeClass("enter_slt");
+		});
+		$(".enter2_3").click(function(){
+			$(".enter2_1").removeClass("enter_slt");
+			$(".enter2_2").removeClass("enter_slt");
+			$(".enter2_3").addClass("enter_slt");
+			$(".enter2_4").removeClass("enter_slt");
+		});
+		$(".enter2_4").click(function(){
+			$(".enter2_1").removeClass("enter_slt");
+			$(".enter2_2").removeClass("enter_slt");
+			$(".enter2_3").removeClass("enter_slt");
+			$(".enter2_4").addClass("enter_slt");
+		});
+		
+		$(".enter3_1").click(function(){
+			$(".enter3_1").addClass("enter_slt");
+			$(".enter3_2").removeClass("enter_slt");
+			$(".enter3_3").removeClass("enter_slt");
+			$(".enter3_4").removeClass("enter_slt");
+		});
+		$(".enter3_2").click(function(){
+			$(".enter3_1").removeClass("enter_slt");
+			$(".enter3_2").addClass("enter_slt");
+			$(".enter3_3").removeClass("enter_slt");
+			$(".enter3_4").removeClass("enter_slt");
+		});
+		$(".enter3_3").click(function(){
+			$(".enter3_1").removeClass("enter_slt");
+			$(".enter3_2").removeClass("enter_slt");
+			$(".enter3_3").addClass("enter_slt");
+			$(".enter3_4").removeClass("enter_slt");
+		});
+		$(".enter3_4").click(function(){
+			$(".enter3_1").removeClass("enter_slt");
+			$(".enter3_2").removeClass("enter_slt");
+			$(".enter3_3").removeClass("enter_slt");
+			$(".enter3_4").addClass("enter_slt");
+		});
+		
+		var enterArr = $(".enter4 .enter");
+		for(var i=0; i<enterArr.length; i++) {
+			var enter = enterArr[i];
+			$(enter).click(function(){
+				for(var j=0; j<enterArr.length; j++) {
+					if(this === enterArr[j]) {
+						$(enterArr[j]).addClass("enter_slt");
+					} else {
+						$(enterArr[j]).removeClass("enter_slt");
+					}
+				}
+			});
+		}
+		
+		$(".enter1_next").click(function(){
+			if($(".enter1 .enter_slt").size() === 0) {
+				alert("请选择一题!");
+				return;
+			}
+			$(".enter1").hide();
+			$(".enter2").show();
+		});
+		$(".enter2_next").click(function(){
+			if($(".enter1 .enter_slt").size() === 0) {
+				alert("请选择一题!");
+				return;
+			}
+			$(".enter2").hide();
+			$(".enter3").show();
+		});
+		$(".enter3_next").click(function(){
+			if($(".enter1 .enter_slt").size() === 0) {
+				alert("请选择一题!");
+				return;
+			}
+			$(".enter3").hide();
+			$(".enter4").show();
+		});
+		$(".enter4_next").click(function(){
+			var da_an = $(".da_an");
+			var str = "";
+			for(var i=0; i<4; i++) {
+				var idx = 0;
+				var enArr = $(".enter"+(i+1)+" .enter");
+				var enSlt = $(".enter"+(i+1)+" .enter_slt")[0];
+				for(var j=0; j<enArr.size(); j++) {
+					if(enArr[j] === enSlt) {
+						idx = j;
+						break;
+					}
+				}
+				str += "-"+(idx+1);
+			}
+			$.getJSON("./index.php?m=Text&a=da_an",{str:str},function(data){
+				if(data.error === 1) {
+					alert(str+" 对应的页面不存在!");
+					return;
+				}
+				var itemEnyArr = data.data;
+				var html = "";
+				for(var i=0; i<itemEnyArr.length; i++) {
+					var itemEny = itemEnyArr[i];
+					html += "<a href='index.php?m=Item&a=index&id="+itemEny.id+"'>"+
+					"<img src='./data/upload/item/"+itemEny.img+"' style='width:100%;'/>"+
+					"</a><a href='index.php?m=Item&a=index&id="+itemEny.id+"' target='blank' style='height: 30px;display: block;line-height: 30px;text-align: center;font-size: 16px;overflow: hidden;'>"+itemEny.title+"</a><br/>";
+				}
+				$(".da_an").html(html);
+			});
+		});
+	});
+</script>
+<div class="s_bottom"></div>
+
+<div class="enter1">
+	<div id="content" style="background: #f2f8f1;">
+	<h1 style="font-size: 12px;height: 30px;line-height: 30px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;">STEPE1：您的性别是？<h1>
+	</div>
+	<div style="width:100%;margin:0 auto;">
+	<li class="enter enter1_1" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">男</li>
+	<li class="enter enter1_2" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">女</li>
+	<li class="enter1_next" style="margin-left: 20px;background: #4c5a41;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;color: #fff;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 85%;">下一步</li>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="enter2">
+	<div id="content" style="background: #f2f8f1;">
+	<h1 style="font-size: 12px;height: 30px;line-height: 30px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;">STEPE2：於中午時段，您的肌膚狀況是？<h1>
+	</div>
+	<div style="width:100%;margin:0 auto;">
+	<li class="enter enter2_1" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">脸部乾燥</li>
+	<li class="enter enter2_2" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">脸部平衡</li>
+	<li class="enter enter2_3" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">脸部偏油</li>
+	<li class="enter enter2_4" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">脸部偏油</li>
+	<li class="enter2_next" style="margin-left: 20px;background: #4c5a41;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;color: #fff;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 85%;">下一步</li>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="enter3">
+	<div id="content" style="background: #f2f8f1;">
+	<h1 style="font-size: 12px;height: 30px;line-height: 30px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;">STEPE3：您是否經常有暗瘡粉刺的煩惱？<h1>
+	</div>
+	<div style="width:100%;margin:0 auto;">
+	<li class="enter enter3_1" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">很少</li>
+	<li class="enter enter3_2" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">生理期前後</li>
+	<li class="enter enter3_3" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">偶爾</li>
+	<li class="enter enter3_4" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">經常</li>
+	<li class="enter3_next" style="margin-left: 20px;background: #4c5a41;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;color: #fff;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 85%;">下一步</li>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div class="enter4">
+	<div id="content" style="background: #f2f8f1;">
+	<h1 style="font-size: 12px;height: 30px;line-height: 30px;margin-top: 20px;margin-bottom: 20px;padding-left: 20px;">STEPE4：您最關注的皮膚問題是?<h1>
+	</div>
+	<div style="width:100%;margin:0 auto;">
+	<li class="enter enter4_1" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">暗瘡 / 粉刺</li>
+	<li class="enter enter4_2" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">幼紋 / 皺紋</li>
+	<li class="enter enter4_3" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">鬆弛 / 下垂</li>
+	<li class="enter enter4_4" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">粗大毛孔</li>
+	<li class="enter enter4_5" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">膚色不均</li>
+	<li class="enter enter4_6" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">眼部浮腫 / 眼黑圈</li>
+	<li class="enter enter4_7" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">敏感</li>
+	<li class="enter enter4_8" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">乾燥 / 脫水</li>
+	<li class="enter enter4_9" style="margin-left: 20px;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 40%;">雀斑 / 色斑</li>
+	<li class="enter4_next" style="margin-left: 20px;background: #4c5a41;height: 29px;line-height: 29px;display: block;text-align: center;float: left;padding: 10px 0;color: #fff;margin-top: 15px;font-size: 16px;margin-bottom: 15px;width: 85%;">下一步</li>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<!-- 答案 -->
+<div class="da_an" style="width: 80%;margin: 0 auto;">
+	
+</div>
+<div class="clear" style="height:33px;"></div>
+<include file="public:footer" />
+</body>
+</html>

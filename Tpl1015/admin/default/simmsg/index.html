@@ -1,0 +1,223 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+<link href="./tpl/home/default/Style/css/amazeui.css" rel="stylesheet" type="text/css" />
+<title>朋友圈素材发送模块</title>
+<style>
+body{
+	font-size:13px;
+}
+ul,li,dl,dt,dd,h1,h2,h3{
+	margin:0px;padding:0px;list-style:none;
+}
+#main{
+	width:1200px;min-height:200px;margin:10px;
+}
+#main .send_msg{
+	width:1200px;min-height:180px;float:left;
+}
+#main .send_msg h1{
+	font-size:16px;
+	border-left:2px solid #0c79b1;
+	padding-left:10px;
+	font-weight:normal;
+}
+.send_list{
+	width:600px;
+	min-height:180px;
+	float:left;
+	margin:5px;
+}
+.send_list li{
+	width:600px;
+	height:40px;
+	line-height:40px;
+	float:left;
+}
+.send_list li .text{
+	width:200px;
+	height:25px;
+	line-height:25px;
+	font-size:13px;
+	border:1px solid #dcdcdc;
+	padding-left:5px;
+	color:#555;
+}
+.send_list li select{
+	width:100px;
+	height:25px;
+	line-height:25px;
+	font-size:13px;
+	border:1px solid #dcdcdc;
+	padding-left:5px;
+	color:#555;
+}
+.send_list span{
+	width:100px;
+	height:30px;
+}
+b { font-weight:normal;}
+
+.send_btn{
+	width:80px;
+	height:25px;
+	line-height:25px;
+	text-align:center;
+	color:#fff;
+	font-size:12px;
+	border:0px;
+	border-radius:2px;
+	background:#0c79b1;
+	margin-right:10px;
+}
+
+.clear_btn{
+	width:80px;
+	height:25px;
+	line-height:25px;
+	text-align:center;
+	color:#fff;
+	font-size:12px;
+	border:0px;
+	border-radius:2px;
+	background:#dd514c;
+}
+hgroup{
+	display:none;
+}
+#tab {overflow:hidden;zoom:1;background:#dcdcdc;}
+#tab li {float:left;color:#555;height:30px;	cursor:pointer;	line-height:30px;padding:0 20px;}
+#tab li.current {color:#000;background:#efefef;}
+.send_tip{
+	width:1200px;
+	min-height:100px;
+	margin:10px;
+	font-size:13px;
+	color:#555;
+	float:left;
+}
+</style>
+<script>
+$(function(){
+	window.onload = function()
+	{
+		var $li = $('#tab li');
+		var $ul = $('#main hgroup');
+		$li.click(function(){
+			var $this = $(this);
+			var $t = $this.index();
+			$li.removeClass();
+			$this.addClass('current');
+			$ul.css('display','none');
+			$ul.eq($t).fadeIn();
+		})
+	}
+});
+</script>
+</head>
+<body>
+
+<ul id="tab">
+	<li class="current">发送订单待结算消息</li>
+	<li>发送订单确认收货消息</li>
+	<li>发送新代理加入消息</li>
+</ul>
+
+<div id="main">
+
+	<hgroup class="send_msg" style="display:block;">
+		<h1>发送订单待结算消息</h1>
+		<form action="__URL__/send_msg" method="post">
+				<input type="hidden" name="msg_type" value="1" />
+				<ul class="send_list">
+					<li><span>用户：</span>
+						<select name="username">
+								<option value="oOejpwsM8q1DJPrAnWhUiTPtn23Y">朱彧</option>
+								<option value="oOejpwsXee3CLktHxLyg_XLU3kb4">胡芬</option>
+								<option value="oOejpwvMFZF5-J1VkOpyU-AbIS1E">廖晓麟</option>
+						</select>
+						<b style="margin-left:5px;">* 你要给谁发送消息？</b>
+					</li>
+					<li><span>金额：</span><input type="text" name="price" class="text" placeholder="提成金额" /> <b style="margin-left:5px;">* 输入大于0的金额</b></li>
+					<li><span>时间：</span><input type="text" name="time"  class="text" value="<?php echo date('Y-m-d H:i:s'); ?>" /></li>
+					<li><span>发送：</span>
+						<input type="submit" class="send_btn" value="确定发送" />
+						<input type="reset" class="clear_btn" value="取消发送" />
+					
+					</li>
+				</ul>
+		</form>
+	</hgroup>
+	
+	<hgroup class="send_msg">
+		<h1>发送订单确认收货消息</h1>
+		<form action="__URL__/send_msg" method="post">
+			<input type="hidden" name="msg_type" value="2" />
+				<ul class="send_list">
+					<li><span>用户：</span>
+						<select name="username">
+								<option value="oOejpwsM8q1DJPrAnWhUiTPtn23Y">朱彧</option>
+								<option value="oOejpwsXee3CLktHxLyg_XLU3kb4">胡芬</option>
+								<option value="oOejpwvMFZF5-J1VkOpyU-AbIS1E">廖晓麟</option>
+						</select>
+						<b style="margin-left:5px;">* 你要给谁发送消息？</b>
+					</li>
+					<li><span>金额：</span><input type="text" name="price" class="text" placeholder="提成金额" /> <b style="margin-left:5px;">* 输入大于0的数额</b></li>
+					<li><span>时间：</span><input type="text" name="time"  class="text" value="<?php echo date('Y-m-d H:i:s'); ?>" /></li>
+					<li><span>发送：</span>
+						<input type="submit" class="send_btn" value="确定发送" />
+						<input type="reset" class="clear_btn" value="取消发送" />
+					
+					</li>
+				</ul>
+		</form>
+	</hgroup>
+	
+	<hgroup class="send_msg">
+		<h1>发送新代理加入消息</h1>
+		<form action="__URL__/send_msg" method="post">
+			<input type="hidden" name="msg_type" value="3" />
+				<ul class="send_list">
+					<li><span>用户：</span>
+						<select name="username">
+								<option value="oOejpwsM8q1DJPrAnWhUiTPtn23Y">朱彧</option>
+								<option value="oOejpwsXee3CLktHxLyg_XLU3kb4">胡芬</option>
+								<option value="oOejpwvMFZF5-J1VkOpyU-AbIS1E">廖晓麟</option>
+						</select>
+						<b style="margin-left:5px;">* 你要给谁发送消息？</b>
+					</li>
+					
+					<li><span>姓名：</span><input type="text" name="i_name" class="text" value="朱彧" /> <b style="margin-left:5px;">* 你的姓名</b></li>
+					<li><span>级别：</span>
+							<select name="level">
+								<option value="掌柜">掌柜</option>
+								<option value="店长">店长</option>
+						</select>
+						<b style="margin-left:5px;">* 选择你的级别</b>
+					</li>
+					<li><span>姓名：</span><input type="text" name="down_name" class="text" placeholder="胡芬" /> <b style="margin-left:5px;">* 下级代理的姓名</b></li>
+					<li><span>微信：</span><input type="text" name="down_wx" class="text" placeholder="xssers" /> <b style="margin-left:5px;">* 下级代理的微信号</b></li>
+					<li><span>手机：</span><input type="text" name="down_phone" class="text" placeholder="13119598402" /> <b style="margin-left:5px;">* 下级代理的手机号码</b></li>
+					<li><span>奖金：</span><input type="text" name="down_price" class="text" placeholder="200" /> <b style="margin-left:5px;">* 200，120，40</b></li>
+					<li><span>时间：</span><input type="text" name="time"  class="text" value="<?php echo date('Y-m-d H:i:s'); ?>" /></li>
+					<li><span>发送：</span>
+						<input type="submit" class="send_btn" value="确定发送" />
+						<input type="reset" class="clear_btn" value="取消发送" />
+					
+					</li>
+				</ul>
+		</form>
+	</hgroup>
+</div>
+<div class="send_tip">
+Copyright © 2016 All Rights Reserved   广州永孚电子商务有限公司 版权所有
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<include file="public:header" />
+<style type="text/css">
+.daijin-a{ background:#EAEEF4; padding:5px 15px; border:1px solid #999999}
+</style>
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="score_log" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$keyword.keyword}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+					
+					<a href="./index.php?g=admin&m=fpeisong&a=addarea&id=1" class="daijin-a">新增配送区域</a>&nbsp;
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+<script type="text/javascript">
+function check_all(obj,cName)
+{
+    var checkboxs = document.getElementsByName(cName);
+    for(var i=0;i<checkboxs.length;i++){checkboxs[i].checked = obj.checked;}
+}
+</script>
+    <div class="J_tablelist table_list" data-acturi="{:U('score_log/ajax_edit')}">
+	<form name="myForm" method="post" action="./index.php?g=admin&m=fpeisong&a=areadels">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="30">
+						<input type="checkbox" name="all" onclick="check_all(this,'id[]')" />ID</span>
+				</th>
+                <th width="90">配送目的地</th>
+				<th>费用单位</th>
+				<th colspan="4">配送参数</th>
+				<th width="90">操作</th>
+            </tr>
+        </thead>
+    	<tbody>
+			<volist name="list" id="val">
+            <tr>
+                <td align="center"><input type="checkbox"   name="id[]" value="{$val.id}"></td>
+				<td align="center"><a href="./index.php?g=admin&m=fpeisong&a=editarea&id={$val.id}">{$val.area}</a></td>
+				<td align="center">元</td>
+				<td align="center"><if condition="$val.isno eq 1">首件：</if><if condition="$val.isno eq 2">首重：</if><if condition="$val.isno eq 3">体积：</if>{$val.psinit}</td>
+                <td align="center">费用：{$val.pstotal}</td>
+				<td align="center"><if condition="$val.isno eq 1">续件：</if><if condition="$val.isno eq 2">续重：</if><if condition="$val.isno eq 3">增体积：</if>{$val.psup}</td>
+                <td align="center">费用：{$val.psupto}</td>
+				<td align="center"><a href="./index.php?g=admin&m=fpeisong&a=areadel&id={$val.id}" onClick="return confirm('你确定要将该记录删除吗？');">删除</a></td>
+            </tr>
+			</volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+	<!--<a href="javascript:;" onclick="document.myForm.submit();" class="daijin-a">批量删除</a>-->
+      <label class="select_all mr10"><input type="checkbox" name="all" onclick="check_all(this,'id[]')" />{:L('select_all')}/{:L('cancel')}</label>
+        <a href="javascript:;" onclick="document.myForm.submit();" class="daijin-a">{:L('delete')}</a>
+        <div id="pages">{$page}</div>
+    </div>
+	
+	</form>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>

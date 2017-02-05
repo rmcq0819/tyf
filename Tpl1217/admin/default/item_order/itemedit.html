@@ -1,0 +1,68 @@
+<style>
+
+body{
+	font-size:13px;
+	color:#555;
+	padding:10px;
+}
+p{
+	font-size:14px;
+}
+table{
+	border:0px;
+}
+td{
+	border:1px solid #ececec;
+}
+tr{
+	width:850px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	
+}
+</style>
+
+<form action="{:U('item_order/itemedit')}" method="post">
+
+<p>商品名称：
+	{$order.title}
+</p>
+<p>商品状态：
+	<select name="status">
+		<option value="0">--所有--</option>
+		<option <if condition='$order.status eq 0'>selected=''</if> value="0">待发货</option>
+		<option <if condition='$order.status eq 1'>selected=''</if> value="1">待付款</option>
+		<option <if condition='$order.status eq 2'>selected=''</if> value="2">待发货</option>
+		<option <if condition='$order.status eq 3'>selected=''</if> value="3">待收货</option>
+		<option <if condition='$order.status eq 4'>selected=''</if> value="4">已完成</option>
+		<option <if condition='$order.status eq 6'>selected=''</if> value="6">退货中</option>
+		<option <if condition='$order.status eq 7'>selected=''</if> value="7">退货失败</option>
+		<option <if condition='$order.status eq 8'>selected=''</if> value="8">退货成功</option>
+		<option <if condition='$order.status eq 9'>selected=''</if> value="9">待收货(清关中)</option>
+		<option <if condition='$order.status eq 10'>selected=''</if> value="10">异常订单</option>
+	</select>
+</p>
+
+<p>
+物流公司：
+<select name="delivery">
+	<option value='无'>无</option>
+	 <volist name='deliveryList' id='vo'>
+			<?php 
+				if($vo['name'] == $order['userfree']){
+					echo "<option value='".$vo['name']."' selected='selected'>".$vo['name']."</option>";
+				}else{
+					echo "<option value='".$vo['name']."'>".$vo['name']."</option>";
+				}
+			?>
+	 </volist>
+</select>
+</p>
+<input type="hidden" name="id" value="{$order.id}">
+<p>物流单号：<input type="text" name="freecode" value="{$order.freecode}"></p>
+
+<p><input type="submit" value="修改" /></p>
+
+
+</form>

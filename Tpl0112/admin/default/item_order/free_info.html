@@ -1,0 +1,38 @@
+<style>
+
+body{
+	font-size:13px;
+	color:#555;
+	padding:10px;
+}
+p{
+	font-size:14px;
+}
+table{
+	border:0px;
+}
+td{
+	border:1px solid #ececec;
+}
+tr{
+	width:850px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	
+}
+</style>
+<p>快递名称：{$order.userfree} &nbsp&nbsp 快递单号：{$order.freecode} &nbsp&nbsp 发货时间：{$order.send_time|date='Y年n月j日 H:i:s',###}</p>
+<p>提示：如无法显示物流信息，请点<a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=0&rsv_idx=1&tn=baidu&wd={$order.freecode}">这里</a></p>
+<table width="850" border="0">
+  <tr>
+    <td>时间</td>
+    <td>地点和跟踪进度</td>
+  </tr>
+  <volist name="result.data" id="vv" key="kk">
+  <tr>
+    <td>{$vv.time}</td>
+    <td style="text-align:left;">{$vv.context}</td>
+  </tr>
+  </volist>
+</table>

@@ -1,0 +1,17 @@
+
+	<h3 class="membertop">
+       <p class="my_name">
+       <span class="profile_name"><a href="{:U('User/username')}">
+        <if condition="$visitor['nickname'] neq NULL">{$visitor.nickname}
+        <elseif condition="$visitor['username'] neq NULL"/>{$visitor.username}
+        <else/>{$visitor.wechatid}</if></a>
+        {$state}
+        <a href="{:U('User/username')}" title="修改呢称"><i class="icon_pen"></i></a></span>
+       <a href="{:U('User/chongzhi')}" style="font-size:14px;">充值</a>
+       <a href="{:U('User/account')}" style="font-size:14px;" >帐户中心</a>
+       <!--<a href="{:U('User/score')}" style="font-size:14px;" >积分中心</a>-->
+       <a href="{:U('Zhuanpan/index')}" style="font-size:14px;">大转盘</a>
+       </p>
+       <p class="my_btns"><a href="{:U('User/address')}" class="address">收货地址管理</a> <a href="{:U('User/logout')}" class="logout">退出</a></p>
+    </h3>
+  

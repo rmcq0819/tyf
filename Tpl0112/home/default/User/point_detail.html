@@ -1,0 +1,128 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<!-- 格式化价格JS，改变数量更新价格JS -->
+		<!--<link rel="stylesheet" type="text/css" href="../Style/assets/zzsc.css"/>
+		<script src="../Style/assets/js.js" type="text/javascript" charset="utf-8"></script>-->
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			
+			/*明细内容*/			
+			#detail ul{
+				padding: 0px 5px 0px 5px;
+			}
+			#detail ul li{
+			 	border-bottom:1px solid #dcdcdc; padding: 5px;
+			}
+			
+			#detail .type{
+				font-size: 13px;
+			}
+			#detail .num{
+				float: right;font-size: 18px;line-height: 45px;color: rgb(241,86,86);
+			}
+			#detail .time{
+				font-size: 12px;
+			}
+			
+			/*没有积分的时候*/
+			.no-score{
+				margin-top: 100px;text-align: center;
+			}
+			.no-score img{
+				width: 120px; height:120px;
+			}
+			.no-font1{
+				text-align: center; color: #555; margin-top: 5px;font-size:13px;
+			}
+			.no-font2{
+				text-align: center; color: #555; margin-bottom: 50px;font-size:13px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:rgb(247,248,248);">
+		
+		<div class="topnav">
+			<a onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			范票明细(<if condition="$point_count eq ''">0<else/>{$point_count}</if>)
+		</div>
+
+		<div id="detail" style="margin-top: 49px;">
+			<ul>
+				<notempty name="point_list">
+					<if condition="$_GET['type'] eq 1">
+							<volist name="point_list" id="val">
+									<li>
+										<p><span class="type">
+										<switch name="val.type">
+												<case value="5">购物奖励范票</case>
+												<case value="6">评论奖励范票</case>
+												<case value="8">红包奖励范票</case>
+												<case value="9">系统奖励范票</case>
+												<case value="11">红包退还范票</case>
+												<case value="20">转盘抽奖范票</case>
+												<case value="22">系统返还范票</case>
+												<case value="19">人气店铺奖励</case>
+										</switch>
+										<span class="num">+{$val.points}</span></p>
+										<p class="time">{$val.time|date='Y-m-d H:i:s',###}</p>
+									</li>
+							</volist>
+						<else/>
+							<volist name="point_list" id="val">
+							<li>
+								<p><span class="type">
+								<switch name="val.type">
+											<case value="7">购物抵扣范票</case>
+											<case value="10">范票红包分享</case>
+											<case value="21">抽奖机会抵扣</case>
+											<case value="25">系统回收范票</case>
+											<case value="26">范票商城兑换</case>
+									</switch>
+								<span class="num">-{$val.points}</span></p>
+								<p class="time">{$val.time|date='Y-m-d H:i:s',###}</p>
+							</li>
+							</volist>
+					</if>
+					<else/>
+					<p class="no-score"><img src="../Style/index-images/no-jifen.png" alt="没积分"/></p>
+					<if condition="$_GET['type'] eq 1">
+							<p class="no-font1">您还没有范票哦~</p>
+							<p class="no-font2">赶紧看看<a href="{:U('User/rule')}" style="color:rgb(240,93,0);">范票规则</a>赚范票吧~</p>
+						<else/>
+							<p class="no-font1">您还没有范票使用记录哦~</p>
+							<p class="no-font2">现在就去<a href="{:U('Index/index')}" style="color:rgb(240,93,0);">使用</a>范票</p>
+					</if>
+					
+				</notempty>
+			</ul>
+		</div>		
+		<include file="public:footer" />
+	</body>
+
+</html>

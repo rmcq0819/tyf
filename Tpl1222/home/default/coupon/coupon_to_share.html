@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+				  'onMenuShareTimeline',
+				  'onMenuShareAppMessage',
+				]
+			});
+			  
+			wx.ready(function () {
+				wx.onMenuShareTimeline({
+					title: "来自{$username}的优惠券分享", // 分享标题
+					link: "http://yooopay.com/index.php?m=coupon&a=coupon_share&ids={$ids}&shares={$info['id']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/coupon.png", // 分享图标
+					success: function (res) {
+						window.location.href="{:U('coupon/share_done')}&ids={$ids}";
+					},
+				});
+				wx.onMenuShareAppMessage({
+					title: "来自{$username}的优惠券分享", // 分享标题
+					desc: "{$username}给您送来了优惠券！", // 分享描述
+					link: "http://yooopay.com/index.php?m=coupon&a=coupon_share&ids={$ids}&shares={$info['id']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/coupon.png", // 分享图标
+					type: 'link', 
+					dataUrl: '',
+					success: function (res) {
+						window.location.href="{:U('coupon/share_done')}&ids={$ids}";
+					},
+				});
+				
+			});
+		</script>
+		
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			/*头部*/
+			
+			/*选项卡*/
+			.tab1{
+				width:100%;margin:50px auto 0 auto;
+			}
+			.menu{
+				width: 100%;height:28px;border-right:#cccccc solid 1px;
+			}
+			.menu li{
+				float:left;width:33.3%;text-align:center;line-height:35px;height:35px;cursor:pointer;border-left:#cccccc solid 1px;color:#666;font-size:14px;overflow:hidden;background-color: white;
+			}
+			.menu li.off{
+				background:#FFFFFF;color:rgb(240,93,0);
+			}
+			.menu li.off span{	
+				padding: 0px 17px 7px 17px; border-bottom: solid 1px rgb(240,93,0);
+			}
+			dt{
+				font-weight: 400;
+			}
+			#all{
+				/*border: dashed 1px rgb(170,170,170); */
+				background-color: white; position: relative; left: 0;
+			}
+			#all>img{           /*快到期*/
+				width: 47px;height: 47px;position: absolute; top: 0; right: 0;
+			}
+			
+			#wei-left{
+				float: left;width: 32%;height: 110px;color: white;
+			}
+			#yiguo-left,#yiyong-left{
+				float: left;width: 32%;height: 110px;color: white;background: url(../Style/index-images/hui.png);background-size: cover;
+			}
+			
+			#wei-right .info,#wei-right .time,#yiyong-right .info,#yiyong-right .time{
+				color: rgb(85,85,85);
+			}
+			#wei-left .you,#yiguo-left .you,#yiyong-left .you{
+				padding: 5px 0px 0px 10px;
+			}
+			#wei-left .num,#yiguo-left .num,#yiyong-left .num{
+				width: 65%; margin: 0 auto ;text-align: center;padding: 10px 0px 5px 0px;  border-bottom: solid 1px white;
+			}
+			#wei-left .wei,#yiguo-left .yiguo,#yiyong-left .yiyong{
+				text-align: center; padding: 3px 0px 3px 0px;font-size: 14px;
+			}
+			
+			#wei-right .un-line,#yiguo-right .un-line,#yiyong-right .un-line{
+				width: 100px; height: 4px; margin-top: -10px;
+			}
+			#wei-right,#yiguo-right,#yiyong-right{
+				width:68%;height: 80px;float: left;text-align: center;position: relative;left: 0;
+			}
+			#wei-right .you1,#yiguo-right .you1,#yiyong-right .you1{
+				text-align: center; padding: 10px 0px 0px 0px; font-size: 14px;
+			}
+			#wei-right .con,#yiguo-right .con,#yiyong-right .con{
+				margin-top: -5px; text-align: center; font-size: 14px;
+			}
+			#wei-right .doted,#yiguo-right .doted,#yiyong-right .doted{
+				margin-top: 10px;
+			}
+			#detail1 .time,#detail2 .time,#detail3 .time{
+				float: right; margin-right: 1px;
+			}
+			
+			/*没有优惠券的时候*/
+			.no-discount{
+				text-align: center; margin-top: 160px;
+			}
+			.no-discount img{
+				width: 120px; height: 120px;
+			}
+			.no-discount p{
+				margin-top: 10px; font-size: 12px;
+			}
+			
+			/*折叠面板样式调整*/
+			.am-accordion-gapped .am-accordion-title:after{
+				top: 65%;
+			}
+			.am-accordion-gapped .am-accordion-title:after{
+				position: static;font-size: 16px;margin-left: 4px;margin-top: 0px;
+			}
+			.go,.go-2{
+				height: 23px;font-size: 12px; background-color: rgb(240,93,0);color: white; border: none;
+			}
+			.go{
+				width: 140px;float: right; margin: 5px 0px 0px 0px; border-bottom-left-radius: 4px; border-top-left-radius: 10px;
+			}
+			.go-2{
+				width:90px;border-radius:4px; margin-top:20px;	
+			}
+			
+			/*使用规则*/
+			
+			.am-modal-bd{
+				height: 310px; overflow: auto; background-color: rgb(239,243,247);padding: 0px;padding-bottom: 5px;
+			}
+			.am-modal-bd .intro,.am-modal-bd .rule,.am-modal-bd .get{
+				background-color: white; padding: 5px; text-align: left; border-bottom: solid 1px rgb(219,214,219); margin-top: 10px;
+			}
+			.am-modal-bd .intro .title,.am-modal-bd .rule .title,.am-modal-bd .get .title{
+				font-size: 15px; color: black; border-bottom: solid 1px rgb(219,214,219); padding-top: 5px; padding-bottom: 5px;
+			}
+			.am-modal-bd .intro .content,.am-modal-bd .rule .content,.am-modal-bd .get .content{
+				padding-top: 3px; padding-bottom: 3px; font-size: 13px;
+			}
+			/*弹出框关闭按钮*/
+			.am-close{
+				font-size: 24px;
+				opacity: 0.6;
+			}
+			
+			.from{
+				text-align: right; padding-right: 0px; color:rgb(155,155,155);padding-top: 10px; line-height: 13px;
+			}
+			.share{
+				height: 25px;background-color: rgb(240,93,0); border: none; color: white;position: fixed; top: 65%;right: 0px; padding: 2px 8px 2px 8px; border-bottom-left-radius: 5px;border-top-left-radius: 5px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animations.css"/>
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="{:U('User/index')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			优惠券分享
+		</div>
+	
+
+		<div class="menudiv">
+			<!--未使用的-->
+			<div id="con_one_1" style="margin-top: 50px;">
+				<p style="padding:5px 0px 5px 5px; color:#555;">温馨提示：以下是您要分享的优惠券，确定不改了就赶紧分享出去吧！</p> 
+				<notempty name="coupon">
+				<volist name="coupon" id="vol">
+				<dl >
+					<dt style="padding: 5px;">
+						<div id="all" style="box-shadow: 0px 1px 2px rgb(115,115,115);">
+							<if condition="$vol.etime lt $time">
+							<img src="../Style/index-images/kuaidaoqi.png" alt="快到期"/>
+							</if>
+			
+							<div id="wei-left" style="background: url(../Style/index-images/lan.png);background-size: cover;">
+								<p class="you"><if condition="$vol.kind eq 1">
+													<if condition="$vol.condition eq 0">现金券<else />通用券</if>
+											   </if>
+								</p>
+								<p class="num"><span style="font-size: 14px;">￥</span><span style="font-size: 38px;">{$vol.disPrice}</span></p>
+							</div>
+							<div id="wei-right">
+								
+								<p class="you1">{$vol.title}</p>		
+								<p><img src="../Style/index-images/line-1.png" alt="线" class="un-line"/></p>
+								<p class="con">全场通用</p>
+								<img src="../Style/index-images/dain.jpg" alt="点" class="am-img-responsive doted"/>
+								
+							</div>
+							
+							<div style="clear: both;"></div>    <!--清除浮动-->
+							<!--折叠面板-->
+							<div id="detail1" style="margin-top: -30px;" >
+								<section data-am-widget="accordion" class="am-accordion am-accordion-gapped" data-am-accordion='{  }' style="width: 100%; margin: 0 auto;">
+									  <dl class="am-accordion-item am-active" style="width: 100%;text-align: left; margin-bottom: 0px; border-bottom: none; border-top: dashed 2px rgba(240,93,0,0);">
+										<dt class="am-accordion-title" style="background-color: rgba(255,255,255,0); padding: 0px 0px 0px 34%; border: none;">
+											<span style="color: rgb(85,85,85);">详细信息</span>
+											<span class="time" style="color: rgb(85,85,85);">{$vol.stime|date="Y.m.d",###}~{$vol.etime|date="Y.m.d",###}</span>
+										</dt>
+										<dd class="am-accordion-bd am-collapse">
+											<p style="padding: 5px; color: rgb(85,85,85);">
+												{$vol.desc}
+											</p>
+										</dd>
+									  </dl>
+								</section>
+							</div> 								
+						</div>
+					</dt>
+				</dl>
+				</volist>
+				<button class="share">分享&nbsp;<i class="am-icon-paper-plane-o floating"></i></button>
+				<else/>
+				<div class="no-discount">
+					<img src="../Style/index-images/no-discount.png" alt="没有优惠券"/>
+					<p style="color:#555;">您暂时还没有选择优惠券</p>
+					
+				</div>
+				</notempty>
+			</div>
+			
+		</div>
+	
+		
+		<!--分享遮罩页面-->
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+			<img src="../Style/images/guide.png" />
+		</div>
+
+		<include file="public:footer" />
+			
+		<!--点击分享按钮弹出分享遮罩-->
+		<script type="text/javascript">
+			$(function(){
+				$(".share").on("click",function(){
+					$("#mcover").show();
+					return false;
+				});
+			});
+		</script>
+
+	
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#btn-open").on("click",function(){
+					if($("#doc-modal-1").css("display")!="none")     //禁止页面滚动
+					{
+						
+						window.ontouchmove=function(e){
+	        			e.preventDefault && e.preventDefault();
+	        			e.returnValue=false;
+	        			e.stopPropagation && e.stopPropagation();
+	        			return false;
+						}
+					}
+				});
+				
+			});
+			$(function(){
+				$(".am-close").on("click",function(){        //当关闭按钮的时候   页面可以滚动
+					window.ontouchmove=null;
+				});
+			});
+		</script>
+
+	</body>
+
+</html>
+

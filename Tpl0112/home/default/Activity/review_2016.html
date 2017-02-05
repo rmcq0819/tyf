@@ -1,0 +1,441 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title></title>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "我在团洋范2016那些事", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/s3-2.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "我在团洋范2016那些事", // 分享标题
+				desc: "我的有范生活", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/s3-2.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style type="text/css">
+		
+			/*旋转音乐*/
+	    	.open{
+	            -webkit-animation: moveRo linear 3.5s infinite;
+	        }
+	        @-webkit-keyframes moveRo {
+	            from{
+	                -webkit-transform: rotate(-360deg);
+	            }
+	            to{
+	                -webkit-transform: rotate(360deg);
+	            }
+	        }
+	        .rotate-img1{
+				width: 90%; margin: 0 auto; animation: myfirst1 8s linear infinite; -webkit-animation: myfirst1 8s linear infinite; -moz-animation: myfirst1 8s linear infinite; -o-animation: myfirst1 8s linear infinite;
+			}
+			/*旋转动画*/
+			@-webkit-keyframes myfirst1{
+				0%{
+					transform: rotate(0deg);-webkit-transform: rotate(0deg);-moz-transform: rotate(0deg);-o-transform: rotate(0deg);
+				}
+				100%{
+					transform: rotate(360deg);-webkit-transform: rotate(360deg);-moz-transform: rotate(360deg);-o-transform: rotate(360deg);
+				}
+			}
+			.rotate-img2{
+				width: 90%; margin: 0 auto; animation: myfirst2 6s linear infinite; -webkit-animation: myfirst2 6s linear infinite; -moz-animation: myfirst2 6s linear infinite; -o-animation: myfirst2 6s linear infinite;
+			}
+			/*旋转动画*/
+			@-webkit-keyframes myfirst2{
+				0%{
+					transform: rotate(-0deg);-webkit-transform: rotate(-0deg);-moz-transform: rotate(-0deg);-o-transform: rotate(-0deg);
+				}
+				100%{
+					transform: rotate(-360deg);-webkit-transform: rotate(-360deg);-moz-transform: rotate(-360deg);-o-transform: rotate(-360deg);
+				}
+			}
+			.rotate-img3{
+				width: 90%; margin: 0 auto; animation: myfirst3 3s linear infinite; -webkit-animation: myfirst3 3s linear infinite; -moz-animation: myfirst3 3s linear infinite; -o-animation: myfirst3 3s linear infinite;
+			}
+			/*旋转动画*/
+			@-webkit-keyframes myfirst3{
+				0%{
+					transform: rotate(-0deg);-webkit-transform: rotate(-0deg);-moz-transform: rotate(-0deg);-o-transform: rotate(-0deg);
+				}
+				100%{
+					transform: rotate(-360deg);-webkit-transform: rotate(-360deg);-moz-transform: rotate(-360deg);-o-transform: rotate(-360deg);
+				}
+			}
+			.rotate-img3{
+				width: 90%; margin: 0 auto; animation: myfirst3 3s linear infinite; -webkit-animation: myfirst3 3s linear infinite; -moz-animation: myfirst3 3s linear infinite; -o-animation: myfirst3 3s linear infinite;
+			}
+			/*旋转动画*/
+    	</style>
+    	<!--<script src="../Style/js/fakeLoader.min.js"></script>
+	    <script>
+		    $(document).ready(function(){
+	            $(".fakeloader").fakeLoader({ 
+	                timeToHide:2500,
+	                bgColor:"white",
+	                imagePath:"../Style/index-images/activity/loading.gif"
+	            });
+	        });
+		</script>-->
+	</head>
+
+	<body>
+		
+		<!--------------加载前动画------------------>
+		<!--<div class="fakeloader"></div>-->
+		<div class="swiper-container" id="swiper-container-v">
+
+			<section class="poster_wrap load" id="load">
+				<div class="p_loading">
+					<div class="p_loading_logo"></div>
+					<p class="p_loading_tip"></p>
+				</div>
+			</section>
+    
+		    <div class="swiper-wrapper">
+		    <!-------------slide1----------------->
+		        <section class="swiper-slide swiper-slide1 swiper-slide-v" style="background-image: url(../Style/index-images/activity/bg-11.jpg); background-size: cover;">
+					<div>
+						<p style="margin-top: 25%;">
+							<img src="../Style/index-images/activity/shouye.png" alt="头部" class="ani am-img-responsive" swiper-animate-effect="zoomIn" swiper-animate-duration="0.6s" swiper-animate-delay="0.3s" style="width: 80%; margin: 0 auto;"/>
+							<img src="../Style/index-images/activity/wo-de.png" alt="头部" class="ani am-img-responsive" swiper-animate-effect="zoomIn" swiper-animate-duration="0.6s" swiper-animate-delay="0.6s" style="width: 60%; margin: 0 auto; margin-top: -44%;"/>
+						</p>
+					</div>
+					
+					<div>
+						<img src="../Style/index-images/activity/s1-1.png" alt="头部" class="ani am-img-responsive" swiper-animate-effect="myFlip" swiper-animate-duration="0.8s" swiper-animate-delay="0.4s" style="width: 12%; position: fixed; right: 13%; bottom: 18%;"/>
+						<img src="../Style/index-images/activity/s1-3.png" alt="头部" class="ani am-img-responsive" swiper-animate-effect="myFlip" swiper-animate-duration="1.0s" swiper-animate-delay="0.6s" style="width: 12%; position: fixed; right: 25%; bottom: 35%;"/>
+						<img src="../Style/index-images/activity/s1-2.png" alt="头部" class="ani am-img-responsive" swiper-animate-effect="myFlip" swiper-animate-duration="1.3s" swiper-animate-delay="1.0s" style="width: 12%; position: fixed; left: 18%; bottom: 18%;"/>
+					</div>		
+		        </section>
+		        
+		    <!---------------slide2-------------->   
+		        <section class="swiper-slide swiper-slide2 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s2-1.png" alt="什么时候加入团洋范" class="am-img-responsive" style="width: 75%; margin: 0 auto;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0);">
+		        		<div style="position: relative; left: 0px;">
+		  					<img src="../Style/index-images/activity/s2-2.png" alt="什么时候加入团洋范" class="am-img-responsive" style="width: 120px; margin: 0 auto; padding-top: 10px;"/>		  							  					
+	  						<p class="ani" style="width: 90px;position: absolute; left: 50%; top: 56px; margin-left: -45px;color: white; text-align: center; font-size: 21px; font-weight: bold;" swiper-animate-effect="flipInY" swiper-animate-duration="0.9s" swiper-animate-delay="0.3s" >{$user.reg_time|date="Y年",###}</p>
+	  						<p class="ani" style="width: 100px;position: absolute; left: 50%; top: 85px;margin-left: -50px; color: white; text-align: center; font-size: 19px; font-weight: bold;" swiper-animate-effect="flipInY" swiper-animate-duration="0.9s" swiper-animate-delay="0.6s" >{$user.reg_time|date="m月d日",###}</p>
+		  				</div>
+		  				<div class="am-g" style="margin-top: 15px;">
+  							<div class="am-u-sm-5">
+  								<img src="{$user.cover}" alt="用户" class="am-img-responsive am-circle ani" style="width: 50px; height: 50px; float: right;" swiper-animate-effect="zoomIn" swiper-animate-duration="0.9s" swiper-animate-delay="1s" />
+  							</div>
+  							<div class="am-u-sm-7">
+  								<p class="ani" style="color: rgb(240,93,0); font-size: 14px; margin-left: 10px; line-height: 50px;" swiper-animate-effect="zoomIn" swiper-animate-duration="0.9s" swiper-animate-delay="1.2s">{$user.username}</p>
+  							</div>
+						</div>
+						<p class="ani" style="color: rgb(85,85,85); text-align: center; padding-top: 20px; font-size: 20px;" swiper-animate-effect="slideInUp" swiper-animate-duration="1.6s" swiper-animate-delay="1.3s" >开始了创业之旅</p>
+		        	</div>
+		        	
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s2-3.png" alt="屋" class="am-img-responsive ani" style="width: 90px;float: right; margin-top: -35px;" swiper-animate-effect="slideInLeft" swiper-animate-duration="1.6s" swiper-animate-delay="1.3s"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<p class="ani" style="color: white; font-size: 17px; margin-top: 12px;text-align: center;" swiper-animate-effect="swing" swiper-animate-duration="1.1s" swiper-animate-delay="2.8s">拥有一家自己的线上商城</p>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		        
+		    <!----------------slide3-------------->
+		        <section class="swiper-slide swiper-slide3 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s3-1.png" alt="2016年售出了多少件商品" class="am-img-responsive" style="width: 75%; margin: 0 auto;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0);">
+		        		<div>
+		  					<img src="../Style/index-images/activity/s3-2.png" alt="" class="am-img-responsive" style="width: 90px; margin: 0 auto; padding-top: -10px;" />		  							  					
+		  				</div>
+		  				<p class="ani" style="color: rgb(240,93,0); text-align: center; font-size: 24px; margin-top: 7%;" swiper-animate-effect="zoomIn" swiper-animate-duration="0.9s" swiper-animate-delay="0.3s">2016年我在团洋范共卖了</p>
+						<p class="ani" style="width: 70%;height: 45px;color: rgb(240,93,0);margin: 0 auto; text-align: center;line-height: 41px; margin-top: 10%; font-size: 24px; border: solid 2px rgb(240,93,0); border-radius: 3px;" swiper-animate-effect="zoomIn" swiper-animate-duration="0.9s" swiper-animate-delay="0.9s"><span style="font-size: 26px; font-weight: bold;">{$counts}</span>&nbsp;件商品</p>
+						<if condition="$counts neq 0">
+						<p class="ani" style="color: rgb(85,85,85); font-size: 15px; text-align: center; margin-top: 5%;" swiper-animate-effect="tada" swiper-animate-duration="0.9s" swiper-animate-delay="1.8s">其中，“<span style="color: rgb(240,93,0);">{$max.name}</span>”类销量最高</p>
+						</if>
+		        	</div>
+		        	
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s3-3.png" alt="屋" class="am-img-responsive" style="width: 110px;float: right; margin-top: -45px;"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<img src="../Style/index-images/activity/s3-4.png" alt="屋" class="am-img-responsive ani" style="width: 40px;float: left; margin-top: 0px;" swiper-animate-effect="slideInRight" swiper-animate-duration="4.0s" swiper-animate-delay="0s"/>
+  								<img src="../Style/index-images/activity/s3-5.png" alt="屋" class="am-img-responsive ani" style="width: 60px;float: right; margin-top: -15px; margin-right: 20%;" swiper-animate-effect="slideInLeft" swiper-animate-duration="4.0s" swiper-animate-delay="1.0s"/>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		        
+		    <!-------------slide4----------------->
+		        <section class="swiper-slide swiper-slide4 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s4-1.png" alt="2016年消费了多少金额" class="am-img-responsive" style="width: 80%; margin: 0 auto; padding-top: 20px;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0);">
+		        		<div>
+		  					<img src="../Style/index-images/activity/s4-2.png" alt="" class="am-img-responsive" style="width: 120px; margin: 0 auto; padding-top: -10px;"/>		  							  					
+		  				</div>
+		  				<p class="ani" style="color: rgb(240,93,0); text-align: center; font-size: 24px; margin-top: 15px;" swiper-animate-effect="zoomInDown" swiper-animate-duration="1.0s" swiper-animate-delay="0.3s">2016年我在团洋范消费了</p>
+						<p class="ani" style="width: 70%;height: 45px;color: rgb(240,93,0);margin: 0 auto; text-align: center;line-height: 41px; margin-top: 15px; font-size: 24px; border: solid 2px rgb(240,93,0); border-radius: 3px;margin-top: 8%;" swiper-animate-effect="slideInRight" swiper-animate-duration="1.3s" swiper-animate-delay="1s"><span style="font-size: 26px; font-weight: bold;">{$amount}元</span></p>
+		        	</div>
+		        	
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s4-3.png" alt="屋" class="am-img-responsive ani" style="width: 90px;float: right; margin-top: -80px;" swiper-animate-effect="tada" swiper-animate-duration="1.2s" swiper-animate-delay="2s"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<p class="ani" style="color: white; font-size: 17px; margin-top: 12px;text-align: center;" swiper-animate-effect="bounce" swiper-animate-duration="0.9s" swiper-animate-delay="2s">一边购物一边赚钱</p>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		        
+			<!-------------slide5----------------->       
+		  		<section class="swiper-slide swiper-slide5 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s5-1.png" alt="2016年销量情况" class="am-img-responsive" style="width: 80%; margin: 0 auto; padding-top: 10px;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0);">
+						<if condition="$cnt neq 0">
+		        		<div id="container" style="width:100%;height:100%; background-color: none;"></div>
+						<else/>
+						<p class="ani" style="color: rgb(240,93,0); font-size: 18px; text-align: center; padding-top: 20%;" swiper-animate-effect="rubberBand" swiper-animate-duration="0.9s" swiper-animate-delay="0.5s">你还没销售记录~~</p>
+						</if>
+		        	</div>
+		        	
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s3-3.png" alt="屋" class="am-img-responsive ani" style="width: 110px;float: right; margin-top: -45px;" swiper-animate-effect="shake" swiper-animate-duration="1.0s" swiper-animate-delay="0s"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<img src="../Style/index-images/activity/s3-4.png" alt="屋" class="am-img-responsive ani" style="width: 40px;float: left; margin-top: 0px;" swiper-animate-effect="slideInRight" swiper-animate-duration="1.4s" swiper-animate-delay="0s"/>
+  								<img src="../Style/index-images/activity/s3-5.png" alt="屋" class="am-img-responsive ani" style="width: 60px;float: right; margin-top: -15px; margin-right: 20%;" swiper-animate-effect="slideInLeft" swiper-animate-duration="1.7s" swiper-animate-delay="1.0s"/>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		
+			<!-------------slide6----------------->       
+		  		<section class="swiper-slide swiper-slide6 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s6-1.png" alt="2016招收了多少代理" class="am-img-responsive" style="width: 70%; margin: 0 auto;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0); text-align: center; font-size: 15px;">
+		        		<p style="padding-top: 10px;">您在团洋范,一共招收了<span style="color: rgb(240,93,0); font-size: 17px;">{$userCnt}</span>位代理</p>
+		        		<p style="margin-top: 7px;">下面几位是最开始支持你的：</p>
+		        		<div style="width: 100%;height: 70%; margin: 0 auto; position: relative; left: 0px;">
+		        			<img src="../Style/index-images/activity/s6-3.png" alt="" class="am-img-responsive rotate-img1" style="width: 36%; position: absolute; left: 50%; top: 19.7%; margin-left: -17.5%;"/>
+		        			<img src="../Style/index-images/activity/s6-4.png" alt="" class="am-img-responsive rotate-img2" style="width: 45%;position: absolute; left: 50%; top: 13.8%; margin-left: -21.5%;"/>
+							<img src="../Style/index-images/activity/s6-5.png" alt="" class="am-img-responsive rotate-img3" style="width: 55%; position: absolute; left: 50%; top: 7%; margin-left: -26.5%;"/>
+		        			<img src="<if condition="$dl_2 neq ''">{$dl_2['cover']}<else/>../Style/index-images/user.png</if>" alt="用户" class="am-img-responsive am-circle ani" style="width: 20%;position: absolute; left: 50%; top: 29%; margin-left: -10%;" swiper-animate-effect="myFlip" swiper-animate-duration="0.8s" swiper-animate-delay="0.2s"/>
+		        			<p style="width: 20%;position: absolute; left: 50%; top: 60%; margin-left: -10%; color: rgb(240,93,0); font-size: 12px;">首个代理</p>
+		        			<img src="<if condition="$dl_0 neq ''">{$dl_0['cover']}<else/>../Style/index-images/user.png</if>" alt="用户" class="am-img-responsive am-circle ani" style="width: 12%;position: absolute; left: 60%; top: 10px;" swiper-animate-effect="myFlip" swiper-animate-duration="0.8s" swiper-animate-delay="0.6s"/>
+		        			<img src="<if condition="$dl_3 neq ''">{$dl_3['cover']}<else/>../Style/index-images/user.png</if>" alt="用户" class="am-img-responsive am-circle ani" style="width: 12%;position: absolute; left: 60%; top: 70%" swiper-animate-effect="myFlip" swiper-animate-duration="0.8s" swiper-animate-delay="1.0s"/>
+		        			<img src="<if condition="$dl_1 neq ''">{$dl_1['cover']}<else/>../Style/index-images/user.png</if>" alt="用户" class="am-img-responsive am-circle ani" style="width: 12%;position: absolute; left: 27%; top: 50%" swiper-animate-effect="myFlip" swiper-animate-duration="0.8s" swiper-animate-delay="1.5s"/>
+		        		</div>
+		        	</div>
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s2-3.png" alt="屋" class="am-img-responsive ani" style="width: 90px;float: right; margin-top: -35px;" swiper-animate-effect="fadeIn" swiper-animate-duration="0.6s" swiper-animate-delay="1.0s"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<p style="color: white; font-size: 17px; margin-top: 12px;text-align: center;">升级成掌柜可加盟实体店</p>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		        
+		    <!----------------slide7-------------->
+		        <section class="swiper-slide swiper-slide7 swiper-slide-v" style="height: 100%;">
+		        	<div style="width: 100%; height: 33%; background: url(../Style/index-images/activity/bg-22.jpg); background-size: cover;">
+		        		<p style="padding-top: 20%;"><img src="../Style/index-images/activity/s7-1.png" alt="2016年赚了多少钱" class="am-img-responsive" style="width: 75%; margin: 0 auto; padding-top: 15px;"/></p>
+		  				
+		        	</div>
+		        	<div style="width: 100%;height: 55%;background-color: rgb(255,241,0);">
+		        		<div>
+		  					<img src="../Style/index-images/activity/s7-2.png" alt="" class="am-img-responsive" style="width: 90px; margin: 0 auto; padding-top: -10px;"/>		  							  					
+		  				</div>
+		  				<p class="ani" style="color: rgb(240,93,0); text-align: center; font-size: 24px; margin-top: 7%;" swiper-animate-effect="lightSpeedIn" swiper-animate-duration="0.8s" swiper-animate-delay="0.2s">2016年我在团洋范赚了</p>
+						<p class="ani" style="width: 70%;height: 45px;color: rgb(240,93,0);margin: 0 auto; text-align: center;line-height: 41px; margin-top: 10%; font-size: 24px; border: solid 2px rgb(240,93,0); border-radius: 3px;" swiper-animate-effect="myFlip" swiper-animate-duration="0.9s" swiper-animate-delay="0.5s"><span style="font-size: 26px; font-weight: bold;">{$profitCnt}</span>&nbsp;元</p>
+		        	</div>
+		        	
+		        	<div style="width: 100%; height: 12%;background-color: rgb(153,108,51);">
+		        		<div class="am-g">
+							<div class="am-u-sm-4">
+								<img src="../Style/index-images/activity/s3-3.png" alt="屋" class="am-img-responsive ani" style="width: 110px;float: right; margin-top: -45px;" swiper-animate-effect="shake" swiper-animate-duration="1.0s" swiper-animate-delay="0s"/>
+							</div>
+  							<div class="am-u-sm-8">
+  								<img src="../Style/index-images/activity/s3-4.png" alt="屋" class="am-img-responsive ani" style="width: 40px;float: left; margin-top: 0px;" swiper-animate-effect="slideInRight" swiper-animate-duration="1.4s" swiper-animate-delay="0s"/>
+  								<img src="../Style/index-images/activity/s3-5.png" alt="屋" class="am-img-responsive ani" style="width: 60px;float: right; margin-top: -15px; margin-right: 20%;" swiper-animate-effect="slideInLeft" swiper-animate-duration="1.7s" swiper-animate-delay="1.0s"/>
+  							</div>
+						</div>
+		        		
+		        	</div>
+					
+		        </section>
+		        
+		    <!----------------slide8-------------->
+		        <section class="swiper-slide swiper-slide8 swiper-slide-v" style="height: 100%; background: url(../Style/index-images/activity/s8-1.jpg); background-size: cover;">
+		        	<div style="margin-top: 70%; text-align: center; color: rgb(235,94,0); font-size: 18px; font-weight: bold;">
+		        		<p class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="1s" swiper-animate-delay="0s">2016，感谢您与团洋范走过</p>
+		        		<p style="margin-top: 5px;" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="2.5s" swiper-animate-delay="0s">2017，我们一起</p>
+		        		<p style="margin-top: 5px;" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="3s" swiper-animate-delay="0s">共赢未来</p>
+		        		<p><button onclick="location.href='{:U('Activity/review_2016')}'" style="width: 190px; height: 30px; color: white; font-size: 14px; background-color: rgb(232,104,32); border: none; border-radius: 16px; border-bottom: solid 2px rgb(255,241,0); margin-top:25px;" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="3.5s" swiper-animate-delay="0s">查看团洋范我的2016</button></p>
+		        		<p><button onclick="location.href='{:U('appdownload/index')}'" style="width: 190px; height: 30px; color: white; font-size: 14px; background-color: rgb(232,104,32); border: none; border-radius: 16px; border-bottom: solid 2px rgb(255,241,0); margin-top: 20px;" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="4s" swiper-animate-delay="0s">下载团洋范商城APP</button></p>
+		        		<p style="margin-top: 30px; color: white;" class="ani" swiper-animate-effect="slideInUp" swiper-animate-duration="5s" swiper-animate-delay="0s">end~</p>
+		        	</div>
+		        </section>
+		        
+	    	</div>
+	    	
+	    	<!-------------箭头-------------->
+			<div class="arrow-box" style="height: 100px; background-color: none;">
+	   			<img src="../Style/index-images/activity/up-a.png" id="array" style="width: 30px; height: 30px;"> 
+	   		</div>   
+	   		
+   			<!-------------分页-------------->
+  			<div class="swiper-pagination"></div>
+  			
+  			<!-------------音乐-------------->
+	   		<div class="music" style="width: 50px; height: 50px; z-index: 1000; position: fixed; right: 0px; top: 55px;">
+	       		<img src="../Style/index-images/activity/icon-muisc.png" class="open" num="1" style="width: 30px; height: 30px; margin-top: 10px; margin-left: 10px;"/>
+	        	<audio id="aud" src="../Style/music/Hit Tunes - Unconditionally (Originally Performed by Katy Perry) - Instrumental.mp3" loop="loop" autoplay></audio>
+	    	</div>
+	    	
+	    	<!----------------关闭------------->
+	    	<div style="width: 20px; height: 20px;position: fixed; left: 10px; top: 10px; z-index: 999;" onClick="window.history.back(-1);">
+	    		<img src="../Style/index-images/activity/h5-close.png" alt="关闭" class="am-img-responsive"/>
+	    	</div>
+	    	
+	    	<!----------------分享------------->
+	    	<div class="new-share" style="width: 20px; height: 20px;position: fixed; right: 10px; top: 10px; z-index: 999;">
+	    		<img src="../Style/index-images/activity/h5-chare.png" alt="关闭" class="am-img-responsive"/>
+	    	</div>
+	    	
+			<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+				<img src="../Style/images/guide.png" />
+			</div>
+		</div>
+		
+	<link rel="stylesheet" href="../Style/css/swiper.min.css">
+	<link rel="stylesheet" href="../Style/css/animate.min.css">
+	<link rel="stylesheet" href="../Style/css/style4.css">
+	<script src="../Style/js/swiper.min.js"></script>
+	<script src="../Style/js/swiper.animate.min.js"></script>
+	<script src="../Style/js/code.min.js"></script>
+	<!--控制音乐-->
+	<script>
+        $(function(){
+            $(".music").on("click",function(){
+                if($(".music img").attr("num")=="1"){
+                    $(".music img").addClass("open");
+                    $(".music img").attr("num",2);
+                   document.getElementById("aud").play();
+                }
+                else{
+                    $(".music img").removeClass("open");
+                    $(".music img").attr("num",1);
+                    document.getElementById("aud").pause();
+                }
+            });
+        });
+   	</script>
+   	<!--分享遮罩-->
+	<script type="text/javascript">
+		$(function(){
+			$(".new-share").on("click",function(){
+				$("#mcover").show();
+				return false;
+			});
+		});
+	</script>
+	<!--数据图形-->
+	<script src="http://img.hcharts.cn/highcharts/highcharts.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://img.hcharts.cn/highcharts/modules/exporting.js" type="text/javascript" charset="utf-8"></script>
+   	<script type="text/javascript">
+   		$(function () {
+		    $('#container').highcharts({
+		        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false
+		        },
+		        title: {
+		            text: ''
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'rgb(240,93,0)'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: 'itemcate',
+		            data: [
+		                {$cateInfo}
+		            ]
+		        }]
+		    });
+		});
+
+   	</script>
+	</body>
+
+</html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<include file="public:head" />
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 1001;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			
+			/*主体*/
+			#share{
+				position: relative; left: 0; top: 0; margin-top: 50px;
+			}
+			#share .fanpiao{
+				position: absolute; left: 12%; top: 75%; z-index: 1000; color: rgb(85,85,85); font-size: 15px;
+			}
+			#share .input{
+				width: 80%; height: 35px ; border-radius: 5px; position: absolute; left: 10%; top: 73%; z-index: 998; padding: 0px 35px 0px 150px; text-align: right; color: red; font-size: 20px;
+			}
+			#share .zhang{
+				position: absolute; left: 82%; top: 75%; z-index: 998; color: rgb(85,85,85); font-size: 15px;
+			}
+			#share .text-content{
+				width: 80%; height: 48px ; border-radius: 5px; position: absolute; left: 10%; top: 84%; z-index: 998; padding-left: 10px; padding-right: 10px;  color: rgb(85,85,85); font-size: 15px; border: none;
+			}
+			
+			#zongfanpiao{
+				margin-top: 5px; color: rgb(85,85,85); text-align: right; padding-right: 25px; font-size: 15px;
+			}
+			#zongfanpiao .all_count{
+				color: rgb(240,93,0); font-size: 17px;
+			}
+			/*按钮*/
+			#btn{
+				text-align: center; margin-top: 20px;
+			}
+			#freeze{
+				text-align: center; margin-top: 20px;
+			}
+			#btn input{
+				width: 89%; height: 35px; background-color: rgb(218,22,36); border: none; color: white; font-size: 17px; border-radius: 5px;
+			}
+			.freeze{
+				width: 89%; margin:0px auto;height: 35px;line-height:35px; border: none; color: white; font-size: 17px; border-radius: 5px;
+			}
+			/*说明提醒*/
+			#tips{
+				padding: 19px; margin-top: 20px;
+			}
+			#tips .title{
+				font-size: 13px; color: rgb(240,93,0);
+			}
+			#tips .content{
+				color: rgb(85,85,85);
+				font-size:13px;
+			}
+			/*验证消息弹出框*/
+			.showinfo {
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+			
+			/*红包个数*/
+			#share .geshu{
+				position: absolute; left: 12%; top: 63.9%; z-index: 1000; color: rgb(85,85,85); font-size: 15px;
+			}
+			#share .te-ge{
+				width: 80%; height: 35px ; border-radius: 5px; position: absolute; left: 10%; top: 62%; z-index: 998; padding: 0px 35px 0px 150px; text-align: right; color: red; font-size: 20px;
+			}
+			#share .ge{
+				position: absolute; left: 82%; top: 63.9%; z-index: 998; color: rgb(85,85,85); font-size: 15px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			分享范票
+		</div>
+		<form action="{:U('User/redbag_sharedo')}" method="post">
+		<div id="share" class="am-img-responsive"> 
+			<img src="../Style/index-images/fenxianghongbao3.png" alt="分享红包" class="am-img-responsive"/>
+			
+			<span class="geshu">红包个数</span>
+			<input class="te-ge" type="tel" name="bag_num" id="bag_num"/>
+			<span class="ge">个</span>
+			
+			<span class="fanpiao">单张范票&nbsp;<span class="pin" style="color: white; background-color: red; border-radius: 4px; padding: 0px 2px 0px 2px;">拼</span></span>
+			<input class="input" type="tel" name="points"/>
+			<span class="zhang">张</span>
+			<!--<input class="text-content" type="text" placeholder="真诚奉献，分享快乐信念"/>-->
+			<textarea class="text-content" placeholder="真诚奉献，分享快乐信念" name="message"></textarea>
+		</div>
+		<!--验证提示框-->
+		<div class="showinfo animated shake"></div>
+		
+		<!--总范票-->
+		<div id="zongfanpiao">
+			<p>总范票&nbsp;<span class="all_count">{$point_yuer}</span>&nbsp;张</p>
+		</div>
+		<!--按钮-->
+		<if condition="$uinfo.is_freeze eq 1">
+			<div id="freeze">
+				<div style="background:#666;" class="freeze" onclick="alert('您的账户存在风险行为，范票账户目前已被冻结，如有疑问请联系客服！')" />账户被冻结</div>
+			</div>
+		<else/>
+			<div id="btn">
+				<input type="submit" value="放进红包" />
+			</div>
+		</if>
+		</form>
+		<!--说明-->
+		<div id="tips">
+			<p class="title">提示：</p>
+			<p class="content">输入的范票数将存进“我的红包”，您可以将红包分享给您的朋友，操作成功后将从范票余额中被扣除。</p>
+		</div>
+		<!--验证js-->
+		<script type="text/javascript">
+			$(function(){
+				$("#btn input").on("click",function(){
+					var num = $(".input").val();          		  //获取文本框的值
+					var total = Number($(".all_count").text());   //获取总范票的值
+					var bag_num = $("#bag_num").val();
+					
+					if(bag_num==""){
+						var content = $(".showinfo").html('请填写红包个数');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					}
+					
+					if(num==""){
+						var content = $(".showinfo").html('请填写范票张数');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					}
+					
+					if(num<=0){
+						var content = $(".showinfo").html('范票数不能小于0');    
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false; 
+					}
+					if(bag_num<=0){
+						var content = $(".showinfo").html('红包个数不能小于0');    
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false; 
+					}
+					if(num>total){
+						var content = $(".showinfo").html('范票数大于总范票');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false; 
+					}
+					if(num>1000){
+						var content = $(".showinfo").html('范票张数不能超过1000张');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut(); 
+						return false;
+					}
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>
+

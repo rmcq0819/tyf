@@ -1,0 +1,124 @@
+<include file="public:header" />
+
+ <div class="content">
+<div class="cLineB">
+<div class="searchbar right">
+<form method="post" action="">
+
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+function setlatlng(longitude,latitude){
+	art.dialog.data('longitude', longitude);
+	art.dialog.data('latitude', latitude);
+	// 此时 iframeA.html 页面可以使用 art.dialog.data('test') 获取到数据，如：
+	// document.getElementById('aInput').value = art.dialog.data('test');
+	art.dialog.open('{:U('Map/setLatLng',array('token'=>$token,'id'=>$id))}',{lock:false,title:'设置经纬度',width:600,height:400,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+<if condition="($parentid neq  '0') and ($parentid neq '')"><a href="{:U('Product/cats',array('parentid'=>$parentCat['parentid']))}" class="btnGreen" style="margin-top:-27px">返回上</a></if>
+</form>
+</div>
+<div class="clr"></div>
+</div>
+
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="<if condition="$isBranch neq 1">current</if> tabli" id="tab0"><a href="{:U('Company/index')}">公司信息</a></li>
+<li class="<if condition="$isBranch eq 1">current</if> tabli" id="tab2"><a href="{:U('Company/branches')}">分支机构</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+ <form class="form" method="post" id="form" action="{:U('Company/branch_add_save')}"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{$set.id}" />
+</if>
+<input type="hidden" name="discount" id="discount" value="{$set.discount}" />
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+       <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <td><input type="text" id="name" name="name" value="{$set.name}" class="px require h23 w550" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>简称：</th> 
+        <td><input type="text" id="shortname" name="shortname" value="{$set.shortname}" class="px require h23 w550" /></td> 
+       </tr>
+       <tr> 
+        <th><span class="red">*</span>电话：</th> 
+        <td><input type="text" id="tel" name="tel" value="{$set.tel}" class="px require h23 w550" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>手机：</th> 
+        <td><input type="text" id="mp" name="mp" value="{$set.mp}" class="px require h23 w550" /></td> 
+       </tr> 
+       <tr> 
+        <th><span class="red">*</span>地址：</th> 
+        <td><input type="text" id="address" name="address" value="{$set.address}" class="px require h23 w550" /></td> 
+       </tr> 
+       <tr> 
+        <th>Logo地址：</th> 
+        <td><p style="float:left;">{$set.logourl}</p>
+		<input type="file" id="pic" name="logourl" class="px require h23 w550 fl" readonly="readonly" /></td> 
+       </tr>
+        <tr> 
+        <th><span class="red">*</span>经纬度：</th> 
+        <td>经度 <input type="text" id="longitude"  name="longitude" size="14" class="px" value="{$set.longitude}" /> 
+		纬度 <input type="text"  name="latitude" size="14" id="latitude" class="px" value="{$set.latitude}" /> 
+		</td> 
+       </tr>
+       <tr> 
+        <th><span class="red"></span>顺序：</th> 
+        <td><input type="text" id="taxis" name="taxis" value="{$set.taxis}" class="px require" style="width:100px;" /></td> 
+       </tr>
+		<tr>
+			<th>详细内容 :</th>
+			<td><textarea name="intro" id="intro" style="width:68%;height:400px;visibility:hidden;resize:none;">{$set.intro}</textarea></td>
+		</tr>
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <if condition="$isBranch eq 1">
+      <input type="hidden" name="isbranch" value="1" />
+      </if>
+      <input type="hidden" name="token" value="{$token}" />
+       <button type="submit" name="button" class="btnGreen">保存</button></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+    
+   </form> 
+
+
+</div>
+<div class="cLine">
+
+<div class="clr"></div>
+</div>
+</div>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+<script language="javascript">
+$(function() {
+	KindEditor.create('#intro', {
+		uploadJson : '{:U("attachment/editer_upload")}',
+		fileManagerJson : '{:U("attachment/editer_manager")}',
+		allowFileManager : true
+	});
+});
+</script>

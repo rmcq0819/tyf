@@ -1,0 +1,32 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>{$info.title}</title>
+<link href="../Style/css/amazeui.css" rel="stylesheet" type="text/css" />
+<link href="../Style/css/css.css" rel="stylesheet" type="text/css" />
+<link href="../Style/css/jquery.spinner.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Style/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../Style/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="../Style/js/amazeui.min.js"></script>
+<script type="text/javascript" src="../Style/js/jquery.spinner.js"></script>
+<script type="text/javascript" src="../Style/js/scrollTop.js"></script>
+<script type="text/javascript" src="../Style/js/indexshop.js"></script>
+<script type="text/javascript" src="../Style/js/jquery.fly.min.js"></script> 
+<style type="text/css">
+#rtt {width:30px; height:30px; background:url(../Style/images/rrt.png); background-size:cover; position:fixed; right:8px; bottom:70px; border-radius: 5px; z-index:999; display:none;}
+.info{width:100%;height:50px;padding:5px;font-size:14px;}
+.info img{width:100%;}
+</style>
+</head>
+<body>
+<div id="rtt"></div>
+<div class="info">
+<if condition="$info.info neq ''">{$info.info}<else /><p style="text-align:center;margin-top:50px;">暂无更新信息</p></if>
+</div>
+</body>
+</html>

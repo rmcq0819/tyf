@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>会员中心 - 订单详情</title>
+		<link href="../Style/shop.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="../Style/js/jquery.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../Style/js/ecmall.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../Style/js/touchslider.dev.js" charset="utf-8"></script>
+		<!--引入layer-->
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+		<!--查看物流样式调用-->
+		<link rel="stylesheet" href="../Style/css/wuliu_style.css" />
+		<script type="text/javascript">
+			//<!CDATA[
+			var SITE_URL = "__ROOT__";
+			var PRICE_FORMAT = '¥%s';
+
+			$(function() {
+				var span = $("#child_nav");
+				span.hover(function() {
+					$("#float_layer:not(:animated)").show();
+				}, function() {
+					$("#float_layer").hide();
+				});
+			});
+
+			function do_urgent(orderId){
+				   $.get('{:U('Order/do_urgent')}',{'orderId':orderId},function(data){
+				   if(data=='成功'){ 
+					  layer.open({
+							title: '提醒发货',
+							content: '您已经成功提醒发货，感谢您对团洋范的支持',
+							btn: ['我知道了'],
+							yes: function(index){
+								//location.reload();
+								layer.close(index);
+							}
+						});              
+					}else if(data=="yes成功"){
+						layer.open({content: '您已经提醒过了哦，我们会尽快发货呢', time: 2});
+					}           
+				 });
+			} 
+		</script>
+		<style>
+			*{
+				font-family: "微软雅黑";
+			}
+			#time{
+				width: 100%; background-color: white; color: rgb(180,180,180); margin-top: 5px;padding-left: 10px;
+			}
+			
+			#ask{
+				height: 30px;background-color: white; margin-top: 5px; line-height: 30px;
+			}
+			#ask button{
+				width: 78px;height: 20px; float: right ; margin-right: 20px; margin-top: 5px;background-color: rgb(240,93,0); color: white; border: none; border-radius:3px ;
+			}
+			
+			/****物流状态S****/	
+			.demo{width:100%; margin: 0 auto; margin-top: 20px; }
+			.history{background:url(../Style/index-images/line042.gif) repeat-y 107px 0;overflow:hidden;position:relative;}
+			.history-date{overflow:hidden;position:relative;}
+			.history-date ul li{background:url(../Style/index-images/icon082.png) no-repeat 100px 0;padding-bottom:24px;zoom:1;}
+			.history-date ul li:last-child{background:url(../Style/index-images/icon082.png) no-repeat 100px 0;padding-bottom:5px;zoom:1;}
+			.history-date ul li:first-child{background:url(../Style/index-images/icon071.png) no-repeat 100px 0;}
+			.history-date ul li.last{padding-bottom:0;}
+			.history-date ul li:after{content:" ";display:block;height:0;clear:both;visibility:hidden;}
+			.history-date ul li h3{float:left;width:110px;text-align:right;padding-right:19px;color:rgb(130,130,130);font:normal 13px/16px Arial;}
+			.history-date ul li h3 span{display:block;color:rgb(130,130,130);font-size:12px; text-align: center;}
+			.history-date ul li dl{float:left;padding-left:30px;margin-top:-5px;font-family:微软雅黑; padding-left:20px ; width: 210px; margin-top: 0px;}
+			.history-date ul li dl dt{font:16px/16px 微软雅黑;color:#737373;}
+			.history-date ul li dl dt span{display:block;color:rgb(130,130,130);font-size:13px;}
+			.history-date ul li:first-child dl dt span{display:block;color:rgb(240,93,0);font-size:13px;}
+			.history-date ul li:first-child h3{color:rgb(240,93,0);}      /*改变第一个时间颜色*/
+			.history-date ul li:first-child h3 span{color:#1db702; text-align: center;}    /*改变第一个时间颜色*/
+			.history-date ul li.green dl{margin-top:-2px;}
+			.history-date ul li.green dl dt{font-size:16px;}
+			/***物流状态E****/	
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+</head>
+<body>
+<include file="public:head" />
+<include file="public:headuser" />
+
+	<!-- 头部 -->
+	<header data-am-widget="header" class="am-header am-header-default">
+		<div class="am-header-left am-header-nav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+					<img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;" alt=""/>
+			</a>
+		</div>
+		<h1 class="am-header-title">订单详情</h1>
+	</header>
+	
+	<div class="carfukuan" style="color:#e15f11;font-size: 16px;margin-right: 2%;background:none;height:65px; line-height: 65px; padding: 0px;">
+		<div style="float: left;">
+			<!-- <span style="color:#e15f11;">已完成</span> -->
+			<p style="padding-left: 10px;">状态:&nbsp;&nbsp;
+				<switch name="order.status" >
+				 <case value="1"><span style="color:#e15f11;">待付款</span></case>
+				 <case value="2"><span style="color:#e15f11;">正在出库</span></case>
+				 <case value="3"><span style="color:#e15f11;">待收货</span></case>
+				 <case value="4"><eq name="order.c_status" value="0"><span style="color:#e15f11;">待评论</span><else /><span style="color:#e15f11;">已完成</span></eq></case>
+				 <case value="6"><span style="color:#e15f11;">申请退款中</span></case>
+				 <case value="7"><span style="color:#e15f11;">申请退款失败</span></case>
+				 <case value="8"><span style="color:#e15f11;">退款成功</span></case>
+				 <case value="9"><span style="color:#e15f11;">待收货&nbsp;(清关中)</span></case>
+				 <case value="10"><span style="color:#e15f11;">异常订单</span></case>
+				<default /><span style="color:#e15f11;">完成</span>
+		 		</switch>	
+			</p>
+		</div>
+		
+		<if condition="$order.status neq 1">
+				<div>
+					<img src="../Style/index-images/chuku.gif" alt="出库" class="am-img-responsive" style="width: 125px;height: 65px;float: right;" />
+				</div>
+		</if>
+		<div style="clear: both;"></div>
+	</div>
+	
+	<!-- 订单号 -->
+	<div style="width: 100%;height: 34px;background-color: #fff;line-height: 34px;padding-left: 3%;">
+		<b>订单号：{$order.orderId}</b>
+		<!--<p style="float:right;color:#898989;margin-right: 10px;"><if condition="$order.fahuo_time neq ''">{$order.fahuo_time|date='Y-m-d',###}</if></p>-->
+	</div>
+	
+	<!--预计到货时间-->
+	<div id="time">
+		<p style="line-height:25px;font-size:13px;padding:5px;">
+			<b >亲爱的范团：</b><br/>小范建议您：在您迫不及待签收货物时，可以和配送员当面对照发货单，核对商品是否与您购买的一致，如在检查的过程中发现问题，请您不要签收商品，并及时联系团洋范客服中心，我们会第一时间进行处理。
+		</p>
+	</div>
+	
+	<!--详情咨询-->
+	<div id="ask">
+		<p style="padding-left: 10px;">如有疑问，您可以咨询在线客服 <a href='https://static.meiqia.com/dist/standalone.html?eid=23554&clientid={$server_u.id}&metadata={"name":"<?php echo $server_u['username']; ?>","tel":"<?php echo $server_u['phone_mob']; ?>","email":"<?php echo $server_u['email']; ?>"}'><button><i class="am-icon-github"></i>&nbsp;在线咨询</button></a></p>
+	</div>
+	
+	<!--物流状态-->
+	<div id="logistics">
+		<div class="demo">
+			<div class="history">
+				<div class="history-date">
+					<ul>
+						<if condition="$order.tuihuo_time neq ''">
+							<li>
+								<h3></span>{$order.tuihuo_time|date='Y-n-j H:i:s',###}</span></h3>
+								<dl>
+									<dt><span>您提交了退款申请，请等待系统确认</span></dt>
+								</dl>
+							</li>
+						</if>
+						
+						<if condition="$act_time gt $dist_time And $order.status eq 2">
+							<li>
+								<h3></span>{$dist_time|date='Y-n-j H:i:s',###}</span></h3>
+									<dl>
+										<dt><span>您的订单待配货</span></dt>
+									</dl>
+							</li>
+						</if>
+						
+						<if condition="$act_time gt $start_time And $order.status eq 2">
+							<li>
+								<h3></span>{$start_time|date='Y-n-j H:i:s',###}</span></h3>
+									<dl>
+										<dt><span>您的订单开始处理</span></dt>
+									</dl>
+							</li>
+						</if>
+						
+						<li>
+							<h3></span>{$order.add_time|date='Y-n-j H:i:s',###}</span></h3>
+							<dl>
+								<dt><span>
+								<if condition="$order.status eq 1">
+									您提交了订单，但并未付款
+									<else/>
+									您提交了订单，请等待系统确认
+								</if>
+								</span></dt>
+							</dl>
+						</li>
+					</ul>
+				</div>		
+			</div>
+		</div>	
+	</div>
+
+	<form method="POST"  action="{:U('Order/pay')}&spr=<?php echo $_GET['spr']; ?>" id="order_form" name="order_form" enctype="multipart/form-data" style="padding:0;">
+	<!-- 订单页面产品列表 -->
+	<div class="dingdangdian" style="margin-top:0;">
+		<ul>
+		<volist name='item_detail' id='item' >	
+			<li>
+				<div class="am-g am-g-fixed">
+					<div class="am-u-sm-12">
+						<div class="am-list-news-bd">
+							<ul class="am-list" style="margin-bottom:0;">
+					
+								<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
+									<a href="javascript:;">
+										<div class="am-u-sm-3 am-list-thumb dianproimg" style="margin-bottom:16px;">
+											<img src="{:attach(get_thumb($item['img'], '_b'), 'item')}"/>
+										</div>
+	
+										<div class=" am-u-sm-7 am-list-main" style="float:left;margin-left:7%;">
+											<table class="am-table am-table-bordered am-table-striped am-table-compact dianprotablezi">
+											  <tbody>
+												<tr>
+													<td style="font-size: 14px;">{$item.title}<!-- {$vo2.name} --></td>
+													<!-- <td><span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$vo2.price}</span></td> -->
+												</tr>
+												<tr>
+													<td colspan="2" style="color:#ababab;">
+													优品价：<span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$item.price}<span style="color:#ababab;margin-left:10%;">x{$item.quantity} </span>
+													<!-- {$vo2.num} --><!-- {$vo2.price} --></span>
+													<!-- <if condition="$vo2.itemtype eq 1">完税商品<else />保税商品</if> --><br/>
+													<!-- <if condition="$vo2.size neq ''">
+													商品规格：<span style="color:#e26000; font-family:'微软雅黑'; font-size:12px;">{$vo2.size}</span><br/>
+													</if>   -->
+													</td>
+												</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="am-u-sm-2 dingdandizhiright" style="width:10%; float:left;line-height: 72px;">
+											<a href="{:U('Item/index',array('id'=>$item['itemId'],'shares'=>$info['id']))}">
+												<img src="../Style/index-images/jt03.png">
+											</a>
+										</div>
+									</a>
+								</li>
+								
+							</ul>			
+						</div>			
+					 
+					</div>
+				</div>
+			</li>
+			</volist> 
+		
+		
+			
+		</ul>
+		
+	</div>
+
+
+	<div class="dingdanghongzi" style="display:none;">跨境专区订单付款不能取消，上传的身份证请务必与收货人姓名保持一致，且不能无理由退换货！</div>
+
+
+	<!--<div class="am-g am-g-fixed dingdanjiashu"  style="margin-top:2px;">
+		<div class="am-u-sm-12 dingdanjiashu1" style="text-align:right;">合计:<span>￥{$totalprice}</span></div>
+	</div>-->
+	
+	<!-- 收件人信息--订单详情页 -->
+	<div class="dingdangbj" style="width:100%;margin: 2px 0 2px 0;padding:0;">
+		<div class="am-g am-g dingdang" style="padding: 10px 0 20px 3%;">
+			<div class="am-u-sm-1">
+				<img src="../Style/index-images/adds.jpg" alt="地址" style="width: 20px; height: 25px; margin-top: 25px;" />
+			</div>
+			<div class="am-u-sm-11 dingdandizhimiddle">
+				<dl>
+					<dd style="padding-left: 8px;">
+						<h5>{$order.address_name}&nbsp;&nbsp;&nbsp;<php>echo substr_replace($order['mobile'],'****',3,4);</php></h5>
+						<p style="color:#ababab;font-size:14px;">{$order.address}</p>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	</form>
+	
+	<div class="am-g am-g-fixed dingdanjiashu">
+		<div class="am-u-sm-12 dingdangyinfukuanon">
+	
+	
+		<switch name="order.status" >
+				 <case value="1">
+				 <a onclick="topay('{$order.orderId}',{$order.userId});" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">去支付</a>
+				</case>
+				 <case value="2"> <a onclick="do_urgent('{$order.orderId}');" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">提醒发货</a></case>
+				 <case value="3"></case>
+				 <case value="4">
+				 <eq name="order.c_status" value="0">
+				 	<a href="index.php?m=User&a=comment&orderId={$order.orderId}&status={$order.status}&comment=1" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">去评论</a>
+			 		<else />
+			 		<a onclick="delorder('{$order.id}')" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">删除订单
+			 		</a>
+				 </eq></case>
+				 <case value="6"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+				 <case value="7"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+				 <case value="8"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+				 <case value="9"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+				 <case value="10"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" href='https://static.meiqia.com/dist/standalone.html?eid=23554&clientid={$server_u.id}&metadata={"name":"<?php echo $server_u['username']; ?>","tel":"<?php echo $server_u['phone_mob']; ?>","email":"<?php echo $server_u['email']; ?>"}'>联系客服</a></case>
+				<default />
+		 </switch>
+		</div>
+	</div>
+	<script>
+		//删除订单
+		function del(id){
+			layer.open({
+					title: '提示',
+					content: '您确定要删除该订单吗？相关的保税或完税订单都会被删除哦！',
+					btn: ['确认', '取消'],
+					yes: function(index){
+						window.location.href= "{:U('Order/delOrder')}&orderId="+id;
+						layer.open({content: '订单删除成功', time: 1});
+						layer.close(index);
+					}
+			});
+			
+		}
+	//支付订单
+	function topay(id,sharesid){
+		layer.open({
+				title: '提示',
+				content: '与该订单相关的保税或完税订单需要一起支付哦！',
+				btn: ['确认', '取消'],
+				yes: function(index){
+					window.location.href="{:U('Order/pay')}&orderId="+id+"&sharesid="+sharesid+"";
+					//layer.open({content: '提交支付成功', time: 1});
+					//layer.close(index);
+				}
+		});
+	}
+	</script>
+	<!--快递时间轴的动画-->
+		<script type="text/javascript">
+		$(function(){
+			systole();
+		});
+		function systole(){
+			if(!$(".history").length){
+				return;
+			}
+			var $warpEle = $(".history-date"),
+				$targetA = $warpEle.find("h2 a,ul li dl dt a"),
+				parentH,
+				eleTop = [];
+			
+			parentH = $warpEle.parent().height();
+			$warpEle.parent().css({"height":59});
+			
+			setTimeout(function(){
+				
+				$warpEle.find("ul").children(":not('h2:first')").each(function(idx){
+					eleTop.push($(this).position().top);
+					$(this).css({"margin-top":-eleTop[idx]}).children().hide();
+				}).animate({"margin-top":0}, 1600).children().fadeIn();
+		
+				$warpEle.parent().animate({"height":parentH}, 1500);
+		
+				$warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
+				
+			}, 600);
+		
+			$targetA.click(function(){
+				$(this).parent().css({"position":"relative"});
+				$(this).parent().siblings().slideToggle();
+				$warpEle.parent().removeAttr("style");
+				return false;
+			});
+		};
+		</script>
+	<include file="public:footer" />
+</body>
+</html>

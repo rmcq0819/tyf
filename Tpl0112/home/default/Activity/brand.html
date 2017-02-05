@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<include file="public:head"/>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "活动期间最高满500减200 - 团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/s-header.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "活动期间最高满500减200 - 团洋范", // 分享标题
+				desc: "大牌齐祝贺，团洋范1周年", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/s-header.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			*{
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav{
+				width: 100%;height: 49px;line-height: 49px;color: white;font-size: 18px;text-align: center;background-color: rgb(240,93,0);
+			}
+			/*头部E*/
+			#main{
+				background-color: rgb(1,74,143); padding: 6px 6px 6px 6px;
+			}
+			#main ul li{
+				position: relative; left: 0px;
+			}
+			#main .fir .cap{
+				width: 20px; height: 28px;position: absolute;left: -5px; top: -11px;
+			}
+			#main .sec .cap{
+				width: 25px; height: 33px;position: absolute;left: -5px; top: -11px;
+			}
+			#main .thi .cap{
+				width: 20px; height: 28px;position: absolute;left: -5px; top: -11px;
+			}
+			
+			#footer{
+				margin-top: 10px; margin-bottom: -5px;
+			}
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+
+	<body style="background-color: rgb(1,74,143);">
+		
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" style="position: absolute; top: 12px; left: 5px;"/>
+			</a>
+			团洋范一周年庆典
+		</div>
+		
+		<div id="header">
+			<img src="../Style/index-images/activity/s-header.png" alt="头部" class="am-img-responsive"/>
+			<img src="../Style/index-images/activity/sjie.png" alt="结" class="am-img-responsive" style="margin-top: -3px;"/>
+		</div>
+		
+		<div id="main">
+			<ul class="am-avg-sm-3 am-thumbnails fir">
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>1))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-1.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>10))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-2.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>2))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-3.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			</ul>
+			
+			
+			
+			<ul class="am-avg-sm-2 am-thumbnails sec" style="margin-top: 15px;">
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>9))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-4.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>8))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-5.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>7))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-6.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>4))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-7.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			</ul>
+			
+			
+			<ul class="am-avg-sm-3 am-thumbnails thi" style="margin-top: 15px;">
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>5))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-8.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>3))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-9.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			  <li onclick="location.href='{:U('Activity/brand_list',array('brandId'=>6))}'">
+			  	<img class="am-thumbnail" src="../Style/index-images/activity/yi-10.png" />
+			  	<img src="../Style/index-images/activity/s-cap.png" alt="帽子" class="am-img-responsive cap"/>
+			  </li>
+			</ul>
+		</div>
+		
+		<div id="footer">
+			<img src="../Style/index-images/activity/s-footer.png" alt="尾部" class="am-img-responsive"/>
+		</div>
+		<include file="public:footer"/>
+		<!--雪花-->
+		<script src="../Style/js/snowfall.jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(document).snowfall({
+					round : true, 
+					flakeCount : 50,
+					flakeColor : 'white',
+					minSize: 3, 
+					maxSize:6,
+					collection:false,
+					intTime:60,
+				}); 
+			});
+		</script>
+	</body>
+
+</html>

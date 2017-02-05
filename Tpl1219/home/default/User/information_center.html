@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<!-- 格式化价格JS，改变数量更新价格JS -->
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			#content p {
+				text-align: center;
+				font-size: 15px;
+				color: #555;
+			}
+			/*信息中心*/
+			#info{
+				margin-top: 55px;
+			}
+			#info li{
+				padding: 5px;
+				border:0px;
+				margin-top:10px;
+			}
+			#info img{
+				width: 50px;
+				height: 50px;
+			}
+			#info p:first-child{
+				margin-top: 5px; 
+				color: #555; 
+				margin-left: 5px;
+			}
+			#info p:last-child{
+				color: rgb(150,150,150); margin-left: 5px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		
+		<div class="topnav">
+			<a href="{:U('User/address')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			消息中心
+		</div>
+
+		<!-- 有通知消息的页面 -->
+		
+		<div id="info" data-am-widget="list_news" class="am-list-news am-list-news-default">
+			<div class="am-list-news-bd">
+			  	<ul class="am-list">
+				
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_class',array('id'=>1))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<img src="../Style/index-images/fahuo_yes.png" alt="团洋范" />
+								</div>
+								<div class="am-u-sm-9" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">发货通知 <span style="float:right;font-weight:normal;color:#aaabab;"></span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">共有{$list1}条消息</p>
+								</div>
+								
+								<div class="am-u-sm-1">
+									<i class="am-icon-chevron-right" style="line-height: 62px;" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'"></i>
+								</div>
+								
+							</div>		
+						</li>
+						
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_class',array('id'=>2))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<img src="../Style/index-images/xinjin_yes.png" alt="团洋范" />
+								</div>
+								<div class="am-u-sm-9" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">新进代理 <span style="float:right;font-weight:normal;color:#aaabab;"></span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">共有{$list2}条消息</p>
+								</div>
+								
+								<div class="am-u-sm-1">
+									<i class="am-icon-chevron-right" style="line-height: 62px;" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'"></i>
+								</div>
+								
+							</div>		
+						</li>
+						
+						<!--
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_class',array('id'=>3))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<img src="../Style/index-images/jiesuan_yes.png" alt="团洋范" />
+								</div>
+								<div class="am-u-sm-9" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">待结算 <span style="float:right;font-weight:normal;color:#aaabab;"></span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">共有{$list3}条消息</p>
+								</div>
+								
+								<div class="am-u-sm-1">
+									<i class="am-icon-chevron-right" style="line-height: 62px;" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'"></i>
+								</div>
+								
+							</div>		
+						</li>
+						
+						<li class="am-g am-list-item-dated" onclick="window.location.href='{:U('User/information_class',array('id'=>4))}'">		
+							<div class="am-g">
+								<div class="am-u-sm-2">
+									<img src="../Style/index-images/shouhuo_yes.png" alt="团洋范" />
+								</div>
+								<div class="am-u-sm-9" style="padding-left: 2%;font-size:13px;">
+									<div style="color:#333;margin-top:2px;">确认收货 <span style="float:right;font-weight:normal;color:#aaabab;"></span></div>
+									<p style="margin-left:0;color:#aaabab;height:25px;overflow:hidden;">共有{$list4}条消息</p>
+								</div>
+								
+								<div class="am-u-sm-1">
+									<i class="am-icon-chevron-right" style="line-height: 62px;" onclick="window.location.href='{:U('User/information_content',array('id'=>$vo['id']))}'"></i>
+								</div>
+								
+							</div>		
+						</li>
+						-->
+			  	</ul>
+			</div>
+		
+		</div>
+		
+		
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script>
+	function edit(id) {
+		window.location.href = "{:U('User/edit_message')}&id=" + id;
+	}
+
+	function del(id) {
+		if(confirm("确认删除吗?")) {
+			window.location.href = "{:U('User/del_message')}&id=" + id;
+		}
+	}
+</script>

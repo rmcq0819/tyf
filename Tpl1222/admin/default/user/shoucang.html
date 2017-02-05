@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 我的收藏</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+</head>
+<body>
+<div id="content">
+  <div class="about_me" style="width: 94%;float: left;">
+  				<script>
+				function shoucangFndel(t) {
+					//商品的id号
+					var shoucangFndel_item_div = $(t).parent(".shoucangFndel_item_div");
+					var id = shoucangFndel_item_div.find(".shoucang_item_id").text();
+					//发出请求
+					$.getJSON("./index.php",{m:"User",a:"shoucangFndel",id:id},function(data){
+						//请求完毕后返回的数据
+						if(data.error){
+							alert(data.error);
+							if(data.error === "请先登录后删除收藏!") {
+								location.href = "./index.php?m=User&a=login";
+							}
+							return;
+						}
+						if(data.success) {
+							alert(data.success);
+							shoucangFndel_item_div.remove();
+						}
+					});
+				}
+				</script>
+        	 <notempty name="itemArr">
+             <volist name='itemArr' id='item' >
+			 <li class="shoucangFndel_item_div" style="min-height: 100px;float: left;width: 280px;margin-right: 10px;border: 1px solid #dce2d7;margin-bottom: 20px;padding-bottom: 10px;">
+				<p style="width: 80px;float: left;padding-right: 10px;"><img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" style="width:100px;height:100px;"></p>
+				<p style="font-size: 14px;height: 30px;color:#495143;">{$item.title}<br><span class="attr"></span></p>
+				<p style="color:4c5a42;font-size: 20px;">
+				<span>
+				<if condition="$_SESSION['user_info']['uid'] eq 0">
+				¥{$item.price}
+				<else />
+				<?php
+				$price =$item['price'];  
+				$discount = $user_category['discount'];
+				$price = $price*($discount/100);
+				?>
+				¥<?php echo $price;?>
+				</if>
+				</span>
+				<span style="font-size: 14px;color: #a9aead;text-decoration: line-through;font-family:微软雅黑;vertical-align: middle;">
+				<if condition="$_SESSION['user_info']['uid'] eq 0">
+					<else />
+					¥{$item.price}
+					</if>
+				</span>
+				<span style="font-size: 14px;color: #a9aead;">
+				<if condition="$_SESSION['user_info']['uid'] eq 0">
+				<else />
+				<?php
+					$discount = $user_category['discount'];
+					$discount = $discount/10;
+					echo $discount;
+					?>折
+					</if>
+					</span>
+				</p>
+				<p style="font-size: 14px;color: #a9aead;"><span>{$item.buy_num}</span>人已经购买</p>
+				</li>
+			 </volist>
+            <else/>
+           <div class="order_form member_no_records" style="text-align:center;">
+                <span>此用户还没有收藏过商品!</span>
+            </div>
+			 </notempty>
+    </div>  
+</div>
+<div class="clear" style="height:33px;"></div>
+</body>
+</html>

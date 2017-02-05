@@ -1,0 +1,46 @@
+
+<include file="public:header" />
+<div class="subnav">
+    <h1 class="title_2 line_x">提成规则</h1>
+</div>
+
+<div class="pad_lr_10">
+<form id="info_form" action="{:U('Tixian/index')}" method="post">
+	<table width="100%" class="table_form">
+        <tr>
+            <td>
+				是否开启提现功能 :
+                <label class="mr10"><input type="radio" class="J_change_status" <eq name="tx['tx_set']" value="0"> checked="checked" </eq> value="0" name="tx[set]">开启</label>
+                <label><input type="radio" class="J_change_status" <eq name="tx['tx_set']" value="1"> checked="checked" </eq> value="1" name="tx[set]">关闭</label>
+				
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<span style="margin-top:5px;">输入提现金额限制:&nbsp;
+				<input class="input-text" type="text" value="{$tx['tx_money']}" size="8" name="tx[money]">元
+			</td>
+		</tr>
+		<tr>	
+			<td>
+        		<span style="margin-top:5px;">请输入自动结算天数:&nbsp;
+				<input class="input-text" type="text" value="{$tx['tx_djq']}" size="8" name="tx[djq]">天
+               	</span>
+        	</td>
+        </tr>
+        <tr>
+        	<td>
+        	<input type="submit" class="btn btn_submit" value="确认"/></span>
+        	</td>
+        </tr> 
+	</table>
+
+</form>
+
+</div>
+
+
+<include file="public:footer" />
+
+</body>
+</html>

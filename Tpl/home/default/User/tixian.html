@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<include file="public:headuser" />
+<style>
+.topnav{ position:fixed;width:100%;height:49px;z-index:9999; background:#C54056; text-align:center; color:#fff; font-size:16px; line-height:49px; top:0;}
+.topnav .back{ position:absolute; left:8px;top:6px;}
+</style>
+<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+<body>
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 提现
+</div>
+<div class="tixianbj" style="margin-top:52px;">
+<a href="{:U('User/bank')}">
+<div class="tixian">
+<dl>
+	<empty name="bank">
+		 <span style="margin-left:35%;font-size:16px;line-height:35px" >添加银行卡信息</span>
+	<else />	
+		<dt><p></p><p><img src="{:attach($bank['img'], 'bank')}" /></p><span style="margin-left:10px;">{$bank.bank}</span><br />
+		<span style="margin-left:10px;color:#999;">卡号尾数:{$userstixian.zhanghao|substr='-4,4'}</span></dt>
+		<dd><a><img src="../Style/images/left.png" width="16" height="30" /></a></dd>
+		<div class="clear"></div>
+	</empty>
+</dl>
+</div>
+</a>
+<div class="tixianqian">
+<dl>
+<dt>提现金额：<input name="fencheng" id="fencheng" onafterpaste="this.value=this.value.replace(/\D/g,'')" onKeyUp="this.value=this.value.replace(/\D/g,'')"  placeholder="请输入提现金额" type="text" value="" /></dt>
+<dd></dd>
+</dl>
+</div>
+<div class="kazizushi">*可提现金额:<span style="color:#ff5400;">{$keti}</span>元</div>
+<div class="kazizushi" style="color:#222;font-size:13px;"><b>提示：</b>提现前请先确认您的银行卡/支付宝/财付通/账号中的姓名，与团洋范平台中填写真实姓名是否保持一致。
+如不一致，您可以点击此页面上方的银行Logo进入修改页面进行修改操作。
+</div>
+<div class="kazizushi" style="color:#222;"><b>请保证以上信息都填写正确，否则可能会导致财务打款失败。</b> </div>
+<div class="kazizushion">
+<div class="kazizushion1"><a href="javascript:;" id="shenqing" style="color:#FFFFFF;display:block">确认提现</a></div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var shenqing = $("#shenqing");
+		shenqing.click(function(){
+			if ($("#fencheng").val()=='') {
+				layer.open({
+							title: '提示',
+							content: '申请金额不能为空',
+							btn: ['我知道了'],
+							yes: function(index){
+								//location.reload();
+								layer.close(index);
+							}
+						});
+				return false;
+			};
+			var bank='{$bank}';
+			if (bank=='') {
+				layer.open({
+					title: '提示',
+					content: '请添加银行卡信息',
+					btn: ['我知道了'],
+					yes: function(index){
+						//location.reload();
+						layer.close(index);
+					}
+				});
+				return false;
+			};
+			
+			layer.open({
+			title: '提示',
+			content: '请确认您的银行卡卡号或支付平台中真实姓名填写正确',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				var data0 = {
+				"fencheng": $("#fencheng").val()
+				,"zhanghao": '{$userstixian.zhanghao}'
+				,"huming": '{$userstixian.huming}'
+				,"kaihuhang": '{$bank.id}'
+				};
+				$.post("./index.php?m=User&a=tixian",data0,function(data){
+					data = eval("("+data+")");
+					if(data.success) {
+						alert(data.success);
+						window.location.href = "./index.php?m=User&a=fenchenglist&time=one";
+					} else {
+						alert(data.error);
+						if(data.status == 0){
+							window.location.href = "./index.php?m=User&a=username";
+						}else{
+							window.location.href = "./index.php?m=User&a=fenchenglist&time=one";
+						}
+						
+					}
+				});
+				layer.close(index);
+			}
+	});
+			
+			
+			
+		});
+	});
+</script>

@@ -1,0 +1,90 @@
+<include file="public:header" />
+<!--会员仓库信息列表-->
+<div class="pad_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="User_lvup" />
+                    <input type="hidden" name="a" value="down" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('user_category/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
+                <th width="50" align="center"><span data-tdtype="order_by" data-field="username">会员名</span></th>
+                <th width="80" align="center"><span data-tdtype="order_by" data-field="phone">手机号码</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="up_time">维持条件(新增总数)</span></th> 
+                <th width="150"><span data-tdtype="order_by" data-field="up_status">代理新增总数</span></th>
+				<th width="150" align="center"><span data-tdtype="order_by" data-field="up_time">维持条件(直推新增数)</span></th> 
+                <th width="150"><span data-tdtype="order_by" data-field="up_status">代理直推新增数</span></th>
+                <th width="80"align="center"><span data-tdtype="order_by" data-field="add_time">生成时间</span></th>
+				<th width="80"align="center"><span data-tdtype="order_by" data-field="do_time">处理时间</span></th>
+<!--     		<th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th> 
+				<th width="30"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th> -->
+                <th width="120">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center"><span >{$val.username}</span></td>
+                <td align="center"><span >{$val.phone_mob}</span></td>
+				<td align="center"><span >{$val.keep}</span></td>
+				<td align="center"><span >{$val.num}</span></td>
+				<td align="center"><span >{$val.keep1}</span></td>
+				<td align="center"><span >{$val.num1}</span></td>
+                <td align="center"><span data-field="add_time" data-id="{$val.id}" >{$val.add_time|date="Y-m-d",###}</span></td>
+				<td align="center"><span data-field="do_time" data-id="{$val.id}" ><notempty name ="val.do_time">{$val.do_time|date="Y-m-d",###}<else />暂未处理</notempty></span></td>
+                <td align="center">
+				<switch name="val.status">
+					<case value="1">已降级</case>
+					<case value="2">不降级</case>
+					<default /><a href="javascript:void(0);" style="color:red;" onclick="lvup({$val.id},1)">【降级】</a>|<a href="javascript:void(0);" style="color:red;" onclick="lvup({$val.id},2)">【不降级】</a>
+				</switch> 
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <!-- <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('user_category/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" /> -->
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+function lvup(id,act){
+	if(confirm('你确定要降级此代理吗？')){
+		$.post("{:U('User_lvup/lvdown_do')}",{id:id,act:act},function(data){
+			alert(data.msg);
+			window.location.reload();
+		},'json');
+	}else{
+		return false;
+	}
+}
+</script>

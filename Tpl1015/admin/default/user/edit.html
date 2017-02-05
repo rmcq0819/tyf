@@ -1,0 +1,291 @@
+<!--编辑会员-->
+
+<div class="dialog_content">
+	<form id="info_form" action="{:u('user/edit')}" method="post">
+	<table width="100%" class="table_form">
+		
+		<tr>
+			<th width="100">会员昵称 :</th>
+			<td>{$info.username}</td>
+		</tr>
+		
+		<tr>
+			<th width="100">店铺名称 :</th>
+			<td>
+				<if condition="$info.merchant eq ''">
+				未填写
+				<else/>
+				{$info.merchant}
+			</if>
+			</td>
+		</tr>
+		
+		<tr style="display:none;">
+			<th width="100">微信id :</th>
+			<td>{$info.wechatid}</td>
+		</tr>
+		
+		<tr>
+			<th width="100">收款人姓名 :</th>
+			<td>
+			<if condition="$info.huming eq ''">
+				未填写
+				<else/>
+				{$info.huming}
+			</if>
+			</td>
+		</tr>
+		
+		<tr>
+			<th width="100">收款帐号 :</th>
+			<td>
+			<if condition="$info.zhanghao eq ''">
+				未填写
+				<else/>
+				{$info.zhanghao}
+			</if>
+			</td>
+		</tr>
+		
+		<tr>
+			<th width="100">开户银行:</th>
+			<td>
+				<if condition="$bankinfo.bank eq ''">
+					未填写
+				<else/>
+					{$bankinfo.bank}
+				</if>
+			</td>
+		</tr>
+		
+		<tr>
+			<th width="100">范票余额：</th>
+			<td>
+				{$info.points}张
+			</td>
+		</tr>
+		
+		<tr>
+			<th width="100">会员组 :</th>
+			
+			<td>
+			<select name='uid'>
+			<volist name="info.cate" id="cate" >
+				<option value='{$cate.id}' <if condition="$info['uid'] eq $cate['id']">selected</if>>{$cate.name}</option>
+			</volist>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<th width="100">添加提成 :</th>
+			<td><input type="text" name="add_cny" id="add_cny"  class="input-text" placeholder="例如：588" /> &nbsp <span style="color:#3A6DA4;">必须填写，不填写则不发送提醒</span></td>
+		</tr>
+		
+		<tr>
+			<th width="100">填写理由 :</th>
+			<td><input type="text" name="add_cont" id="add_cont"  class="input-text" placeholder="例如：满足招收代理要求" style="width:200px;" /> &nbsp <span style="color:#3A6DA4;">不填写则发送默认理由</span></td>
+		</tr>
+		
+		<tr>
+			<th width="100">下单所属 :</th>
+			<td><input type="text" name="user_source" id="user_source"  class="input-text" placeholder="例如：SY" /> &nbsp <span style="color:#3A6DA4;">必须填写，不填写则不发送提醒</span></td>
+		</tr>
+		
+		<tr>
+			<th width="100">赠送范票 :</th>
+			<td><input type="text" name="add_points" id="add_points"  class="input-text" placeholder="例如：100" /> &nbsp <span style="color:#3A6DA4;">不填写则不赠送</span></td>
+		</tr>
+		
+		<!--
+		<tr>
+			<th width="100" style="color:red;font-weight:bold;">待结算金额 :</th>
+			<td><input type="text" name="send_cny" id="send_cny"  class="input-text" placeholder="例如: 20 " style="width:200px;" /> &nbsp <span style="color:#3A6DA4;">临时解决方案</span></td>
+		</tr>
+		-->
+		<!-- <tr id="lv" <eq name="info.uid" value="4"> style="display:none" </eq> >
+			<th width="100">代理商等级:</th>
+			<td><input type="text" name="uid_lv" id="uid_lv" class="input-text"  value="{$info.uid_lv}"/></td>
+		</tr> -->
+	    <tr>
+			<th>会员头像 :</th>
+			<td>
+            	<input type="text" name="img" id="J_img" class="input-text fl mr10" size="30" value="{$info.img}">
+            	<div id="J_upload_img" class="upload_btn"><span>{:L('upload')}</span></div>
+                <img src="{:avatar($info['id'], 32)}" />
+				<notempty name="info['img']"><span class="attachment_icon J_attachment_icon" file-type="image" file-rel="{:avatar($info['id'], 32)}"><img src="__ROOT__/statics/images/filetype/image_s.gif" /></span></notempty>
+            </td>
+		</tr>
+		<tr>
+			<th width="100">会员姓名 :</th>
+			<td><input type="text" name="name" id="name" class="input-text"  value="{$info.name}"/></td>
+		</tr>
+		
+		<tr id="dz" <eq name="info.uid" value="4"> style="display:none" </eq> >
+			<th>地区选择:</th>
+            <td><select name="sheng" id="s1" style="border: 1px solid #ddd;width: 30.0%;height: 30px;line-height: 30px;margin-right: 1%;font-size: 14px;color: #999999;"></select>
+			<select name="shi" id="s2" style="border: 1px solid #ddd;width: 30.0%;height: 30px;line-height:30px;margin-right: 1%;font-size: 14px;color: #999999;"></select>
+			<select name="qu" id="s3" style="border: 1px solid #ddd;width: 30.0%;height: 30px;line-height: 30px;margin-right: 1%;font-size: 14px;color: #999999;"></select>
+			</td>
+        </tr>  
+         
+		<tr>
+			<th>详细地址:</th>
+			<td><input type="text" name="address" id="address" class="input-text" value="{$info.address}" size="30"></td>
+		</tr>
+        <tr>
+			<th>联系方式 :</th>
+			<td><input type="text" name="phone_mob" id="phone_mob" class="input-text" value="{$info.phone_mob}" size="30"></td>
+		</tr>
+		<tr>
+			<th>QQ:</th>
+			<td><input type="text" name="qq" id="qq" class="input-text" value="{$info.qq}" size="30"></td>
+		</tr>
+		
+		<!--
+		 <tr>
+			<th>会员邮箱 :</th>
+			<td><input type="text" name="email" id="email" class="input-text" value="{$info.email}" size="30"></td>
+		</tr>
+		-->
+		<tr>
+			<th>出生日期 :</th>
+			<td><input type="text" name="birthday" id="birthday" class="date input-text" value="{$info.birthday}" size="27"></td>
+		</tr>
+		<tr>
+        	<th>性别 :</th>
+            <td>
+            	<label><input type="radio" name="gender" value="1" <if condition="$info.gender eq 1">checked</if>> 男</label>&nbsp;&nbsp;
+				<label><input type="radio" name="gender" value="0" <if condition="$info.gender eq 0">checked</if>> 女</label>
+            </td>
+        </tr>
+        
+        <tr>
+			<th>新密码 :</th>
+			<td><input type="password" name="password" class="input-text" size="30">
+            <label class="gray">&nbsp;&nbsp;不修改则留空</label>
+            </td>
+		</tr>
+        <tr>
+			<th>重复密码 :</th>
+			<td><input type="password" name="repassword" class="input-text" size="30"></td>
+		</tr>
+		<script>
+		document.getElementById("intro").value="{$info.intro}";
+		</script>
+		<tr>
+			<th>备注 :</th>
+			<td><textarea name="intro" id="intro"  value="{$info.intro}" cols="40" rows="8" ></textarea></td>
+		</tr>
+        
+	    <tr>
+			<th>{:L('enabled')} :</th>
+			<td>
+				<label><input type="radio" name="status" value="1" <if condition="$info.status eq 1">checked</if>> {:L('yes')}</label>&nbsp;&nbsp;
+				<label><input type="radio" name="status" value="0" <if condition="$info.status eq 0">checked</if>> {:L('no')}</label>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="id" value="{$info.id}" />
+	</form>
+</div>
+<script src="__STATIC__/js/fileuploader.js"></script>
+<script>
+Calendar.setup({
+    inputField : "birthday",
+    ifFormat   : "%Y-%m-%d",
+    showsTime  : true,
+    timeFormat : "24"
+});
+var check_name_url = "{:U('user/ajax_check_name', array('id'=>$info['id']))}";
+var check_email_url = "{:U('user/ajax_check_email', array('id'=>$info['id']))}";
+$(function(){
+	$.formValidator.initConfig({formid:"info_form",autotip:true});
+	/* $("#username").formValidator({onshow:'请填写用户名',onfocus:'请填写用户名'}).inputValidator({min:1,onerror:'请填写用户名'}).ajaxValidator({
+	    type : "get",
+		url : check_name_url,
+		datatype : "json",
+		async:'false',
+		success : function(result){	
+            if(result.status == 0){
+                return false;
+			}else{
+                return true;
+			}
+		},
+		onerror : '用户已经存在',
+		onwait : '正在检测'
+	}).defaultPassed();
+	$("#email").formValidator({onshow:"请填写邮箱",onfocus:"请填写邮箱"}).inputValidator({min:1,onerror:"请填写邮箱"}).regexValidator({regexp:"email",datatype:"enum",onerror:"邮箱格式错误"}).defaultPassed().ajaxValidator({
+	    type : "get",
+		url : check_email_url,
+		datatype : "json",
+		async:'false',
+		success : function(result){	
+            if(result.status == 0){
+                return false;
+			}else{
+                return true;
+			}
+		},
+		onerror : '邮箱已经存在',
+		onwait : '正在检测'
+	});
+	 */
+	$('#info_form').ajaxForm({success:complate,dataType:'json'});
+	function complate(result){
+		if(result.status == 1){
+			$.dialog.get(result.dialog).close();
+            $.pinphp.tip({content:result.msg});
+            window.location.reload();
+		} else {
+			$.pinphp.tip({content:result.msg, icon:'alert'});
+		}
+	}
+	$("select[name='uid']").change(function(){
+		if ($(this).val()==3){
+			$('#dz').css('display','');
+			$('#lv').css('display','');
+		}else{
+			$('#dz').css('display','none');
+			$('#lv').css('display','none');
+		}
+
+	})
+	//上传图片
+    var uploader = new qq.FileUploaderBasic({
+    	allowedExtensions: ['jpg','gif','jpeg','png','bmp','pdg'],
+        button: document.getElementById('J_upload_img'),
+        multiple: false,
+        action: "{:U('user/ajax_upload_imgs')}",
+        inputName: 'img',
+        forceMultipart: true, //用$_FILES
+        messages: {
+        	typeError: lang.upload_type_error,
+        	sizeError: lang.upload_size_error,
+        	minSizeError: lang.upload_minsize_error,
+        	emptyError: lang.upload_empty_error,
+        	noFilesError: lang.upload_nofile_error,
+        	onLeave: lang.upload_onLeave
+        },
+        showMessage: function(message){
+        	$.pinphp.tip({content:message, icon:'error'});
+        },
+        onSubmit: function(id, fileName){
+        	$('#J_upload_img').addClass('btn_disabled').find('span').text(lang.uploading);
+        },
+        onComplete: function(id, fileName, result){
+        	$('#J_upload_img').removeClass('btn_disabled').find('span').text(lang.upload);
+            if(result.status == '1'){
+        		$('#J_img').val(result.data);
+        	} else {
+        		$.pinphp.tip({content:result.msg, icon:'error'});
+        	}
+        }
+    });
+});
+</script>
+<script type="text/javascript" language="javascript" src='./tpl/home/default/Style/js/dizhi2.js'></script>
+<script type="text/javascript" language="javascript" src='./tpl/home/default/Style/js/diqu2.js'></script>
+<script language="javascript">
+	new PCAS("sheng","shi","qu","{$info.sheng}","{$info.shi}","{$info.qu}");
+</script>

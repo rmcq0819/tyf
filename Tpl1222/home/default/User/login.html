@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>会员登录</title>
+<include file="public:headtop" />
+</head>
+<body>
+<include file="public:headuser" />
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js"></script>
+<script type="text/javascript">
+$(function(){	
+    $('#login_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next("label").append(error); 
+        },
+        success       : function(label){
+            //label.addClass('validate_right').text('OK!');
+        },
+		onsubmit:true,// 是否在提交是验证 
+        onkeyup : false,
+        rules : {
+            user_name : {
+                required : true,
+			/*	remote   : {
+					url:'index.php?app=member&act=check_user&ajax=1&login=1',
+					type:'get',
+					data:{
+						user_name : function(){
+                        return $('#user_name').val();
+                        }
+					}
+				}*/
+            },
+            password : {
+                required : true
+            },
+          		
+        },
+        messages : {
+            user_name : {
+                required : '您必须提供一个用户名',
+				remote   : '用户名不存在！'
+            },
+            password  : {
+                required : '您必须提供一个密码'
+            }
+        },
+		submitHandler: function(form) {  //通过之后回调
+			
+    	//var param = $("#login_form").serialize();
+    	var user_name= $('#user_name').val();
+    	var password= $('#password').val();
+    	
+    	var url  = "{:U('Index/ajaxlogin')}";
+		var postData = {user_name:user_name,password:password};
+		var wechatid = "<?php echo $_GET["wechatid"]; ?>";
+		if(wechatid !== "") {
+			postData.wechatid = wechatid;
+		}
+    	$.post(url,postData,function(data){
+    		if(data.status==1) {
+    			$('#login_text').html("<b>登陆成功！</b>");
+    			location.href="index.php?m=User&a=index";
+    		}else {
+    			$('#login_text').html("<i>密码错误！</i>");
+    		}
+
+    	},'json');
+     /*	$.ajax({
+		url : "{:U('Index/ajaxlogin')}",
+		type : "post",
+		dataType : "json",
+		data: param,
+		success : function(result) {
+			alert(result.msg);
+
+		if(result.status==1) {
+			$('#login_text').html("<b>登陆成功！</b>");			
+			function a(){location.href=decodeURIComponent("%2Findex.php%3Fapp%3Dmemberbuy%26store_id%3D9");}
+			setTimeout(a,2000);
+		} else {
+        	//var jsonObj = eval('('+result+')');
+			$('#login_text').html("<i>密码错误！</i>");
+		}
+		}
+     	});
+     */
+        }
+}); 
+});  
+</script>
+
+<div id="content" style="background: #f1f9fa;">
+	<div style="background:url(./images/logo.png) center center;background-size:120%;height:120px;"></div>
+    <form method="post" id="login_form" style="">
+            <input name="user_name" id="user_name" class="text width5" placeholder="用户名" type="text" style="background: url(./Tpl/home/default/Style/images/login_05.png) repeat-y #fff;height:48px;padding-left: 40px;">
+
+            <input name="password" id="password" class="text width5" placeholder="密 码" type="password" style="background: url(./Tpl/home/default/Style/images/login_08.png) repeat-y #fff;height:48px;padding-left: 40px;">
+                         
+
+<!-- 			<input name="Submit" value="立即绑定" class="enter" type="submit" style="background:#000;width:48%;color:#ddd;margin-top: 20px;margin-bottom: 20px;"> -->
+			<volist name="userCate" id="vo" key="key">
+			<input name="Regis_{$vo['id']}" value="申请成为{$vo['name']}" class="enter" type="button" onclick="location.href='{:U('User/register',array('role'=>$vo['id']))}'" style="background:#000;width:46%;color:#ddd;margin-top: 20px;margin-bottom: 10px;font-size:16px;font-family:微软雅黑;display:inline;<if condition="$key eq 2">float:right;</if>">
+			</volist>
+            <input name="Submit" value="立即登录" onclick="return checkin()" class="enter" type="submit" style="height:48px;line-height:48px;background:#000;width:100%;color:#ddd;float: left;margin-right: 4%;margin-top: 20px;margin-bottom: 20px;font-size:16px;font-family:微软雅黑;">
+            <div id="login_text" style="text-align:center;"></div>
+            <a href="#" style="margin-bottom: 20px;display: block;float: right;display: none;">忘记密码？</a>
+           <!-- <input name="ret_url" value=" " type="hidden">-->
+    </form>
+
+</div>
+<div class="clear"></div>
+
+
+</body>
+</html>
+<script>
+$().ready(function (){
+	$('#content').height(window.innerHeight - 50);
+});
+</script>

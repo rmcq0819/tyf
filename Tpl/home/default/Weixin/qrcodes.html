@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$user_name}的二维码图片</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<link href="../Style/dialog.css" rel="stylesheet" type="text/css">
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<style type="text/css">
+.tips_msg{
+	width:100%;
+	height:auto;
+	font-size:16px;
+	text-align:center;
+}
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="../Style/jquery.css">
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script> -->
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<!-- <script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script> -->
+</head>
+<include file="public:headuser" />
+<body>
+	<div id="qrcode"><img src="{$imgurls}" width="100%",height="auto"></div>
+	
+	<div class="tips_msg">提示：您可以长按二维码保存至手机相册中 ：)</div>
+</body>
+</html>

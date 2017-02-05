@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>发表评价</title>
+		<include file="public:head" />
+		<style>
+			* {
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position:absolute;
+				left:5px;
+				top:14px;
+			}
+			/*订单列表*/
+			#order ul li{
+				padding: 5px;
+			}
+			.product-img .img{             /*产品图片大小*/
+				width: 80px;
+				height: 80px;
+			}
+			#free-name,#pro-num{            /*免税价和数量的颜色*/
+				color:rgb(137,137,137);
+			}
+			#free-price,#total-price{
+				font-size: 14px;
+			}
+			#free-price,#fare-price,#total-price{                 /*免税价、清关费、运费、总价颜色*/
+				color: rgb(219,101,14); 
+			}
+			/*结算总价*/
+			#account{
+				float: right; 
+				margin-right: 5px;
+			}
+			
+			/*评论*/
+			#comment-content{
+				float: left; 
+				width: 70%; 
+				padding-left: 10px; 
+				border-right: solid 1px rgb(222,222,222); 
+				margin-top: -10px;
+			}
+			#comment-img{
+				position: relative; 
+				left: 0px; 
+				top: 0px;
+				float: left; 
+				width: 30%; 
+				padding-right: 10px; 
+				margin-top: -10px; 
+			}
+			#comment-content textarea{
+				width: 100%;
+				height: 70px;
+				padding:5px;
+			}
+			#comment-img img{
+				width: 100%;
+				height: 70px;
+			} 
+			#comment-img input{             /*input="file"*/
+				position: absolute; 
+				top: 0px; 
+				left: 0px; 
+				font-size: 50px; 
+				width:86px; 
+				opacity: 0;
+			}
+			/*提交评论*/
+			#sub-comment{
+				width: 94%; 
+				height: 50px; 
+				background-color: white;  
+				text-align: center; 
+				margin: 0 auto; 
+				margin-top: 8px; 
+				color: rgb(240,93,0); 
+				line-height: 50px; 
+				font-size: 15px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25"/>
+			</a>
+			发表评价
+		</div>
+		<!--商品-->
+		<form action="index.php?m=Order&a=orderBBS" method="post" name="comment_form" enctype="multipart/form-data">
+		<div data-am-widget="list_news" class="am-list-news am-list-news-default" id="order" style="margin-top: 55px;">
+
+			<div class="am-list-news-bd">
+				<ul class="am-list">
+					
+					<!--订单号-->
+					<li class="am-g am-list-item-dated" class="order-number">
+						<span>订单号：<span><span>{$order.orderId}</span>
+					</li>
+					<!--订单商品-->
+					<volist name="item_detail" id="vo">
+					<li class="am-g am-list-item-dated">	
+						<div class="am-g">
+  							<div class="am-u-sm-2" class="product-img">
+  								<img src="data/upload/item/{$vo['img']}" alt="商品" class="am-img-responsive"/>
+  							</div>
+  							<div class="am-u-sm-9" class="product-detail">
+  								<p>{$vo.title}</p>
+  								<span id="free-name">优品价：</span><span id="free-price">￥{$vo.price}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="pro-num"></span>
+  							</div>
+  							<div class="am-u-sm-1" style="line-height: 62px;">
+  								
+  							</div>
+						</div>
+					</li>
+					    <input type="hidden" name="item_id[{$i}]" value="{$vo['itemId']}" />
+					    <input type="hidden" name="color" value="{$vo.color}" />
+					    <input type="hidden" name="title" value="{$vo.title}" />
+					    <input type="hidden" name="size" value="{$vo.size}" />
+				</volist>
+				<input type="hidden" name="orderId" value="{$order.orderId}" />
+					<!--订单费用-->
+					<!-- <li class="am-g am-list-item-dated">
+						<p>
+							<span>运费:</span><span id="fare-price" >￥20</span>
+							<span id="account">
+								<span>共<span class="total-num">1</span>件商品</span>&nbsp;&nbsp;
+								<span>合计:</span><span id="total-price">￥254.00</span>
+							</span>
+							
+						</p>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+
+		<!--评论内容、照片-->
+		<div id="comment-content">
+			<textarea name="info" placeholder="您的评价..."></textarea>
+		</div>
+		<div id="comment-img">
+			<img src="../Style/index-images/camera.png" id="img" alt="相机" class="am-img-responsive"/>
+			<input type="file" name="avatar"/>
+		</div>
+		<script>	
+			$("input[name ='avatar']").change(function(){
+				var objUrl = getObjectURL(this.files[0]) ;
+				console.log("objUrl = "+objUrl) ;
+				if (objUrl) {
+					$("#img").attr("src", objUrl) ;
+				}
+			}) ;
+
+			//建立一個可存取到該file的url
+			function getObjectURL(file) {
+				var url = null ; 
+				if (window.createObjectURL!=undefined) { // basic
+					url = window.createObjectURL(file) ;
+				} else if (window.URL!=undefined) { // mozilla(firefox)
+					url = window.URL.createObjectURL(file) ;
+				} else if (window.webkitURL!=undefined) { // webkit or chrome
+					url = window.webkitURL.createObjectURL(file) ;
+				}
+				return url ;
+			}
+		</script>
+		<!--清楚浮动-->
+		<div style="clear: both;"></div>
+			
+		<!--提交评论-->
+		<div id="sub-comment">
+			<a href="javascript:void(0)" onClick="javascript:return checkvalue();">提交评价&nbsp;&nbsp;&nbsp;<i class="am-icon-paper-plane-o"></i>
+			</a>
+		</div>
+<!-- 			<br/> 图片路径:
+			<span id="img"></span> -->
+
+			
+
+			<!--<div class="ddpingjiafuonbj" style="position:fixed; bottom:0;">
+				<dl>
+					
+					<dd>
+						<a href="javascript:void(0)" onClick="javascript:return checkvalue();">发表评价</a>
+					</dd>
+			</div>-->
+		</form>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#img_url').change(function() {
+					$('#img').text($(this).val());
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			function checkvalue() {
+				document.comment_form.submit();
+			}
+		</script>
+	</body>		
+</html>

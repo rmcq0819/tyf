@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<include file="public:headtop" />
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+
+<div class="here">
+<a href="index.php?m=words&a=index" style="margin-left: 3%;background:#222;color:#eee">我要留言</a>
+<a href="index.php?m=words&a=show" class="hover" style="background:#eee;color:#222">查看留言</a>
+</div>		
+  <div class="clear"></div>
+           <div class="wrap_child">
+						<div class="wrap_child">
+							<div class="words">
+							<ul>
+							  <volist name="message" id="item">
+								<span></span>
+								<li style="margin-top: -20px;">{$item.words_txt}</li>
+								<p>{$item.add_time}</p>
+								<div style="border-bottom: 2px solid #e8e8e8;margin-right: 15px;margin-left: 15px;"></div>
+								 </volist>   
+							</ul>
+							</div>
+						</div>
+					<present name="page_bar">
+					<div class="wall_page" style="margin-left:10px;" <present name="show_page">style="display:block;"</present>>
+						<div class="page_bar">{$page_bar}</div>
+					</div>
+					</present>
+            </div>
+			<div style="height:30px;background: #fff;"></div>
+<div class="clear" style="height:33px;"></div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<title>我要发货</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" /></head>
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+<include file="public:headuser" />
+<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+
+<div id="content" style="overflow: hidden;background: #f1f9fa;">
+<?php if(count($cangkuinfo)==0){ ?>
+<img src="../Style/images/buy.png" style="width: 100%;"/>
+    <div class="null_shopping" style="margin-top: -370px;padding-bottom: 130px;">
+          <img src="../Style/images/car_blank.png" />
+          <h4 style="color:#000;">您的仓库空空如也哦！</h4>
+          <p>
+              <a class="enter" href="{:U('book/good')}" style="background: #4c5a41;color:#fff;padding: 10px;margin-top: 10px;">马上去存点货！</a>
+          </p>
+      </div>  
+   <?php }else{  ?>   
+   <form action="{:U('User/fahuo1')}" method="post">
+   <h3 id="chose_all" style="background: #e7f3f2;height: 40px;line-height: 40px;padding-left: 20px;color: #495143;"><b class="ico">选择商品</b></h3>
+    <ul class="cart_list car_li">
+    
+     <volist name='iteminfo' id='vo'>
+         <li id="cart_item_{$vo.id}" class="one_box">
+              <p class="goods_info one">
+                  <span class="img"><a href="{:U('Item/index',array('id'=>$vo['id']))}" ><img src="{:attach(get_thumb($vo['img'], '_b'), 'item')}" width="100" /></a></span>
+                  <span class="tit" style="font-size: 14px;font-family: 微软雅黑;color: #4c4c4c;margin-left: 10px;height: 24px;line-height: 24px;">
+                      <a href="{:U('Item/index',array('id'=>$vo['id']))}" >{$vo['title']}</a><br/>
+                  </span>
+
+                  <div style="font-size:13px;color: #838383; float:left;margin-top: 10px;">
+                      <span>发货数量：</span>
+					<input value="{$vo.num}" name="items[{$vo['id']}][num]" class="text1 width3" type="text" style="border:1px solid #ccc;padding:2px;text-align:center;" type="text" value="0" size="6" />
+					&nbsp;&nbsp;&nbsp;&nbsp;我的存货：<span>{$cangkuinfo[$vo['id']]['xskucun'] + $cangkuinfo[$vo['id']]['xxkucun']}</span>
+                   </div>
+              </p>                   
+          </li>
+          </volist>
+          <li style="text-align:center;border:none;padding-top:20px;"><input type="submit" name="submit" style="background:#222;color:#ccc;width:80%;text-align:center;height:50px;border:none;" value="下一步"/></li>
+    </ul>
+    
+	</form>
+    <?php } ?>
+</div>
+<div class="clear" style="height:33px;"></div>
+<!-- <include file="public:footer" /> -->
+
+</body>
+</html>

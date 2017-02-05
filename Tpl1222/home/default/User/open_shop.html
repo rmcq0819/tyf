@@ -1,0 +1,341 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+					'onMenuShareTimeline',
+					'onMenuShareAppMessage',
+				]
+			});
+			wx.ready(function() {
+				wx.onMenuShareTimeline({
+					title: "{$fx_info['username']}邀请您加入团洋范！", // 分享标题
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fximg}", // 分享图标
+				});
+				wx.onMenuShareAppMessage({
+					title: "{$fx_info['username']}邀请您加入团洋范！", // 分享标题
+					desc: "{$fx_info['m_desc']}", // 分享描述
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "{$fximg}", // 分享图标
+					type: 'link',
+					dataUrl: '',
+				});
+			});
+		</script>
+		<style>
+			/*头部*/
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			
+			/*头部*/
+			#header{
+				margin-top: 49px; position: relative; left: 0px;
+			}
+			#shouyi{
+				margin-top: 15px; padding: 0px 20px 0px 20px;
+			}
+			#shouyi .f-title{
+				font-size: 23px; color: rgb(240,93,0); font-weight: bold; margin-top: 25px;
+			}
+			#shouyi .s-title{
+				color: rgb(84,84,84); font-size: 15px; margin-top: 25px;
+			}
+			#shouyi .s-title img{
+				width: 24px; height: 26px;
+			}
+			
+			#daogou,#dianzhang{
+				width: 100%; height: 40px; background-color: rgb(240,93,0); color: white; font-size: 22px; text-align: center; line-height: 40px;
+			}
+			
+			#ewai{
+				margin-top: 40px; padding: 0px 20px 0px 20px;
+			}
+			#ewai .e-title{
+				font-size: 20px; color: rgb(240,93,0); font-weight: bold;
+			}
+			#ewai .ss-title{
+				color: rgb(84,84,84); font-size: 15px; margin-top: 10px;
+			}
+			
+			#ru{
+				margin-top: 40px; padding: 0px 20px 0px 20px;
+			}
+			#ru .r-title{
+				font-size: 24px; color: rgb(240,93,0); font-weight: bold; 
+			}
+			
+			#zhuang{
+				margin-top: 40px; padding: 0px 20px 0px 20px;
+			}
+			#zhuang .z-title{
+				font-size: 24px; color: rgb(240,93,0); font-weight: bold; line-height: 30px;
+			}
+			
+			#open-btn,#share{
+				width: 180px; margin: 0 auto; margin-top: 15px; 
+			}
+			
+			#right-fixed{
+				position: fixed; right: 0px; top: 50%; background-color: rgb(240,93,0); padding: 5px; opacity: 0.55; border-bottom-left-radius: 5px; border-top-left-radius: 5px;
+			}
+			#right-fixed .dao{
+				border-bottom: solid 1px white; padding-bottom: 6px;
+			}
+			#right-fixed .dian{
+				margin-top: 5px;
+			}
+		</style>
+		<link rel="stylesheet" href="../Style/css/animations.css" />
+	</head>
+	<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	<body style="background:rgb(240,240,240);">
+		<div class="topnav">
+			<a onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			我要开店
+		</div>
+		
+		<!--头部-->
+		<div id="header">
+			<img src="../Style/index-images/activity/kai-bg2.png" alt="头部" class="am-img-responsive" />
+		</div>
+		
+		<!--财务手册-->
+		<img id="header-img" src="../Style/index-images/activity/caifu.jpg" alt="" class="am-img-responsive" style="margin-top: 15px;"/>
+		
+		<div id="a" style="height: 51px; opacity: 0;">我要做经纪人</div>
+		<!--我要做经纪人-->
+		<div id="daogou">
+			我要做经纪人
+		</div>
+		<!--店长收益构成-->
+		<div id="shouyi">
+			<p class="f-title">成为经纪人的收益构成</p>
+			<p class="s-title"><img src="../Style/index-images/activity/jiangjin.png" alt="销售奖金"/>&nbsp;&nbsp;获得自营店铺商品销售奖金</p>
+			<img src="../Style/index-images/activity/kai-line2.png" alt="线" class="am-img-responsive" style="margin-top: 10px;"/>
+		</div>
+
+		<!--入店标准说明-->
+		<div id="ru">
+			<p class="r-title">入驻开店的标准说明</p>
+			<img src="../Style/index-images/activity/99jingjiren.png" alt="99元开店" class="am-img-responsive" style="margin-top: 30px;"/>
+			<div class="am-g" style="margin-top: 20px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/lingshou.png" alt="零售收益" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(240,93,0); font-size: 15px; font-weight: bold; padding-left: 6px;">零售收益</p>
+  					<p style="color: rgb(84,84,84); font-size: 13px; padding-left: 6px;">售出的每一件产品都有产品利润20%提成</p>
+  				</div>
+			</div>
+			<img src="../Style/index-images/activity/kai-line2.png" alt="线" class="am-img-responsive" style="margin-top: 20px;"/>
+		</div>
+		
+		<!--专业客服及售后-->
+		<div id="zhuang">
+			<p class="z-title">专业化的客服/售后及物流服务</p>
+			<div class="am-g" style="margin-top: 20px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/kefu.png" alt="客服" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(84,84,84); font-size: 12px; padding-left: 6px;">专业客服团队，一对一的销售及咨询服务</p>
+  					<p style="color: rgb(84,84,84); font-size: 12px; padding-left: 6px;">30天无理由退货售后保证</p>
+  				</div>
+			</div>
+			<div class="am-g" style="margin-top: 30px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/wuliu.png" alt="零售收益" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(84,84,84); font-size: 13px; padding-left: 6px;">全国四大保税仓+海外直邮</p>
+  					<p style="color: rgb(84,84,84); font-size: 13px;padding-left: 6px;">满99元免费全国快递配送</p>
+  				</div>
+			</div>
+			<img src="../Style/index-images/activity/fenzhi.png" alt="" class="am-img-responsive" style="margin-top: 10px;"/>	
+		</div>
+		
+		<!--我要做经纪人按钮-->
+		
+		<div style="width: 180px;position: relative; left: 0px; margin: 0 auto;">
+			<img id="shares" src="../Style/index-images/activity/jingjiren.png" alt="我要成为经纪人" class="am-img-responsive"/>
+			<img src="../Style/index-images/activity/shou.png" alt="手" style="width: 50px;position: absolute; right: -27px; top: 14px;" />
+		</div>
+		
+		<div id="b" style="height: 51px; opacity: 0;">我要成为店长</div>
+		<!--我要做店长-->
+		<div id="dianzhang">
+			我要做店长
+		</div>
+		<!--店长收益构成-->
+		<div id="shouyi">
+			<p class="f-title">成为店长的收益构成</p>
+			<p class="s-title"><img src="../Style/index-images/activity/jiangjin.png" alt="销售奖金"/>&nbsp;&nbsp;获得自营店铺商品销售奖金</p>
+			<p class="s-title"><img src="../Style/index-images/activity/xunzhang.png" alt="销售奖金"/>&nbsp;&nbsp;获得推广加盟的培训奖金</p>
+			<p class="s-title"><img src="../Style/index-images/activity/lipin.png" alt="销售奖金"/>&nbsp;&nbsp;获得新加入店长创业礼品</p>
+			<img src="../Style/index-images/activity/kai-line.png" alt="线" class="am-img-responsive" style="margin-top: 15px;"/>
+		</div>
+		
+		<!--额外奖励-->
+		<!--
+		<div id="ewai">
+			<p class="e-title">额外奖励</p>
+			<p class="ss-title">所有新加入的店长，一周内可获得以下奖励：</p>
+			<p class="ss-title">直接开分店3家，奖励现金300元；</p>
+			<p class="ss-title">直接开分店6家，奖励现金588元；</p>
+			<p class="ss-title">直接开分店10家，奖励现金888元！</p>
+			<p style="color: red; font-size: 15px; margin-top: 7px;">备注：从加入的即刻起计时，系统直接统计</p>
+			<img src="../Style/index-images/activity/kai-line2.png" alt="线" class="am-img-responsive" style="margin-top: 30px;"/>
+		</div>
+		-->
+		<!--入店标准说明-->
+		<div id="ru">
+			<p class="r-title">入驻开店的标准说明</p>
+			<img src="../Style/index-images/activity/588.png" alt="588元开店" class="am-img-responsive" style="margin-top: 30px;"/>
+			<div class="am-g" style="margin-top: 20px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/lingshou.png" alt="零售收益" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(240,93,0); font-size: 15px; font-weight: bold; padding-left: 6px;">零售收益</p>
+  					<p style="color: rgb(84,84,84); font-size: 13px; padding-left: 6px;">售出的每一件产品都有产品利润60%提成</p>
+  				</div>
+			</div>
+			<div class="am-g" style="margin-top: 25px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/tuiguang.png" alt="推广加盟" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(240,93,0); font-size: 15px;font-weight: bold; padding-left: 6px;">推广加盟</p>
+  					<p style="color: rgb(84,84,84); font-size: 13px; padding-left: 6px;">推荐一位新的店长加入，都有200元/人的培训管理提成</p>
+  				</div>
+			</div>
+			<p style="text-align: center;color: rgb(84,84,84); font-size: 13px; margin-top: 20px;">直推经纪人零售利润40%提成</p>
+			<img src="../Style/index-images/activity/kai-line2.png" alt="线" class="am-img-responsive" style="margin-top: 30px;"/>
+		</div>
+		
+		<!--专业客服及售后-->
+		<div id="zhuang">
+			<p class="z-title">专业化的客服/售后及物流服务</p>
+			<div class="am-g" style="margin-top: 20px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/kefu.png" alt="客服" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(84,84,84); font-size: 12px; padding-left: 6px;">专业客服团队，一对一的销售及咨询服务</p>
+  					<p style="color: rgb(84,84,84); font-size: 12px; padding-left: 6px;">30天无理由退货售后保证</p>
+  				</div>
+			</div>
+			<div class="am-g" style="margin-top: 30px;">
+  				<div class="am-u-sm-2">
+  					<img src="../Style/index-images/activity/wuliu.png" alt="零售收益" class="am-img-responsive" style="max-width: 45px;"/>
+  				</div>
+  				<div class="am-u-sm-10">
+  					<p style="color: rgb(84,84,84); font-size: 13px; padding-left: 6px;">全国四大保税仓+海外直邮</p>
+  					<p style="color: rgb(84,84,84); font-size: 13px;padding-left: 6px;">满99元免费全国快递配送</p>
+  				</div>
+			</div>
+			<img src="../Style/index-images/activity/fenzhi.png" alt="" class="am-img-responsive" style="margin-top: 10px;"/>
+			
+		</div>
+		
+		<!--我要做店长按钮-->
+		<div style="width: 180px;position: relative; left: 0px; margin: 0 auto; margin-bottom: 40px;">
+			<img id="sharess" src="../Style/index-images/activity/dianzhang.png" alt="我要做店长" class="am-img-responsive"/>
+			<img src="../Style/index-images/activity/shou.png" alt="手" style="width: 50px;position: absolute; right: -27px; top: 14px;" />
+		</div>
+		
+		<!--右侧固定栏目-->
+		<i class="am-icon-send-o am-icon-sm floating" style="position: fixed; right: 21px; top: 46.2%; color: rgb(240,159,108);"></i>
+		<div id="right-fixed">
+			<p class="dao"><a href="#a" style="color: white;">成为经纪人&nbsp;<i class="am-icon-angle-right"></i></a></p>
+			<p class="dian"><a href="#b" style="color: white; margin-left: 7px;">成为店长&nbsp;<i class="am-icon-angle-right"></i></a></p>
+		</div>
+		<!--分享遮罩页面-->
+		<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+			<img src="../Style/images/guide.png" />
+		</div>
+		<include file="public:footer" />
+		<script type="text/javascript">
+
+
+			$(function(){
+				var width = $("#img-phone").width();
+				var w = width/2;
+				$("#img-phone").css("margin-left",-w);
+
+				//经纪人
+				$("#shares").on("click",function(){
+					send('shares');
+				});
+
+
+				//店长
+				$("#sharess").on("click",function(){
+					send('sharess');
+				});
+
+
+			});
+			var url = "{:U('User/open_shop')}";
+			function send($part){
+				$.post(url,{'application':$part},function(data){
+					console.log(data);
+					if(data.code==0){
+						layer.open({
+							title: data.title,
+							content: data.content,
+							btn: [data.btn],
+							yes: function(index){
+								layer.close(index);
+							}
+						});
+						if(data.share==1){
+							$("#mcover").show();
+						}
+					}else{
+						window.location.href = data.url;
+					}
+				},'json');
+			}
+		</script>
+		<!--页面锚点平滑滚动的效果-->
+		<script type="text/JavaScript">
+			$(document).ready(function() {
+			    $('a[href*=#]').click(function() {
+			        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+			            var $target = $(this.hash);
+			            $target = $target.length && $target || $('[name=' + this.hash.slice(1) + ']');
+			            if ($target.length) {
+			                var targetOffset = $target.offset().top;
+			                $('html,body').animate({
+			                    scrollTop: targetOffset
+			                },
+			                300);
+			                return false;
+			            }
+			        }
+			    });
+			});
+		</script>
+	</body>
+</html>

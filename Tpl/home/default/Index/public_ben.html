@@ -1,0 +1,110 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "有范更有爱公益礼包 - 团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/libao-header2.jpg", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "有范更有爱公益礼包 - 团洋范", // 分享标题
+				desc: "每售出1个礼包，团洋范将为环卫工人提供1元公益基金。", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity/libao-header2.jpg", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			
+			/*-----------轮播图-------------*/
+			.swiper-container {
+        		width: 100%;height: 180px;
+    		}
+		    .swiper-slide {
+		        text-align: center;font-size: 18px;background: #fff;width: 100%; padding: 1px 0px 0px 0px;
+		        /* Center slide text vertically */
+		        display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-webkit-box-pack: center;-ms-flex-pack: center;-webkit-justify-content: center;justify-content: center;-webkit-box-align: center;-ms-flex-align: center;-webkit-align-items: center;align-items: center;
+		    }
+		    .swiper-slide img{
+		    	height: 180px;width: 100%;
+		    }
+			
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/css/swiper.min.css"/>
+	</head>
+
+	<body style="background-color: rgb(217,189,167);">
+		
+		<div class="topnav">
+			<a onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			公益礼包
+		</div>
+
+		<div style="margin-top: 49px;">
+			<img src="../Style/index-images/activity/libao-header2.png" alt="礼包" class="am-img-responsive"/>
+		</div>
+		<!-------轮播图------->
+		<div class="swiper-container">
+	        <div class="swiper-wrapper">
+	            <!--<div class="swiper-slide"><img src="../Style/index-images/activity/libao-header2.jpg" alt="" class="am-img-responsive"/></div>-->
+				<div class="swiper-slide" onclick="window.location.href='{:U('Activity/signup',array('shares'=>$info['id']))}'"><img src="../Style/index-images/activity/lb-g3.png" alt="报名入口" class="am-img-responsive"/></div>
+	            <div class="swiper-slide"><img src="../Style/index-images/activity/lb-g1.jpg" alt="滚动图1" class="am-img-responsive"/></div>
+	            <div class="swiper-slide"><img src="../Style/index-images/activity/lb-g2.jpg" alt="滚动图2" class="am-img-responsive"/></div>
+	        </div>
+	        <!-- Add Pagination -->
+	        <div class="swiper-pagination"></div>
+		</div>
+		
+		<div style="background-color: white;">
+			<img src="../Style/index-images/activity/libao-99.png" alt="礼包" class="am-img-responsive" style="padding-top: 1px;"/>
+		</div>
+		
+		<img src="../Style/index-images/activity/lb1-1.png" alt="礼包A" class="am-img-responsive" onclick="window.location.href='http://yooopay.com/index.php?m=Item&a=index&id=5221&shares={$info.id}'" style="margin-top: -1px;"/>	
+		<img src="../Style/index-images/activity/lb2-2.png" alt="礼包B" class="am-img-responsive" onclick="window.location.href='http://yooopay.com/index.php?m=Item&a=index&id=5222&shares={$info.id}'" style="margin-top: -1px;"/ >
+		<img src="../Style/index-images/activity/lb3-3.png" alt="礼包C" class="am-img-responsive" onclick="window.location.href='http://yooopay.com/index.php?m=Item&a=index&id=5223&shares={$info.id}'" style="margin-top: -1px;"/>
+		
+		<script src="../Style/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		    var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        slidesPerView: 'auto',
+		        paginationClickable: true,
+		        spaceBetween: 30,
+		        autoplay:3000
+		    });
+    	</script>
+		<include file="public:footer" />
+	</body>
+
+</html>
+

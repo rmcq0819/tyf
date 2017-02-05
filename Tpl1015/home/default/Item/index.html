@@ -1,0 +1,580 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language="JavaScript">
+wx.config({
+    debug: false,
+    appId: 'wxc3f8ad3fc6c24903',
+    timestamp: "{$jsapi['timestamp']}",
+    nonceStr: "{$jsapi['timestamp']}",
+    signature: "{$jsapi['signature']}",
+    jsApiList: [
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage',
+    ]
+  });
+  
+  wx.ready(function () {
+     wx.onMenuShareTimeline({
+        title: "{$item['title']}-团洋范", // 分享标题
+        link: "{$jsapi['url']}", // 分享链接
+        imgUrl: "http://yooopay.com/data/upload/item/{$item['img']}", // 分享图标
+    });
+    wx.onMenuShareAppMessage({
+        title: "{$item['title']}-团洋范", // 分享标题
+        desc: "{$item['title']}-团洋范", // 分享描述
+        link: "{$jsapi['url']}", // 分享链接
+		imgUrl: "http://yooopay.com/data/upload/item/{$item['img']}", // 分享图标
+        type: 'link', 
+        dataUrl: '',
+    });
+  });
+</script>
+<link href="../Style/css/lightbox.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.proneirong img{width:100%}
+.proneimain img{width:100%}
+</style>
+<!-- 购物流程S -->
+<script type="text/javascript">	
+	//点击调用次方法
+	function shoucangFn() {
+		//商品的id号
+		var id = {$item.id};
+		var url = "./index.php";
+		//发出请求
+		$.getJSON(url,{m:"Item",a:"shoucang",id:id},function(data){
+			//请求完毕后返回的数据
+			if(data.error){
+				/*alert(data.error);
+				if(data.error === "请先登录后收藏!") {
+					location.href = "./index.php?m=User&a=login";
+				}*/
+				$(".am-icon-star-o").css('color','#FABE01');
+				$('.cartmsg').html(data.error);
+				$('.cartmsg').slideDown(500);
+				setTimeout(slideUp_fn, 6000);
+				return;
+			}
+			if(data.success) {
+				//alert(data.success);
+				$(".am-icon-star-o").css('color','#FABE01');
+				$('.cartmsg').html(data.success);
+				$('.cartmsg').slideDown(500);
+				setTimeout(slideUp_fn, 6000);	
+			}
+		});
+	}	
+	
+	
+    function buys(an,cb)
+    {
+		var size = $("input[name=size]").val();
+		var issize = $("input[name=issize]").val();	//判断是否存在分类，若无为单品下单，获取单品价格
+		var title = $("#title").val();
+    	var img = $("#img").val();
+    	var price = $("#price").val();
+    	var aprice = $("#aprice").val();
+		var itemtype = $("#itemtype").val();
+    	var quantity = $("#quantity").val();
+    	var shopid = $("#shopid").val();
+    	var baseid = $("#baseid").val();
+		
+		//alert(price);
+		//alert(aprice);
+		
+		/*if(parseFloat(price)>parseFloat(aprice)){
+			price=aprice;
+		}*/
+		
+		if (size == '')
+		{
+			//alert('请选择分类');
+			$('.proshudamai').css('border','1px solid red');
+			$('.cartmsg').html('请选择商品分类.');
+			$('.cartmsg').slideDown(500);
+			setTimeout(slideUp_fn, 6000);				
+			return;
+		}
+        var goodId = $("#goodId").val();
+		//无分类下单
+		if(issize == ''){
+			var yhprice = $("input[name=price]").val();
+			var cost = $("input[name=cost1]").val();   //判断是否存在分类，若无为单品下单，获取单品成本价格
+		}else{
+			var yhprice = $("input[name=yhprice]").val();
+			var cost = $("input[name=cost]").val();
+		}
+        var quantity = $("#quantity").val();
+		var discount = $("#discount").val();
+      
+        if (quantity == '')
+        {
+            alert('请输入购买数量');
+            return;
+        }
+        if (parseInt(quantity) < 1)
+        {
+            alert("购买数量不能小于1");
+            return;
+        }
+        if(isNaN(quantity))
+        {
+          alert("请输入数字!");
+           return;
+        }
+		
+		//立即购买
+		if(an==1){
+			 add_to_cart(goodId,itemtype,quantity,title,img,price,shopid,baseid,size,cost,cb);return;
+		}
+        add_cart(goodId,itemtype,quantity,title,img,price,shopid,baseid,size,cost,cb);
+	
+    }
+	
+	//立即购买
+	function add_to_cart(goodId,itemtype,quantity,title,img,price,shopid,baseid,size,cost,cb)	//商品ID，购买数量，相应分类的价格，分类名称
+	{
+		var url  = "{:U('Shopcart/add_cart')}";
+		var jsurl = "{:U('Order/jiesuan')}&spr=0";
+		
+		var cart_count = parseInt($("#cart_count").html())+parseInt(quantity);
+		var cart_price = parseFloat($("#cart_price").val())+parseFloat(price)*parseInt(quantity);
+		$("#cart_price").val(cart_price);
+		$("#cart_count").html(cart_count);
+     	$.post(url,{goodId:goodId,itemtype:itemtype,quantity:quantity,title:title,img:img,price:price,shopid:shopid,baseid:baseid,size:size,cost:cost},function(data){
+     		if(cb !== undefined) {
+				cb(data);
+				return;
+			}
+     	   if(data.status==1)
+     		{	
+				/*htm='<span>'+data.msg+'！购物车共有'+data.count+'件商品,共计：'+data.sumPrice+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(500);
+				$('#cart_count').html(data.count);
+				$('.am-icon-cart-plus').fadeOut(600);
+				setTimeout(slideUp_fn, 6000);*/
+				//alert(data.cartId);
+				location.href = jsurl+"&cartId="+data.cartId;			 
+				
+     		}else
+     		{
+     			htm='<span>'+data.msg+'！购物车共有'+cart_count+'件商品,共计：'+cart_price+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(1200);
+				$('#cart_count').html(cart_count);
+     			$('.am-icon-cart-plus').fadeOut(600);
+     			setTimeout(slideUp_fn, 6000);
+     		}
+     	},'json');
+		
+	}
+    
+	//加入购物车
+    function add_cart(goodId,itemtype,quantity,title,img,price,shopid,baseid,size,cost,cb)	//商品ID，购买数量，相应分类的价格，分类名称
+    {
+    	//jquery获取隐藏域的值
+    	var title = $("#title").val();
+    	var img = $("#img").val();
+    	var shopid = $("#shopid").val();
+    
+		var cart_count = parseInt($("#cart_count").html())+parseInt(quantity);
+		var cart_price = parseFloat($("#cart_price").val())+parseFloat(price)*parseInt(quantity);
+		$("#cart_price").val(cart_price);
+		$("#cart_count").html(cart_count);
+     	var url  = "{:U('Shopcart/add_cart')}";
+     	$.post(url,{goodId:goodId,itemtype:itemtype,quantity:quantity,title:title,img:img,price:price,shopid:shopid,baseid:baseid,size:size,cost:cost},function(data){
+     		if(cb !== undefined) {
+				cb(data);
+				return;
+			}
+     	   if(data.status==1)
+     		{	
+				htm='<span>'+data.msg+'！购物车共有'+cart_count+'件商品,共计：'+cart_price+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(500);
+				$('#cart_count').html(cart_count);
+				$('.am-icon-cart-plus').fadeOut(600);
+				setTimeout(slideUp_fn, 6000);				 
+				
+     		}else
+     		{
+     			htm='<span>'+data.msg+'！购物车共有'+cart_count+'件商品,共计：'+cart_price+'元.</span>';
+				$('.cartmsg').html(htm);
+				$('.cartmsg').slideDown(1200);
+				$('#cart_count').html(cart_count);
+     			$('.am-icon-cart-plus').fadeOut(600);
+     			setTimeout(slideUp_fn, 6000);
+     		}
+     	},'json');	
+    }
+	
+	function slideUp_fn(){
+		$('.cartmsg').slideUp(1200);
+	} 
+	
+	function share() {
+		$("#mcover").show();
+	}
+</script>
+<style>
+#pro-sp{
+	width: 100%; 
+	background-color: white; 
+	margin-bottom: 5px; 
+	font-size: 12px;
+	padding: 2px;
+}
+#pro-sp .am-u-sm-3{
+	text-align: center;
+}
+#pro-sp img{
+	width: 21px;
+	height: 21px;
+	vertical-align: middle;
+}
+#pro-sp span{
+	vertical-align:middle;
+}
+#goods_stock_msg{
+	color:#ff0000;
+	margin-right:10px;
+	font-weight:bold;
+}
+</style>
+<script type="text/javascript" src="../Style/js/indexanimate.js"></script>
+<!-- 购物流程E -->
+</head>
+<body>
+<!-- topnav -->
+<div class="top-title" id="end">
+<div class="am-g">
+<!-- 判断是否通过分享过来的商品 -->
+<?php
+if(session('shopid')!=$huiyuanid){
+	echo '<div class="am-u-sm-1" style="background:#f05d00;"><a href="./index.php?m=Index&a=index&shopid='.session('shopid').'" class="am-icon-chevron-left" style="color:#fff;font-size:14px;"></a></div>';	
+}else if($page == 'first'){
+	echo '<div class="am-u-sm-1" style="background:#f05d00;"><a href="./index.php?m=Item&a=itemcate" class="am-icon-chevron-left" style="color:#fff;font-size:14px;"></a></div>';
+}else{
+	echo '<div class="am-u-sm-1" style="background:#f05d00;"><a href="javascript:;" onClick="window.history.back(-1);" class="am-icon-chevron-left" style="color:#fff;font-size:14px;"></a></div>';
+}
+?>
+<!-- 判断是否通过分享过来的商品 -->	
+<div class="am-u-sm-11" style="font-size:14px; padding-right:10px; background-color: rgb(240,93,0);">
+	<h2>产品详情</h2>
+</div>
+	<!--<div class="am-u-sm-1"><a href="javascript:;" class="am-icon-home am-icon-md" style="color:#FFFFFF;font-size:12px;margin-right:10px;"></a></div>-->
+</div>
+</div>
+<!--<div class="top-title2">
+<div class="am-g">
+	<div class="am-u-sm-1"><a href="javascript:;" onClick="window.history.back(-1);" class="onetop1"><img src="../Style/images/fanhui1.png" /></a></div>
+	<div class="am-u-sm-9"><a href="{:U('Shopcart/index')}" class="twotop1"><img src="../Style/images/carts1.png" /></a></div>
+    <div class="am-u-sm-2"><a href="javascript:;" class="threetop1"><img src="../Style/images/xiaoxi1.png" /></a></div>
+</div>
+</div>-->
+
+<div class="cartmsg"></div>
+<!--// topnav -->
+
+<!--分享S-->
+<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+<img src="../Style/images/guide.png" />
+</div>
+<!--分享E-->
+
+<div id='rtt'></div>
+<!-- itemgroupimg -->
+<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0" style="margin-top:45px;">
+  <ul class="am-slides" id="ab">
+  <volist name="img_list" id="vo">
+    <li><img src="data/upload/item/{$vo.url}" ></li>
+  </volist>
+  </ul>
+</div>
+
+
+<script>
+  $(function() {
+    var $slider = $('#demo-slider-0');
+    var counter = 0;
+    var getSlide = function() {
+      counter++;
+      return '<li><img src="http://s.amazeui.org/media/i/demos/bing-' +
+        (Math.floor(Math.random() * 4) + 1) + '.jpg" />' +
+        '<div class="am-slider-desc">动态插入的 slide ' + counter + '</div></li>';
+    };
+
+    $('.js-demo-slider-btn').on('click', function() {
+      var action = this.getAttribute('data-action');
+      if (action === 'add') {
+        $slider.flexslider('addSlide', getSlide());
+      } else {
+        var count = $slider.flexslider('count');
+        count > 1 && $slider.flexslider('removeSlide', $slider.flexslider('count') - 1);
+      }
+    });
+
+  });
+</script>
+<!--隐藏域传输购物车所需内容-->
+<input type="hidden" value="{$item.id}" id="goodId" >
+<input type="hidden" value="{$size}" name="issize" />
+<input type="hidden" value="{$item.title}" name="title" id="title" />
+<input type="hidden" value="{$item.img}" name="img" id="img" />
+<input type="hidden" value="<?php echo session('shopid');  ?>" name="shopid" id="shopid" />
+<input type="hidden" value="{$item.itemtype}" name="itemtype" id="itemtype" />
+<input type="hidden" value="{$item.baseid}" name="baseid" id="baseid" />
+<div class="am-g projiabj">
+    <div class="am-u-sm-3 pro-huangbj">优品价
+	<if condition="$item.activity eq 1 or $item.is_combo eq 1">
+		<del><span id="yhprice" style="font-size:10px; margin-top:-5px;">¥{$item.price}</span></del>
+	<else/>
+		<span id="yhprice">¥{$item.price}</span>
+	</if>
+	<if condition="$item.activity eq 1 or $item.is_combo eq 1">
+		<span id="actprice" style="font-size:16px; margin-top:-5px;">¥{$activityPrice}</span>
+	</if>
+	</div>
+    <!--<div class="am-u-sm-3 pro-huangbj">优品价<span id="yhprice">¥{$item.price}</span><if condition="$vo.priceyuan neq '0'"><s style="color:#0183D7;">¥{$item.priceyuan}</s></if></div>-->
+  <div class="am-u-sm-7 projiazi">{$item.title}	<!--<if condition="$item.itemtype eq '0'"><font color="#fff" size="1">[保税商品]</font></if>--></div>
+  <div class="am-u-sm-2 pro-share"><a href="javascript:;" onClick="share();"><img src="../Style/images/img20.png"><span>分享</span></a></div>
+</div>
+<div class="am-g projiabj1">
+<div class="am-u-sm-6 changdi">
+产地：
+<if condition="$item.countryId eq 0">
+{$item.adress}
+<else/>
+{$countryname.name}
+</if></div>
+<div class="am-u-sm-6 yishou">已售{$item.buy_num}笔</div>
+</div>
+
+<notempty name="size">
+<!-- itemcate -->
+<div class="am-g proshudamai">
+<div class="am-u-sm-3 proshumainleft">选择规格：</div>
+<div class="am-u-sm-9 proshumainlei">
+<volist name="size" id="vo">
+<a href="javascript:;" class="">{$vo}<input type="hidden" name="id" value="{$i-1}"></a>
+<input type="hidden" name="yhprice{$i-1}" value="¥{$price[$i-1]}"><!-- $price=explode('|',$item['yhprice']); -->
+<input type="hidden" name="goods_stock{$i-1}" value="{$goods_stock[$i-1]}">
+<input type="hidden" name="cost{$i-1}" value="{$cost[$i-1]}">
+<input type="hidden" name="price{$i-1}" value="{$price[$i-1]}">
+<input type="hidden" name="aprice{$i-1}" value="{$aprice[$i-1]}">
+<input type="hidden" name="actprice{$i-1}" value="¥{$aprice[$i-1]}">
+<input type="hidden" name="size_imgs{$i-1}" value="{$size_imgs[$i-1]}">
+</volist>
+</div>
+</div>
+<!-- hidden area -->
+<input type="hidden" name="size" value="">
+<!-- 单品适配 -->
+<input type="hidden" name="yhprice" value="">
+<input type="hidden" name="actprice" value="">
+<input type="hidden" name="goods_stock" value="">
+<input type="hidden" name="cost" value="">
+<input type="hidden" name="price" id="price" value=""/>
+<input type="hidden" name="aprice" id="aprice" value=""/>
+<else />
+<input type="hidden" value="{$item.price}" name="price" id="price" />
+<input type="hidden" value="{$item.aprice}" name="aprice" id="aprice" />
+<input type="hidden" name="cost1" value="{$cost}" /><!-- 无分类下的成本价格 -->
+</notempty>
+
+<div class="am-g proshumain" style="padding-left:16px;">
+<div class="am-u-sm-3 proshumainleft" style="text-align:left;margin-top:3px;">购买数量：</div>
+<div class="am-u-sm-3">
+<input type="text" id="quantity"  value="1" orig="1" changed="1" class="spinnerExample"onafterpaste="this.value=this.value.replace(/\D/g,'')" onKeyUp="this.value=this.value.replace(/\D/g,'')" />
+</div>
+
+<div class="am-u-sm-6 proshengyushu" >
+  <span style="color:#999;margin-left:10px;">剩余<span id="goods_stock">
+    <notempty name="size">{$goods_stock[0]}<else/>
+      <if condition="$item.goods_stock lt 0">
+        <else />{$item.goods_stock}
+      </if>
+    </notempty>
+  </span>件</span>
+</div>
+
+<a style="float:right;" id="goods_stock_msg"></a>
+
+
+</div>
+
+<div id="pro-sp">
+	<div class="am-g">
+		<if condition="$item.itemtype eq 1">
+				<div class="am-u-sm-3"><img src="../Style/index-images/wanshui.png" alt="完税商品" /><span>&nbsp;完税商品</span></div>
+			<else/>
+			<div class="am-u-sm-3"><img src="../Style/index-images/baoshui.png" alt="保税商品" /><span>&nbsp;保税商品</span></div>
+		</if>
+		<div class="am-u-sm-3"><img src="../Style/index-images/zhengpin.png" alt="正品保障" /><span>&nbsp;正品保障</span></div>
+		<div class="am-u-sm-3"><img src="../Style/index-images/baoyou.png" alt="满99包邮" /><span>&nbsp;满99包邮</span></div>
+		<div class="am-u-sm-3"><img src="../Style/index-images/fahuo.png" alt="闪电发货" /><span>&nbsp;闪电发货</span></div>
+	</div>
+</div>
+
+<div data-am-widget="tabs"  class="am-tabs am-tabs-d2 pronei">
+<ul class="am-tabs-nav am-cf proneitimain">
+<li class="am-active"><a href="javascript:;">产品详情</a></li>
+<li class=""><a href="javascript:;">产品参数</a></li>
+<li class=""><a href="javascript:;">产品评论<span style="color:#c54056;">{$count}</span></a></li>
+</ul>
+<div class="am-tabs-bd">
+<!-------------产品详情--------------> 
+<div class="proneirong">
+<notempty name="item.info">
+{$item.info}
+<else />
+<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无产品详情！</div>
+</notempty>
+</div>
+<!-------------产品详情-end-------------> 
+ 
+ 
+<!-------------产品参数开始--------------->   
+<div class="proneimain" style="display:none;">
+<notempty name="item.cs">
+{$item.cs}
+<else />
+<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无产品参数！</div>
+</notempty>
+</div>
+<!-------------产品参数结束--------------->  
+
+<!-------------评价开始--------------->
+<div class="propinglunmain proneimain" style="display:none;">
+<ul class="am-comments-list am-comments-list-flip">
+<notempty name="cmt_list">
+<volist name="cmt_list" id="vo">
+  <li class="am-comment propinglunbj">
+   <article class="am-comment"> <!-- 评论容器 -->
+  <a href="javascript:;" class="">
+   <img  class="am-comment-avatar pinglun" style="width:40px;height:40px;border-radius:40px;margin-right:8px;" src="{$vo.cover}">
+   <!-- 评论者头像 -->
+  </a>
+
+  <div class="am-comment-main"> <!-- 评论内容容器 -->
+    <header class="am-comment-hd">
+      <!--<h3 class="am-comment-title">评论标题</h3>-->
+      <div class="am-comment-meta"> <!-- 评论元数据 -->
+        <a href="javascript:;" class="am-comment-author am-comment-authorzi">{$vo.uname}</a> <!-- 评论者 -->
+        评论于 <time datetime="">{$vo.add_time|date='Y-m-d',###}</time>
+      </div>
+    </header>
+
+    <div class="am-comment-bd">{$vo.info}</div> <!-- 评论内容 -->
+	<if condition="($vo.picurl1 neq '') OR ($vo.picurl2 neq '') OR ($vo.picurl3 neq '')"> 
+	<div class="am-comment-bd" style="margin-top:-15px;">
+	<if condition="$vo.picurl1 neq ''">
+	<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+	<img src="{$vo.picurl1}" class="example-image" style="width:50px;height:50px;"/>
+	</a>
+	</if>
+	<if condition="$vo.picurl2 neq ''">
+	<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+	<img src="{$vo.picurl2}" class="example-image" width="50" height="50" />
+	</a>
+	</if>
+	<if condition="$vo.picurl3 neq ''">
+	<a class="example-image-link" href="{$vo.picurl1}" data-lightbox="example-set" data-title="">
+	<img src="{$vo.picurl3}" class="example-image" width="50" height="50" />
+	</a>
+	</if>
+	</div>
+	</if>
+  </div>
+  </article>
+  </li>
+</volist>
+<else />
+<div style="text-align:center; height:60px;line-height:60px;color:#ccc;">暂无评论！</div>
+</notempty>
+</ul>
+</div>
+<!-------------评价结束--------------->  
+</div>
+</div>
+
+
+<div class="am-g">
+<div class="am-u-sm-3 propagetuixian"></div>
+<div class="am-u-sm-6 propagetuiti"><span style="color:#666;">买了该宝贝的人还买了</span></div>
+<div class="am-u-sm-3 propagetuixian"></div>
+</div>
+
+<ul class="am-avg-sm-2 am-thumbnails indexpromain">
+<volist name="itemsbuy" id="vo">
+  <li class="am-thumbnail">
+   <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+   <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+   <img real_src="data/upload/item/{$vo.img}" src="../Style/images/loading.gif" ><P style="height:70px;">{$vo.title|msubstr=0,24,'UTF-8',true}<br>
+<span style="font-family:'微软雅黑'; font-size:14px; color:#d3222c;">￥{$vo.price}</span></P></a></li>
+</volist>
+</ul>
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default" >
+      <ul class="am-navbar-nav am-cf am-avg-sm-3 carbottombj" style=" background:#FFF; border-top:1px #dad9d9 solid;">
+          <li  class="carbottomli propaedh">
+			<p onclick="location.href='index.php?shares={$info.id}'"><img src="../Style/index-images/home.png" alt="主页" style="width: 20px; height: 20px; margin-top: 0px;" />
+			<br/>首页</p>
+			<p onClick="shoucangFn()"><img src="../Style/index-images/shoucang1.png" alt="收藏" style="width: 20px; height: 20px; margin-top: 0px;" />
+			<br>收藏</p>
+			<p><a href="{:U('Shopcart/index',array('item_id'=>$item['id']))}"><span class="am-badge am-badge-danger am-round" id="cart_count"><neq name="cart_count" value="0">{$cart_count}<else />0</neq></span>
+<img src="../Style/images/img19.png"></a></p>
+          </li>
+		  
+		 <if condition="$item.is_stock eq 1">
+				<li style="background:#999999;color:#FFFFFF;" id="no_stock">
+					<a href="javascript:;">已售罄</a>
+				</li>
+			  <else/>
+			  <li style="background:#999999;color:#FFFFFF;display:none;" id="no_stock">
+				<a href="javascript:;">已售罄</a>
+			  </li>
+			  <li class="carbottomli3" style="background:#ffb400;" id="yes_cart">
+				<a href="javascript:;" class="m-tip" onClick="buys();" style="font-size:14px;">加入购物车</a>
+			  </li>          
+			  <li class="carbottomli2" id="yes_pay">
+				<a href="javascript:;" class="" onClick="buys(1);" style="font-size:14px;">立即购买</a>
+			  </li>
+		  </if>
+
+      </ul>
+  </div>
+  <input type = "hidden" id="cart_price" value="{$cart_price}">
+  <!--联系客服-->
+	<div style="width: 40px; height: 40px; position: fixed; right: 0px; top: 70%; z-index: 999; opacity: 0.6;">
+		<a href='https://static.meiqia.com/dist/standalone.html?eid=23554&clientid={$server_u.id}&metadata={"name":"<?php echo $server_u['username']; ?>","tel":"<?php echo $server_u['phone_mob']; ?>","email":"<?php echo $server_u['email']; ?>"}'><img src="../Style/index-images/kefu2.png" alt="联系客服" style="width: 40px; height: 40px;"/></a>
+	</div>
+<script type="text/javascript">
+$('.spinnerExample').spinner({});
+</script>
+<script type="text/javascript" src="../Style/js/lightbox-plus-jquery.min.js"></script>
+<script src="../Style/js/Y_lazyload.js" type="text/javascript"></script><!--图片懒加载-->
+<script type="text/javascript">
+$(function(){
+        /**
+        *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+        *
+        *   event           //加载img的触发事件
+        *   img             //随后加载 img 的dom
+        *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+        *   animate         //动画效果
+        *   animate_delay   //动画等待时间，等待图片下载完成
+        *   animate_time    //动画执行时间
+        *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+        **/
+        $(window).Y_lazyload({
+            time_out : 500
+        });
+    });
+</script>
+</body>
+</html>

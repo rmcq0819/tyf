@@ -1,0 +1,31 @@
+<html>
+	<head>
+	<script type="text/javascript" src="../Style/js/jquery-1.7.1.min.js"></script>
+	<script>
+		setInterval(function(){
+            jQuery.ajax({
+				type:"POST",
+				url:"{:U('Zhuanpan/ajax')}",
+				global:false,
+				dataType:"json",
+				data:"action=ajax",
+				success:function(data){ 
+					  $("#test1").val("恭喜"+data[0].username+"获得"+data[0].prize);
+					  $("#test2").val("恭喜"+data[1].username+"获得"+data[1].prize);
+					  $("#test3").val("恭喜"+data[2].username+"获得"+data[2].prize);
+				},
+				error:function()
+				{
+					//alert("err:操作错误");
+					alert(data);
+				}
+			})
+        }, 1000);
+	</script>
+	</head>
+	<body>
+		<input type="text" id="test1" name="test1" size="60" value=""/></br>
+		<input type="text" id="test2" name="test2" size="60" value=""/></br>
+		<input type="text" id="test3" name="test3" size="60" value=""/>
+	</body>
+</html>

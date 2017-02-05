@@ -1,0 +1,384 @@
+[ 2016-12-17T09:39:50+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000636s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000022s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001399s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008352s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.010333s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.005645s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000270s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.664617s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001272s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.665917s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008056s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.673994s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.674445s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.674838s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.675170s ]
+INFO: Run content_replace Behavior [ RunTime:-0.675587s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002043s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.676070s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000503s ]
+
+[ 2016-12-17T09:39:53+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000336s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000018s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000828s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002491s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004081s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003797s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 1 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000289s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.005179s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 1 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000304s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 2 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000229s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 60 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000216s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 300 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000232s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.025992s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000592s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.026608s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005635s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.032263s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.032539s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.032794s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.032996s ]
+INFO: Run content_replace Behavior [ RunTime:-0.033287s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001365s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.033657s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000371s ]
+
+[ 2016-12-17T09:39:54+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000340s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000019s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000823s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002504s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003973s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004120s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000291s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004360s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000292s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000236s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000245s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.025085s ]
+INFO: [ view_template ] --END-- [ RunTime:0.000586s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.025694s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005502s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.031216s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.031493s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.031747s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.031949s ]
+INFO: Run content_replace Behavior [ RunTime:-0.032242s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001364s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.032611s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000372s ]
+
+[ 2016-12-17T11:49:10+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001094s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000034s ]
+INFO: Run load_lang Behavior [ RunTime:-0.002035s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006453s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.010325s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.006823s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000343s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.403159s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002179s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.405380s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011604s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.417011s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.417725s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.418108s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.418421s ]
+INFO: Run content_replace Behavior [ RunTime:-0.418908s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002417s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.419460s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000659s ]
+
+[ 2016-12-17T11:49:12+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000344s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000020s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000873s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002794s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004261s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003663s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000341s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004500s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000273s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000208s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000213s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.025921s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001067s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.027010s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006325s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.033357s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.033849s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.034097s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.034299s ]
+INFO: Run content_replace Behavior [ RunTime:-0.034864s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002186s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.035576s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000582s ]
+
+[ 2016-12-17T12:00:26+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000889s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000025s ]
+INFO: Run load_lang Behavior [ RunTime:-0.002066s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008219s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.005657s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.006334s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000281s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.041380s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002473s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.043872s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014820s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.058714s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.059492s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.060320s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.061497s ]
+INFO: Run content_replace Behavior [ RunTime:-0.064221s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006343s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.065097s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000896s ]
+
+[ 2016-12-17T12:00:28+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000679s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000019s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001399s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004127s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004087s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003541s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000277s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004212s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000296s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000229s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000267s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.028712s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001866s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.030603s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009108s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.039732s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.040389s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.040942s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.041439s ]
+INFO: Run content_replace Behavior [ RunTime:-0.042065s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003009s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.042771s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000728s ]
+
+[ 2016-12-17T15:47:58+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001316s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000044s ]
+INFO: Run load_lang Behavior [ RunTime:-0.003713s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.013608s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.011144s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.007567s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000275s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.324668s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002163s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.326855s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008999s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.335875s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.337001s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.338053s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.338488s ]
+INFO: Run content_replace Behavior [ RunTime:-0.339004s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.003980s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.339890s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000591s ]
+
+[ 2016-12-17T15:48:00+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000498s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000020s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001488s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004201s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004059s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003860s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000326s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.005223s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000286s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000245s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000236s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.031708s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001852s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.033602s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009111s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.042732s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.043251s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.043681s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.044058s ]
+INFO: Run content_replace Behavior [ RunTime:-0.044557s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002694s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.045462s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000677s ]
+
+[ 2016-12-17T15:59:36+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000933s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000037s ]
+INFO: Run load_lang Behavior [ RunTime:-0.004727s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.013912s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.007087s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.007045s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000400s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.306374s ]
+INFO: [ view_template ] --END-- [ RunTime:0.003701s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.310142s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021324s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.331497s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.332472s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.333644s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.335521s ]
+INFO: Run content_replace Behavior [ RunTime:-0.336718s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006992s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.338642s ]
+INFO: [ view_end ] --END-- [ RunTime:0.003571s ]
+
+[ 2016-12-17T15:59:41+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000960s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000024s ]
+INFO: Run load_lang Behavior [ RunTime:-0.002028s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005442s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.004624s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003431s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000279s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004850s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000301s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000238s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000247s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.034336s ]
+INFO: [ view_template ] --END-- [ RunTime:0.001998s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.036358s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009029s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.045408s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.045906s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.046370s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.046782s ]
+INFO: Run content_replace Behavior [ RunTime:-0.047180s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002738s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.048177s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000585s ]
+
+[ 2016-12-17T16:03:06+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001321s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000041s ]
+INFO: Run load_lang Behavior [ RunTime:-0.004543s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.013925s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.005276s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004813s ]
+SQL: SELECT * FROM `weixin_menu` WHERE ( `often` = 1 )  [ RunTime:0.000831s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.353813s ]
+INFO: [ view_template ] --END-- [ RunTime:0.005146s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Undefined index: data E:\phpStudy\WWW\tyf\data\runtime\Cache\admin\f2060a97309747da5e15a6de56868020.php 第 3 行.
+INFO: Run ParseTemplate Behavior [ RunTime:-0.358977s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018390s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.377416s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.378444s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.379485s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.380268s ]
+INFO: Run content_replace Behavior [ RunTime:-0.381130s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.005624s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.383109s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002979s ]
+
+[ 2016-12-17T16:03:27+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=index&a=left
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000498s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000021s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001564s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004261s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003907s ]
+SQL: SHOW COLUMNS FROM `weixin_menu` [ RunTime:0.003513s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000279s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004571s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 50 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000307s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 51 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000236s ]
+SQL: SELECT * FROM `weixin_menu` WHERE (  ( `pid` = 295 ) ) AND ( `display` = 1 ) ORDER BY ordid  [ RunTime:0.000231s ]
+INFO: [ view_template ] --START--
+INFO: Run basic_template Behavior [ RunTime:-0.030436s ]
+INFO: [ view_template ] --END-- [ RunTime:0.002152s ]
+INFO: [ view_parse ] --START--
+INFO: Run ParseTemplate Behavior [ RunTime:-0.032617s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011413s ]
+INFO: [ view_filter ] --START--
+INFO: Run ContentReplace Behavior [ RunTime:-0.044050s ]
+INFO: Run TokenBuild Behavior [ RunTime:-0.044576s ]
+INFO: Run WriteHtmlCache Behavior [ RunTime:-0.045068s ]
+INFO: Run ShowRuntime Behavior [ RunTime:-0.045487s ]
+INFO: Run content_replace Behavior [ RunTime:-0.046019s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002831s ]
+INFO: [ view_end ] --START--
+INFO: Run ShowPageTrace Behavior [ RunTime:-0.046915s ]
+INFO: [ view_end ] --END-- [ RunTime:0.000625s ]
+
+[ 2016-12-17T16:40:55+08:00 ] 192.168.3.33 /tyf/index.php?g=admin&m=item_order&a=status_edit
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000528s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000022s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001733s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005465s ]
+NOTIC: [2048] Declaration of item_orderAction::getExcel() should be compatible with backendAction::getExcel($fileName, $headArr, $data, $keys) E:\phpStudy\WWW\tyf\app\Lib\Action\admin\item_orderAction.class.php 第 2 行.
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004231s ]
+SQL: SHOW COLUMNS FROM `weixin_item_order` [ RunTime:0.004096s ]
+SQL: UPDATE `weixin_item_order` SET `status`=8 WHERE ( `orderId` = '201612111417431798-02' ) [ RunTime:0.017029s ]
+

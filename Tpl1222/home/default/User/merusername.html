@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+<style type="text/css">
+	.topnav{z-index:999;position:fixed;width:100%;height:49px; background:#C54056; text-align:center; color:#fff; font-size:16px; line-height:49px; top:0;}
+	.topnav .back{margin-top:-8px;position:absolute; left:8px;top:6px;}
+	.picdiv{display:none;width:100%;height:85px;line-height:70px;background:#fff;margin-top:2px; padding-left:4%; padding-top:3px;}
+	.logo{background:#51ABC0; padding:2px 50px; color:#FFFFFF;font-size:14px;}
+	.showinfo{ position:absolute;top:60%;left:35%;border-radius:5px;background:#000;opacity:0.6;-moz-opacity:0.6;filter:alpha(opacity=60);width:120px;height:38px;box-shadow:0px 0px 10px #000;margin:-60px auto;color:#FFFFFF; text-align:center; line-height:38px;font-size:14px;display:none;z-index:999;}
+	.btnok{ background:#459E40; padding:10px 90px; color:#FFFFFF;font-size:14px;font-weight:bold;}
+	.txt{height:38px;width:100%;}
+	.pass{ text-align:center;margin-bottom:50px;display:block;}
+</style>
+<script>
+$(function(){
+	$("#uploadpic").toggle(function(){
+		$(".picdiv").slideDown(800);
+	},
+	function(){
+		$(".picdiv").slideUp(800);
+	}
+	);
+	
+	//修改店铺名
+	$("#editmer").live('click',function() {
+		var span_txt = $(this).prev().text();
+		var htm		 = '<input type="text" style="width:72%;border:1px solid #ccc;height:45px;" name="merchant" value="'+span_txt+'" />';
+		$(this).prev().html(htm);
+	});
+	
+	$("input[name='merchant']").live('blur',function(){
+		var span_txt	 = $(this).val();
+		var b			 = $(this).parent();
+		b.html(span_txt);
+		//保存
+		url = "{:U('User/meredit')}";
+		$.ajax({
+			type:"get",
+			url:url,
+			data:"txt="+span_txt+"&act=1",
+			beforeSend:function(){
+			
+			},
+			success:function(msg){
+				if(msg==1){
+					$(".showinfo").html("保存成功.").show().delay (3000).fadeOut();
+					return;
+				}
+				if(msg==0){
+					$(".showinfo").html("保存失败.").show().delay (3000).fadeOut();
+					return;
+				}
+			},
+			complete:function(){
+			
+			}
+			
+		});
+		
+	});
+	
+	//修改介绍
+	$("#editdesc").live('click',function() {
+		var span_txt = $(this).next().text();
+		var htm		 = '<textarea style="width:72%;border:1px solid #ccc;height:45px;" name="m_desc">'+span_txt+'</textarea>';
+		$(this).next().html(htm);
+	});
+	
+	$("textarea[name='m_desc']").live('blur',function(){
+		var span_txt	 = $(this).val();
+		var b			 = $(this).parent();
+		b.html(span_txt);
+		//保存
+		url = "{:U('User/meredit')}";
+		$.ajax({
+			type:"get",
+			url:url,
+			data:"txt="+span_txt+"&act=2",
+			beforeSend:function(){
+			
+			},
+			success:function(msg){
+				if(msg==1){
+					$(".showinfo").html("保存成功.").show().delay (3000).fadeOut();
+					return;
+				}
+				if(msg==0){
+					$(".showinfo").html("保存失败.").show().delay (3000).fadeOut();
+					return;
+				}
+			},
+			complete:function(){
+			
+			}
+			
+		});
+	});
+	
+	//修改密码
+	p1 = $("input[name='oldp']");
+	p2 = $("input[name='newp']");
+	p3 = $("input[name='anewp']");
+	
+	p1.blur(function(){
+		if(p1.val()==""){
+			p1.css("border","1px solid red");return;
+		}
+	});
+	
+	p2.blur(function(){
+		if(p2.val()==""){
+			p2.css("border","1px solid red");return;
+		}
+	});
+	
+	p3.blur(function(){
+		if(p3.val()==""){
+			p3.css("border","1px solid red");return;
+		}else{
+			if($.trim(p3.val())!=$.trim(p2.val())){
+				$(".showinfo").html("两次密码不一致.").show().delay (3000).fadeOut();p3.val("");return;
+			}
+		}
+	});
+	$(".btnok").click(function(){
+		if(p1.val()==""){
+			p1.css("border","1px solid red");return;
+		}
+		if(p2.val()==""){
+			p2.css("border","1px solid red");return;
+		}
+		if(p3.val()==""){
+			p3.css("border","1px solid red");return;
+		}
+		//提交修改
+		url = "{:U('User/meredit')}";
+		//当前用户ID
+		id = $("input[name='id']").val();
+		$.ajax({
+			type:"get",
+			url:url,
+			data:"id="+id+"&p1="+p1.val()+"&p2="+p2.val()+"&act=3",
+			beforeSend:function(){
+			
+			},
+			success:function(msg){
+				if(msg==1){
+					$(".showinfo").html("修改成功.").show().delay (3000).fadeOut();
+					p1.val("");
+					p2.val("");
+					p3.val("");
+					location.href="./index.php?m=User&a=index";
+					return;
+				}
+				if(msg==0){
+					$(".showinfo").html("原密码不正确.").show().delay (3000).fadeOut();
+					return;
+				}
+				if(msg==2){
+					$(".showinfo").html("修改失败.").show().delay (3000).fadeOut();
+					return;
+				}
+			},
+			complete:function(){
+			
+			}
+			
+		});
+		
+	});
+	
+});
+</script>
+</head>
+<body>
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 店铺设置
+</div>
+<div class="am-g diantiaobj" style="margin-top:51px;">
+<div class="am-u-sm-4 diantuoxiang">
+<if condition="$visitor.hyimg neq ''"><img src="{$visitor.hyimg}" /><else /><img src="{$weiheader.cover}" /></if></div>
+<div class="am-u-sm-4 diantuoxiangzi"><p style="font-size:14px; color:#333;">{$visitor.username}</p><p style="color:#666;">注册时间：{$visitor.reg_time|date='Y-m-d H:i:s',###}</p></div>
+<div class="am-u-sm-4 diantuoxiangtu"><a href="javascript:;" id="uploadpic"><img src="../Style/images/pic11.png"></a></div>
+</div>
+
+<!-- 上传头像 -->
+<div class="picdiv">
+<form method="post" action="{:U('User/merimg')}" id="editusername_form" enctype="multipart/form-data">
+<input type="file" name="avatar" size="30" style="border:1px solid #ccc;">
+<a href="javascript:;" style="position:absolute;margin-top:-26px;right:10px;color:#51ABC0;">("团洋范"照，给自己添加人气)</a>
+<a href="javascript:$('#editusername_form').submit();" class="logo">更新头像</a>
+</form>
+</div>
+
+<div class="am-g am-g-fixed dianmiaobj">
+<div class="am-u-sm-12 dianmiaoti"><img src="../Style/images/mer.png" >店铺信息</div>
+<div class="am-u-sm-12 dianxiangxizi">店铺名
+<span style="padding:0 0 0 15px;">
+{$info.merchant}
+</span>
+<a href="javascript:;" id="editmer" style="float:right;"><img src="../Style/images/picedit.png" width="40"></a></div>
+<div class="am-u-sm-12 dianxiangxizi">微信名<span style="padding:0 0 0 15px;">{$info.nickname}</span></div>
+</div></div>
+
+
+
+<div class="am-g am-g-fixed dianmiaobj">
+<div class="am-u-sm-12 dianmiaoti"><img src="../Style/images/desc.png" >店铺描述</div>
+<div class="am-u-sm-12 dianmiaozi">
+<a href="javascript:;" id="editdesc"><img src="../Style/images/picedit.png"></a>
+<span>{$info.m_desc}</span>
+</div>
+</div></div>
+
+<div class="am-g am-g-fixed dianmiaobj">
+<div class="am-u-sm-12 dianmiaoti"><img src="../Style/images/pic101.png" >更改密码</div>
+<div class="pass">
+	<input type="password" class="txt" name="oldp" placeholder="输入原密码"><br/><br/>
+	<input type="password" class="txt" name="newp" placeholder="输入新密码"><br/><br/>
+	<input type="password" class="txt" name="anewp" placeholder="确定新密码"><br/><br/>
+	<a href="javascript:;" class="btnok">确定修改</a>
+</div>
+</div>
+
+<div class="showinfo"></div>
+</body>
+</html>

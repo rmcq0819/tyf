@@ -1,0 +1,64 @@
+<include file="public:header" />
+<style type="text/css">
+.coupon-a{ background:#EAEEF4; padding:5px 15px; border:1px solid #999999}
+</style>
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="coupon_templet" />
+                    <input type="hidden" name="a" value="user" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+					 <input type="hidden" name="id" value="{$_GET['id']}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="35" value="{$search}" placeholder="支持按照用户ID、昵称及订单号查找" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+					<span style="color:#959595">当前您查看的是持有“<span style="color:red">{$couponDetail.title}</span>”的优惠券的全部用户</span>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('score_log/ajax_edit')}">
+	<form name="myForm" method="post">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+				<th width="25%">用户ID</th>
+				<th width="25%">用户昵称</th>
+				<th width="25%">使用订单号</th>
+				<th width="25%">使用情况</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="user" id="vol" >
+            <tr>
+				<td align="center">{$vol.id}</center>
+				<td align="center">{$vol.username}</td>
+				<td align="center">{$vol.orderId}</td>
+				<td align="center">
+					<switch name="vol.status">
+						<case value="0"><if condition="$vol.end_time lt $time">已过期<else/>未使用</if></case>
+						<case value="1">已使用</case>
+					</switch>
+				</td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+	
+	</form>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$info.title}_{$page_seo.title}</title>
+<include file="public:headtop" />
+</head>
+<body>
+<style>
+img{max-width:100%}
+</style>
+<include file="public:head" />
+<div class="top-title" id="end">
+<div class="am-g">
+	<div class="am-u-sm-1"><a href="javascript:;" onClick="window.history.back(-1);" class="am-icon-chevron-left" style="color:#FFFFFF;font-size:14px;"></a></div>
+	<div class="am-u-sm-11" style="font-size:14px; padding-right:10px;"><h2>素材详情</h2></div>
+</div>
+</div>
+<div class="clear" style="height:55px;"></div>
+<div style="border:#ececec;width:98%;margin:auto">
+<article class="am-article">
+  <div class="am-article-hd">
+    <h1 class="am-article-title" style="text-align:center;font-size:18px">{$info.title}</h1>
+    <p class="am-article-meta" style="text-align:center">{$info.add_time|date='Y-m-d H:i:s',###}</p>
+  </div>
+
+  <div class="am-article-bd">
+    <p class="am-article-lead">摘要:{$info.intro}</p>
+  </div>
+  {$info.info}
+</article>
+<div>
+</body>
+</html>

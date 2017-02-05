@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<include file="public:headtop" />
+</head>
+<body style="margin: 0 auto;">
+<include file="public:head" />
+
+  <volist name='serve' id='vo'>
+<div>
+     <a href="{$vo.url}"> <img title="{$vo.desc}" width="100%" src="data/upload/advert/{$vo.content}"></a>
+  </div>           
+        </volist>
+		
+<div class="serve_li">
+  <volist name='cid_li' id="item">
+	<a href="{:U('canvass/index',array('id'=>$item['id']))}" <if condition="$item['id'] == $_GET['id']">class="hover"</if>>{$item.name}</a>
+	</volist>
+</div>
+
+<div class="canvass">
+{$info.info}
+</div>
+<div style="height:25px;background: #fff;border-top: 1px solid #e2e2e2;"></div>
+<div class="clear" style="height:33px;"></div>
+<include file="public:footer" />
+</body>
+</html>

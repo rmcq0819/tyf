@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>我的仓库</title>
+<include file="public:headtop" />
+<style>
+*{margin:0px; padding:0px;}
+.bar{}
+.bar li{float:left;width:50%;height:30px;line-height:30px;font-size:14px;padding:8px 0px;text-align:center;background:#eee;}
+.bar .cur{background:#fff;}
+
+table {width:100%;text-align:center;}
+
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<ul class="bar">
+	<li class="cur">
+		<span>未处理</span>
+	</li>
+	<li>
+		<span>已处理</span>
+	</li>
+</ul>
+<div class="clear"></div>
+
+<div style="padding:10px 0px;">
+<!-- 未处理购货信息 -->
+<table class="weicl">
+	<tr>
+		<td>编号</td>
+		<td>购货人</td>
+		<td>时间</td>
+		<td>操作</td>
+	</tr>
+	<if condition="count($ordermsg0) eq 0">
+		<tr><td colspan="4">没有未处理的购货信息</td></tr>
+	<else/>
+		<volist name="ordermsg0" id="vo">
+		<tr>
+			<td>{$i}</td>
+			<td>{$vo.dlname}</td>
+			<td>{$vo.add_time|date='Y-m-d',###}</td>
+			<td><a href="{:U('User/ordermsg_dtl',array('id'=>$vo['id']))}">查看详情</a></td>
+		</tr>
+		</volist>
+	</if>
+</table>
+
+<!-- 已处理购货信息 -->
+<table class="yicl">
+	<tr>
+		<td>订单号</td>
+		<td>购货人</td>
+		<td>订单状态</td>
+		<td>操作</td>
+	</tr>
+	<if condition="count($ordermsg1) eq 0">
+	<tr><td colspan="4">没有已处理的购货信息</td></tr>
+	<else/>
+		<volist name="ordermsg1" id="vo">
+		<tr>
+			<td>{$vo.orderid}</td>
+			<td>{$vo.dlname}</td>
+			<td>{$status[$vo['ostatus']]}</td>
+			<td><a href="{:U('User/ordermsg_dtl',array('id'=>$vo['id']))}">查看订单</a></td>
+		</tr>
+		</volist>
+	</if>
+</table>
+</div>
+
+ <div class="clear" style="height:30px;"></div>
+</body>
+</html>
+<script>
+$().ready(function(){
+
+	$('.yicl').css('display','none');
+	$('.bar>li').bind('click',function(){
+		$('.bar>li').removeClass('cur');
+		$(this).addClass('cur');
+		var index = $(this).index();
+		if(index == 0){
+			$('.weicl').css('display','');
+			$('.yicl').css('display','none');
+		}else{
+			$('.weicl').css('display','none');
+			$('.yicl').css('display','');
+		}
+		
+	});
+});
+</script>

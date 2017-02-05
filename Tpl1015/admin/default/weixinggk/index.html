@@ -1,0 +1,75 @@
+<include file="public:header" />
+<!--文章列表-->
+<div class="content_menu ib_a blue line_x" style="margin-left:10px;margin-top:5px;">
+<a class="add fb "  href="{:U('weixinggk/add')}">
+<em>添加转盘活动</em>
+</a>
+</div>
+</div>
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+        <tr>
+            <td>
+            <div class="explain_col">
+                <input type="hidden" name="g" value="admin" />
+                <input type="hidden" name="m" value="weixinggk" />
+                <input type="hidden" name="a" value="index" />
+                <input type="hidden" name="menuid" value="{$menuid}" />
+                
+                &nbsp;&nbsp;{:L('keyword')}:
+                <input name="keyword" type="text" class="input-text" size="25" value="{$keyword}" />
+                <input type="submit" name="search" class="btn" value="{:L('search')}" />
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('weixinggk/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width=25><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th align="center"><span data-tdtype="order_by" data-field="title">标题</span></th>
+                <th><span data-tdtype="order_by" data-field="cate_id">活动内容</span></th>
+                <th width=80>活动人数</th>
+                <th width=80>活动次数</th>
+				<th width=150><span data-tdtype="order_by" data-field="add_time">活动开始时间</span></th>
+                <th width=150><span data-tdtype="order_by" data-field="add_time">活动结束时间</span></th>
+                <th width="80">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center">{$val.hd_name}</td>
+                <td align="center">{$val.hd_info|msubstr=0,25}</td>
+				<td align="center">{$val.hd_renshu}</td>
+                <td align="center">{$val.hd_cishu}</td>
+                <td align="center">{$val.hd_begin_time|date='Y-m-d H:i:s',###}</td>
+                 <td align="center">{$val.hd_end_time|date='Y-m-d H:i:s',###}</td>
+                <td align="center"><a href="{:u('weixinggk/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}">{:L('edit')}</a> | <a href="javascript:void(0);" class="J_confirmurl" data-acttype="ajax" data-uri="{:u('weixinggk/delete', array('id'=>$val['id']))}" data-msg="{:sprintf(L('confirm_delete_one'),$val['title'])}">{:L('delete')}</a></td>
+            </tr>
+            </volist>
+        </tbody>
+    </table>
+
+    <div class="btn_wrap_fixed">
+        <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('weixinggk/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" />
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="public:footer" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+</body>
+</html>

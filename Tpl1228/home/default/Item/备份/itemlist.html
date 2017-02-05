@@ -1,0 +1,189 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" /> 
+
+<script>
+$(function(){
+	$('.prorenqimain>.prorenqi').click(function(){ 
+
+		$(".load").show().delay(800).fadeOut();
+		$(this).find('a').addClass("onselect");
+		$(this).siblings().find('a').removeClass();
+		//$(".itemlist>ul").slideUp('500').eq($('.prorenqimain>.prorenqi').index(this)).slideDown('500');
+		var cateid = $(this).find('a').attr("id");
+		if(cateid==3){ //默认3，ASC
+			c = $(this).find('a').find("span");
+			c.removeClass("am-icon-caret-down");
+			c.addClass("am-icon-caret-up");
+			$(this).find('a').attr("id",4);
+		}else if(cateid==4){
+			c = $(this).find('a').find("span");
+			c.removeClass("am-icon-caret-up");
+			c.addClass("am-icon-caret-down");
+			$(this).find('a').attr("id",3);
+		}
+		
+		$("#div"+cateid).show().siblings(".indexpromain").hide();
+		
+		
+	}); 
+});
+</script>
+
+</head>
+<body>
+<div id='rtt'></div>
+<input type="hidden" name="cate_id" value="{$cate_id}" />
+<input type="hidden" name="type" value="{$type}" />
+
+<!-- top banner -->
+<div class="probanner">
+<img src="data/upload/advert/{$ad.content}" <if condition="$ad.url neq ''">onClick="location.href='{$ad.url}'"</if> />
+</div>
+
+
+<div class="am-g prorenqimain">
+<div class="am-u-sm-3 prorenqi"><a href="javascript:;" id="1" class="onselect">人气</a></div>
+<div class="am-u-sm-3 prorenqi"><a href="javascript:;" id="2">时间</a></div>
+<div class="am-u-sm-3 prorenqi"><a href="javascript:;" id="3">价格<span></span></a></div>
+<div class="am-u-sm-3 prorenqi"><a href="javascript:;" id="5">销量</a></div>
+</div>
+
+<!-- itemlist -->
+<div class="load">
+<img src="../Style/images/loading.gif" />
+<span>玩命加载中..</span>
+</div>
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="div1">
+<notempty name="moodslist">
+<volist name="moodslist" id="vo">
+  <li class="am-thumbnail">
+  <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+  <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+  <img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif" >
+  <div style="width:100%; height:65px;">
+	  <div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+		  <b style="font-size:14px; color:#FF0000;">¥{$vo.price}</b>
+		  <if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+		  <a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+	  </div>
+	  <div style="padding:4px 2px 2px 2px;">{$vo.title|msubstr=0,12,'UTF-8',true}</div>
+  </div>
+  </a></li>
+</volist>
+<else />
+<div class="nolist">没有找到相关商品~~</div>
+</notempty>
+</ul>
+
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="div2" style="display:none">
+<notempty name="timelist">
+<volist name="timelist" id="vo">
+  <li class="am-thumbnail">
+  <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+  <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+  <img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif" >
+  <div style="width:100%; height:65px;">
+	  <div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+		  <b style="font-size:14px; color:#FF0000;">¥{$vo.price}</b>
+		  <if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+		  <a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+	  </div>
+	  <div style="padding:4px 2px 2px 2px;">{$vo.title|msubstr=0,12,'UTF-8',true}</div>
+  </div>
+  </a></li>
+</volist>
+<else />
+<div class="nolist">没有找到相关商品~~</div>
+</notempty>
+</ul>
+
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="div3" style="display:none">
+<notempty name="pricelist_asc">
+<volist name="pricelist_asc" id="vo">
+  <li class="am-thumbnail">
+  <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+  <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+  <img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif" >
+  <div style="width:100%; height:65px;">
+	  <div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+		  <b style="font-size:14px; color:#FF0000;">¥{$vo.price}</b>
+		  <if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+		  <a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+	  </div>
+	  <div style="padding:4px 2px 2px 2px;">{$vo.title|msubstr=0,12,'UTF-8',true}</div>
+  </div>
+  </a></li>
+</volist>
+<else />
+<div class="nolist">没有找到相关商品~~</div>
+</notempty>
+</ul>
+
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="div4" style="display:none">
+<notempty name="pricelist_desc">
+<volist name="pricelist_desc" id="vo">
+  <li class="am-thumbnail">
+  <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+  <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+  <img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif" >
+  <div style="width:100%; height:65px;">
+	  <div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+		  <b style="font-size:14px; color:#FF0000;">¥{$vo.price}</b>
+		  <if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+		  <a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+	  </div>
+	  <div style="padding:4px 2px 2px 2px;">{$vo.title|msubstr=0,12,'UTF-8',true}</div>
+  </div>
+  </a></li>
+</volist>
+<else />
+<div class="nolist">没有找到相关商品~~</div>
+</notempty>
+</ul>
+
+<ul class="am-avg-sm-2 am-thumbnails indexpromain" id="div5" style="display:none">
+<notempty name="buylist">
+<volist name="buylist" id="vo">
+  <li class="am-thumbnail">
+  <if condition="$vo.itemtype eq 0"><img src="../Style/images/baosui.png" style="position:absolute;width:30px;" /></if>
+  <a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}">
+  <img real_src="data/upload/item/{:get_thumb($vo['img'], '_b')}" src="../Style/images/loading.gif" >
+  <div style="width:100%; height:65px;">
+	  <div style="width:100%; padding:4px 2px 2px 2px; border-bottom:1px dashed #ccc;">
+		  <b style="font-size:14px; color:#FF0000;">¥{$vo.price}</b>
+		  <if condition="$vo.priceyuan neq '0'"><s style="font-size:10px; color:#0183D7;">¥{$vo.priceyuan}</s></if>
+		  <a style="float:right;font-size:13px;">销量{$vo.buy_num}</a>
+	  </div>
+	  <div style="padding:4px 2px 2px 2px;">{$vo.title|msubstr=0,12,'UTF-8',true}</div>
+  </div>
+  </a></li>
+</volist>
+<else />
+<div class="nolist">没有找到相关商品~~</div>
+</notempty>
+</ul>
+
+<include file="public:footer" />
+<script src="../Style/js/Y_lazyload.js" type="text/javascript"></script><!--图片懒加载-->
+<script type="text/javascript">
+$(function(){
+        /**
+        *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+        *
+        *   event           //加载img的触发事件
+        *   img             //随后加载 img 的dom
+        *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+        *   animate         //动画效果
+        *   animate_delay   //动画等待时间，等待图片下载完成
+        *   animate_time    //动画执行时间
+        *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+        **/
+        $(window).Y_lazyload({
+            time_out : 500
+        });
+    });
+</script>
+</body>
+</html>

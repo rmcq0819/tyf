@@ -1,0 +1,229 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>升级商家</title>
+		<include file="public:head" />
+				<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+		<script type="text/javascript" language="javascript" src='../Style/js/dizhi2.js'></script>
+		<script type="text/javascript" language="javascript" src='../Style/js/diqu2.js'></script>
+		<style type="text/css">
+			*{
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;
+				position: fixed;
+				width: 100%;
+				height: 49px;
+				background: rgb(240,93,0);
+				text-align: center;
+				color: #fff;
+				font-size: 18px;
+				line-height: 49px;
+				top: 0;
+			}
+			
+			.topnav .back {
+				position: absolute;
+				left: 8px;
+				top: 6px;
+				margin-top: -8px;
+			}
+			
+			#form{
+				width: 100%; 
+				height: 390px; 
+				background-color: white;
+			}
+			/******基本信息*******/
+			#information{
+				width: 100%;
+				height: 40px;
+				padding: 10px;
+				margin-top: 49px;
+				color: rgb(240,93,0);
+				background-color: rgb(236,234,234); 
+			}
+			#user-info{
+				width: 100%;
+				height: 500px;
+				background-color: white;
+			}
+			/*商家信息*/
+			#shops-name,#shops-phone,#shops-type,#shops-province,#shops-city,#shops-country{
+				width: 100%;
+				height: 50px;
+				padding: 10px;
+				font-size: 14px;
+				line-height: 30px;
+			}
+			#shops-phone,#shops-province,#shops-country{				
+				width: 100%;
+				height: 50px;
+				background-color: rgb(236,234,234);
+			}
+			#shops-type select,#shops-city select{             /*下拉框的宽度和背景颜色*/
+				width: 55%;
+				background-color: white;
+			}
+			#shops-phone input,#shops-province select,#shops-country select{     /*下拉框的宽度和背景颜色*/
+				width: 55%;
+				background-color: rgb(236,234,234);
+			}
+			#shops-type select,#shops-province select,#shops-city select,#shops-country select{
+				appearance: none;
+				-webkit-appearance: none;
+			}
+			#form i{
+				float: right;
+				margin-right: 20px;
+			}
+			/*******提交按钮*********/
+			#btn{
+				width: 100%; 
+				height: 50px; 
+				color: rgb(240,93,0); 
+				text-align: center; 
+				line-height: 50px; 
+				font-size: 15px;
+			}
+			#btn button{
+				width: 100%;
+				height: 50px;
+				background-color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			升级商家
+		</div>
+		<div id="form">
+			<!--升级商家-->
+			<div id="information">
+				<h1>基本信息</h1>
+			</div>
+			<div >您的邀请人是：{$share_data}，请确认信息无误。</div>
+
+			<div id="shops-name">
+				<span>商家姓名：</span>
+				<input type="text" name="username" placeholder="请输入店主的名字"/>
+			</div>
+			<div id="shops-phone">
+				<span>商家手机：</span>
+				<input type="text" name="phone_mob" placeholder="请输入店主的手机号码"/>
+			</div>
+			<div id="shops-address">
+				<span>商家联系地址：</span>
+				<input type="text" name="address" placeholder="请输入店主的联系地址"/>
+			</div>
+			<div id="shops-weixin">
+				<span>商家微信号：</span>
+				<input type="text" name="wxname" placeholder="请输入店主的微信号"/>
+			</div>
+			<div id="shops-cardId">
+				<span>商家省份证号：</span>
+				<input type="text" name="card" placeholder="请输入店主的省份证ID"/>
+			</div>
+<!-- 			<div id="shops-type">
+				<span>申请类型：</span>
+				<select name="" >
+					<option value="">请选择申请类型</option>
+					<option value="">2</option>
+					<option value="">3</option>
+				</select>
+				<i class="am-icon-chevron-down"></i>
+			</div>
+			<div id="shops-province">
+				<span>选择省份：</span>
+				 <select name="sheng" id="s1" style="font-size: 13px;color: #333333;background-color: #eceaea; "></select>
+				<i class="am-icon-chevron-down"></i>
+			</div>
+			<div id="shops-city" >
+				<span>选择城市：</span>
+				<select name="shi" id="s2" style="font-size: 13px;color: #333333;background-color: #ffffff; "></select>
+				<i class="am-icon-chevron-down"></i>
+			</div>
+			<div id="shops-country">
+				<span>选择区县：</span>
+				<select name="qu" id="s3" style="font-size: 13px;color: #333333;background-color: #eceaea; "></select>
+				<i class="am-icon-chevron-down"></i>
+			</div> -->
+<!-- 		<script language="javascript">
+			new PCAS("sheng","shi","qu","","","");
+			</script> -->
+			<div id="btn">
+				<button onclick="lv_up();">提交申请</button>
+			</div>
+		</div>
+	
+		<include file="public:footer" />
+	</body>
+
+</html>
+<script src="../Style/js/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript">
+ $("#submit").click(function(){
+    var res = true;
+    $("#form").find("input[type='text']").each(function(){
+      if ($(this).val() == '') {
+          var name = $(this).attr("placeholder");
+          alert(name+'不能为空!');
+          res = flase;
+      }
+    })
+    var tel  = $("input[name='phone_mob']").val();
+    var mail = $("input[name='email']").val();
+    if(!!tel.match(/^((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)$/) == false){
+        alert("请输入正确的手机号!");
+        res = flase;
+    }
+      
+    if(res) {
+      var url ="{:U('Recom/index')}";
+      $.post(url,{userinfo: $("form").serialize()},function(data){
+          alert(data.title+'\t\t\n'+data.msg);
+          if (data.code == 1) {
+            window.location.href=data.url;
+          };
+      },'json');
+    }; 
+ })
+    $(document).ready(
+        function() {
+            var nowpage = 0;
+            //给最大的盒子增加事件监听
+            $(".container").swipe(
+                {
+                    swipe:function(event, direction, distance, duration, fingerCount) {
+                         if(direction == "up"){
+                            if (nowpage != 1) {
+                              nowpage = nowpage + 1;
+                            };
+                         }else if(direction == "down"){
+
+                            nowpage = nowpage - 1;
+                         }
+
+                         if(nowpage > 2){
+                            nowpage = 0;
+                         }
+
+                         if(nowpage < 0){
+                            nowpage = 0;
+                         }
+                        $(".container").animate({"top":nowpage * -100 + "%"},400); 
+                        $(".page").eq(nowpage).addClass("cur").siblings().removeClass("cur");
+                    }
+                }
+            );
+        }
+    );
+</script>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<include file="public:headtop" />
+<link rel="stylesheet" type="text/css" href="../Style/jquery.css">
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
+<style>
+	.fl{float:left;}
+	.fr{float:right;}
+
+	.order {background:#F3F3F3}
+	.order .top {height:50px;line-height:50px;margin-bottom:20px;background:#811806;padding-left:10px;}
+	.order .top span{border:1px dashed #ccc;color:#eee;font-size:14px;padding:4px;border-radius:10%;-moz-border-radius:10%;-webkit-border-radius:10%;}
+	
+	.order .orderlist{margin-bottom:10px;background:#fff;border-top:1px solid #DEDEDE;border-bottom:1px solid #DEDEDE;}
+	.order .orderlist .danhao{border-bottom:1px solid #DEDEDE;padding:4px 10px;}
+	.order .orderlist .danhao .orderstatus{color:red;font-weight:bold;}
+	.order .orderlist .item{height:80px;padding:10px;border-bottom:1px solid #DEDEDE}
+	.order .orderlist .item .item_img{padding-right:10px;}
+	.order .orderlist .item .item_info{width:64%}
+	.order .orderlist .orderinfo {padding:6px 10px;border-bottom:1px solid #DEDEDE}
+	.order .orderlist .orderinfo span{}
+	.order .orderlist .tuihuoinfo {padding:6px 10px;}
+</style>
+</head>
+<body>
+<title>会员中心 - 主页</title>
+<include file="public:headuser" />
+<div class="order">
+<div class="topnav">
+	 <a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+	 退货记录
+</div>
+	 <div class="clear" style="height:52px;"></div>
+	<if condition="!empty($item_orders)">
+	<volist name="item_orders" id="vo">
+	<div class="orderlist">
+		<div class="danhao">
+			订单：{$vo.orderId}
+			<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">订单详情</a>
+			<span class="orderstatus fr">{$state[$vo['status']]}</span>
+		</div>
+		<div class="clear"></div>
+		<volist name="vo.item" id="vo1">
+		<div class="item">
+			<div class="fl item_img"><img alt="" src="{:attach(get_thumb($vo1['img'], '_b'), 'item')}" width="80" height="80"></div>
+			<div class="fl item_info">
+				<p>{$vo1.title}</p>
+				<p>单价：￥{$vo1.price} X {$vo1.quantity}</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+		</volist>
+		<div class="orderinfo">
+			总价：￥{$vo.order_sumPrice}元
+			<span class="fr">
+				<if condition="$vo['status'] eq 1">
+				<a href="{:U('Order/pay',array('orderId'=>$vo['orderId']))}">去付款</a> | <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">查看</a>
+				<elseif condition="$vo['status'] eq 2" />
+				<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">查看</a> | <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">申请退货</a>
+				<elseif condition="$vo['status'] eq 3" />
+				<a href="{:U('Order/confirmOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">确认收货</a> | <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">查看</a>
+				<elseif condition="$vo['status'] eq 4" />
+				<a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">去评论</a> | <a href="{:U('Order/checkOrder',array('orderId'=>$vo['orderId'],'status'=>$status))}">申请退货</a>
+				</if>
+			</span>
+		</div>
+
+		<div class="tuihuoinfo">
+			<p>收货人：{$huming} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系方式：{$phone_mob}</p>
+			<p>开户人：{$huming} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开户银行：{$kaihuhang}</p>
+			<p>银行卡号：{$zhanghao}</p>
+		</div>
+	</div>
+	</volist>
+	<else/>
+	<div style="text-align:center;font-size:16px;padding:50px 0">
+		<span style="font-size:36px;margin-left:30%" class="fl">:(</span>
+		<br><br>
+		没有任何相关的记录
+	</div>
+	</if>
+	<div class="footer"></div>
+</div>
+</body>
+</html>
+<script>
+	$().ready(function(){
+		var flag = {$item_orders|count=###};
+		if(!flag){
+			var oHeight = window.innerHeight;
+			$('.order').height(oHeight - 48);
+		}
+	});
+</script>

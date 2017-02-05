@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 积分记录</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+</head>
+<body>
+<div id="content" style="background:#fff;min-height: 500px;">
+  <div style="background: #e7f3f3;float: left;width:100%;padding-top: 30px;padding-bottom: 30px;">
+  <span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;">积分:<?php echo $item_jifennum-$item_jifennum1;?></span>
+  </div>
+  <div class="clear"></div>
+          	 <notempty name="item_jifenArr">
+             <volist name='item_jifenArr' id='item' >
+			  <li style="list-style-type:none;border-top: 1px solid #e2e6e3;border-bottom: 1px solid #e2e6e3;margin-top: 20px;width: 95%;padding-left:5%;float: left;padding-bottom: 10px;">
+			  <div style="width: 60%;float: left;">
+			  <h1 style="color: #495143;font-size: 14px;font-weight: 100;height: 38px;line-height: 38px;">
+			  <if condition="($item['state'] eq 1) AND ($item['item_id'] neq '')">
+			  购买
+			  <elseif condition="($item['state'] eq 0)"/>
+			  兑换了
+			  </if>
+			  {$item.title}<span>
+			  <if condition="($item['state'] eq 1) AND ($item['item_id'] neq '')">
+			  ¥{$item.price}元
+			  <else />
+			  </if></span></h1>
+			  <span style="font-size: 12px;color:#939998;">{$item.add_time|date='Y-m-d H:i:s',###}</span>
+			  </div>
+			  <div style="width: 30%;float: right;text-align: center;padding-top: 10px;">
+			  <span style="font-size: 18px;">
+			  <if condition="$item['state'] eq 0">
+				-
+			  <else />
+				+
+			  </if>{$item.jifen}
+			  </span><br/>
+			  <span style="font-size: 12px;color:#939998;">
+			  <if condition="$item['state'] eq 0">
+				使用
+			  <else />
+				获取
+			  </if>
+			 </span>
+			  </div>
+			  </li>
+			 </volist>
+            <else/>
+           <div class="order_form member_no_records" style="text-align:center;">
+                <span>此用户还没有积分兑换记录!</span>
+            </div>
+			 </notempty> 
+</div>
+<div class="clear"></div>
+</body>
+</html>

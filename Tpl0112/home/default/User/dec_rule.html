@@ -1,0 +1,124 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		<title>{$desc}</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#tab .tabList p{
+				line-height: 40px; font-size: 15px;
+			}
+			#tab .tabList img{
+				position: absolute; z-index: 999; height: 40px;
+			}
+			
+			#tab .tabCon .title{
+				margin-bottom:10px;
+				font-size:14px;
+			}
+			
+			#tab .tabCon .content{
+				color:#555;font-size:13px;line-height:30px;margin-bottom:10px; 
+			}
+			
+			.tabList input{
+				display: none;
+			}
+			.current{
+				color: rgb(240,93,0);
+			}
+			
+			.no-img{
+				width:100%;text-align: center; margin-top: 50px;
+			}
+			.no-img img{
+				width: 90px; height: 90px;
+			}
+			.tips{
+				font-size: 13px;color: #555;text-align: center; margin-top: 10px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/assets/zzsc.css"/>
+	</head>
+	<body style="background-color: white;">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			{$desc}说明
+		</div>
+		<!--规则内容-->
+		<!--选项卡-->
+		<div id="tab" style="width: 100%;margin-top: 50px;">
+			<div class="tabList">
+				<ul id="ab" style="width: 100%;">
+					<li class="cur" style="width: 50%; height: 40px; background-color: white; border-bottom: solid 1px #eee;">
+						<input type="radio" name="name"/>
+						<p class="size_radioToggle current">	
+							<span>成为{$desc}</span>
+						</p>
+					</li>
+					<img src="../Style/index-images/space.png" alt="分割线"/>
+					<li style="width: 50%; height: 40px; background-color: white;border-bottom: solid 1px #eee;">
+						<input type="radio" name="name"/>
+						<p class="size_radioToggle">
+							<span>{$desc}特权</span>
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div class="tabCon" style="width: 0%;">
+			
+				<div class="cur" style="width: 99%;margin-top: 45px;">
+					<p class="content">
+						<if condition="$desc eq '人气店铺'">
+							1、7天连续登录店铺；<br/>
+							2、7天店铺订单额累计达到1028元；
+							<else/>
+							<p class="no-img"><img src="../Style/index-images/hope.png" alt="期待"/></p>
+							<p class="tips">暂未开放，将在近期推出，敬请期待 :)</p>
+						</if>
+					</p>
+				</div>
+				
+				<div style="width: 99%;margin-top: 45px;">
+					<p class="content">
+					<if condition="$desc eq '人气店铺'">
+							1、点亮人气店铺图标，并获得188张范票；<br />
+							2、优先开放范票商城产品优惠兑换；<br />
+						<else/>
+							<p class="no-img"><img src="../Style/index-images/hope.png" alt="期待"/></p>
+							<p class="tips">暂未开放，将在近期推出，敬请期待 :)</p>
+					</if>
+					</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				$('#ab li p').click(function(){
+					var thisToggle = $(this).is('.size_radioToggle') ? $(this) : $(this).prev();
+					var checkBox = thisToggle.prev();
+					checkBox.trigger('click');
+					$('.size_radioToggle').removeClass('current');  
+					thisToggle.addClass('current'); 
+					return false;
+				});
+			});
+		</script>
+		<script src="../Style/assets/js.js" type="text/javascript" charset="utf-8"></script>
+		<include file="public:footer" />
+	</body>
+</html>

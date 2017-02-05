@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 我的消息</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+</head>
+<body>
+<include file="public:headuser" />
+
+<div class="dingdangyue">
+<ul>
+<li <eq name="time" value="one"> class="hover" </eq> ><a href="{:U('User/fenchenglist',array('time'=>one))}">最近一个月</a></li>
+<li <eq name="time" value="two"> class="hover" </eq> ><a href="{:U('User/fenchenglist',array('time'=>two))}">最近三个月</a></li>
+<li <eq name="time" value="third"> class="hover" </eq> ><a href="{:U('User/fenchenglist',array('time'=>third))}">三个月以前</a></li>
+</ul>
+</div>
+
+
+
+<div class="dingdangbj" style="width:94%;">
+<div class="mingxi">
+<volist name="item_jifenArr" id="vo">
+<dl>
+<eq name="vo.state" value="1">
+<dt>分成<br />
+订单{$vo.orderId}<br>总价￥{$vo.price}<br />
+</dt>
+<dd><br><span style="color:#999;">{$vo.add_time|date='Y-m-d',###}</span><br />
+<span style="color:#ff4e00; font-size:16px;">+￥{$vo.fencheng}</span></dd>
+<div class="clear"></div>
+</eq>
+<eq name="vo.state" value="0">
+<dt>提现<br />
+￥{$vo.fencheng}</dt>
+<dd><br><span style="color:#999;">{$vo.add_time}</span><br />
+<span style="color:#ff4e00; font-size:16px;">-{$vo.fencheng}</span></dd>
+<div class="clear"></div>
+</eq>
+<eq name="vo.state" value="2">
+<dt>申请提现<br />
+￥{$vo.fencheng}</dt>
+<dd><br><span style="color:#999;">{$vo.add_time|date='Y-m-d',###}</span><br />
+<span style="color:#ff4e00; font-size:16px;">-{$vo.fencheng}</span></dd>
+<div class="clear"></div>
+</eq>
+</dl>
+</volist>
+</div>
+<div class="clear"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>购货信息</title>
+<include file="public:headtop" />
+<style>
+*{margin:0px; padding:0px;}
+.bar{}
+.bar li{float:left;width:50%;height:30px;line-height:30px;font-size:14px;padding:8px 0px;text-align:center;background:#eee;}
+.bar .cur{background:#fff;}
+
+table {width:100%;text-align:center;}
+
+.iteminfo td{padding:6px 0px;}
+.eee{background:#eee}
+.ccc{background:#bbb;}
+.yicl td{padding:6px 4px;}
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<ul class="bar">
+	<li class="cur">
+		<span>购货信息</span>
+	</li>
+	<li>
+		<span>购货人</span>
+	</li>
+</ul>
+<div class="clear"></div>
+
+<div style="padding:10px 0px;">
+<!-- 未处理购货信息 -->
+<table class="weicl" style="border:;">
+	<tr style="background:#321;color:#eee;">
+		<td colspan="2">商品名称</td>
+		<td>单价</td>
+		<td>数量</td>
+		<td>小计</td>
+	</tr>
+
+	<volist name="itemdtl" id="vo">
+	<tr class="iteminfo <if condition='$i%2 eq 0'>eee</if>">
+		<td><img alt="" width="50" height="50" src="{:attach(get_thumb($vo['img'], '_s'), 'item')}" /></td>
+		<td align="left" width="45%">{$vo.title}</td>
+		<td class="danjia">{$vo['price'] * $dl_discount * ($vo['priceyuan']/10)|round=###,"2"}</td>
+		<td>X<span>{$iteminfo[$vo['id']]}</span></td>
+		<td class="xiaoji">{$vo['price'] * $dl_discount * ($vo['priceyuan']/10) * $iteminfo[$vo['id']]}</td>
+	</tr>
+	</volist>
+	
+	<tr>
+		<td colspan="5" align="right" style="padding:4px 10px;background:#aaa;color:white;">总计：<span id="sumPrice"></span></td>
+	</tr>
+</table>
+
+<!-- 已处理购货信息 -->
+<table class="yicl">
+	<tr>
+		<td colspan="2" class="ccc">代理商信息</td>
+	</tr>
+	<tr>
+		<td width="35%" align="right">用户名：</td>
+		<td align="left">{$dlinfo.username}</td>
+	</tr>
+	<tr>
+		<td align="right">昵称：</td>
+		<td align="left">{$dlinfo.nickname}</td>
+	</tr>
+	<tr>
+		<td align="right">手机号码：</td>
+		<td align="left">{$dlinfo.phone_mob}</td>
+	</tr>
+	<tr>
+		<td align="right">性别：</td>
+		<td align="left"><if condition="$dlinfo['gender'] eq 0">女</else>男</if></td>
+	</tr>
+	<tr>
+		<td colspan="2" class="ccc">收货地址</td>
+	</tr>
+	<if condition="$ordermsg.status eq 1">
+		<tr>
+			<td align="right">订单号：</td>
+			<td align="left">{$ordermsg.orderid}</td>
+		</tr>
+		<tr>
+			<td align="right">订单状态：</td>
+			<td align="left">{$info}</td>
+		</tr>
+	</if>
+	<tr>
+		<td align="right">收货人：</td>
+		<td align="left">{$addr.consignee}</td>
+	</tr>
+	<tr>
+		<td align="right">收货地址：</td>
+		<td align="left">{$addr.sheng}{$addr.shi}{$addr.qu}{$addr.address}</td>
+	</tr>
+	<tr>
+		<td align="right">联系方式：</td>
+		<td align="left">{$addr.mobile}</td>
+	</tr>
+</table>
+</div>
+
+<div style="">
+<if condition="$uid eq 3">
+	<if condition="$ordermsg.status eq 1">
+		<p style="margin:0px auto;background:#ccc;width:80%;height:50px;line-height:50px;font-size:24px;cursor:pointer;text-align:center;color:#fff">
+			已发货
+		</p>
+	<else/>
+		<p onclick="fahuo({$ordermsg.id})" style="margin:0px auto;background:#321;width:80%;height:50px;line-height:50px;font-size:24px;cursor:pointer;text-align:center;color:#eee">
+			发货
+		</p>
+	</if>
+</if>
+</div>
+ <div class="clear" style="height:30px;"></div>
+</body>
+</html>
+<script>
+$().ready(function(){
+
+	$('.yicl').css('display','none');
+	$('.bar>li').bind('click',function(){
+		$('.bar>li').removeClass('cur');
+		$(this).addClass('cur');
+		var index = $(this).index();
+		if(index == 0){
+			$('.weicl').css('display','');
+			$('.yicl').css('display','none');
+		}else{
+			$('.weicl').css('display','none');
+			$('.yicl').css('display','');
+		}
+		
+	});
+	//单价
+	$('.danjia').each(function(i,item){
+		var danjia = $(item).html();
+		var num = $(item).next().find('span').html();
+		
+		var xiaoji = danjia * num;
+		$(item).next().next().html(xiaoji);
+	});
+	
+	var sum = 0;
+	//总计
+	$('.xiaoji').each(function(i,item){
+		sum += ($(item).html() - 0);
+	});
+	
+	$('#sumPrice').html(sum);
+});
+
+function fahuo(id){
+	var token = '{$token}';
+	var act = 'dl';
+	$.post("{:U('User/fahuo3')}",{id:id,token:token,act:act},function(msg){
+		if(msg == -1){
+			alert('库存不足！');
+		}else if(msg == -2){
+			alert('已经发过货！');
+		}else if(msg == 1){
+			alert('发货成功！');
+			window.location.href = "{:U('User/ordermsg')}";
+		}else{
+			alert('发货失败！');
+		}
+	});
+}
+</script>

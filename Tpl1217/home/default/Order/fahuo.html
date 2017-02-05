@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>发货</title>
+<include file="public:headuser" />
+<div class="tuikuan">
+	<form action="./index.php?m=Order&a=fahuo" name="delivery" method="post" enctype="multipart/form-data" >
+		<input type="hidden" name="orderId" value="{$orderId}"/>
+		<span style="float:left;color:red;">*请正确填写物流信息,方便客户查询物流</span><br>
+		<div class="tuikuan1">
+		<dl>
+		<dt>快递公司:</dt>
+		<dd>
+		<ul>
+		<li style="width:100%;">
+			<select name="userfree" style="width:100%;height:100%;">
+				<volist name="delivery" id="vo">
+					<option>{$vo.name}</option>
+				</volist>
+			</select>
+		</li>
+		</ul>
+		</dd>
+		</dl>
+		</div>
+
+		<div class="tuikuan1">
+		<dl>
+		<dt>发货地址:</dt>
+		<dd>
+		<ul>
+		<li style="width:100%;"><span style="color:#999;"><input style="width:100%;height:100%;" name="fahuoaddress" value=""  /></span></li>
+		</ul>
+		</dd>
+		</dl>
+		</div>
+		<div class="tuikuan1">
+		<dl>
+		<dt>快递单号:</dt>
+		<dd>
+		<ul>
+		<li style="width:100%;"><span style="color:#999;"><input style="width:100%;height:100%;" name="freecode" value=""  /></span></li>
+		</ul>
+		</dd>
+		</dl>
+		</div>
+		<div class="tuikuan1on"><a href="javascript:void(0)" onClick="document.delivery.submit();">提交</a></div>
+	</form>
+</div>

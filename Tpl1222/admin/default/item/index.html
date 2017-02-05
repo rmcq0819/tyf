@@ -1,0 +1,334 @@
+<include file="public:header" />
+<script src="__STATIC__/layer/layer.js"></script>
+<script src="__STATIC__/js/jquery.zclip.min.js"></script>
+<style type="text/css">
+.input_txt{border:1px solid #ccc;width:50%;text-align:center;font-weight:bold}
+</style>
+<script>
+$(function(){
+	$("input[name='buy_num']").blur(function(){
+		var itemid = $(this).next("input").val();
+		var buy_num = $(this).val();
+		url = "./index.php?g=admin&m=item&a=buy_num";
+		$.ajax({
+			type:"get",
+			url:url,
+			data:"itemid="+itemid+"&buy_num="+buy_num,
+			success:function(msg){
+				if(msg!=1){
+					return;
+				}
+			}
+		});
+	});
+});
+</script>
+
+
+<!--商品列表-->
+<div class="pad_lr_10" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col" style="height:110px;line-height: 30px;">
+                        <form name="searchform" method="get" id="searchform"> 
+                        <div style="float:left;width:100%;height:100%"> 
+                        <input type="hidden" name="g" value="admin" />
+                        <input type="hidden" name="m" value="item" />
+                        <input type="hidden" name="a" value="index" />
+                        <input type="hidden" name="menuid" value="{$menuid}" />
+    					<if condition="$sm neq ''"><input type="hidden" name="sm" value="{$sm}" /></if>
+                        发布时间 :
+                        <input type="text" name="time_start" id="J_time_start" class="date" size="12" value="{$search.time_start}">
+                        -
+                        <input type="text" name="time_end" id="J_time_end" class="date" size="12" value="{$search.time_end}">
+
+    					&nbsp;&nbsp;分类 :
+                        <select class="J_cate_select mr10" data-pid="0" data-uri="{:U('item_cate/ajax_getchilds', array('type'=>0))}" data-selected="{$search.selected_ids}"></select>
+                        <input type="hidden" name="cate_id" id="J_cate_id" value="{$search.cate_id}" />
+                      	&nbsp;&nbsp;是否上架 :  
+                      	<select name="status" >
+                      	<option value="">--所有--</option>
+                      	<option <if condition='$search.status eq 1'>selected=''</if> value="1">上架</option>
+                      	<option <if condition='$search.status eq 0'>selected=''</if> value="0">下架</option>
+                      	</select>
+                        &nbsp;&nbsp;商品类型 :  
+                      	<select name="itemtype" >
+                      	<option value="">--所有--</option>
+                      	<option <if condition='$search.itemtype eq 1'>selected=''</if> value="1">完税</option>
+                      	<option <if condition='$search.itemtype eq 0'>selected=''</if> value="0">保税</option>
+                      	</select>
+                        &nbsp;&nbsp;首页展示 :  
+                        <select name="home" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.home eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.home eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+						 &nbsp;&nbsp;新品推荐 :  
+                        <select name="zhuangui" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.zhuangui eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.zhuangui eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+						 &nbsp;&nbsp;专题推荐 :  
+                        <select name="zhuanti" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.zhuanti eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.zhuanti eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+						&nbsp;&nbsp;品牌 :  
+                        <select name="brandId" >
+                        <option value="">--所有--</option>
+						<volist name="brand" id="vol">
+                        <option <if condition="$search.brandId eq $vol['id']">selected=''</if> value="{$vol['id']}">{$vol.name}</option>
+						</volist>
+                        </select>
+						<!--  &nbsp;&nbsp;单品活动 :  
+                        <select name="activity" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.activity eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.activity eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+						 &nbsp;&nbsp;是否套餐 :  
+                        <select name="is_combo" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.is_combo eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.is_combo eq 0'>selected=''</if> value="0">否</option>
+                        </select> --></br>
+						是否回收 :  
+                        <select name="is_delete" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.is_delete eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.is_delete eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+						
+						是否参与砍价 :  
+                        <select name="is_bargain" >
+                        <option value="">--所有--</option>
+                        <option <if condition='$search.is_bargain eq 1'>selected=''</if> value="1">是</option>
+                        <option <if condition='$search.is_bargain eq 0'>selected=''</if> value="0">否</option>
+                        </select>
+                      <!--   <div class="bk8"></div> -->
+
+                        价格区间 :
+                        <input type="text" name="price_min" class="input-text" size="5" value="{$search.price_min}" />
+                        -
+                        <input type="text" name="price_max" class="input-text" size="5" value="{$search.price_max}" />
+						
+						
+    					
+                        &nbsp;&nbsp;关键字 :
+                        <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+						SKU编码: <input name="sku_nember" type="text" class="input-text" size="25" value="{$search.sku_nember}" />
+                        
+						&nbsp;&nbsp; 选择免税仓 :
+						<select name="itembase">
+							<option value="">--所有--</option>   
+							<volist name="item_base" id="item_base">
+									<if condition="$item_base.id eq $_GET['itembase']">
+										<option value="{$item_base.id}" selected>{$item_base.basename}</option>
+										<else/>
+										<option value="{$item_base.id}">{$item_base.basename}</option>
+									</if>
+								
+							</volist>	
+						</select>
+						
+						
+						
+						<input type="submit" name="search" class="btn" value="搜索" />
+    				</div>
+                    </form>
+                    <form action="{:U('item/excelout')}" method="post">
+                        <div style="float:left;width:100%;height:100%"><input type="submit" class="btn" style="float:right;margin-top:0px;" value="导出数据"></div> 
+                    </form> 
+						<img src="{:attach(get_thumb('example.png', ''), 'item')}" width="32"  class="J_preview" data-bimg="{:attach('example.png', 'item')}">
+						<span style="color:#555;">选择导入的Excel文件后缀应为‘.xls’,文件内容应与示例一致，示例图点击可放大</span>
+					<form action="{:U('item/ReadExcel')}" method="post" enctype="multipart/form-data" style="float:right;">
+					
+						<input type="file" name="exin" style="width:160px;">
+						<input type="submit" class="btn" value="导入数据">
+					</form>
+					<div style="clear:both;"></div>
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
+    <if condition="$sm eq 'image'">
+    <div class="J_tablelist item_imglist clearfix">
+        <volist name="list" id="val">
+        <div class="item fl">
+            <label>
+            <input type="checkbox" class="J_checkitem check" value="{$val.id}" />
+            <div class="img clearfix"><img src="{:attach(get_thumb($val['img'], '_m'), 'item')}"></div>
+            </label>
+            <span class="line_x">{$val.title}</span>
+            <ul>
+                <li><a class="J_tooltip btn_blue" title="{$cate_list[$val['cate_id']]}">{:L('cate')}</a></li>
+                <li><a class="J_tooltip btn_blue" title="{$val.uname|default=L('item_no_author')}">{:L('author')}</a></li>
+            </ul>
+        </div>
+        </volist>
+    </div>
+    <else/>
+    <div class="J_tablelist table_list" data-acturi="{:U('item/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="3%"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+                <th width="3%"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th width="1%">&nbsp;</th>
+                <th width="20%" align="left"><span data-tdtype="order_by" data-field="title">商品名称</span></th>
+                <th width="10%" align="left"><span>SKU编码</span></th>
+                <th width="5%"><span data-tdtype="order_by" data-field="buy_num">卖出数量</span></br><span onclick="location.href='{:U('item/add_buynum')}'" style="color:#189;">调整<span style="font-size:15px">↑</span></span></th>
+                <th width="5%"><span data-tdtype="order_by" data-field="cate_id">分类</span></th>
+				
+                <th width="10%"><span data-tdtype="order_by" data-field="price">价格(元)</span></th>
+				
+                <th width="5%"><span data-tdtype="order_by" data-field="ordid">{:L('sort_order')}</span></th>
+                <th width="3%"><span data-tdtype="order_by" data-field="status">是否上架</span></th>
+                <th width="10%"><span data-tdtype="order_by" data-field="status">库存数</span></th>
+                <th width="10%"><span data-tdtype="order_by" data-field="add_time">发布时间</span></th>
+				<th width="5%"><span data-tdtype="order_by" data-field="paynum">快捷操作</span></th>
+                <th width="10%">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center">
+                    <notempty name="val['img']"><div class="img_border"><img src="{:attach(get_thumb($val['img'], '_s'), 'item')}" width="32" width="32" class="J_preview" data-bimg="{:attach($val['img'], 'item')}"></div></notempty>
+                </td>
+                <td align="left">
+				<span <if condition="$val.title eq ''">data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit"</if> style="color:{$val.colors};">
+				<if condition="$val.title eq ''">&nbsp;<else/>{$val.title}</if>
+				</span>
+				</td>
+				
+				<td align="left">
+				<span <if condition="$val.adress eq ''">data-tdtype="edit" data-field="adress" data-id="{$val.id}" class="tdedit"</if> style="word-break:normal; display:block; white-space:pre-wrap;word-wrap : break-word ;overflow: hidden ;width:80px;color:{$val.colors};">
+					<if condition="$val.adress eq ''">&nbsp;<else/>{$val.adress}</if>
+				</span>
+				 </td>
+				
+             <td align="center"><b><input type="text" class="input_txt" name="buy_num" value="{$val.buy_num}" /><input type="hidden" name="id" value="{$val.id}" /></b></td>
+			   <td align="center"><b>{$cate_list[$val['cate_id']]}</b></td>
+               
+                
+                <td align="center" class="red">{$val.price}</td> 
+				
+                <td align="center"><span data-tdtype="edit" data-field="ordid" data-id="{$val.id}" class="tdedit">{$val.ordid}</span></td>
+                <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+                <td align="center"><if condition="$val.goods_stock lt 0"><b style="color:red">0</b><else /><span style="word-break:normal; display:block; white-space:pre-wrap;word-wrap : break-word ;overflow: hidden ;width:70px;">{$val.goods_stock}</span>
+				</if><if condition='$val.is_stockjointly eq 1'><span style="color:red">共库存</span></if></td>
+                <td align="center">{$val.add_time|date='Y-m-d H:i:s',###}</td>
+				 <td align="center">
+				 <?php 
+					$newimg = substr($val['img'],0,strrpos($val['img'],'.')).'_b.jpg';
+					$url = 'http://yooopay.com/data/upload/item/'.$newimg.'';
+				 ?>
+					<a href="javascript:;" onclick="copy_url('<?php echo $url; ?>')">图片</a> | <a href="index.php?g=admin&m=item_comment&a=add&id={$val.id}" target="_blank">评论</a>
+				 
+				 </td>
+                <td align="center"><a href="{:u('item/edit', array('id'=>$val['id'], 'menuid'=>$menuid))}" target="_blank">{:L('edit')}</a> | 
+				
+				<if condition="$val.is_delete eq 1">
+						<a href="javascript:void(0);" onclick="is_resume(this,{$val.id},'{$val.title}')">恢复</a>
+					<else/>
+						<a href="javascript:void(0);" onclick="is_delete(this,{$val.id},'{$val.title}')">回收</a>
+				</if>
+				
+				</td>
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    </div>
+    </if>
+    <div class="btn_wrap_fixed">
+        <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+     <!--    <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" /> -->
+		<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/onShelves')}" data-name="id" data-msg="确定一键上架？" value="一键上架" />
+		<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/downShelves')}" data-name="id" data-msg="确定一键下架？" value="一键下架" />
+		<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/recycle')}" data-name="id" data-msg="确定一键回收？" value="一键回收" />
+		<input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('item/resume')}" data-name="id" data-msg="确定一键恢复？" value="一键恢复" />
+	
+        <div id="pages">{$page}</div>
+    </div>
+</div>
+<include file="public:footer" />
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+Calendar.setup({
+	inputField : "J_time_start",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+Calendar.setup({
+	inputField : "J_time_end",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+$('.J_preview').preview(); //查看大图
+$('.J_cate_select').cate_select({top_option:lang.all}); //分类联动
+$('.J_tooltip[title]').tooltip({offset:[10, 2], effect:'slide'}).dynamic({bottom:{direction:'down', bounce:true}});
+
+
+//是否回收
+function is_delete(obj,id,title){
+	layer.confirm('您确定要将【'+title+'】放进回收站吗？', {
+		  title: '回收提示',
+		  shade: 0,
+		  btn: ['确定','取消'],
+		  yes: function(index){
+			layer.close(index);
+			
+			var url="{:U('item/is_delete',array('id'=>'" + id + "'))}";
+			$.post(url,{id:id},function(data){
+				alert(data);
+			});
+				
+			$(obj).parent().parent().remove();
+		  }
+	});
+}
+
+//是否恢复
+function is_resume(obj,id,title){
+	layer.confirm('您确定要将【'+title+'】移出回收站吗？', {
+		  title: '移出提示',
+		  shade: 0,
+		  btn: ['确定','取消'],
+		  yes: function(index){
+			layer.close(index);
+			
+			var url="{:U('item/is_resume',array('id'=>'" + id + "'))}";
+			$.post(url,{id:id},function(data){
+				alert(data);
+			});
+				
+			$(obj).parent().parent().remove();
+		  }
+	});
+}
+
+function copy_url(url){
+		layer.open({
+		  type: 1,
+		  area: ['600px', '120px'],
+		  shadeClose: true, //点击遮罩关闭
+		  shade:0,
+		  content: '\<\div style="padding:20px;font-size:16px;">'+url+'\<\/div>'
+		});
+}
+</script>
+</body>
+</html>

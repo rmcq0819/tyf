@@ -1,0 +1,104 @@
+
+<include file="public:header" />
+<div class="subnav">
+    <h1 class="title_2 line_x">分成配置</h1>
+</div>
+
+<div class="pad_lr_10">
+<form id="info_form" action="{:U('Fencheng/index')}" method="post">
+	<table width="100%" class="table_form">
+        <tr>
+            <td>
+				开启分成机制 :
+                <label class="mr10"><input type="radio" class="J_change_status" <eq name="status" value="0"> checked="checked" </eq> value="0" name="status">开启</label>
+                <label><input type="radio" class="J_change_status" <eq name="status" value="1"> checked="checked" </eq> value="1" name="status">关闭</label>
+				<span style="margin-left:15px"><input type="submit" class="btn btn_submit" value="确认"/></span>
+			</td>
+        </tr> 
+	</table>
+	</form>
+</div>
+<!--分成设置-->
+<form id="info_form" action="{:U('Fencheng/index')}" method="post">
+ <div class="content_list pad_10">
+	<table width="100%" cellpadding="2" cellspacing="1" class="table_form" id="item_attr">
+		<tbody class="add_item_attr">
+			<tr>
+				<td style="color:red;font-size:14px">购物分销设置</td>
+			</tr>
+			<tr>
+				<volist name="lv" id="vo">
+				<td> 
+					<span>{$list[$i-1]}</span>分成率:<input type="text" name="fencheng[{$i}]" class="input-text" value="{$vo}" size="20">
+					<!-- <eq name="count" value="$i">
+					<a href="javascript:void(0);" class="blue" onclick="add_attr();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>
+					</eq>
+					<neq name="count" value="$i">
+						<a href="javascript:void(0);" class="blue" onclick="del_attr(this);"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+					</neq> -->
+				</td>
+				</volist>
+			</tr>
+			<tr>
+				<td style="color:red;font-size:14px">推荐分销设置</td>
+			</tr>
+			<tr>	
+			<volist name="lv1" id="vo1">
+					<td> 
+						<span>{$list1[$i-1]}</span>推荐奖:<input type="text" name="fencheng1[{$i}]" class="input-text" value="{$vo1}" size="20">
+						<!-- <eq name="count" value="$i">
+						<a href="javascript:void(0);" class="blue" onclick="add_attr();"><img src="__STATIC__/css/admin/bgimg/tv-expandable.gif" /></a>
+						</eq>
+						<neq name="count" value="$i">
+							<a href="javascript:void(0);" class="blue" onclick="del_attr(this);"><img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" /></a>
+						</neq> -->
+					</td>
+			</volist>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div style="width:100%;margin-left:2%;">
+		<input type="submit" value="保存" id="dosubmit" name="dosubmit" class="btn btn_submit" />
+	</div>
+</div>
+</form>
+
+<include file="public:footer" />
+
+<script>
+var i='{$i}';
+function add_file()
+{
+    $("#next_upload_file tr").clone().insertAfter("#next_upload_file tr:last");
+}
+function del_file_box(obj)
+{
+	$(obj).parent().parent().remove();
+}
+function add_attr()
+{	
+	i++;
+	var html;
+	html='<table id="hidden_attr">';
+	html+='<tbody class="add_item_attr">';
+	html+='<tr>';
+	html+='<td>'+i+'級分成率<input type="text" name="fencheng['+i+']" class="input-text" size="30">';
+	html+='<a href="javascript:void(0);" class="blue" onclick="del_attr(this);">';
+	html+='<img src="__STATIC__/css/admin/bgimg/tv-collapsable.gif" />';
+	html+='</a></td>';
+	html+='</tr>';
+	html+='</tbody>';
+    html+='</table>';
+    $(html).clone().insertAfter($("#item_attr .add_item_attr:last"));
+}
+function del_attr(obj)
+{
+	i--;
+	$(obj).parent().parent().remove();
+}
+
+</script>
+
+</body>
+</html>

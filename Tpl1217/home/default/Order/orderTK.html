@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>申请退款</title>
+		<include file="public:head"/>
+		<style>
+			*{
+				outline: none;font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav{
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;background-color: rgb(240,93,0);
+			}
+			.topnav img{
+				position:absolute; left:5px; top:14px;
+			}
+			/*头部E*/
+			
+			/*表单S*/
+			.form {
+				width: 100%;background-color: white;margin-top: 10px;padding: 6px;color:#555;
+			}
+			.form i{
+				color: rgb(240,93,0); position: absolute; left: 91%; top: 29px;
+			}
+			.form p {
+				font-size: 14px;
+			}
+			.form span {
+				color: red;
+			}
+			.form input {
+				width: 100%;color: #555;border: none;outline: none;padding-left: 20px;padding-right: 25px;border-bottom: 1px solid #eee; <!-- text-align: center; -->
+			}
+			.form textarea {
+				width: 100%;color: #555;border: none;border-bottom: solid 1px #eee; max-height: 40px;
+			}
+			/*表单E*/
+			
+			/*提交按钮*/
+			#btn {
+				width: 100%;height: 45px;background-color: white;margin-top: 10px;text-align: center;line-height: 45px;font-size: 15px;color: rgb(240, 93, 0);
+			}
+			 /*验证消息弹出框*/
+			.showinfo {
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+		</style>
+		<link rel="stylesheet" type="text/css" href="../Style/css/animate.min.css"/>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25"/>
+			</a>
+			申请退款
+		</div>
+		<!--表单-->
+		<form action="./index.php?m=Order&a=orderTK" name="tk" id="refund_form" method="post" enctype="multipart/form-data" >
+		<input type="hidden" name="orderId" value="{$order.orderId}"/>
+		<input type="hidden" name="zhanghao" value="{$user.zhanghao}"/>
+		<input type="hidden" name="huming" value="{$user.huming}"/>
+		<input type="hidden" name="kaihuhang" value="{$user.kaihuhang}"/>
+		<input type="hidden" name="detail_id" value="{$_GET['detail_id']}"/>
+		
+		<div class="form" style="position: relative; left: 0px;">
+			<p>退款金额：<span>*</span></p>
+			<i class="am-icon-cny" style="position: absolute; left: 12px; top: 29px; color:#555; <!-- rgb(180,180,180); -->"></i>
+			<if condition="$order.price neq ''">
+				<input type="text" name="refund" value="{$order.price}"/>
+				<else/>
+				<input type="text" name="refund" value="{$order.order_sumPrice}"/>
+			</if>
+		</div>
+		<div class="form">
+			<p>退款原因：<span>*</span></p>
+			<textarea name="yuanyin"></textarea>
+		</div>
+		<div class="form" style="position: relative; top: 0; left: 0;">
+			<p>退款类型：
+				<label class="am-checkbox" style="margin: 2px 5px 0px 2%; color: rgb(85,85,85); font-size: 12px; float: right;">
+      				<input id="ck" type="checkbox" name="ck" value="" data-am-ucheck>
+      				是否需要退货
+    			</label>
+			</p>
+			<div style="clear: both;"></div>
+		</div>
+		
+		<if condition="$order.title neq ''">
+			<div class="form">
+				<p>宝贝名称：<span>*</span></p>
+				<input type="text" value="{$order.title}"/>
+			</div>
+		</if>
+		
+		<div id="wuliu" style="display: none;">
+			<div class="form">
+				<p>物流公司：<span>*</span></p>
+				<input type="text" name="express" value=""/>
+			</div>
+			<div class="form">
+				<p>退货运单号：<span>*</span></p>
+				<input type="text" name="waybill" value=""/>
+			</div>
+		</div>
+		
+		<!--提交按钮-->
+		<div id="btn" onClick="javascript:return checkvalue();">
+			<p>提交申请&nbsp;&nbsp;<i class="am-icon-send-o"></i></p>
+		</div>
+		<div class="showinfo animated shake"></div>
+
+		<script type="text/javascript">
+			$(function(){
+				$("#ck").on("click",function(){
+					if($(this).is(":checked")){
+						$("#wuliu").slideDown();
+					}
+					else{
+						$("#wuliu").slideUp();
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").click(function(){
+					var refund = $("input[name='refund']").val();
+					var yuanyin = $("textarea[name='yuanyin']").val();
+					var express = $("input[name='express']").val();
+					var waybill = $("input[name='waybill']").val();
+				
+					if(refund==''){
+						var content = $('.showinfo').html('请填写退款金额');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					 }
+					if(isNaN(refund)){
+						var content = $('.showinfo').html('请填写数字金额');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					 }
+
+					if(yuanyin==''){
+						var content = $('.showinfo').html('请填写退款原因');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					}
+					if($("#ck").is(":checked")){
+						if(express==''){
+							var content = $('.showinfo').html('请填写物流公司');
+							var w = content.width()/2;
+							$(".showinfo").css("margin-left",-w);
+							$(".showinfo").show().delay(3000).fadeOut();
+							return false;  
+						 }
+						 if(waybill==''){
+							var content = $('.showinfo').html('请填写退货运单号');
+							var w = content.width()/2;
+							$(".showinfo").css("margin-left",-w);
+							$(".showinfo").show().delay(3000).fadeOut();
+							return false;  
+						 }
+					}
+					$("#refund_form").submit(); 
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+</html>

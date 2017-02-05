@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+</head>
+<body>
+<header data-am-widget="header" class="am-header am-header-default">
+<div class="am-header-left am-header-nav">
+</div>
+<h1 class="am-header-title">支付中心</h1>
+</header>
+<form action="{:U('Order/end')}" method="POST" id="goto_pay">
+<input type="hidden" name="orderid" value="{$orderid}" />
+<input type="hidden" name="dingdanhao" value="{$dingdanhao}" />
+<div class="diangdangpagezhuangtai">订单号：{$dingdanhao}</div>
+
+
+<div class="dingdangbj">
+<div class="am-g am-g dingdang">
+<div class="am-u-sm-1 dingdandizhileft"><img src="../Style/images/pic16.png"></div>
+<div class="am-u-sm-11 dingdandizhimiddle"><P><span>{$orderaddr.mobile}</span>收货人：{$orderaddr.address_name}</P><p style="color:#666;">收货地址：{$orderaddr.address}</p></div>
+</div>
+</div>
+
+
+<div class="dingdangdian">
+<ul>
+<volist name="orderinfo" id="vo">
+<li>
+<div class="am-g am-g-fixed">
+<div class="am-u-sm-12 dianming"><a href="#"><img src="../Style/images/pic15.png">商家：{$vo.0}></a></div>
+<div class="am-u-sm-12">
+<div class="am-list-news-bd">
+<ul class="am-list">
+
+<volist name="vo.goods" id="vo2">
+<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left" style="width:99%;">
+<a href="javascript:;">
+<div class="am-u-sm-3 am-list-thumb dianproimg"><img src="{:attach(get_thumb($vo2['img'], '_m'), 'item')}"></div>
+
+<div class=" am-u-sm-9 am-list-main">
+<table class="am-table am-table-bordered am-table-striped am-table-compact dianprotablezi">
+  <tbody>
+  <tr>
+    <td>{$vo2.title}</td>
+    <td><span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$vo2.price}</span></td>
+  </tr>
+   <tr>
+    <td colspan="2">
+	商品类型：<if condition="$vo2.itemtype eq 1">完税商品<else />保税商品</if><br/>
+	<if condition="$vo2.size neq ''">
+	商品规格：<span style="color:#e26000; font-family:'微软雅黑'; font-size:12px;">{$vo2.size}</span><br/>
+  	</if>  
+	购买数量：X {$vo2.quantity}</td>
+	</td>
+  </tr>
+</tbody>
+</table>
+</div>
+</a>
+</li>
+</volist>
+  
+</ul>
+</div>
+</div>
+</div>
+</li>
+</volist>
+</ul>
+</div>
+
+
+<div class="am-g diangdangpageliuyan">
+<div class="am-u-sm-2">留言：</div>
+<div class="am-u-sm-10">{$orderaddr.note}</div>
+</div>
+
+
+<div class="am-g am-g-fixed dingdangpagezhifu">
+<div class="am-u-sm-12">
+<div class="am-g dingdangpagezhifuzi">
+<div class="am-u-sm-4 ">支付方式</div>
+<div class="am-u-sm-8 dingdangpagezhifuzi2">
+<if condition="$wxpaystatus eq 1">
+<input  id="payment_wxpay" name="payment_id" value="3"  checked type="radio"><img src="../Style/images/wei.png" width="90" height="20" >
+</if>
+</dl>
+</div>
+
+</div>
+</div>
+<div class="am-u-sm-12 dingdangpeisong"><P>配送方式</P><p style="color:#666;">由商家选择合作快递为您配送</p></div>
+</div>
+
+
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
+
+<div class="am-g">
+<div class="am-u-sm-9 dingdangyinfukuan"><span>应付款：￥{$order_sumPrice}</span></div>
+<div class="am-u-sm-3 dingdangyinfukuanon"><a href="javascript:$('#goto_pay').submit();" >确认支付</a></div>
+</div>
+</div>
+</form>
+
+</body>
+</html>

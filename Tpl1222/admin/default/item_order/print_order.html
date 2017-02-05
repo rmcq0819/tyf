@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title></title>
+	<script type="text/javascript" language="javascript" src='../Style/js/jquery-1.4.4.min.js'></script>
+	<script language="javascript" src="../Style/js/jquery.jqprint-0.3.js"></script>
+	<script language="javascript">
+		function  a(){
+			$("#ddd").jqprint();
+		}
+	</script>
+</head>
+
+<body>
+
+<!-- 订单模板S -->
+<div id="ddd">
+<style type="text/css">
+table{ border-collapse:collapse; background:#EAF0F7;}
+table tr td{ padding:5px;}
+</style>
+
+	<table border="1" align="center" width="100%">
+		<tr>
+			<td>商品图片</td><td>商品名称</td><td>商品属性</td><td>单价</td><td>数量</td><td>小计</td>
+		</tr>
+		 <volist name='order_detail' id='vo' >
+		<tr>
+			<td><img width="100" height="80" alt="nopic" src="{:attach(get_thumb($vo['img'], '_b'), 'item')}"></td>
+			<td> {$vo.title}</td>
+			<td> {$vo.color}--{$vo.size}</td>
+			<td>¥{$vo.price}</td>
+			<td>{$vo.quantity}</td>
+			<td><font color=red>¥<?php echo $vo['price']*$vo['quantity']; ?></font></td>
+		</tr>
+		</volist>
+		<tr>
+			<td colspan="6" style=" text-align:right">商品总额：￥{$item_info.goods_sumPrice}</td>
+		</tr>
+		<tr>
+			<td colspan="6">
+	<table border="1" width="100%">
+		<tr>
+			<td>购物客户ID：{$item_info.userName}</td>
+			<td>下单时间：{$item_info.add_time|date='Y/m/d H:i:s',###}</td>
+			<td colspan="2">支付方式：
+			<switch name="item_info.supportmetho" >
+                         <case value="1">支付宝支付</case>
+                         <case value="2">货到付款</case>
+                         <case value="3">微信支付</case>
+                        <default />--
+             </switch>
+			 
+			&nbsp;&nbsp;订单编号：{$item_info.orderId}</td>
+		</tr>
+		<tr>
+			<td>付款时间：<if condition="$item_info.support_time eq ''">--<else />{$item_info.support_time|date='Y/m/d H:i:s',###}</if></td>
+			<td>配送方式：
+                 <if condition="$item_info.userfree eq '0'">无需快递<elseif condition="$item_info.userfree neq '' and $item_info.userfree neq '0' " />{$info.userfree}<else />--[买家自行配送方式]</if>
+			</td>
+			<td colspan="2">客户备注：{$item_info.note}</td>
+		</tr>
+		<tr>
+			<td>收货人：{$item_info.address_name}</td><td>联系手机：{$item_info.mobile}</td>
+			<td colspan="2">收货地址：{$item_info.address} </td>
+		</tr>
+		<tr>
+			<td>发货人：{$userinfo.contacts}<br/>单位名称：{$userinfo.name}</td>
+			<td>打印时间：<?php echo date('Y/m/d H:i:s',time());?></td>
+			<td colspan="2">操作人：<?php echo $_SESSION['admin']['username'];?></td>
+		</tr>
+	  </table>
+		</td>
+		</tr>		   
+</table>
+</div>
+<!-- 订单模板E -->
+<input type="button" onClick=" a()" value="打印!" style=" background:#318DD0; margin-top:20px; padding:5px 12px; color:#FFFFFF" />
+</body>
+</html>
+
+

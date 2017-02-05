@@ -1,0 +1,191 @@
+<include file="public:header" />
+
+<style type="text/css">
+body{overflow:hidden}
+.add{ width:93%; height:800px; margin:20px;}
+.span{ font-size:16px; border-bottom:1px solid #CCCCCC; width:100%; display:block; padding:13px; background:#CCCCCC}
+.t1{ margin:10px 0 0 30px;border-collapse:collapse;}
+.t1 tr td{ padding:15px;}
+.notice{ color:#990000; margin-left:15px;}
+.t1 .txt{ width:200px; height:27px; font-size:14px; border:1px solid #CCCCCC}
+
+.t2{  border-color:#CCCCCC; }
+.t2 .title{ background:#CCCCCC;}
+.t2 .title td{ text-align:left; margin-left:8px;}
+.t2 td{border:1px solid #CCCCCC; text-align:center}
+.t2 td .txt1{ width:70px; height:27px; font-size:14px; border:1px solid #CCCCCC; text-align:center;color:#666666}
+.t2 td .txt2{ width:120px;height:27px; font-size:14px;border:1px solid #CCCCCC; color:#666666; text-align:center}
+
+.sub{ background:#3399FF; padding:10px 20px; color:#FFFFFF; }
+p{ margin-left:12%; margin-top:10px;}
+p a{ margin-right:25px;}
+p a:hover{ text-decoration:none; background:#006699}
+</style>
+
+ <script type="text/javascript" >
+  function to_change1(){
+
+  var radios = document.getElementsByName("type");
+  
+  var s1 = document.getElementById("s1");
+  var s2 = document.getElementById("s2");
+  var s3 = document.getElementById("s3");
+
+  for ( var i = 0; i < radios.length; i++) {
+
+  if (radios[i].checked==true) {
+
+      i++;
+		
+	if(radios[--i].value=="1"){
+		s2.style.display = "";
+		s1.style.display = "none";
+		s3.style.display = "none";
+	}
+		
+   }
+   
+  }
+
+ }
+ 
+   function to_change2(){
+
+  var radios = document.getElementsByName("type");
+  
+  var s1 = document.getElementById("s1");
+  var s2 = document.getElementById("s2");
+  var s3 = document.getElementById("s3");
+
+  for ( var i = 0; i < radios.length; i++) {
+
+  if (radios[i].checked==true) {
+
+      i++;
+		
+    if(radios[--i].value=="2"){
+		s1.style.display = "";
+		s2.style.display = "none";
+		s3.style.display = "none";
+	}
+		
+   }
+
+  }
+
+ }
+
+  function to_change3(){
+
+  var radios = document.getElementsByName("type");
+  
+  var s1 = document.getElementById("s1");
+  var s2 = document.getElementById("s2");
+  var s3 = document.getElementById("s3");
+
+  for ( var i = 0; i < radios.length; i++) {
+
+  if (radios[i].checked==true) {
+
+      i++;
+		
+    if(radios[--i].value=="3"){
+		s3.style.display = "";
+		s1.style.display = "none";
+		s2.style.display = "none";
+	}
+		
+   }
+
+  }
+
+ }
+
+
+//notice
+function check_n(){
+	var n = document.getElementById('n').value;
+	var nc = document.getElementById('notice');
+	if(n==""){
+		nc.innerHTML = "运费模板不能为空";
+	}else{
+		nc.innerHTML = "";
+	}
+}
+
+</script>
+
+<div class="add">
+	<span class="span">新增运费模板</span>
+	<form name="myForm" method="post" action="./index.php?g=admin&m=ftemp&a=add">
+		<table class="t1">
+			<tr>
+				<td>模板名称</td><td><input type="text" class="txt" name="tempname" id="n" onblur="check_n();"/>
+				<span class="notice">*<font class="notice" id="notice"></font></span>
+				</td>
+			</tr>
+			<tr>
+				<td>发货地址</td>
+				<td>
+					<select name="addr">
+					<volist name="fh" id="fh" >
+						<option id="{$fh.id}">{$fh.Province}{$fh.City}{$fh.Area}{$fh.address}{$fh.name}</option>
+					</volist>>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>计价方式</td>
+				<td>
+					<input type="radio" name="type" value="1" onclick="to_change1();" checked="checked" />按件数&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="type" value="2" onclick="to_change2();"  />按重量&nbsp;&nbsp;&nbsp;
+			        <input type="radio" name="type" value="3" onclick="to_change3();" />按体积
+				</td>
+			</tr>
+			<!--<tr>
+				<td>运送方式</td>
+				<td>
+				<volist name="kd" id="kd">
+					<input type="checkbox" value="{$kd.id}" name="mode[]" />{$kd.name}&nbsp;&nbsp;
+				</volist>
+				</td>
+			</tr>-->
+			<tr>
+				<td>运送配置</td>
+				<td>
+					<table class="t2" border="1px  solid #ccc">
+						<tr class="title"><td colspan="5">快递运费设置</td></tr>
+						<!-- 方式触发S -->
+						<tr id="s1" style="display:none;"><td>区域配送</td><td>首重[kg]</td><td>运费[元]</td><td>续重[kg]</td><td>运费[元]</td></tr>
+						<tr id="s2"><td>区域配送</td><td>件数</td><td>运费[元]</td><td>续件</td><td>运费[元]</td></tr>
+						<tr id="s3" style="display:none;"><td>区域配送</td><td>体积</td><td>运费[元]</td><td>续体</td><td>运费[元]</td></tr>
+						<!-- 方式触发E -->
+						<tr>
+							<td>
+							<input type="text" class="txt2" value="全国默认地区" onblur="if(this.value=='') {this.value='全国默认地区'}" onfocus="if(this.value == '全国默认地区') {this.value=''}" name="area"/>
+							</td>
+							<td><input type="text" class="txt1" name="cs1" value="0" onblur="if(this.value=='') {this.value='0'}" onfocus="if(this.value == '0') {this.value=''}"/></td>
+							<td><input type="text" class="txt1" name="fy1" value="0" onblur="if(this.value=='') {this.value='0'}" onfocus="if(this.value == '0') {this.value=''}"/></td>
+							<td><input type="text" class="txt1" name="cs2" value="0" onblur="if(this.value=='') {this.value='0'}" onfocus="if(this.value == '0') {this.value=''}"/></td>
+							<td><input type="text" class="txt1" name="fy2" value="0" onblur="if(this.value=='') {this.value='0'}" onfocus="if(this.value == '0') {this.value=''}"/></td>
+						</tr>
+						<tr><td colspan="5" style="color:#990000">
+						*[区域配送]配送填写，默认全国各地，如需配置指定地区，请填写相应的城市名称即可，如“广州市”、“上海”
+						</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+		</table>
+		<p>
+			<a href="javascript:;" onclick="document.myForm.submit();" class="sub">添加模板</a>
+			<a href="javascript:history.go(-1);" class="sub">取消</a>
+		</p>
+	</form>
+	
+</div>
+
+
+</body>
+</html>

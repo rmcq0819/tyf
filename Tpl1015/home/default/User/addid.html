@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>会员中心 - 添加身份证信息</title>
+		<!-- <link rel="stylesheet" type="text/css" href="../Style/shop.css" /> -->
+		<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+		<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.js" ></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+		<script type="text/javascript" language="javascript" src='../Style/js/dizhi2.js'></script>
+		<script type="text/javascript" language="javascript" src='../Style/js/diqu2.js'></script>
+		<script type="text/javascript">
+		$(function(){
+				$("#check").click(function(){
+					var consignee = $("input[name='consignee']").val();
+					var address = $("input[name='address']").val();
+					var sheng = $("select[name='sheng']").val();
+					var phone_mob = $("input[name='phone_mob']").val();
+					var cardId = $("input[name='cardId']").val();
+					var shi = $("select[name='shi']").val();
+					var qu = $("select[name='qu']").val();
+					var frontage = $("input[name='frontage']").val();
+					var opposite = $("input[name='opposite']").val();
+					
+					if(consignee==''){
+						$('.showinfo').html('请填写收货人').show().delay(3000).fadeOut();return;
+					 }
+					 
+					 if(cardId==''){
+						$('.showinfo').html('请填写身份证号').show().delay(3000).fadeOut();return;
+					}
+					
+					 //使用正则验证身份证是否有效
+					var reg = /^[1-9]{1}[0-9]{14}$|^[1-9]{1}[0-9]{16}([0-9]|[xX])$/;
+					if(!reg.test(cardId)){
+						$('.showinfo').html('身份证号码无效').show().delay(3000).fadeOut();return;
+					}
+						
+					if(phone_mob==''){
+						$('.showinfo').html('请填写手机号码').show().delay(3000).fadeOut();return;
+					}
+					
+					//使用正则验证手机号码是否有效
+					/* var phone = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+					if(!phone.test(phone_mob)){
+						$('.showinfo').html('手机号码无效').show().delay(3000).fadeOut();return;
+					}
+					 if(sheng==''){
+						$('.showinfo').html('请选择省').show().delay(3000).fadeOut();return;
+					 }
+					 if(shi==''){
+						$('.showinfo').html('请选择市').show().delay(3000).fadeOut();return;
+					 }
+					 if(qu==''){
+						$('.showinfo').html('请选择区').show().delay(3000).fadeOut();return;
+					 }
+					 if(address==''){
+						$('.showinfo').html('请填写地址').show().delay(3000).fadeOut();return;
+					 }
+
+					 if(frontage==''){
+						$('.showinfo').html('请上传身份证正面图片').show().delay(3000).fadeOut();return;
+					 }
+					 if(opposite==''){
+						$('.showinfo').html('请上传身份证反面图片').show().delay(3000).fadeOut();return;
+					 }*/
+
+					 $("#id_form").submit(); 
+				}); 
+				 
+		});
+	</script>
+	 
+		<style>
+			* {
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}
+			/*收货人S、身份证S*/
+			#user{
+				width: 95%;
+				height: 40px;
+				margin: 0 auto;
+				margin-top: 55px;
+			}
+			#user,#phone,#province,#county{
+				background-color: white;
+			}
+			#id-card,#phone,#province,#city,#county,#address{
+				width: 95%;
+				height: 40px;
+				margin: 0 auto;
+				margin-top: 5px;
+				background:#fff;
+			}
+			#user span,#id-card span,#phone span,#province span,#city span,#county span,#address span{
+				color: #555;
+				font-size:15px;
+				line-height: 40px;
+				padding-left: 3px;
+			}
+			#user input,#id-card input,#phone input, #address input{
+				width: 70%;
+				color: #555;
+				font-size: 13px;
+				margin-top: -6px;
+			}
+			#id-card input,#address input{
+				background-color: rgb(236,234,234);
+			}
+			/*身份证S*/
+			
+			/*保存收货地址*/
+			#save{
+				width: 95%; 
+				height: 50px;
+				margin:0 auto;
+				color: rgb(240,93,0); 
+				background-color: white; 
+				text-align: center; 
+				line-height: 50px; 
+				font-size: 15px;
+			}
+			#upload-pic:first-child{
+				border-right: 1px solid #dcdcdc;
+			}
+			#upload-pic{
+  			  position: relative; 
+    		  width:50%; 
+    		  height:100px; 
+    		  float:left; 
+			  top:10px;
+	        }
+	        #upload-pic img{
+	        	height:98px; 
+	        	margin:0 auto;
+	        }
+	        #upload-pic input
+	        {
+	            opacity:0;
+	            filter:alpha(opacity=0);
+	            height: 100%;
+	            width: 100%;
+	            position: absolute;
+	            top: 0;
+	            left: 0;
+	            z-index: 9;
+	           
+	        }
+			#id-card button{position: absolute;right:14px;top: 54px;background-color: #fff;width: 20px;height:20px;color: #e15f11;border-radius: 50%;padding: 0;border-color: #e15f11;}
+			.am-modal-bd p{text-align:left;}
+		</style>
+				
+	</head>
+
+	<body onLoad="setup()">
+		<include file="public:head" />	
+		<!--头部-->
+		<div class="topnav">
+			<a href="{:U('User/id_manage')}" class="back">
+				<img src="../Style/images/fanhui1.png" width="25"  />
+			</a>
+			添加身份证信息
+		</div>
+		
+		<form method="post" action="{:U('User/do_addid')}" id="id_form" name="id_form" enctype="multipart/form-data">
+		<input type="hidden" name="ids" value="{$_GET['ids']}" />
+		<input type="hidden" name="addr_id" value="{$_GET['addr_id']}" />
+		<!--收货人-->
+		<div id="user">
+			<span>姓名：</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="consignee" placeholder="请输入与收货人身份证一致的姓名" style="width:75%; padding-right:25px;" />
+		</div>
+		<!--身份证-->
+		<div id="id-card">
+			<span>身份证：</span>&nbsp;&nbsp;&nbsp;<input type="text" name="cardId" id="" value="" placeholder="请输入收货人的身份证号码" style="width:65%;height:35px;line-height:35px;background:#fff; padding-right:25px;" />
+			<button type="button" class="am-btn am-btn-primary" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0, width:300, height:400}">?</button>
+			<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+			  <div class="am-modal-dialog" style="overflow-y:scroll">
+				<div class="am-modal-hd" style="position:fixed;width:100%;z-index:999;background: #e15f11;height:50px;color:#fff;">跨境电商全购物须知
+				  <a href="javascript: void(0)" style="color: white; opacity:0.9" class="am-close am-close-spin" data-am-modal-close ><i class="am-icon-close"></i></a>
+				</div>
+				<div class="am-modal-bd" style="margin-top:60px;">     
+					<p>尊敬的饭团：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;请务必认真阅读以下条款，了解本文所告知内容后再进行下单购买。 如因未能了解下属条款而产生的一切购物纠纷，均由您个人承担。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、进口免税商品不退换机制：由于跨境电商制度原因，下单支付成功6小时后无法申请无理由退款，如若出现下错单或者需加单情况，
+						请在支付成功后的6小时内申请退款重拍。跨境进口产品一旦发货，非质量问题概不退换。
+						团洋范全球购承诺，商品如若在15个工作日内未收到货（不包括偏远地区）以及产品质量问题，自付款日开始30天内均可提供退款退货服务。其他情况，均不退换。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、物流：平台下单之后，需要48小时交由海关审核，海关审核通过之后，监管仓库扫描出库，快递公司开始国内配送。如果周六日及节假日延迟，我们会协助买家催促海关进行最快审核，
+						由于是境外直邮进关，正常您收到货时间是7--10个工作日，工作日不包括海关休息的周三周六周日以及法定节假日。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、多包裹配送：为保证原产地直发，所以是海外多地仓库同时发货，部分客户会陆续收到来自世界各地的多个包裹。略有繁琐，敬请耐心等待。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4、务必填写真实身份信息：由于跨境电商全程均在海关监管下运作，须保证订单、支付单、物流单三单合一。
+					所以您在本商城下单结算时请务必填写正确的身份证信息和真实姓名，否则将不能清关及发货。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5、抽检：海关将会对所有清关商品进行开包抽查，以保证商品的真实性及安全性。所以会有部分产品外包装有被打开的痕迹，如果是遮光瓶或者不透明瓶子，海关将有可能开盖检查。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6、无中国发票：您在本商城购买的商品均为境外商品，所以不能提供中国发票。</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7、为什么能免税：海关保税仓清关非常严格，，为了能够顺利收到货物，请买家下单时请勿购买超于2000元，
+						一旦高于2000元将按照国家标准征收邮税。《海关总署公告2010年第43号》规定第一条，个人邮寄进境物品，海关依法征收进口税，
+						但应征进口税税额在人民币50元（含50元以下的，税额=售价*数量*税率）。母婴、保健品行邮税率是10%，购买500元以下商品免税。
+						其他类型邮税参考《入境旅客行李物品和个人邮递物品进口税税则归类表》以及《入境旅客行李物品和个人邮递物品完税价格表》	</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8、使用风险个人承担：您购买的境外商品适用的品质、健康、标识等项目的使用标准均符合原产国使用标准，但是可能与我国标准有所不同，
+						所以在使用过程中由此可能产生的危害或损失以及其他风险，将由您个人承担。</p>
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+		
+		<!--保存收货地址-->
+		<div id="save" style="margin-top: 10px;">
+			<a id="check"><p><span style="color:#f05d00;">保存身份证信息</p></span></a>
+		</div>
+		</form>
+		<div class="showinfo" ></div>
+		
+		
+	</body>
+
+</html>

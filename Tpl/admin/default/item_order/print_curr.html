@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title></title>
+	<script type="text/javascript" language="javascript" src='../Style/js/jquery-1.4.4.min.js'></script>
+	<script language="javascript" src="../Style/js/jquery.jqprint-0.3.js"></script>
+	<script language="javascript">
+		function  a(){
+			$(".orderlist").jqprint();
+		}
+	</script>
+</head>
+<style type="text/css">
+.orderlist{ width:100%;height:auto;}
+.orderlist .ordertable{border:1px solid #ccc;margin-bottom:15px;}
+.orderlist .ordertable tr,.ordertable td {border:1px solid #ccc;padding:5px;}
+</style>
+<body>
+
+<!-- 订单模板S -->
+<div class="orderlist">
+<volist name="orderList" id="vo">
+	<table class="ordertable">
+		<tr>
+		<td colspan="6">
+		<if condition="$vo.itemtype eq 0"><font color="#990000">保税分单[{$vo.orderId}<b>BS</b>]</font>
+		<else />
+		<font color="#006600">完税分单[{$vo.orderId}<b>WS</b>]</font>
+		</if>
+		<a href="javascript:;" style="font-weight:bold;float:right;">所属订单[{$vo.orderId}]</a>
+		</td>
+		</tr>
+		<volist name="vo.goodsifno" id="vo1">
+		<tr>
+		<td><img src="./data/upload/item/{$vo1.img}" width="40" /></td>
+		<td>{$vo1.title}</td>
+		<td>属性：<if condition="$vo1.size eq ''">无<else />{$vo1.size}</if></td>
+		<td>类型：<if condition="$vo.itemtype eq 0">保税商品<else />完税商品</if></td>
+		<td>数量：x{$vo1.quantity}</td>
+		<td>价格：￥{$vo1.price}</td>
+		</tr>
+		</volist>
+		<tr><td colspan="6" align="right">总单共计：{$vo.goods_sumPrice}，本分单共计：<b>{$vo.0}</b>元.</td></tr>
+	</table>
+</volist>
+</div>
+<!-- 订单模板E -->
+<input type="button" onClick=" a()" value="打印!" style=" background:#318DD0; margin-top:20px; padding:5px 12px; color:#FFFFFF" />
+</body>
+</html>
+
+

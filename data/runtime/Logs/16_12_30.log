@@ -1,0 +1,396 @@
+[ 2016-12-30T12:01:14+08:00 ] ERR: (ThinkException) Duplicate entry '0' for key 'PRIMARY'
+ [ SQL语句 ] : INSERT INTO `weixin_user_blessings` (`gender`,`name`,`blessing`,`pic_1`,`pic_2`,`pic_3`,`video_1`,`sendId`,`add_time`,`phone`) VALUES (2,'liliy','hello','data/upload/blessing/148307046378_img.jpg','data/upload/blessing/148307046378_picurl2.jpg','data/upload/blessing/148307046378_picurl3.jpg','data/upload/video/78_1483070463_33041_1482991714.mp4',78,1483070474,'')
+[ 2016-12-30T12:01:25+08:00 ] ERR: (ThinkException) Duplicate entry '0' for key 'PRIMARY'
+ [ SQL语句 ] : INSERT INTO `weixin_user_blessings` (`gender`,`name`,`blessing`,`pic_1`,`pic_2`,`pic_3`,`video_1`,`sendId`,`add_time`,`phone`) VALUES (2,'liliy','hello','data/upload/blessing/148307047478_img.jpg','data/upload/blessing/148307047478_picurl2.jpg','data/upload/blessing/148307047478_picurl3.jpg','data/upload/video/78_1483070474_33041_1482991714.mp4',78,1483070485,'')
+[ 2016-12-30T12:02:06+08:00 ] ERR: (ThinkException) Duplicate entry '0' for key 'PRIMARY'
+ [ SQL语句 ] : INSERT INTO `weixin_user_blessings` (`gender`,`name`,`blessing`,`pic_1`,`pic_2`,`pic_3`,`video_1`,`sendId`,`add_time`,`phone`) VALUES (2,'liliy','hello','data/upload/blessing/148307051578_img.jpg','data/upload/blessing/148307051578_picurl2.jpg','data/upload/blessing/148307051578_picurl3.jpg','data/upload/video/78_1483070515_33041_1482991714.mp4',78,1483070526,'')
+[ 2016-12-30T13:41:58+08:00 ] ERR: (ThinkException) Action:dispaly您所请求的方法不存在！
+[ 2016-12-30T13:43:07+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000581s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000020s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001288s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002892s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.003618s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000198s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004235s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000384s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000258s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000190s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003175s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011577s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076587 WHERE ( `id` = null ) [ RunTime:0.000118s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.035419s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000331s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076587 WHERE ( `id` = null ) [ RunTime:0.000107s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000264s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.010164s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000188s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000143s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000322s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004769s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000283s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.014676s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14090 LIMIT 1   [ RunTime:0.000621s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.014602s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2311 ) LIMIT 1   [ RunTime:0.000201s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14090 ) LIMIT 1   [ RunTime:0.000132s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:43:09+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000545s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000033s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000948s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002237s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004088s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000226s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.005805s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000389s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000252s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000225s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003439s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011470s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076589 WHERE ( `id` = null ) [ RunTime:0.000132s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004089s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000323s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076589 WHERE ( `id` = null ) [ RunTime:0.000110s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000266s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003388s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000198s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000134s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001105s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.013085s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000408s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.003743s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14090 LIMIT 1   [ RunTime:0.000156s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.003953s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2311 ) LIMIT 1   [ RunTime:0.000167s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14090 ) LIMIT 1   [ RunTime:0.000105s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:43:14+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000334s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000019s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000878s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001950s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004265s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000211s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004479s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000391s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000250s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000209s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003247s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011632s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076593 WHERE ( `id` = null ) [ RunTime:0.000137s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004373s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000330s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076593 WHERE ( `id` = null ) [ RunTime:0.000090s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000250s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003575s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000191s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000142s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001127s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.032458s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000984s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.009808s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14090 LIMIT 1   [ RunTime:0.000270s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.006329s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2311 ) LIMIT 1   [ RunTime:0.000182s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14090 ) LIMIT 1   [ RunTime:0.000104s ]
+
+[ 2016-12-30T13:43:19+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000330s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000019s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001077s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002176s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.003906s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000215s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004183s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000473s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000265s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000224s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003261s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011624s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076598 WHERE ( `id` = null ) [ RunTime:0.000173s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.005207s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000342s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076598 WHERE ( `id` = null ) [ RunTime:0.000101s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000262s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003418s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000202s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000143s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000302s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004547s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000322s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.004947s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14090 LIMIT 1   [ RunTime:0.000755s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004720s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2311 ) LIMIT 1   [ RunTime:0.000180s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14090 ) LIMIT 1   [ RunTime:0.000107s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:43:22+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000341s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000018s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000863s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001927s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004043s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000217s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004989s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000391s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000257s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000210s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003352s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011872s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076602 WHERE ( `id` = null ) [ RunTime:0.000139s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004035s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000323s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076602 WHERE ( `id` = null ) [ RunTime:0.000105s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000270s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003284s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000194s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000145s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001057s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.010621s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000285s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.003965s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14090 LIMIT 1   [ RunTime:0.000182s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004794s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2311 ) LIMIT 1   [ RunTime:0.000212s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14090 ) LIMIT 1   [ RunTime:0.000128s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:43:24+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000351s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000021s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000893s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001997s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004296s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004456s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000376s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000249s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000222s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003275s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011546s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076604 WHERE ( `id` = null ) [ RunTime:0.000131s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004448s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000340s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076604 WHERE ( `id` = null ) [ RunTime:0.000110s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000266s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003441s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000215s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000145s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001484s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.017755s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001011s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.036198s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14352 LIMIT 1   [ RunTime:0.000216s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004479s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2397 ) LIMIT 1   [ RunTime:0.000254s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14352 ) LIMIT 1   [ RunTime:0.000145s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:43:26+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000731s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000074s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001896s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003756s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.003703s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000201s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004267s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000367s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000238s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000186s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003099s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011674s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483076606 WHERE ( `id` = null ) [ RunTime:0.000138s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.003909s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000318s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483076606 WHERE ( `id` = null ) [ RunTime:0.000110s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000267s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003474s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000184s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000133s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001073s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.017649s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001007s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.005544s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14352 LIMIT 1   [ RunTime:0.000186s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004418s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 2397 ) LIMIT 1   [ RunTime:0.000209s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14352 ) LIMIT 1   [ RunTime:0.000128s ]
+NOTIC: [8] Undefined variable: discount E:\phpStudy\WWW\tyf\app\Lib\ORG\Cart.class.php 第 159 行.
+
+[ 2016-12-30T13:57:32+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000337s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000019s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000893s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002080s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004112s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004281s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000378s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000249s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000242s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003299s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011563s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483077452 WHERE ( `id` = null ) [ RunTime:0.000134s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.003876s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000319s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483077452 WHERE ( `id` = null ) [ RunTime:0.000108s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000281s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003345s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000202s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000151s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001036s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.022831s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001578s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.005202s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14155 LIMIT 1   [ RunTime:0.000167s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.003808s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 5095 ) LIMIT 1   [ RunTime:0.000187s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14155 ) LIMIT 1   [ RunTime:0.000106s ]
+
+[ 2016-12-30T13:57:37+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=change_quantity
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000330s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000020s ]
+INFO: Run load_lang Behavior [ RunTime:-0.000874s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001936s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004082s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000221s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004632s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000403s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000329s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000237s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003470s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.012149s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483077457 WHERE ( `id` = null ) [ RunTime:0.000142s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.003886s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000332s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483077457 WHERE ( `id` = null ) [ RunTime:0.000109s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000268s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003405s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000198s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000149s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001047s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.017591s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001038s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.013970s ]
+SQL: SELECT `id` FROM `weixin_cart` WHERE mainid =14155 LIMIT 1   [ RunTime:0.000179s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004710s ]
+SQL: SELECT `goods_stock`,`size`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 5095 ) LIMIT 1   [ RunTime:0.000203s ]
+SQL: SELECT `num`,`price` FROM `weixin_cart` WHERE ( `mainid` = 14155 ) LIMIT 1   [ RunTime:0.000107s ]
+
+[ 2016-12-30T13:57:55+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=add_cart
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.001096s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000051s ]
+INFO: Run load_lang Behavior [ RunTime:-0.002093s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005456s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004661s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000220s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.003917s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000379s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000253s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000210s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.003178s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011836s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483077475 WHERE ( `id` = null ) [ RunTime:0.000123s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004513s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000311s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483077475 WHERE ( `id` = null ) [ RunTime:0.000089s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000251s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.004859s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000301s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000263s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000365s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004395s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000282s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.003650s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004384s ]
+SQL: SELECT `id`,`title`,`img`,`yhprice`,`size`,`color`,`goods_stock`,`zuzhuang`,`priceyuan`,`add_time`,`itemtype`,`cost`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 5313 ) LIMIT 1   [ RunTime:0.000250s ]
+SQL: INSERT INTO `weixin_cart` (`id`,`name`,`img`,`price`,`num`,`cost`,`uid`,`shopid`,`itemtype`,`baseid`,`is_fictitious`) VALUES (5313,'日本Chez moi 蓝紫根颈膜 抗皱紧致去颈纹 30g ','1608/20/57b80f652fd3b.jpg','159.00',1,'141.00',78,'78','0',4,0) [ RunTime:0.000231s ]
+NOTIC: [8] Undefined variable: color E:\phpStudy\WWW\tyf\app\Lib\Action\home\ShopcartAction.class.php 第 487 行.
+NOTIC: [8] Undefined variable: zuzhuang E:\phpStudy\WWW\tyf\app\Lib\Action\home\ShopcartAction.class.php 第 514 行.
+
+[ 2016-12-30T13:58:12+08:00 ] 192.168.3.36 /tyf/index.php?m=Shopcart&a=add_cart
+INFO: [ app_begin ] --START--
+INFO: Run ReadHtmlCache Behavior [ RunTime:0.000583s ]
+INFO: Run check_ipban Behavior [ RunTime:-0.000044s ]
+INFO: Run load_lang Behavior [ RunTime:-0.001389s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003855s ]
+SQL: SHOW COLUMNS FROM `weixin_ad` [ RunTime:0.004303s ]
+SQL: SELECT * FROM `weixin_ad` WHERE ( `board_id` = 12 ) LIMIT 1   [ RunTime:0.000320s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.004278s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `wechatid` = 'oOejpwrfSdXyOwCb1IcPhZZMR_bc' ) LIMIT 1   [ RunTime:0.000426s ]
+NOTIC: [8] Undefined index: shares E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 60 行.
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000287s ]
+SQL: SELECT * FROM `weixin_user` WHERE id=78 LIMIT 1   [ RunTime:0.000314s ]
+SQL: SHOW COLUMNS FROM `weixin_seller` [ RunTime:0.004876s ]
+SQL: SELECT * FROM `weixin_seller` WHERE ( `userid` = 78 ) AND ( `shopid` = null ) LIMIT 1   [ RunTime:0.011857s ]
+SQL: UPDATE `weixin_seller` SET `addtime`=1483077492 WHERE ( `id` = null ) [ RunTime:0.000174s ]
+SQL: SHOW COLUMNS FROM `weixin_flow_history` [ RunTime:0.004234s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `userid` = 78 ) AND ( `view_shopid` = 78 ) LIMIT 1   [ RunTime:0.000325s ]
+SQL: UPDATE `weixin_flow_history` SET `view_time`=1483077492 WHERE ( `id` = null ) [ RunTime:0.000092s ]
+SQL: SELECT * FROM `weixin_flow_history` WHERE ( `view_shopid` = 78 ) ORDER BY view_time desc  [ RunTime:0.000272s ]
+NOTIC: [2] Invalid argument supplied for foreach() E:\phpStudy\WWW\tyf\app\Lib\Action\frontendAction.class.php 第 140 行.
+NOTIC: [2048] Declaration of settingModel::_before_write() should be compatible with Model::_before_write(&$data) E:\phpStudy\WWW\tyf\app\Lib\Model\settingModel.class.php 第 25 行.
+SQL: SHOW COLUMNS FROM `weixin_setting` [ RunTime:0.003752s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appid' ) LIMIT 1   [ RunTime:0.000206s ]
+SQL: SELECT * FROM `weixin_setting` WHERE ( `name` = 'appsecret' ) LIMIT 1   [ RunTime:0.000130s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.001047s ]
+SQL: SHOW COLUMNS FROM `weixin_user` [ RunTime:0.016986s ]
+SQL: SELECT * FROM `weixin_user` WHERE ( `id` = 78 ) LIMIT 1   [ RunTime:0.000444s ]
+SQL: SHOW COLUMNS FROM `weixin_cart` [ RunTime:0.004129s ]
+SQL: SHOW COLUMNS FROM `weixin_item` [ RunTime:0.004325s ]
+SQL: SELECT `id`,`title`,`img`,`yhprice`,`size`,`color`,`goods_stock`,`zuzhuang`,`priceyuan`,`add_time`,`itemtype`,`cost`,`activity`,`sale_quantity` FROM `weixin_item` WHERE ( `id` = 5313 ) LIMIT 1   [ RunTime:0.000223s ]
+SQL: INSERT INTO `weixin_cart` (`id`,`name`,`img`,`price`,`num`,`cost`,`uid`,`shopid`,`itemtype`,`baseid`,`is_fictitious`) VALUES (5313,'日本Chez moi 蓝紫根颈膜 抗皱紧致去颈纹 30g ','1608/20/57b80f652fd3b.jpg','159.00',1,'141.00',78,'78','0',4,0) [ RunTime:0.000242s ]
+NOTIC: [8] Undefined variable: color E:\phpStudy\WWW\tyf\app\Lib\Action\home\ShopcartAction.class.php 第 487 行.
+NOTIC: [8] Undefined variable: zuzhuang E:\phpStudy\WWW\tyf\app\Lib\Action\home\ShopcartAction.class.php 第 514 行.
+
+[ 2016-12-30T14:19:59+08:00 ] ERR: (ThinkException) 非法操作:new_year
+[ 2016-12-30T14:22:14+08:00 ] ERR: (ThinkException) 无法加载模块:Blessing26%a=new_year
+[ 2016-12-30T14:52:59+08:00 ] ERR: (ThinkException) Column 'video_1' cannot be null
+ [ SQL语句 ] : INSERT INTO `weixin_user_blessings` (`gender`,`name`,`blessing`,`pic_1`,`pic_2`,`pic_3`,`video_1`,`sendId`,`add_time`,`phone`) VALUES (2,'456','小孩','data/upload/blessing/148308077878_img.jpg','','',null,78,1483080779,'')
+[ 2016-12-30T14:54:07+08:00 ] ERR: (ThinkException) Column 'video_1' cannot be null
+ [ SQL语句 ] : INSERT INTO `weixin_user_blessings` (`gender`,`name`,`blessing`,`pic_1`,`pic_2`,`pic_3`,`video_1`,`sendId`,`add_time`,`phone`) VALUES (1,'4566','回来了','data/upload/blessing/148308084778_img.jpg','','',null,78,1483080847,'')
+[ 2016-12-30T15:05:53+08:00 ] ERR: (ThinkException) 模板不存在[./Tpl/home/default/Blessing/blessing.html]

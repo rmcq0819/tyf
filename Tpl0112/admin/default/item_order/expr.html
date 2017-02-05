@@ -1,0 +1,30 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+<style type="text/css">
+.sta{ width:80%; height:auto; border:1px solid #999999; margin:15px auto; text-align:left;}
+.sta ul{ list-style:none;}
+.sta ul li{ margin-left:16%; padding:8px 0}
+p{ margin-left:60%;padding:8px 0}
+.title{height:28px; text-align:center; background:#0066FF; display:block; margin:0 auto; line-height:25px; color:#FFFFFF;}
+a{ float:right; margin-right:20px;width:100px; height:24px; background:#3366CC; padding:1px 10px; border:1px solid #0099FF; color:#FFFFFF; text-decoration:none;}
+a:hover{ background:#990033}
+</style>
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+<body>
+<div class="sta">
+<span class="title">快递单号：{$freecode}，物流动态<a href="javascript:history.go(-1);">返回</a></span>
+<ul>
+ <volist name="list" id="val" >
+	<li>[{$val.time}]&nbsp;&nbsp;&nbsp;{$val.context}</li>
+ </volist>
+</ul>
+<p>信息来源：<font color="#3366FF">{$info}</font>,运单号：<font color="#006600">{$freecode}</font></p>
+</div>
+<include file="public:footer" />
+
+
+</body>
+</html>
+<script src="__STATIC__/js/jquery/plugins/colorpicker.js"></script>
+<script src="__STATIC__/js/kindeditor/kindeditor.js"></script>
+

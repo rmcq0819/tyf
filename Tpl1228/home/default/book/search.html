@@ -1,0 +1,172 @@
+<?php
+$isAjax = false;
+if(isset($_GET["isAjax"]) && $_GET["isAjax"] == "true") $isAjax = true;
+if(!$isAjax) {
+?>
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$page_seo.title}--商品搜索</title>
+<include file="public:headtop" />
+</head>
+
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+
+			<div class="search product_search">
+			  <form action="{:U('book/search')}" method="post">
+			  <div class="text"> <input class="txtseach2" type="text" name="Keyword" class="input" value="" placeholder="输入商品名称..."/></div>
+			   <div class="btn"><input  class="btnseach2"  type="submit" class="submit" value="" class="olp-bg-search"/></div>
+			  </form>
+			</div>
+	
+	<script type="text/javascript">
+	$(function(){
+		//是否浏览器处于正在加载状态
+		var isAjax = false;
+		$(window).scroll(function(e){
+			//如果浏览器不处于加载状态,并且,滚动条拉到底了,并且,第二张表换没有加载完毕
+			if(!isAjax && window.document.body.scrollTop+$(window).height() > window.document.body.scrollHeight-20) {
+				isAjax = true;
+				var pdt_ser_li = $(".pdt_ser_li");
+				var id = "<?php echo $_GET['id']; ?>";
+				$.get("{:U('book/search')}",{isAjax:"true",from:pdt_ser_li.size(),id:id},function(data){
+					isAjax = false;
+					var pdt_ser_li2 = $(data).find("ul>.pdt_ser_li");
+					pdt_ser_li2.appendTo($(".Pants_list>ul"));
+				});
+			}
+		});
+	});
+	</script>
+		<?php
+	}
+	?>		
+			
+	 <div class="Pants_list">
+    	<ul>
+		 <volist name="items" id="item">
+        	<li class="pdt_ser_li" style="border-bottom: 1px solid #e6e6e6;">
+            	<div class="img" style="width: 32%;float: left;">
+				<img src="./Tpl/home/default/Style/images/mianfei2.png" style="width: 61px;height: 57px;position: relative;float: right;"/>
+                	<a href="{:U('Item/index',array('id'=>$item['id']))}">
+					<img src="{:attach(get_thumb($item['img'], '_b'), 'item')}" width="100%" style="margin-top: -57px;" />
+					</a>
+                </div>
+                <div class="font" style="margin-left: 15px;">
+                	<a href="{:U('Item/index',array('id'=>$item['id']))}">{$item.title}</a>
+                </div>
+                <div class="price" style="margin-left: 15px;">
+                	<span style="color: #4c5a42;font-size: 20px;line-height: 22px;">
+					<if condition="$users['uid'] eq 0 || $users['uid'] eq ''">
+					<?php
+					if(!empty($item['zuzhuang'])){
+					$huodong = time()-$item['add_time'];
+					$zuzhuang = 24*60*60*$item['zuzhuang'];
+						if($huodong<$zuzhuang){
+							?>
+						<span style="font-size: 12px;background: #ff6600;color: #fff;padding: 3px;margin-left: 5px;">限时折扣价</span>¥
+							<?php
+							$price =($item['price'])*($item['priceyuan']/10);
+							echo $price;
+							?>
+							元
+						<?php
+						}else {
+							?>
+							¥{$item.price}元
+							<?php
+						}
+					}else{
+					?>
+					¥{$item.price}元
+					<?php
+					}
+					?>
+					<else />
+					<?php
+					if(!empty($item['zuzhuang'])){
+					$huodong = time()-$item['add_time'];
+					$zuzhuang = 24*60*60*$item['zuzhuang'];
+						if($huodong<$zuzhuang){
+							?>
+						<span style="font-size: 12px;background: #ff6600;color: #fff;padding: 3px;margin-left: 5px;">限时折上折</span>
+							<?php
+							$price =$item['price'];  
+							$discount = $user_category['discount'];
+							$price = $price*($discount/100)*($item['priceyuan']/10);
+							?>
+							¥<?php echo $price;?>元
+						<?php
+						}else {
+							$price =$item['price'];  
+							$discount = $user_category['discount'];
+							$price = $price*($discount/100);
+							?>
+							¥<?php echo $price;?>元
+							<?php
+						}
+					}else{
+						$price =$item['price'];  
+						$discount = $user_category['discount'];
+						$price = $price*($discount/100);
+						?>
+						¥<?php echo $price;?>元
+					<?php
+					}
+					?>
+					</if>
+					</span>
+					<span style="font-size: 14px;color: #a9aead;line-height: 22px;text-decoration: line-through;font-family:微软雅黑;vertical-align: middle;">
+					<if condition="$users['uid'] eq 0">
+					<else />
+					¥{$item.price}元
+					</if>
+					</span>　
+					<span style="color: #86908e;font-size: 14px;line-height: 22px;">
+					<if condition="$users['uid'] eq 0">
+					<else />
+					<?php
+					if(!empty($item['zuzhuang'])){
+					$huodong = time()-$item['add_time'];
+					$zuzhuang = 24*60*60*$item['zuzhuang'];
+						if($huodong<$zuzhuang){
+							$discount = $user_category['discount'];
+							$discount = ($discount/10)*($item['priceyuan']/10);
+							echo $discount."折";
+							?>
+						<?php
+						}else {
+							$discount = $user_category['discount'];
+							$discount = $discount/10;
+							echo $discount."折";
+						}
+					}else{
+						$discount = $user_category['discount'];
+						$discount = $discount/10;
+						echo $discount."折";
+					}
+					?>
+					</if>
+					</span>
+					<br/>
+					<span style="font-size: 14px;color: #a9aead;color:red;">{$item.buy_num}人已经购买</span>
+                    <a href="{:U('Item/index',array('id'=>$item['id']))}" class="right"><img src="../Style/images/book_10.png" /></a>
+                </div>
+            </li>
+		</volist>
+        </ul>
+    </div>
+<?php
+if(!$isAjax) {
+?>
+<div class="clear" style="height:33px;"></div>
+
+<!-- <include file="public:footer" /> -->
+
+
+</body>
+</html>
+<?php
+}
+?>

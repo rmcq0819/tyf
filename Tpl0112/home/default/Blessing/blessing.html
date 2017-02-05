@@ -1,0 +1,132 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;height: 49px;line-height: 49px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;z-index: 999;background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}			
+			/*头部*/
+			#picture{
+				width: 100%;position: absolute; left: 0px; top: 34%; padding: 0px;
+			}
+			#picture img{
+				border-radius: 3px;height: 64px;
+			}
+			#footer{
+				width: 100%;position: absolute; left: 0%; top: 43%; padding: 5px;
+			}
+			#footer .yu{
+				margin-bottom: 46px; position: relative; left: 0px; font-weight: bold;
+			}
+			#footer .yu .name{
+				position: absolute; left: 15%; top: 10%; color: rgb(240,93,0); font-size: 13px;
+			}
+			#footer .yu .content{
+				width: 80%;position: absolute; left: 14%; top: 24%; color: rgb(240,93,0); font-size: 13px; 
+			}
+			#footer .yu .zeng{
+				position: absolute; right: 8%; top: 63%; color: rgb(240,93,0); font-size: 12px;
+			}
+			#footer .yu .time{
+				position: absolute; right: 10%; top: 73%; color: rgb(240,93,0); font-size: 12px;
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="{:U('User/index')}" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			新年大吉
+		</div>
+		
+		<div id="main" style="position: relative; left: 0px;">
+			<img src="../Style/index-images/activity/zhu-bg.jpg" alt="背景图" class="am-img-responsive" style="margin-top: 49px;"/>
+			<p style="position: absolute; left: 0px; top: 20%;">
+				<img src="{$send_user['cover']}" alt="" class="am-circle" style="width: 50px;height:50px;margin-left: 3px;"/>
+				<p style="position: absolute; left: 20%; top: 20.7%; color: rgb(240,93,0); font-size: 14px;">{$send_user['username']}(新年快乐，哈哈，想到是我了吗)</p>
+			</p>
+			<p style="position: absolute; left: 16%; top: 29%; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+				下面是为你制作的祝福图片<span style="font-size:12px;">(点击查看大图)</span>
+			</p>
+			<div id="picture">
+				<if condition="($blessing['pic_1'] neq '') OR ($blessing['pic_2'] neq '') OR ($blessing['pic_3'] neq '')"> 
+				<ul data-am-widget="gallery" class="am-gallery am-avg-sm-3 am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }" >
+			     	<li>
+				        <div class="am-gallery-item">
+				            <a href="<if condition="$blessing.pic_1 neq ''">{$blessing['pic_1']}<else/>../Style/index-images/activity/no-p1.png</if>" class="">
+				              <img src="<if condition="$blessing.pic_1 neq ''">{$blessing['pic_1']}<else/>../Style/index-images/activity/no-p1.png</if>"  alt="图片"/>
+				            </a>
+				        </div>
+			      	</li>
+			      <li>
+			        <div class="am-gallery-item">
+			            <a href="<if condition="$blessing.pic_2 neq ''">{$blessing['pic_2']}<else/>../Style/index-images/activity/no-p1.png</if>" class="">
+			              <img src="<if condition="$blessing.pic_2 neq ''">{$blessing['pic_2']}<else/>../Style/index-images/activity/no-p1.png</if>"  alt="图片"/>
+			            </a>
+			        </div>
+			      </li>
+			      <li>
+			        <div class="am-gallery-item">
+			            <a href="<if condition="$blessing.pic_3 neq ''">{$blessing['pic_3']}<else/>../Style/index-images/activity/no-p1.png</if>" class="">
+			              <img src="<if condition="$blessing.pic_3 neq ''">{$blessing['pic_3']}<else/>../Style/index-images/activity/no-p1.png</if>"  alt="图片"/>
+			            </a>
+			        </div>
+			      </li>
+  				</ul>
+				<else/>
+  				<!--没有照片的时候-->
+  				<p style="text-align: center; margin-top: 5px;">
+  					<img src="../Style/index-images/activity/no-p1.png" alt="无照片" style="width: 60px;height: 60px; border: none;"/>
+  					<span style="color: rgb(169,183,183); margin-left: 5px;">无照片</span>
+  				</p>
+				</if>
+			</div>
+			
+			<div style="width: 100%; height: 200px;background-color: rgb(253,235,197);"></div>
+			
+			<div id="footer">
+				<p style="font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: absolute; left: 16%; top: 10%;">
+					也任性为你制作的祝福小视频
+				</p>
+				<if condition="$blessing['video_1'] neq ''">
+				<video src="https://api.yooopay.com/{$blessing['video_1']}"  width="100%" height="250" controls="controls" style="margin-top: 80px;">
+  					当前浏览器不支持 video直接播放，点击这里下载视频： <a href="https://api.yooopay.com/{$blessing['video_1']}">下载视频</a>
+  				</video>
+				<else/>
+  				<!--没有视频的时候-->
+  				<p style="margin-top: 80px; text-align: center;">
+					<img src="../Style/index-images/activity/no-v.png" alt="无视频" style="width: 79px; margin-left: -5px;"/>
+					<span style="text-align: center;color: rgb(169,183,183); margin-left: -3px;">无视频</span>
+				</p>
+				</if>
+  				<div class="yu">
+  					<img src="../Style/index-images/activity/zhu-footer.jpg" alt="背景图" class="am-img-responsive"/>
+  					<p class="name">{$blessing['name']}
+					<if condition="$blessing['gender'] eq 1">先生</if>
+					<if condition="$blessing['gender'] eq 2">女士</if>
+					<if condition="$blessing['gender'] eq 3">先生/女士</if>：</p>
+  					<p class="content">
+  						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$blessing['blessing']}
+  					</p>
+  					<p class="zeng">{$send_user['username']}（赠）</p>
+  					<p class="time">{$blessing.add_time|date="Y.m.d",###}</p>
+  				</div>
+			</div>
+		</div>
+		
+		<include file="public:footer" />
+	</body>
+
+</html>
+

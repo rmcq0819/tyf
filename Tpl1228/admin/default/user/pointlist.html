@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 范票明细</title>
+<include file="public:header" />
+</head>
+<body>
+
+<table width="100%" cellspacing="0">
+	<tbody>
+		<tr>
+			<td>
+			<div class="explain_col" style="font-size:15px;">
+				您正在查看【<if condition="$userinfo.username eq ''">{$userinfo.id}<else/>{$userinfo.username}</if>】的范票明细 
+				<form name="searchform" method="get" > 
+					<input type="hidden" name="g" value="admin" />
+					<input type="hidden" name="m" value="user" />
+					<input type="hidden" name="a" value="pointlist" />
+					<input type="hidden" name="id" value="{$_GET['id']}" />
+					<div class="explain_col">
+						&nbsp;&nbsp;范票类型：
+						 <select name="type" >
+							<option value="0">--所有--</option>
+							<option <if condition='$type eq 5'>selected=''</if> value="5">购物奖励范票</option>
+							<option <if condition='$type eq 6'>selected=''</if> value="6">评论奖励范票</option>
+							<option <if condition='$type eq 7'>selected=''</if> value="7">购物抵扣范票</option>
+							<option <if condition='$type eq 8'>selected=''</if> value="8">红包奖励范票</option>
+							<option <if condition='$type eq 9'>selected=''</if> value="9">系统奖励范票</option>
+							<option <if condition='$type eq 10'>selected=''</if> value="10">范票红包分享</option>
+							<option <if condition='$type eq 11'>selected=''</if> value="11">红包退还范票</option>
+							<option <if condition='$type eq 12'>selected=''</if> value="12">范票充值成功</option>
+							<option <if condition='$type eq 20'>selected=''</if> value="20">转盘抽奖范票</option>
+							<option <if condition='$type eq 21'>selected=''</if> value="21">抽奖机会抵扣</option>
+							<option <if condition='$type eq 22'>selected=''</if> value="22">退款返还范票</option>
+							<option <if condition='$type eq 19'>selected=''</if> value="19">人气店铺奖励</option>
+							<option <if condition='$type eq 25'>selected=''</if> value="25">系统回收范票</option>
+							<option <if condition='$type eq 26'>selected=''</if> value="26">范票商城兑换</option>
+						  </select>
+						<input type="submit" name="search" class="btn" value="搜索" />
+						</form>
+						<br/>
+						<form name="searchform" method="post">
+							<input type="hidden" name="g" value="admin" />
+							<input type="hidden" name="m" value="user" />
+							<input type="hidden" name="a" value="pointfreeze" />
+							<input type="hidden" name="id" value="{$_GET['id']}" />
+							<input value="1" <if condition='$userinfo.is_freeze eq 1'>checked=''</if> type="checkbox" name="is_freeze" > 冻结范票账户
+							<input type="submit" name="search" class="btn" value="冻结该账户"/>
+							&nbsp&nbsp <span>(冻结后，用户将无法使用红包发放、领取、范票抵扣等功能。)
+						</form>
+					</div>
+				
+			
+			</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div id="content" style="background:#fff;min-height: 500px;margin:10px;">
+  <div style="background: #e7f3f3;float: left;width:100%;padding-top: 15px;padding-bottom: 10px;">
+	<p style="width:100%;height: 45px;">
+	<span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;font-size:15px;">范票余额：{$point_yuer} ({$yuer_price}元)</span>
+	<span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;font-size:15px;">领取红包范票：{$redpoint} (<?php echo $redpoint/100; ?>元)</span>
+	<span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;font-size:15px;">发出红包范票：{$sendcount} (<?php echo $sendcount/100; ?>元)</span>
+	<span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;font-size:15px;">转盘获得范票：{$zhuanpan_count} (<?php echo $zhuanpan_count/100; ?>元)</span>
+	<span style="padding: 10px;display: block;float: left;border: 1px dashed #a8aea3;margin-left: 5%;font-size:15px;">转盘花费范票：{$zhuanpan_dec} (<?php echo $zhuanpan_dec/100; ?>元)</span>
+	</p>
+  </div>
+
+<div class="clear"></div>
+
+<!--范票明细列表-->
+<div class="pad_10" >
+    <div class="J_tablelist table_list">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="name">详细描述</span></th>
+                <th width="150" align="center"><span data-tdtype="order_by" data-field="shares">时间</span></th>
+              <th width="120" align="center"><span data-tdtype="order_by" data-field="lv">范票数量</span></th>
+            </tr>
+        </thead>
+    	<tbody>
+			<notempty name="lists">
+				<volist name="lists" id="val" >
+					<tr>
+						<td align="center">{$val.id}</td>
+						<td align="center">
+							<switch name="val.type">
+								<case value="5">购物奖励范票</case>
+								<case value="6">评论奖励范票</case>
+								<case value="7">
+								购物抵扣范票(订单号：{$val.order_id})
+								</case>
+								<case value="8">
+								<?php
+									 $redbag = M('red_packets')
+									->join("a left join weixin_user as b on a.userId = b.id")
+									->where(array('a.id'=>$val['pid']))
+									->find();
+								?>
+								领取了【
+								<?php 
+									if($redbag['username'] == ''){
+										echo $redbag['userId'];
+									}else{
+										echo $redbag['username'];
+									}
+								?>
+								】发出的红包
+								</case>
+								<case value="9">系统奖励范票</case>
+								<case value="10">范票红包分享</case>
+								<case value="11">红包退还范票</case>
+								<case value="12">范票充值成功</case>
+								<case value="20">转盘抽奖范票</case>
+								<case value="21">转盘机会抵扣</case>
+								<case value="22">退款返还范票</case>
+								<case value="19">人气店铺奖励</case>
+								<case value="25">系统回收范票</case>
+								<case value="26">范票商城兑换</case>
+							</switch>
+						</td>
+						<td align="center">{$val.time|date="Y-m-d H:i:s",###}</td>
+					   <td align="center">
+							<switch name="val.type">
+								<case value="5">+{$val.points}</case>
+								<case value="6">+{$val.points}</case>
+								<case value="7">-{$val.points}</case>
+								<case value="8">+{$val.points}</case>
+								<case value="9">+{$val.points}</case>
+								<case value="10">-{$val.points}</case>
+								<case value="11">+{$val.points}</case>
+								<case value="12">+{$val.points}</case>
+								<case value="20">+{$val.points}</case>
+								<case value="21">-{$val.points}</case>
+								<case value="22">+{$val.points}</case>
+								<case value="19">+{$val.points}</case>
+								<case value="25">-{$val.points}</case>
+								<case value="26">-{$val.points}</case>
+							</switch>
+					   </td>
+					</tr>
+					</volist>
+			</notempty>
+            
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <div id="pages">{$page}</div>
+    </div>
+    </div>
+</div>
+
+</div>
+<div class="clear" style="height:40px;"></div>
+</body>
+</html>

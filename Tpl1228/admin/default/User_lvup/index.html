@@ -1,0 +1,120 @@
+<include file="public:header" />
+<!--会员仓库信息列表-->
+<div class="pad_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="User_lvup" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="25" value="{$search.keyword}" />
+                    <input type="submit" name="search" class="btn" value="搜索" />
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+
+    <div class="J_tablelist table_list" data-acturi="{:U('user_category/ajax_edit')}">
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th width="40"><input type="checkbox" name="checkall" class="J_checkall"></th>
+                <th width="50"><span tdtype="order_by" fieldname="id">ID</span></th>
+                <th width="100" align="center"><span data-tdtype="order_by" data-field="username">会员名</span></th>
+                <th width="100" align="center"><span data-tdtype="order_by" data-field="phone">手机号码</span></th>
+                <th width="140" align="center"><span data-tdtype="order_by" data-field="upgrade">维持条件(团队新增总数)</span></th> 
+                <th width="140"><span data-tdtype="order_by" data-field="num">代理团队新增总数</span></th>
+				<th width="140" align="center"><span data-tdtype="order_by" data-field="upgrade1">维持条件(团队直推新增数)</span></th> 
+                <th width="140"><span data-tdtype="order_by" data-field="num1">代理团队直推新增数</span></th>
+				<th align="center"><span data-tdtype="order_by" data-field="add_time">申请时间</span></th>
+                <th align="center"><span data-tdtype="order_by" data-field="up_time">上级处理时间</span></th>
+				<th align="center"><span >是否手动升级</span></th>
+                <th width="80"><span data-tdtype="order_by" data-field="up_status">上级处理状态</span></th>
+<!--            <th width="50" align="left"><span data-tdtype="order_by" data-field="ordid">排序</span></th> -->
+<!--            <th width="30"><span data-tdtype="order_by" data-field="status">{:L('status')}</span></th> -->
+                <th width="50">{:L('operations_manage')}</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="list" id="val" >
+            <tr>
+                <td align="center"><input type="checkbox" class="J_checkitem" value="{$val.id}"></td>
+                <td align="center">{$val.id}</td>
+                <td align="center"><span >{$val.username}</span></td>
+                <td align="center"><span >{$val.phone_mob}</span></td>
+				<td align="center"><span >{$val.upgrade}</span></td>
+				<td align="center"><span >{$val.num}</span></td>
+				<td align="center"><span >{$val.upgrade1}</span></td>
+				<td align="center"><span >{$val.num1}</span></td>
+                <td align="center"><span data-field="add_time" data-id="{$val.id}" >{$val.add_time|date="Y-m-d",###}</span></td>
+                <td align="center"><span data-field="up_time" data-id="{$val.id}" ><notempty name ="val.up_time">{$val.up_time|date="Y-m-d",###}<else />暂未处理</notempty></span></td>
+                <td align="center">
+					<switch name="val.is_update">
+						<case value="1"><span style="color:#31598a;">是</span></case>
+						<default/> <span>否</span>
+					</switch>
+				</td>
+				<td align="center"><span data-field="up_status" data-id="{$val.id}" class="">
+                    <switch name="val.up_status">
+                        <case value="1">已通过</case>
+                        <case value="2">不通过</case>
+                        <default />未处理
+                    </switch>    
+                </td>
+                <td align="center">
+                <if condition="$val.hq_status eq 0 && $val.up_status eq 1">
+                    <a href="javascript:void(0);" style="color:red;" onclick="lvup({$val.id})">【升级】</a>
+                <else/>
+                    <eq name="val.up_status" value="2">
+                        审核不通过
+                    <else />
+                        <switch name="val.hq_status">
+                            <case value="1">已通过</case>
+                            <case value="2">不通过</case>
+                            <default />未处理
+                        </switch>
+                    </eq> 
+                 </if>   
+            </tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed">
+        <!-- <label class="select_all"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <input type="button" class="btn" data-tdtype="batch_action" data-acttype="ajax" data-uri="{:U('user_category/delete')}" data-name="id" data-msg="{:L('confirm_delete')}" value="{:L('delete')}" /> -->
+        <div id="pages">{$page}</div>
+    </div>
+
+    </div>
+</div>
+<include file="public:footer" />
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script type="text/javascript" src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+function lvup(id){
+	var flag = confirm('你确定要升级此代理吗？');
+	if(flag){
+		$.post("{:U('User_lvup/lvup_do')}",{id:id},function(msg){
+			if(msg == 1){
+				alert('升级成功！');
+				window.location.reload();
+			}else if(msg == 0){
+				alert('升级失败！');
+			}else if(msg == -1){
+				alert('由于系统错误升级失败！请联系管理员');
+			}
+		});
+	}else{
+		return false;
+	}
+}
+</script>

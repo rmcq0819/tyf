@@ -1,0 +1,131 @@
+<include file="public:header" />
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+   <script>
+		     $(function(){
+		    
+        	 $('#free').change(function(){
+        	  if($(this).val()==2)
+        	  {
+        	  	$('#address_form').show();
+        	  }else
+        	  {
+        	  		$('#address_form').hide();
+        	  }
+        	 });
+        	 set_address();
+        })
+        
+          function set_address()
+          {
+          	 var addr_id =$("#free").find("option:selected").val();
+          	
+           if(addr_id == 2)
+            {
+               
+                $('#address_form').show();
+            }
+            else
+            {
+                $('#address_form').hide();
+     
+            }
+          }
+		 </script>
+<!--添加产国-->
+<form id="info_form" action="{:U('item_comment/add')}" method="post" enctype="multipart/form-data">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">添加评论</li>
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+		
+			<tr>
+				<th>商品 :</th>
+				<td>
+					<select name="item" style="font-size:14px;height:30px;" id="items">
+						<option value="{$item_detail.id}" style="font-size:14px;">{$item_detail.title} -- 评论数({$counts})</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>商品图片 :</th>
+				<td>
+					<img src="http://yooopay.com/data/upload/item/{$item_detail.img}" id="imgs" style="width:100px;height:100px;"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>评论用户 :</th>
+				<td>
+					<select name="user" style="font-size:14px;height:30px;" id="users">
+						<volist name="users" id="vol">
+								<option value="{$vol.id}" style="font-size:14px;">{$vol.username}</option>
+						</volist>
+					</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>用户头像 :</th>
+				<td>
+					<img src="" id="user_imgs" style="width:100px;height:100px;" alt="请在上方选择评论用户"/>
+				</td>
+			</tr>
+			
+            <tr>
+				<th>评论内容 :</th>
+				<td><textarea name="content" style="width:600px;height:160px;font-size:14px;line-height:30px;">物流速度快，商品质量好</textarea></td>
+			</tr>
+			
+			<tr>
+				<th>评论时间 :</th>
+				<td>
+					<input name="comment_time" type="text" id="J_time_start" class="date" >
+				</td>
+			</tr>
+			
+			<tr>
+				<th>评论图片 :</th>
+				<td><input type="file" name="comment_img" /> <span style="color:#959595">评论图片，如不需要则不上传</span></td>
+ 			</tr>
+		</table>
+		</div>
+        </div>
+		<div class="mt10" style="margin-bottom:40px;"><input type="submit" value="添加评论" class="btn btn_submit"></div>
+	</div>
+</div>
+<link rel="stylesheet" href="__STATIC__/js/calendar/calendar-blue.css"/>
+<script src="__STATIC__/js/calendar/calendar.js"></script>
+<script>
+	$(document).ready(function(){ 
+		$('#items').change(function(){ 
+			var id=$(this).children('option:selected').val();
+			$.post('{:U('item_comment/add')}',{'id':id},function(data){
+				$("#imgs").attr("src",'http://yooopay.com/data/upload/item/'+data); 
+			});
+			
+		}) 
+		
+		$('#users').change(function(){ 
+			var userid=$(this).children('option:selected').val();
+			$.post('{:U('item_comment/add')}',{'userid':userid},function(data){
+				$("#user_imgs").attr("src",'http://yooopay.com/'+data); 
+			});
+			
+		}) 
+	}) 
+Calendar.setup({
+	inputField : "J_time_start",
+	ifFormat   : "%Y-%m-%d",
+	showsTime  : false,
+	timeFormat : "24"
+});
+</script>
+<input type="hidden" name="menuid"  value="{$menuid}"/>
+</form>
+<include file="public:footer" />
+</body>
+</html>

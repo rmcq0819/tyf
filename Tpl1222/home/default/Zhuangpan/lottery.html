@@ -1,0 +1,88 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title></title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;  
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#main{
+				background-color: rgb(255,241,220); padding: 10px;
+			}
+			#main .user-name{
+				padding-left: 8px; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+			}
+			#main .user-content{
+				padding-left: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+			}
+			
+			#main-img .con{
+				width: 220px;color: rgb(254,242,218); position: absolute; left: 50%; top:246px; text-align: center; margin-left: -110px; font-size: 13px;
+			}
+			#main-img .rec{
+				width: 220px;color: rgb(254,242,218); position: absolute; left: 50%; top:274px; text-align: center; margin-left: -110px; font-size: 13px;
+			}
+			.btn{
+				width: 140px;height: 32px;border: solid 2px rgb(255,216,100); border-bottom: solid 3px rgb(255,216,100); background-color: rgb(240,93,0); color: rgb(255,216,100); border-radius: 9px; text-align: center; margin-top: 35px; font-size: 13px;
+			}
+			#tips{
+				background-color: rgb(239,199,138); border: solid 1px rgb(184,176,164); border-radius: 5px; margin-top: 25px; padding: 8px; color: rgb(85,85,85);
+			}
+			#tips .sh-ming{
+				text-align: center; font-size: 15px; color: rgb(240,93,0);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"> 
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			中奖了
+		</div>
+		
+		<div style="margin-top: 49px;">
+			<img src="../Style/index-images/activity/z-header.png" alt="中奖了" class="am-img-responsive"/>
+		</div>
+		
+		<div id="main">
+			<div class="am-g">
+  				<div class="am-u-sm-2">
+  					<img src="{$lottery.cover}" alt="用户"  class="am-img-responsive am-circle" style="width: 45px; margin: 0 auto;"/>
+  				</div>
+  				<div class="am-u-sm-10" style="color: rgb(240,93,0); font-size: 14px;">
+  					<p class="user-name">{$lottery.username}</p>
+  					<p class="user-content">吓到宝宝了，一不小心就中奖了</p>
+  				</div>
+			</div>
+			
+			<div id="main-img" style="position: relative; left: 0px;">
+				<img src="../Style/index-images/activity/z-jiang.png" alt="中奖了" class="am-img-responsive" style="width: 280px;;margin: 0 auto; margin-top: 30px; "/>
+				<img src="../Style/index-images/activity/{$lottery.pic}" alt="奖品" style="width: 106px; position: absolute; left: 50%; top: 162px; margin-left: -53px;"/>
+				<p class="con">恭喜您获得{$lottery.prize}</p>
+				<p class="rec">(奖品可在"我的中奖记录"中查看)</p>
+			</div>
+			<p style="text-align: center;"><button class="btn" onclick="location.href='{:U('Zhuangpan/index')}'">我也去抽奖</button></p>
+			<div id="tips">
+				<p class="sh-ming">抽奖说明</p>
+				<p style="margin-top: 8px;">1、点击“我也去抽奖”进入商城，关注公众号就可以获得一次抽奖机会</p>
+				<p>2、庆祝商城线下实体店开业，期间在商城消费任何金额就能获得开业红包（内有优惠券、范票红包、抽奖机会等）</p>
+				<p>3、其他未了解的事宜可咨询商城客服</p>
+			</div>
+		</div>
+		<include file="public:footer" />
+	</body>
+</html>

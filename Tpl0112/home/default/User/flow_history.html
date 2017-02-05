@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>访问统计</title>
+		<style>
+			* {
+				border: none;outline: none;font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav {
+				width: 100%;height: 50px;line-height: 50px;color: white;font-size: 18px;text-align: center;position: fixed;top: 0;background-color: rgb(181,43,66);z-index: 999;
+			}
+			.topnav img{
+				position: absolute; left:5px; top: 14px;
+			}
+			.topnav select{
+				background: none; font-size: 13px; position: absolute; right: 7px; top: 16px;
+			}
+			.topnav select option{
+				color: rgb(85,85,85);
+			}
+			
+			#list{
+				background-color: white; margin: 8px; border-radius: 5px; margin-top: 13px; padding-bottom: 15px;
+			}
+			#list .content{
+				width: 95%;padding-bottom: 3px; border-bottom: solid 1px #dcdcdc; margin: 0 auto;
+			}
+			#list .content .u-name{
+				overflow:hidden; text-overflow: ellipsis; white-space: nowrap; line-height: 50px; color: rgb(85,85,85); padding-left: 5px;
+			}
+			#list .content .v-time{
+				text-align: right; line-height: 50px; color: rgb(156,156,156); padding-right: 10px;
+			}
+			#list .fw{
+				margin-top: 9px; color: rgb(137,137,137);
+			}
+			#list .fs{
+				margin-top: 10px; color: rgb(240,93,0);
+			}
+			#list .tl{
+				margin-top: 10px; color: rgb(56,151,235); 
+			}
+		</style>	
+	</head>
+	
+	<body>
+		<include file="public:head" />	
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25"  />
+			</a>
+			<span>访问统计&nbsp({$flow_count})</span>
+			<!--
+			<select name="date">
+				<option value="1">今天</option>
+				<option value="2">昨天</option>
+			</select>
+			-->
+		</div>
+		<div style="margin-top: 55px;">
+			<ul>
+				<notempty name="flow_list">
+							<volist name="flow_list" id="val">
+								<li id="list">
+									<div class="am-g content">
+										<div class="am-u-sm-2">
+											<img src="{$val.cover}" alt="头像" class="am-img-responsive am-circle" style="width: 45px;height:40px;padding-left: 3px; margin-top: 6px;"/>
+										</div>
+										<div class="am-u-sm-6">
+											<p class="u-name">{$val.username}</p>
+										</div>
+										<div class="am-u-sm-4">
+											<p class="v-time">
+												<if condition="$val.uid eq 2">掌柜
+													<elseif condition="$val.uid eq 3" />店长
+													<elseif condition="$val.uid eq 5" />经纪人
+													<else/>消费者
+												</if>
+											</p>
+										</div>
+									</div>
+									<div class="am-g" style="text-align: center;">
+										<div class="am-u-sm-5">
+											<p class="fw"><img src="../Style/index-images/rukou.png" alt="访问入口" style="width: 20px; margin-top: -2px;"/>&nbsp;&nbsp;访问店铺</p>
+										</div>
+										<div class="am-u-sm-2"></div>
+										<div class="am-u-sm-5">
+											<p class="fw"><img src="../Style/index-images/tingliu.png" alt="停留最久" style="width: 17px;"/>&nbsp;&nbsp;今日{$val.view_time|date='H:i:s',###}</p>
+										</div>
+									</div>
+								</li>
+						</volist>
+					<else/>
+					<div style="margin-top: 100px;">
+						<img src="../Style/index-images/no-v.png" alt="没有访问记录" class="am-img-responsive" style="width: 90px; margin: 0 auto;"/>
+						<p style="color: #555;text-align: center; margin-top: 10px;font-size:13px;">您今天还没有相关的访问记录</p>
+					</div>
+				</notempty>
+			</ul>
+		</div>
+		<include file="public:footer" />
+	</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>推荐分成活动介绍</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+<link href="../Style/css/activity-style.css" rel="stylesheet" type="text/css">
+
+<script src="../Style/js/jquery-1.11.0.js" type="text/javascript"></script>
+<script src="../Style/js/jquery.cookie.js" type="text/javascript"></script> 
+<script src="../Style/js/audio.min.js" type="text/javascript"></script>      
+<script>
+      audiojs.events.ready(function() {
+        audiojs.createAll();
+      });
+ </script>
+<script>
+		$(function(){
+			var date = new Date();
+			date.setHours(date.getHours()+6);
+			$.cookie("shares","<?php echo $_GET["shares"]; ?>",{expires:date});
+			//var shareuid = $.cookie("shareuid");  获得id
+			
+		});
+</script>
+</head>
+<body class="activity-lottery-winning" style="background:#e7f3f3;">
+<include file="public:headuser" />
+<!--main start-->
+<div class="main" style="background:#e7f3f3;background-size: 320px auto;margin-bottom: 20px;">
+<center><img src="./Tpl/home/default/Fencheng/jifen.jpg"></center>
+<div class="boxcontent boxyellow">
+    <div class="box">
+    <div class="title-green">友情提醒：</div>
+         <div class="Detail">
+				<p style="color:#f00;line-height:160%">您可能是从朋友圈等分享过的页面打开的链接，无法直接参与此会员特权活动，如需参与此活动请按照以下步骤操作：
+				<br>1、关注微信名称“北京爱肌艳后”或者微信号“voleta”或者点击右上角点击【查看公众号】进行关注。
+				<br>2、点击会员中心的【我要参与推荐分成】
+				<br>3、点击右上角选择【发送给朋友】或者【分享到朋友圈】
+				<br>4、如果您的朋友通过您分享的链接在此公众号成为了会员，那么您的分享成功。
+               </p></div>
+</div>
+</div>	
+<div class="boxcontent boxyellow">
+    <div class="box">
+        <div class="title-green">推荐分成活动：</div>
+        <div class="Detail">
+        <p>活动说明:</p>
+		<p>1,您分享给朋友或者朋友圈直接注册的会员属于您的<span style="color:red;">一级A</span>，<span style="color:red;">一级A</span>在此公众号购物后，您能获得他购买总价
+		<volist name='fengchenglv' id='vo' key='k'>
+		<if condition="$k eq 1">
+		{$vo.royalty}
+		</if>
+		</volist> 
+		的提成;</p><br>
+		<p>2,<span style="color:red;">一级A</span>分享给朋友或者朋友圈直接注册的会员属于您的<span style="color:red;">二级B</span>，<span style="color:red;">二级B</span>在此公众号购物后，您能获得他购买总价
+		<volist name='fengchenglv' id='vo' key='k'>
+		<if condition="$k eq 2">
+		{$vo.royalty}
+		</if>
+		</volist> 
+		的提成;</p><br>
+		<p>3,<span style="color:red;">二级B</span>分享给朋友或者朋友圈直接注册的会员属于您的<span style="color:red;">三级C</span>，<span style="color:red;">三级C</span>在此公众号购物后，您能获得他购买总价
+		<volist name='fengchenglv' id='vo' key='k'>
+		<if condition="$k eq 3">
+		{$vo.royalty}
+		</if>
+		</volist> 
+		的提成;</p><br>
+		
+		<center><img src="./Tpl/home/default/Fencheng/jinzita.jpg"></center>	
+		<p>4,您的朋友<span style="color:red;">一级A</span>也享受此规则，只是他是获得<span style="color:red;">三级C</span>购买总价
+		<volist name='fengchenglv' id='vo' key='k'>
+		<if condition="$k eq 2">
+		{$vo.royalty}
+		</if>
+		</volist> 
+		的提成，<span style="color:red;">四级D</span>购买总价
+		<volist name='fengchenglv' id='vo' key='k'>
+		<if condition="$k eq 3">
+		{$vo.royalty}
+		</if>
+		</volist> 
+		的提成;依此类推 。</p><br>
+		<p>5,申明:您无法获得三级以下会员购买的提成;</p><br>
+		<p>6,小小的分享,大大的回报。好东西，齐分享，心动不如行动，小手一抖，分享给您的好朋友吧。</p><br>
+        <p>活动时间:永久</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="clear" style="height:33px;"></div>
+<!--content end-->
+
+<!--main end-->
+
+<!-- share -->
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Lipin",
+            "moduleID":"0",
+            "imgUrl": "http://hf.gz-web.com/Tpl/home/default/Fencheng/jifen.jpg", 
+            "sendFriendLink": "http://<?php echo $_SERVER['SERVER_NAME']; ?>__ROOT__{:U('Fencheng/index',array('shares'=>$visitor['id']))}",
+            "tTitle": "小小的分享,大大的回报。好东西，齐分享，心动不如行动，小手一抖，分享给您的好朋友吧。",
+            "tContent": "您的朋友通过您分享的链接在此公众号进行【会员注册】了，您的分享成功种下了颗【提成】种子。"
+};
+</script>
+<script>document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+         shareHandle('friend');
+            WeixinJSBridge.invoke('sendAppMessage', { 
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.sendFriendLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function (res) {
+                _report('send_msg', res.err_msg);
+            })
+        });
+
+        WeixinJSBridge.on('menu:share:timeline', function (argv) {
+         shareHandle('frineds');
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.sendFriendLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function (res) {
+                _report('timeline', res.err_msg);
+            });
+        });
+
+        WeixinJSBridge.on('menu:share:weibo', function (argv) {
+         shareHandle('weibo');
+            WeixinJSBridge.invoke('shareWeibo', {
+                "content": window.shareData.tContent,
+                "url": window.shareData.sendFriendLink,
+            }, function (res) {
+                _report('weibo', res.err_msg);
+            });
+        });
+        }, false)
+        
+        function shareHandle(to) {
+	var submitData = {
+		module: window.shareData.moduleName,
+		moduleid: window.shareData.moduleID,
+		token:'eyokhj1408945634',
+		wecha_id:'ofTy6jqTd4aHneGC5nGf66OQpKV8',
+		url: window.shareData.sendFriendLink,
+		to:to
+	};
+	$.post('http://<?php echo $_SERVER['SERVER_NAME']; ?>__ROOT__{:U('Fencheng/index',array('shares'=>$visitor['id']))}',submitData,function (data) {},'json')
+}
+        </script>
+<!-- <include file="public:footer" /> -->
+</body>
+</html>

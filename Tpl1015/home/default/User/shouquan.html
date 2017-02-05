@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<include file="public:head" />
+</head>
+<body style=" background: url(../Style/images/pic180.png) repeat left top #c53f57;">
+<div class="logo"><img src="../Style/images/shouquanLogo.png" width="100%"></div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-4 bianhaoshuzi1">授权编号：</div>
+<div class="am-u-sm-8 bianhaoshuzi2">YF{$info.reg_time|date="Y",###}<if condition="$info.id lt 10">000{$info.id}<elseif condition="$info.id lt 100" />00{$info.id}<elseif condition="$info.id lt 1000" />0{$info.id}<elseif condition="$info.id lt 10000" />{$info.id}</if></if></div>
+</div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-4 namezi1">兹授权</div>
+<div class="am-u-sm-4 namezi2">{$info.nickname}</div>
+<div class="am-u-sm-4 namezi3">（先生/女士）</div>
+</div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-12 hangyezi" style="padding-left:17px;"><p>为“团洋范”社交电商平台(美妆类、母婴类、健康类、生活类)指定代理商</p></div>
+</div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-4 bianhaoshuzi1">代理权限为：</div>
+<div class="am-u-sm-8 dailiquanxianzi">{$dengji}</div>
+</div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-12" style="font-size:14px;color:#fff;font-family:微软雅黑;padding-left:17px;">授权期间享受我公司品牌权益，同时并遵守我公司各项制度。</div>
+</div>
+
+<!-- qrcode -->
+<div style="position:absolute;margin-top:67px;left:15px;width:80px;"><img src="../Style/images/qrcodetyf.jpg" width="100%" /></div>
+<!-- qrcode -->
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-4 bianhaoshuzi1">授权期限：</div>
+<div class="am-u-sm-8 dailiquanxianzi">终身制</div>
+</div>
+
+<div class="am-g bianhaoshuzi">
+<div class="am-u-sm-12 shouquanfang"><span style="font-size:14px; color:#ffb2c0; font-family:"微软雅黑";">授权方：</span>广州永孚电子商务有限公司</p></div>
+</div>
+
+
+<div class="am-g bianhaoshuzi">
+<div class="yinzhang"><img src="../Style/images/yin.png"></div>
+<div class="am-u-sm-4"></div>
+<div class="am-u-sm-8 time"><span>{$info.reg_time|date='Y',###}</span>年<span>{$info.reg_time|date='m',###}</span>月<span>{$info.reg_time|date='d',###}</span>日</div>
+</div>
+
+</body>
+</html>

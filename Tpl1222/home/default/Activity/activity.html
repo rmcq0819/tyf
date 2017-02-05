@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<include file="public:head" />
+		<script type="text/javascript" src="../Style/js/cart.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="../Style/slick/slick-theme.css" media="screen" />
+ 		<link rel="stylesheet" href="../Style/slick/slick.css" media="screen" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+		wx.config({
+			debug: false,
+			appId: 'wxc3f8ad3fc6c24903',
+			timestamp: "{$jsapi['timestamp']}",
+			nonceStr: "{$jsapi['timestamp']}",
+			signature: "{$jsapi['signature']}",
+			jsApiList: [
+			  'onMenuShareTimeline',
+			  'onMenuShareAppMessage',
+			]
+		  });
+		  
+		  wx.ready(function () {
+			 wx.onMenuShareTimeline({
+				title: "中秋选好礼，就在团洋范", // 分享标题
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity6_small.png", // 分享图标
+			});
+			wx.onMenuShareAppMessage({
+				title: "中秋选好礼，就在团洋范", // 分享标题
+				desc: "下单满20元，红包送不停！", // 分享描述
+				link: "{$jsapi['url']}", // 分享链接
+				imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/activity6_small.png", // 分享图标
+				type: 'link', 
+				dataUrl: '',
+			});
+		  });
+		</script>
+		<style>
+			* {
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				z-index: 999;
+				background-color: rgb(240, 93, 0);
+			}
+			.topnav img{
+				position: absolute; 
+				left:5px; 
+				top: 14px;
+			}			
+			/*头部*/
+			#header{
+				margin-top: 50px; background-color: white; text-align: center; padding-bottom: 5px;
+			}
+			#header span{
+				font-size: 30px; color: rgb(85,85,85); text-align: center; font-weight: bold;
+			}
+			#header-main{
+				color: rgb(85,85,85);border-top:solid 1px rgb(85,85,85);border-bottom:solid 1px rgb(85,85,85); width: 76%; margin: 0 auto; margin-top: 10px; font-size: 20px; padding: 5px 0px 5px 0px;
+			}
+			#header-main i{
+				font-size: 10px;
+			}
+			#header-img{
+				padding: 10px; margin-top: 5px;
+			}
+			/*头部S*/
+			
+			/*轮播图片*/
+			#header .slider img{
+				width: 100%;
+				height:230px;
+			}
+			
+			/*特惠必购*/
+			#vouchsafe {
+	            height: 50px; line-height: 50px; font-size: 16px; text-align: center; position: relative; color: #555;
+        	}
+        	#vouchsafe i{
+        		transform: rotate(46deg); font-size: 10px;
+        	}
+	        #vouchsafe .span-1,#vouchsafe .span-2 {
+	            border-top: 1px solid rgb(190,190,190); width: 34%; position: absolute; top: 25px;
+	        }
+	        #vouchsafe .span-1{
+	            left: 0px;
+	        }
+	        #vouchsafe .span-2{
+	            right: 0px;
+	        }
+	        
+	        /*产品*/
+	        #product{
+	        	background-color: white;
+	        }
+	        #product ul li{
+	        	margin-top: 7px;
+	        }
+	        #product fieldset{
+	        	border: dashed 1px rgb(117,117,117); margin: 0px;
+	        }
+	        #product fieldset legend{
+	        	border-bottom: none; text-align: center; font-size: 13px; padding-bottom: 0px; margin-bottom: 0px;
+	        }
+	        #product .title{
+	        	text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-top: 5px; color: rgb(85,85,85); font-size: 13px;
+	        }
+	        #product .price{
+	        	text-align: center; font-size: 13px;
+	        }
+	        #product button{
+	        	width: 100%; font-size: 13px;background-color: rgb(240,93,0); color: white; border: none; padding: 4px 0px 4px 0px; border-radius: 5px; margin-top: 2px;
+	        }  
+	        
+	        /*图片轮播样式调整*/
+	        .slider {
+				width: 100%;
+				margin: 10px auto;
+			}
+			.slick-slide {
+				margin: 0px 0px;
+			}
+			.slick-slide img {
+				width: 100%;
+			}
+			.slick-prev:before,
+			.slick-next:before {
+				color: black;
+			}
+			.slick-dots{
+				bottom: -27px;
+			}
+			.slick-next{
+				right: 0px;
+			}
+			.slick-next:before{
+				content: "";
+			}
+		</style>
+
+	</head>
+
+	<body style="background:#f3f3f3;">
+		<div class="topnav">
+			<a href="" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			中秋选好礼 就在团洋范
+		</div>
+		
+		<div id="header">
+			<div style="padding-top: 20px;">
+				<span>精选活动</span>
+			</div>
+			
+			<div id="header-main">
+				<i class="am-icon-circle"></i>&nbsp;精选特惠好货 感恩回馈&nbsp;<i class="am-icon-circle"></i>
+			</div>
+
+			<!--活动广告图片-->
+			<div class="regular slider" style="margin-top: 20px;">	
+				<volist name="combos" id="vol">
+				<a href="{$vol.url}&shares=<?php echo $info['id']; ?>">
+					<div>
+						<img src="data/upload/advert/{$vol.content}" alt="活动" class="am-img-responsive"/>
+					</div>
+				</a>
+				</volist>
+			</div>
+		</div>	
+		
+		<p id="vouchsafe">
+        	<span class="span-1"></span>
+        		<i class="am-icon-stop"></i>&nbsp;特惠必购&nbsp;<i class="am-icon-stop"></i>
+        	<span class="span-2"></span>
+    	</p>
+    	
+    	<!--产品-->
+		<div id="product">
+    		<ul class="am-avg-sm-2 am-thumbnails">
+			<volist name="items" id="vol">
+				<li>
+					<fieldset>
+						<legend>特惠必购</legend>
+						<img class="am-thumbnail" src="data/upload/item/{:get_thumb($vol['img'], '_b')}" onclick="location='{:U('Item/index',array('id'=>$vol['id'],'shares'=>$info['id']))}'"/>
+					</fieldset>
+					<p class="title">{$vol.title}</p>
+					<p class="price"><span style="color: rgb(240,93,0);">￥{$vol.aprice}</span>&nbsp;&nbsp;<del><span style="color: rgb(85,85,85);">￥{$vol.price}</span></del></p>
+					<button onclick="location='{:U('Item/index',array('id'=>$vol['id'],'shares'=>$info['id']))}'">立即抢购&nbsp;>><!-- <i class="am-icon-cart-plus"></i> --></button>
+				</li>
+			</volist>
+			</ul>
+    	</div>
+		<!--图片轮播的参数说明-->
+		<script src="../Style/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).on('ready', function() {
+				$(".regular").slick({
+					dots: true,               //小点
+					infinite: true,          //是否循环
+					slidesToShow: 1,         //展示图片的数量
+					slidesToScroll: 1,       //滑动图片数量
+					autoplay:true,           //是否自动播放    
+					swipe:true               //是否支持手机滑动
+				});
+			});
+		</script>
+		<include file="public:footer" />
+	</body>
+
+</html>
+

@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>商品搜索</title>
+		<include file="public:head" />
+		<script src="../Style/js/addclear.js"></script>
+		<script type="text/javascript" charset="utf-8">
+	  		$(function(){
+	    		$("input").addClear();
+	  		});
+		</script>
+		<style>
+			* {
+				border: none;
+				outline: none;
+				font-family: "微软雅黑";
+			}
+			/*头部*/
+			.topnav {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				color: white;
+				font-size: 18px;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				background-color: rgb(240, 93, 0);
+			}
+			#search{
+				text-align: center; 
+				margin-top: 55px;
+			}
+			#search input{
+				width: 68%;
+				height: 30px;
+				font-size: 13px;
+				border-bottom-left-radius: 8px;
+				border-top-left-radius: 8px;
+				border-bottom-left-radius: 8px;
+				border-top-right-radius: 0px;
+				border-bottom-right-radius: 0px;
+				background-color: white;
+				padding-left: 25px;
+				padding-right:25px;
+				border: solid 1px rgb(240,93,0);
+				background: url("../Style/index-images/sea-img1.png") left no-repeat;
+				background-repeat: no-repeat;
+			}
+			#search button{
+				width: 27%;
+				height: 30px;
+				color: white;
+				margin-left: -4px;
+				background-color: rgb(240,93,0);
+			}
+			/*三角形*/
+			#triangle{
+				float:left; 
+				border-style:solid; 
+				border-width:10px; 
+				border-color:#ECEAEA #ECEAEA white #ECEAEA;
+				margin-left: 20%; 
+				margin-top: -10px;
+			}
+			/*搜索历史*/
+			#history{
+				margin-top: 10px;
+			}
+			#history i{
+				color: rgb(180,180,180);
+			}
+			#history ul li{
+				padding: 10px;
+			}
+			#history img{
+				width: 20px;
+				height: 20px;
+			}
+			#history ul li:first-child{
+				border-top: none;
+			}
+			#history .clear-history{
+				width: 65px;
+				height:24px;
+				float: right;
+				line-height: 24px;
+				border: solid 1px rgb(240,93,0);
+				color:rgb(240,93,0);
+				font-size:13px;
+				border-radius:5px;
+				text-align:center;
+			}
+			/*热门搜索*/
+			#hot-search{
+				width: 100%; 
+				background-color: white; 
+				margin-top: 20px;
+				padding: 10px;
+			}
+			#hot-search p{
+				font-size: 16px;
+			}
+			#hot-search li{
+				float: left;
+				margin-left: 7px;
+				margin-top: 13px;
+			}
+			#hot-search li span{
+				padding: 5px 13px 5px 13px;
+				background: rgb(240,240,240);
+			}
+			
+		</style>
+		<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<input type="hidden" name="shares_id" id="shares_id" value="{$info.id}" />
+		<!--头部-->
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" style="position: absolute; left:5px; top: 14px;" />
+			</a>
+			商品搜索
+		</div>
+		<!--商品搜搜-->
+		<div id="search">
+			<input type="text" name="keyword" value="{$keyword}" placeholder="请输入商品关键词搜索"/>
+			<button class="button"  id="search_btn">搜索</button>	
+		</div>
+<script>
+	$('#search_btn').click(function(){
+		var keyword=$('input[name=keyword]');
+		var shares_id = $('input[name=shares_id]');
+		if(keyword.val() == ''){
+			 layer.open({
+				title: '提示',
+				content: '你还是输点什么再点我吧~',
+				btn: ['我知道了'],
+				yes: function(index){
+					//location.reload();
+					layer.close(index);
+				}
+			}); 
+		}else{
+			window.location.href= "{:U('Item/itemlist',array('keyword'=>'"+keyword.val()+"','shares'=>'"+shares_id.val()+"'))}";
+		}
+	});
+
+</script>
+		<!--三角形-->
+		<div id="triangle"></div>
+		
+		<!--搜索历史-->
+
+		<div id="history" data-am-widget="list_news" class="am-list-news am-list-news-default">
+		  	<div class="am-list-news-bd">
+		  		<ul class="am-list">
+		      		<li class="am-g am-list-item-dated">
+		          		<div class="am-g">
+						<notempty name="search_history">
+  							<div class="am-u-sm-4"><span style="font-size: 16px;">搜索历史</span></div>
+  							
+							<div class="am-u-sm-8"><span class="clear-history" id="clear_history">清空记录</span></div>
+							<else/>
+							<div class="am-u-sm-4" style="width: 100%;"><p style="font-size: 13px;color:#555;">目前还没有搜索记录</p></div>
+							
+							</notempty>
+						</div>
+		      		</li>
+					<script>
+							$("#clear_history").click(function(){
+								layer.open({
+									title: '提示',
+									content: '您确定要清空搜索记录吗？',
+									btn: ['确认', '取消'],
+									yes: function(index){
+										window.location.href= "{:U('User/clear_searchHistory',array('shares'=>$shares_id))}";
+										layer.open({content: '搜索记录已被清空', time: 1});
+										layer.close(index);
+									}
+								});
+							});
+					</script>
+		      		<volist name="search_history" id="vo">
+		      		<li class="am-g am-list-item-dated">
+		         		<div class="am-g">
+		         			<a href= "{:U('Item/itemlist',array('keyword'=> $vo,'shares'=>$info['id']))}" style="color:#000000;">
+  							<div class="am-u-sm-1"><img src="../Style/index-images/clock.jpg" class="am-img-responsive"/></div>
+  							<div class="am-u-sm-10">{$vo}</div>
+  							<div class="am-u-sm-1"><i class="am-icon-chevron-right"></i></div>
+  						    </a>
+						</div>
+		      		</li>
+		      	</volist>
+		  		</ul>
+		  	</div>
+    	</div>
+    	
+    	<!--热门搜索-->
+    	<div id="hot-search">
+    		<p>搜索发现</p>
+    			<div id="first-find" class="am-g">
+    				<ul style="text-align: center; margin: 0 auto; width: 96%;">
+					<volist name="hot" id="vol">
+    					<li>
+    						<a href= "{:U('Item/itemlist',array('keyword'=> $vol['keyword'],'shares'=>$info['id']))}">
+    							<span>{$vol['keyword']}</span>
+    						</a>
+    					</li>
+					</volist>
+    				</ul>
+  					
+				</div>
+				<!--<div id="second-find" class="am-g" style="text-align: center; margin-top: 20px;">
+					<a href= "{:U('Item/itemcate',array('keyword'=> $hot[4]['keyword'],'shares'=>$shares_id))}">
+  						<div class="am-u-sm-3"><span>{$hot[4]['keyword']}</span></div>
+  					</a>
+  					<a href= "{:U('Item/itemcate',array('keyword'=> $hot[4]['keyword'],'shares'=>$shares_id))}">
+  						<div class="am-u-sm-3"><span>{$hot[5]['keyword']}</span></div>
+  					</a>
+  					<a href= "{:U('Item/itemcate',array('keyword'=> $hot[4]['keyword'],'shares'=>$shares_id))}">
+  						<div class="am-u-sm-3"><span>{$hot[6]['keyword']}</span></div>
+  					</a>
+  					<a href= "{:U('Item/itemcate',array('keyword'=> $hot[4]['keyword'],'shares'=>$shares_id))}">
+  						<div class="am-u-sm-3"><span>{$hot[7]['keyword']}</span></div>
+  					</a>
+				</div>-->
+    			
+    		<!--<div class="am-g">
+    			<a href= "{:U('Item/itemcate',array('keyword'=> $hot[0]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6" style="font-size:13px;">
+  					&nbsp;<span style="color: white; background-color: rgb(240,93,0);">&nbsp;1&nbsp;</span>
+  					<span>{$hot[0]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  				</a>
+  				<a href= "{:U('Item/itemcate',array('keyword'=>$hot[1]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6" style="font-size:13px;">
+  					&nbsp;<span style=" color: white; background-color: rgb(240,93,0);">&nbsp;2&nbsp;</span>
+  					<span>{$hot[1]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  				</a>
+			</div>
+			<div class="am-g" style="font-size:13px;">
+				<a href= "{:U('Item/itemcate',array('keyword'=> $hot[2]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6">
+  					&nbsp;<span style=" color: white;background-color: rgb(240,93,0);">&nbsp;3&nbsp;</span>
+  					<span>{$hot[2]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  				</a>
+  				<a href= "{:U('Item/itemcate',array('keyword'=> $hot[3]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6" style="font-size:13px;">
+  					&nbsp;<span style=" color: white; background-color: rgb(180,180,180);">&nbsp;4&nbsp;</span>
+  					<span>{$hot[3]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  				</a>
+			</div>
+			<div class="am-g" style="font-size:13px;">
+				<a href= "{:U('Item/itemcate',array('keyword'=> $hot[4]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6">
+  					&nbsp;<span style=" color: white; background-color: rgb(180,180,180);">&nbsp;5&nbsp;</span>
+  					<span>{$hot[4]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  			</a>
+  				<a href= "{:U('Item/itemcate',array('keyword'=> $hot[5]['keyword'],'shares'=>$shares_id))}">
+  				<div class="am-u-sm-6" style="font-size:13px;">
+  					&nbsp;<span style=" color: white;background-color: rgb(180,180,180); ">&nbsp;6&nbsp;</span>
+  					<span>{$hot[5]['keyword']}</span>
+  					<i class="am-icon-chevron-right"></i>
+  				</div>
+  				</a>
+			</div>-->
+			
+    	</div>
+    	
+	</body>		
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <css file="__STATIC__/css/admin/style.css" />
+    <title>{:L('website_manage')}</title>
+    <script>
+	var URL = '__URL__';
+	var SELF = '__SELF__';
+	var ROOT_PATH = '__ROOT__';
+	var APP	 =	 '__APP__';
+	//语言项目
+	var lang = new Object();
+	<volist name=":L('js_lang')" id="val">
+		lang.{$key} = "{$val}";
+	</volist>
+	</script>
+</head>
+<body scroll="no">
+<div id="content">
+    <div class="right_main">
+    	<div id="J_rframe">
+		<li style="width: 100%;background: #eee;height: 40px;float: left;line-height: 40px;text-align: center;"><span style="width: 5%;display: block;float: left;">ID</span>
+		<span style="width: 10%;display: block;float: left;">姓名</span>
+		<span style="width: 5%;display: block;float: left;">性别</span>
+		<span style="width: 10%;display: block;float: left;">联系电话</span>
+		<span style="width: 20%;display: block;float: left;">测量地址</span>
+		<span style="width: 10%;display: block;float: left;">测量日期</span>
+		<span style="width: 10%;display: block;float: left;">上面测量时间</span>
+		<span style="width: 20%;display: block;float: left;">计划购买产品</span>
+		<span style="width: 10%;display: block;float: left;">提交时间</span>
+		</li>
+		 <volist name="serve" id="item">
+		<li style="width: 100%;height: 40px;float: left;line-height: 40px;text-align: center;"><span style="width: 5%;display: block;float: left;">{$item.id}</span>
+		<span style="width: 10%;display: block;float: left;">{$item.user_name}</span>
+		<span style="width: 5%;display: block;float: left;"><if condition="$item.sex eq 1">男</if><if condition="$item.sex eq 2">女</if></span>
+		<span style="width: 10%;display: block;float: left;">{$item.tel}</span>
+		<span style="width: 20%;display: block;float: left;">{$item.adress}</span>
+		<span style="width: 10%;display: block;float: left;">{$item.s_date}</span>
+		<span style="width: 10%;display: block;float: left;">{$item.s_datetime}</span>
+		<span style="width: 20%;display: block;float: left;">
+		<if condition="$item.goods eq 1">衣柜</if>
+		<if condition="$item.goods eq 2">书柜</if>
+		<if condition="$item.goods eq 3">玄关柜</if>
+		<if condition="$item.goods eq 4">衣帽间</if>
+		<if condition="$item.goods eq 5">电视柜</if>
+		<if condition="$item.goods eq 6">床</if>
+		<if condition="$item.goods eq 7">梳妆台</if>
+		<if condition="$item.goods eq 8">鞋柜</if>
+		<if condition="$item.goods eq 9">酒柜</if>
+		<if condition="$item.goods eq 10">其他</if>
+		</span>
+		<span style="width: 10%;display: block;float: left;">{$item.add_time}</span>
+		</li>
+		<div style="border-bottom: 2px solid #e8e8e8;margin-right: 15px;margin-left: 15px;"></div>
+		 </volist>  
+		 <present name="page_bar">
+					<div class="wall_page" style="margin-left:10px;" <present name="show_page">style="display:block;"</present>>
+						<div class="page_bar">{$page_bar}</div>
+					</div>
+					</present>
+        	      </div>
+    </div>
+</div>
+<script src="__STATIC__/js/jquery/jquery.js"></script>
+<script src="__STATIC__/js/pinphp.js"></script>
+<script>
+//初始化弹窗
+(function (d) {
+    d['okValue'] = lang.dialog_ok;
+    d['cancelValue'] = lang.dialog_cancel;
+    d['title'] = lang.dialog_title;
+})($.dialog.defaults);
+</script>
+<script src="../Style/js/index.js"></script>
+</body>
+</html>

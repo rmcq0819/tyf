@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>会员中心 - 订单详情</title>
+<link href="../Style/shop.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Style/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="../Style/js/ecmall.js" charset="utf-8"></script>
+<script type="text/javascript" src="../Style/js/touchslider.dev.js" charset="utf-8"></script>
+<!--引入layer-->
+<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+<!--查看物流样式调用-->
+<link rel="stylesheet" href="../Style/css/wuliu_style.css" />
+<script type="text/javascript">
+//<!CDATA[
+var SITE_URL = "__ROOT__";
+var PRICE_FORMAT = '¥%s';
+
+$(function(){
+    var span = $("#child_nav");
+    span.hover(function(){
+        $("#float_layer:not(:animated)").show();
+    }, function(){
+        $("#float_layer").hide();
+    });
+});
+
+
+    function do_urgent(orderId){
+           $.get('{:U('Order/do_urgent')}',{'orderId':orderId},function(data){
+           if(data=='成功'){ 
+              layer.open({
+					title: '提醒发货',
+					content: '您已经成功提醒发货，感谢您对团洋范的支持',
+					btn: ['我知道了'],
+					yes: function(index){
+						//location.reload();
+						layer.close(index);
+					}
+				});              
+            }else if(data=="yes成功"){
+				layer.open({content: '您已经提醒过了哦，我们会尽快发货呢', time: 2});
+			}           
+         });
+     }     
+   
+//]]>
+</script>
+<style>
+*{font-family: "微软雅黑";}
+</style>
+<script type="text/javascript" src="../Style/layer/layer.js" charset="utf-8"></script>
+</head>
+<body>
+<include file="public:head" />
+<include file="public:headuser" />
+<!-- 头部 -->
+<header data-am-widget="header" class="am-header am-header-default">
+	<div class="am-header-left am-header-nav">
+		<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img class="am-header-icon-custom" src="data:image/svg+xml;charset=utf-8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 12 20&quot;&gt;&lt;path d=&quot;M10,0l2,2l-8,8l8,8l-2,2L0,10L10,0z&quot; fill=&quot;%23fff&quot;/&gt;&lt;/svg&gt;" alt=""/>
+		</a>
+	</div>
+	<h1 class="am-header-title">订单详情</h1>
+</header>
+<div class="carfukuan" style="color:#e15f11;font-size: 16px;margin-right: 2%;background:none;height:42px;">
+	<div>
+		<!-- <span style="color:#e15f11;">已完成</span> -->
+		<p style="margin-left:3%;">状态:&nbsp;&nbsp;
+			<switch name="order.status" >
+			 <case value="1"><span style="color:#e15f11;">待付款</span></case>
+			 <case value="2"><span style="color:#e15f11;">待发货</span></case>
+			 <case value="3"><span style="color:#e15f11;">待收货</span></case>
+			 <case value="4"><eq name="order.c_status" value="0"><span style="color:#e15f11;">待评论</span><else /><span style="color:#e15f11;">已完成</span></eq></case>
+			 <case value="6"><span style="color:#e15f11;">申请退款中</span></case>
+			 <case value="7"><span style="color:#e15f11;">申请退款失败</span></case>
+			 <case value="8"><span style="color:#e15f11;">退款成功</span></case>
+			<default /><span style="color:#e15f11;">完成</span>
+	 </switch>
+		</p>
+	 <!--  -->
+	<!-- 订单金额(含运费)：￥{$order.order_sumPrice}<br />
+	运费：￥{$order.freeprice}</dd> -->
+	</div>
+</div>
+<!-- 订单号 -->
+	<div style="height: 34px;background-color: #fff;line-height: 34px;padding-left: 3%;">
+		<b>订单号:{$order.orderId}</b>
+		<p style="float:right;color:#898989;margin-right: 10px;"><if condition="$order.fahuo_time neq ''">{$order.fahuo_time|date='Y-m-d',###}</if></p>
+	</div>
+
+<form method="POST"  action="{:U('Order/pay')}&spr=<?php echo $_GET['spr']; ?>" id="order_form" name="order_form" enctype="multipart/form-data" style="padding:0;">
+<!-- 订单页面产品列表 -->
+<div class="dingdangdian" style="margin-top:0;">
+	<ul>
+	<volist name='item_detail' id='item' >	
+		<li>
+			<div class="am-g am-g-fixed">
+				<div class="am-u-sm-12">
+					<div class="am-list-news-bd">
+						<ul class="am-list" style="margin-bottom:0;">
+				
+							<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-bottom-left">
+								<a href="javascript:;">
+									<div class="am-u-sm-3 am-list-thumb dianproimg" style="margin-bottom:16px;">
+										<img src="{:attach(get_thumb($item['img'], '_b'), 'item')}"/>
+									</div>
+
+									<div class=" am-u-sm-7 am-list-main" style="float:left;margin-left:7%;">
+										<table class="am-table am-table-bordered am-table-striped am-table-compact dianprotablezi">
+										  <tbody>
+											<tr>
+												<td style="font-size: 14px;">{$item.title}<!-- {$vo2.name} --></td>
+												<!-- <td><span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$vo2.price}</span></td> -->
+											</tr>
+											<tr>
+												<td colspan="2" style="color:#ababab;">
+												优品价：<span style="color:#e26000; font-family:'微软雅黑'; font-size:14px;">¥{$item.price}<span style="color:#ababab;margin-left:10%;">x{$item.quantity} </span>
+												<!-- {$vo2.num} --><!-- {$vo2.price} --></span>
+												<!-- <if condition="$vo2.itemtype eq 1">完税商品<else />保税商品</if> --><br/>
+												<!-- <if condition="$vo2.size neq ''">
+												商品规格：<span style="color:#e26000; font-family:'微软雅黑'; font-size:12px;">{$vo2.size}</span><br/>
+												</if>   -->
+												</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="am-u-sm-2 dingdandizhiright" style="width:10%; float:left;line-height: 72px;">
+										<a href="{:U('Item/index',array('id'=>$item['itemId'],'shares'=>$info['id']))}">
+											<img src="../Style/index-images/jt03.png">
+										</a>
+									</div>
+								</a>
+							</li>
+							
+						</ul>			
+					</div>			
+				 
+				</div>
+			</div>
+		</li>
+		</volist> 
+	
+	
+		
+	</ul>
+	
+</div>
+
+
+<div class="dingdanghongzi" style="display:none;">跨境专区订单付款不能取消，上传的身份证请务必与收货人姓名保持一致，且不能无理由退换货！</div>
+
+
+<div class="am-g am-g-fixed dingdanjiashu"  style="margin-top:2px;">
+	<!-- <div class="am-u-sm-4 dingdanjiashu1">运费:<span>
+		￥<empty name="order.yunfei">0.00<else />{$order.yunfei}</empty>
+	</span></div> -->
+
+
+	
+
+
+	<div class="am-u-sm-12 dingdanjiashu1" style="text-align:right;">合计:<span>￥{$totalprice}</span></div>
+<!-- <div class="am-u-sm-6 dingdanjiashu3"><if condition="$yunfei neq ''">￥<span style="font-size:12px;">5<!-- {$yunfei} -->(订单金额不满99元)</span><else />￥0</if></div> -->
+<!--<div class="am-u-sm-6 dingdanjiashu2">优惠金额</div>
+<div class="am-u-sm-6 dingdanjiashu3">￥0.0</div>-->
+<!-- <div class="am-u-sm-6 dingdanjiashu2">商品金额</div> -->
+<!-- <div class="am-u-sm-6 dingdanjiashu3">￥<span id="sumPrice" style="font-size:14px;font-weight:bold;">{$sunprice}</span></div> -->
+
+</div>
+
+<!-- 收件人信息--订单详情页 -->
+<div class="dingdangbj" style="width:100%;margin: 2px 0 2px 0;padding:0;">
+	<div class="am-g am-g dingdang" style="padding: 10px 0 20px 3%;">
+		<div class="am-u-sm-10 dingdandizhimiddle">
+			<dl>
+
+	<dd>
+					<h5>{$order.address_name}&nbsp;&nbsp;&nbsp;{$order.mobile}</h5>
+				<p style="color:#ababab;font-size:14px;">{$order.address}</p>
+				</dd>
+
+			</dl>
+		</div>
+	</div>
+</div>
+</form>
+
+<div class="am-g am-g-fixed dingdanjiashu">
+	<div class="am-u-sm-12 dingdangyinfukuanon">
+		<!-- <a href="javascript:;" id="tijiaomsg" style="display:none;"><img src="../Style/images/loading.gif" style="border-radius:25px;" width="25" />&nbsp;&nbsp;正在提交</a>
+		<a href="javascript:;" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">删除订单</a>
+ -->
+
+
+	<switch name="order.status" >
+			 <case value="1">
+			 <a onclick="topay('{$order.orderId}');" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">去支付</a>
+			</case>
+			 <case value="2"> <a onclick="do_urgent('{$order.orderId}');" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">提醒发货</a></case>
+			 <case value="3"></case>
+			 <case value="4">
+			 <eq name="order.c_status" value="0">
+			 	<a href="index.php?m=User&a=comment&orderId={$order.orderId}&status={$order.status}&comment=1" id="check" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">去评论</a>
+		 		<else />
+		 		<a onclick="delorder('{$order.id}')" style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;">删除订单
+		 		</a>
+			 </eq></case>
+			 <case value="6"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+			 <case value="7"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+			 <case value="8"><a style="color:#e15f11;text-align:center;font-size:14px;display: block;font-weight:bold;" onclick="window.location.href='{:U('Index/index',array('shares'=>$info['id']))}'">去逛逛</a></case>
+			<default />
+	 </switch>
+	</div>
+</div>
+<script>
+	//删除订单
+	function del(id){
+		layer.open({
+				title: '提示',
+				content: '您确定要删除该订单吗？相关的保税或完税订单都会被删除哦！',
+				btn: ['确认', '取消'],
+				yes: function(index){
+					window.location.href= "{:U('Order/delOrder')}&orderId="+id;
+					layer.open({content: '订单删除成功', time: 1});
+					layer.close(index);
+				}
+		});
+		
+	}
+//支付订单
+function topay(id){
+	layer.open({
+			title: '提示',
+			content: '与该订单相关的保税或完税订单需要一起支付哦！',
+			btn: ['确认', '取消'],
+			yes: function(index){
+				window.location.href="{:U('Order/pay')}&orderId="+id;
+				//layer.open({content: '提交支付成功', time: 1});
+				//layer.close(index);
+			}
+	});
+}
+</script>
+<include file="public:footer" />
+</body>
+</html>

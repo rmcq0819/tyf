@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>App下载 - 团洋范</title>
+		<include file="public:head" />
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script language="JavaScript">
+			wx.config({
+				debug: false,
+				appId: 'wxc3f8ad3fc6c24903',
+				timestamp: "{$jsapi['timestamp']}",
+				nonceStr: "{$jsapi['timestamp']}",
+				signature: "{$jsapi['signature']}",
+				jsApiList: [
+				  'onMenuShareTimeline',
+				  'onMenuShareAppMessage',
+				]
+			  });
+			  
+			  wx.ready(function () {
+				 wx.onMenuShareTimeline({
+					title: "App下载 - 团洋范", // 分享标题
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/appshare_bg.png", // 分享图标
+				});
+				wx.onMenuShareAppMessage({
+					title: "App下载 - 团洋范", // 分享标题
+					desc: "随时随地，畅游海外商场 - 团洋范", // 分享描述
+					link: "{$jsapi['url']}", // 分享链接
+					imgUrl: "http://yooopay.com/Tpl/home/default/Style/index-images/appshare_bg.png", // 分享图标
+					type: 'link', 
+					dataUrl: '',
+				});
+			  });
+		</script>
+		<style type="text/css">
+			body{
+				background-color: rgb(253,96,50);
+			}
+			#btn-down{
+				background-color: rgb(253,96,50); text-align: center;
+			}
+			#btn-down .android{
+				width: 195px; height: 40px;background-color: rgb(253,96,50); color: white; border: solid 1px white; outline: none; border-radius: 8px; margin-top: 30px; font-size: 13px;
+			}
+			#btn-down .ios{
+				width: 195px; height: 40px;background-color: white; color: rgb(253,96,50); border: solid 1px white; outline: none; border-radius: 8px; margin-top: 20px; font-size: 13px;
+			}
+			#fix-img{
+				margin-top: 30px; position: fixed; left: 0px; top:66.5%;
+			}
+			#rotate-img{
+				width: 90%; margin: 0 auto; animation: myfirst 20s linear infinite; -webkit-animation: myfirst 20s linear infinite; -moz-animation: myfirst 20s linear infinite; -o-animation: myfirst 20s linear infinite;
+			}
+			/*旋转动画*/
+			@-webkit-keyframes myfirst{
+				0%{
+					transform: rotate(0deg);
+					-webkit-transform: rotate(0deg);
+					-moz-transform: rotate(0deg);
+					-o-transform: rotate(0deg);
+				}
+				100%{
+					transform: rotate(360deg);
+					-webkit-transform: rotate(360deg);
+					-moz-transform: rotate(360deg);
+					-o-transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!--分享遮罩页面-->
+			<div id="mcover" onclick="document.getElementById('mcover').style.display='';" style="display:none;">
+				<img src="../Style/images/gui.png" />
+			</div>
+		<img src="../Style/index-images/app-header.png" alt="头部" class="am-img-responsive" />
+		<div id="btn-down">
+			<?php 
+				if(!strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ){
+			?>
+				<button class="android" onclick="window.location.href='http://api.yooopay.com/version/app-release.apk'"><i class="am-icon-android am-icon-md"></i>&nbsp;&nbsp;Android版下载</button>
+			<?php
+				}else{
+			?>
+				<button class="android" id="share"><i class="am-icon-android am-icon-md"></i>&nbsp;&nbsp;Android版下载</button>
+			<?php
+				}
+			?>
+			<br />
+			<button class="ios" onclick="window.location.href='https://itunes.apple.com/cn/app/tuan-yang-fan/id1173198472?mt=8'"><i class="am-icon-apple am-icon-md"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iOS版下载</button>
+		</div>
+		<div id="fix-img">
+			<img src="../Style/index-images/app-down.png" alt="旋转图片" class="am-img-responsive" id="rotate-img" />
+		</div>
+		<!--点击分享按钮弹出分享遮罩-->
+		<script type="text/javascript">
+			$(function(){
+				$("#share").on("click",function(){
+					$("#mcover").show();
+					return false;
+				});
+			});
+		</script>
+	</body>
+
+</html>

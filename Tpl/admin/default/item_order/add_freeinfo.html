@@ -1,0 +1,68 @@
+<include file="public:header" />
+<style>
+.ext_cont{
+	
+}
+b{
+	font-weight:normal;
+}
+.contlist li{
+	font-size:14px;
+	color:#555;
+	line-height:30px;
+	height:30px;
+}
+.cont-title{
+	font-size:14px;
+	border-bottom:1px solid #dcdcdc;
+	padding-bottom:5px;
+}
+</style>
+<script charset="utf-8" src="__STATIC__/js/jquery.js" type="text/javascript"></script>
+<form id="info_form" action="{:U('item_order/add_freeinfo')}" method="post">
+<div class="pad_lr_10">
+	<div class="col_tab">
+		<ul class="J_tabs tab_but cu_li">
+			<li class="current">添加物流信息</li>
+		</ul>
+		<div class="J_panes">
+        <div class="content_list pad_10">
+		<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+			<tr>
+				<th>物流时间 :</th>
+				<td>
+					<input name="free_time" type="text" placeholder="2016-12-2 11:39" style="width:250px;height:25px;line-height:25px;" >
+				</td>
+			</tr>
+			<input type="hidden" name="detail_id" value="{$_GET['order_id']}">
+            <tr>
+				<th>物流内容 :</th>
+				<td><textarea name="free_context" style="width:600px;height:160px;font-size:14px;line-height:30px;" placeholder="订单已进入 日本千叶印西订单执行仓 准备出库"></textarea></td>
+			</tr>
+			
+		</table>
+		</div>
+        </div>
+		<div class="mt10" style="margin-bottom:40px;"><input type="submit" value="添加信息" class="btn btn_submit"></div>
+	</div>
+	
+	
+	<div class="ext_cont">
+		<h1 class="cont-title">已填写物流信息：</h1>
+		<notempty name="freelist">
+			<ul class="contlist">
+				<volist name="freelist" id="val">
+					<li><span>{$val.free_time}</span> <b>{$val.free_context}</b></li>
+				</volist>
+			</ul>
+			<else/>
+			<br/>
+			<span style="font-size:15px;color:red;">:) 暂未添加物流信息</span>
+		</notempty>
+		
+	</div>
+</div>
+</form>
+<include file="public:footer" />
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<title>代理后台中心</title>
+<include file="public:head" />
+</head>
+<style type="text/css">
+  #mainer{ text-align:left;}
+  * {
+  box-sizing: border-box;
+  }
+  *::before, *::after {
+      box-sizing: border-box;
+  }
+  *::before, *::after {
+      box-sizing: border-box;
+  }
+  h3, .h3 {
+      font-size: 24px;
+  }
+  .m-t-xs {
+      margin-top: 5px;
+  }
+  .block {
+      display: block;
+  }
+  .scrollable{ margin:10px;}
+  .panel.panel-default {
+      border-color: #e8e8e8;
+  }
+  .bg-light.lter, .bg-light .lter {
+      background-color: #fefefe;
+  }
+  .m-t {
+      margin-top: 15px;
+  }
+  .panel {
+      border-radius: 2px;
+  }
+  .panel-default {
+      border-color: #ddd;
+  }
+  .panel {
+      background-color: #fff;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+      display: block;
+      height:90px;
+  }
+  .b-light {
+      border-color: #e4e4e4;
+  }
+  .b-r {
+      border-right: 1px solid #cfcfcf;
+  }
+  .padder-v {
+      padding-bottom: 15px;
+      padding-top: 15px;
+  }
+  .col-md-3 {
+      width: 20%;
+  }
+  .col-md-1, .col-md-2,.col-sm-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,.col-xs-6,.col-sm-10 {
+      float: left;
+      min-height: 1px;
+      padding-left: 15px;
+      padding-right: 15px;
+      position: relative;
+  }
+  .m-r-sm {
+      margin-right: 10px;
+  }
+  .fa-stack {
+      display: inline-block;
+      height: 2em;
+      line-height: 2em;
+      position: relative;
+      vertical-align: middle;
+      width: 2em;
+  }
+  .pull-left {
+      float: left;
+  }
+  .fa-2x {
+      font-size: 2em;
+  }
+  .pull-left {
+      float: left !important;
+  }
+  .text-uc {
+      text-transform: uppercase;
+  }
+  .text-muted {
+      color: #979797;
+  }
+  .text-muted {
+      color: #999;
+  }
+  small {
+      font-size: 12px;
+  }
+  .padder .fa {
+      margin-right: 5px;
+  }
+  .text-primary {
+      color: #65bd77;
+  }
+  .text-info {
+      color: #4cc0c1;
+  }
+  .text-success {
+      color: #8ec165;
+  }
+  .text-warning {
+      color: #ffc333;
+  }
+  .text-danger {
+      color: #fb6b5b;
+  }
+  .text-light {
+      color: #f1f1f1;
+  }
+  .text-white {
+      color: #fff;
+  }
+  .text-dark {
+      color: #2e3e4e;
+  }
+  .text-blue {
+      color: #368ee0;
+  }
+  .text-muted {
+      color: #979797;
+  }
+  .text-center {
+      text-align: center;
+  }
+  h4, .h4 {
+      font-size: 18px;
+  }
+  .fa-stack-2x {
+      font-size: 2em;
+  }
+  .fa-stack-1x, .fa-stack-2x {
+      left: 0;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+  }
+  .fa {
+      display: inline-block;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+  }
+  .fa-stack-1x {
+      line-height: inherit;
+  }
+  .panel.panel-default > .panel-heading, .panel.panel-default > .panel-footer {
+      border-color: #e8e8e8;
+  }
+  .panel-default > .panel-heading {
+      background-color: #f5f5f5;
+      border-color: #ddd;
+      color: #333;
+  }
+  .font-bold {
+      font-weight: 700;
+  }
+  .panel-heading {
+      border-radius: 2px 2px 0 0;
+  }
+  .panel-heading {
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      padding: 10px 15px;
+  }
+  .panel-body::after, .modal-footer::before, .modal-footer::after, .row::after {
+      content: " ";
+      display: table;
+  }
+  .panel-body {
+      padding: 15px;
+  }
+  .no-padder {
+      padding: 0 !important;
+  }
+  .bg-white {
+      background-color: #fff;
+      color: #717171;
+  }
+  .panel-footer {
+      border-radius: 0 0 2px 2px;
+  }
+  .panel-footer {
+      background-color: #f5f5f5;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      border-top: 1px solid #ddd;
+      padding: 10px 15px;
+  }
+  .row {
+      margin-left: -15px;
+      margin-right: -15px;
+  }
+  .col-md-8 {
+      width: 66.6667%;
+  }
+  .col-md-4 {
+      width: 33.3333%;
+  }
+  .no-gutter [class*="col"] {
+      padding: 0;
+  }
+  .b-light {
+      border-color: #e4e4e4;
+  }
+  .b-r {
+      border-right: 1px solid #cfcfcf;
+  }
+  .col-xs-3 {
+      width: 25%;
+  }
+  .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+      float: left;
+  }
+  .row.no-gutter {
+      margin-left: 0;
+      margin-right: 0;
+  }
+  .m-b {
+      margin-bottom: 15px;
+  }
+
+  .line {
+      background-color: transparent;
+      border-top: 1px solid #e8e8e8;
+      border-width: 1px 0 0;
+      font-size: 0;
+      height: 2px;
+      margin: 10px 0;
+      overflow: hidden;
+  }
+  .pull-in {
+      margin-left: -15px;
+      margin-right: -15px;
+  }
+  .col-xs-6 {
+      width: 50%;
+  }
+  .col-md-12 {
+      width: 100%;
+  }
+  .m-t-xs {
+      margin-top: 5px;
+  }
+  .col-sm-10 {
+      width: 83.3333%;
+  }
+  .money::before {
+      content: "¥";
+      margin-right: 1px;
+  }
+  .m-n {
+      margin: 0 !important;
+  }
+  .form-group {
+      margin-bottom: 15px;
+  }
+  .col-sm-2 {
+      width: 16.6667%;
+  }
+  .text-right {
+      text-align: right;
+  }
+  .list-group {
+      border-radius: 2px;
+  }
+  .list-group {
+      margin-bottom: 20px;
+      padding-left: 0;
+  }
+  .panel .list-group-item {
+      border-color: #f0f0f0;
+  }
+  .list-group-item:first-child {
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+  }
+  .list-group-item {
+      border-color: #e8e8e8;
+      padding-right: 15px;
+  }
+  .list-group-item {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      display: block;
+      margin-bottom: -1px;
+      padding: 10px 15px;
+      position: relative;
+  }
+  .divall{width:100%;}
+.table{width:100%;height:65px;}
+.table tr td{ text-align:center;font-size:14px;color:#fff;background:#b72c43;}
+.sel{background:#a21930;}
+</style>
+<link href="../Style/css/pancl01.css" type="text/css" rel="stylesheet" />
+<link href="../Style/css/pancl02.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../Style/js/all.js"></script>
+<script type="text/javascript" src="../Style/js/colorbox.js"></script>
+<link href="../Style/js/colorbox/colorbox.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../Style/js/echarts/echarts.js"></script>
+<body>
+<div class="dailirembertop" <if condition='$dengji eq 2'>style="background:#FF891B;"<elseif condition='$dengji eq 3'/>style="background:#b72c43;"</if>>
+<if condition="$visitor.hyimg neq ''"><img src="{$visitor.hyimg}" width="120" height="120" /><else /><img src="{$weiheader.cover}" width="120" height="120" /></if>
+  <span>
+  <if condition="$visitor['nickname'] neq NULL">{$visitor.nickname}
+    <elseif condition="$visitor['username'] neq NULL"/>{$visitor.username}
+    <else/>{$visitor.wechatid}
+  </if>
+  ({$role})</span>
+
+  <span>上级：
+	<if condition="$stName neq ''">{$stName}<else/>{$shares}</if>
+&nbsp;&nbsp&nbsp;
+  团队：{$shares}团队</span>
+</div>
+
+
+<!--<div class="am-g">
+<div class="am-u-sm-4 dailichangshu" <if condition='$dengji eq 2'>style="background:#FF895B;width:33%"<elseif condition='$dengji eq 3'/>style="background:#89BE74;width:33%"</if>>{$mk_zong}<span>店长总数</span></div>
+<div class="am-u-sm-4 dailichangshu hover" <if condition='$dengji eq 2'>style="background:#FF892B;width:33%"<elseif condition='$dengji eq 3'/>style="background:#89BE44;width:33%"</if>>{$dk}<span>直推掌柜</span></div>
+<div class="am-u-sm-4 dailichangshu" <if condition='$dengji eq 2'>style="background:#FF895B;width:34%;margin:0;"<elseif condition='$dengji eq 3'/>style="background:#89BE74;width:34%;margin:0;"</if>>{$mk_xz}<span>直推店长</span></div>
+</div>-->
+
+<div class="divall">
+<table class="table">
+<tr>
+<td <if condition='$dengji eq 2'>style="background:#FF895B;width:25%;"<elseif condition='$dengji eq 3'/>style="background:#b72c43;width:25%"</if>>{$mk_zong}<br/>店长总数</td>
+<td class="sel" <if condition='$dengji eq 2'>style="background:#FF892B;width:25%;"<elseif condition='$dengji eq 3'/>style="background:#a21930;width:25%"<else />style="background:#a21930;"</if>>{$dk}<br/>直推掌柜</td>
+<td <if condition='$dengji eq 2'>style="background:#FF895B;width:25%;margin:0;"<elseif condition='$dengji eq 3'/>style="background:#b72c43;width:25%;margin:0;"</if>>{$mk_xz}<br/>直推店长</td>
+<td <if condition='$dengji eq 2'>style="background:#FF895B;width:25%;margin:0;"<elseif condition='$dengji eq 5'/>style="background:#b72c43;width:25%;margin:0;"</if>>{$mk_jr}<br/>经纪人</td>
+</tr>
+</table>
+</div>
+
+<eq name="lv_up" value="1">
+  <div class="fanweinshu" style="border-top:none;">
+    <span style="float:right;background:#c54157;color:#fff;border-radius:3px;height:80%;line-height:27px;vertical-align:center;padding:4px;margin:5px;" onclick="lv_up();">提交申请</span>亲爱的{$visitor.username},您当前符合升级条件.
+  </div>
+</eq>
+<gt name="up_sq" value="0">
+<div class="am-alert am-alert-success" data-am-alert style="margin-top:0">
+  <p>亲爱的{$visitor.username},您当前有未处理的下级代理升级申请.
+	 <span style="background:#FF891B;color:#fff;border-radius:3px;height:80%;vertical-align:center;padding:4px;">
+		<a href="{:U('User/lvup',array('up'=>1))}">点击查看</a>
+	 </span>
+  </p>
+</div>
+</gt>
+<gt name="down_mg" value="0">
+  <div class="am-alert am-alert-warning" data-am-alert style="margin-top:0">
+	<button type="button" class="am-close">&times;</button>
+    温馨提示:亲爱的{$visitor.username},上个月您未达到团队目标,受到了降级处理.不要灰心,这个月您会做的更好.
+  </div>
+</gt>
+<div class="quxian" style="position:relative;">
+  <!-- <span style="right:8px;top:5px;position:absolute;z-index:1px;">总收入:<span style="color:red">{$yongjin}</span></span> -->
+  <div class="panel-body"  style="height:220px;width:100%">
+      <div id="visit_charts" style="height:220px;width:100%" data-path="/vshop/Ajax/Get/GetGetOrderCountBookingAndOverAndReturn">
+          <div class="load">数据加载中...</div>
+      </div>
+  </div>
+  {$echarts}
+</div>
+
+
+<div class="fanweinshu">今日访问量：{$liulan}</div>
+<ul class="am-avg-sm-4 am-thumbnails dailidh">
+<li><a href="{:U('User/merusername')}"><img src="../Style/images/img28.png"><span>店铺设置</span></a></li>
+<li><a href="{:U('User/order_list',array('shopid'=>1,'time'=>'one'))}"><img src="../Style/images/img29.png"><span>店铺订单</span></a></li>
+<li><a href="{:U('User/fencheng')}"><img src="../Style/images/img30.png"><span>我的分销商</span></a></li>
+<li><a href="{:U('User/dl_order')}"><img src="../Style/images/img31.png"><span>代理订单</span></a></li>
+<li><a href="{:U('Item/onitemlist')}"><img src="../Style/images/img32.png"><span>在售商品</span></a></li>
+<li><a href="{:U('User/shouquan')}"><img src="../Style/images/img33.png"><span>授权证书</span></a></li>
+<li><a href="{:U('User/qrcode')}"><img src="../Style/images/img34.png"><span>店铺二维码</span></a></li>
+<li><a href="{:U('User/khzs')}"><img src="../Style/images/img35.png"><span>成交客户</span></a></li>
+<!--<li><a href="{:U('Article/listcate')}"><img src="../Style/images/pic91.png"><span>素材中心</span></a></li>-->
+<li><a href="{:U('User/sales_list')}"><img src="../Style/images/pic92.png"><span>店铺销售额</span></a></li>
+<li><a href="{:U('User/flow_history')}"><img src="../Style/images/pic93.png"><span>访问统计</span></a></li>
+</ul>
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default "
+      id="">
+      <ul class="am-navbar-nav am-cf am-avg-sm-4" <if condition='$dengji eq 2'>style="background:#FF891B;"<elseif condition='$dengji eq 3'/>style="background:#c54157;"</if>>
+          <li>
+            <a href="{:U('Index/index',array('shares'=>$visitor['id']))}" class="">
+            <span class="am-icon-home" style="font-size:28px;margin-top:-5px;"></span>
+                <span class="am-navbar-label" style="margin-top:8px;">首页</span>
+            </a>
+          </li>
+          <li>
+            <a href="{:U('User/fenchenglist',array('time'=>'one'))}" class="">
+           <img src="../Style/images/img36.png" >
+                <span class="am-navbar-label">消息</span>
+            </a>
+          </li>
+          <li>
+            <a href="{:U('Index/index',array('shares'=>$uid))}" class="">
+              <img src="../Style/images/img37.png" >
+              <span class="am-navbar-label">店铺</span>
+            </a>
+          </li>
+          <li >
+            <a href="{:U('User/yongjin')}" class="">
+              <img src="../Style/images/img38.png" >
+              <span class="am-navbar-label">奖金</span> 
+            </a>
+          </li>
+  </ul>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+  function lv_up(){
+      if (confirm("确认升级吗?")) {
+        var url = "{:U('User/lv_up')}";
+		var num = "{$num}";
+		var zt  = "{$zt}";
+        $.post(url,{num:num,zt:zt},function(data){
+            if (data.status == 1) {
+              alert(data.msg);
+            }else{
+              alert(data.msg);
+            }
+        },"json");
+      };
+  }
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>加盟商信息</title>
+<include file="public:headtop" />
+<style>
+#content {padding:30px;}
+#content table{width:100%;font-size:16px;}
+</style>
+</head>
+<body style="margin: 0 auto;">
+<include file="public:headuser" />
+ <div class="clear"></div>
+<h1 align="center" style="padding:10px 0 10px 0;border-bottom:1px solid #ccc;background:#eee">加盟商信息</h1>
+<div id="content">
+	<table>
+		<tr>
+			<td style="text-align:right;padding:10px;width:40%;">用户名:</td>
+			<td>{$jminfo.username}</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;padding:10px;width:40%;">手机号码:</td>
+			<td>{$jminfo.phone_mob}</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;padding:10px;width:40%;">邮箱:</td>
+			<td>{$jminfo.email}</td>
+		</tr>
+		<tr>
+			<td colspan="2"><button style="background:#321;color:#ccc;border:none;height:40px;width:60%;margin:0 auto;display:block" onclick="gouhuo()">去购货</button></td>
+		</tr>
+	</table>
+</div>
+ <div class="clear" style="height:30px;"></div>
+
+</body>
+</html>
+<script>
+	function gouhuo(){
+		window.location.href = "{:U('User/gouhuo1')}";
+	}
+</script>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title></title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;  
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			
+			#header{
+				margin-top: 49px;
+			}
+			#main{
+				background-color: rgb(254,0,0); position: relative; left: 0px;
+			}
+			#main .line{
+				width: 95%;height: 5px;background-color: black; margin: 0 auto; border-radius: 10px; opacity: 0.6;
+			}
+			#main .content{
+				width: 90%;background-color: rgb(255,217,144); margin: 0 auto; overflow-y: scroll; min-height: 110px; max-height: 400px;
+			}
+			#main .content .am-g{
+				background-color: white;
+			}
+			#main .content ul{
+				padding: 8px;
+			}
+			#main .content li{
+				margin-top: 8px;
+			}
+			#main .content li:first-child{
+				margin-top: 0px;
+			}
+			/*按钮*/
+			.btn1,.btn2{
+				margin: 0 auto; text-align: center;
+			}
+			.btn1 button{
+				width: 200px;  height: 40px;background-color: rgb(255,217,144); color: rgb(85,85,85); border: none; border-radius: 3px; font-size: 15px; margin-top: 15px;
+			}
+			.btn2 button{
+				width: 200px; height: 40px;background-color: rgb(255,217,144); color: rgb(85,85,85); border: none; border-radius: 3px;font-size: 15px; margin-top: 12px; margin-bottom: 20px;
+			}
+			
+			/*手气*/
+			#shouqi{
+				background-color: rgb(254,245,178); padding-bottom: 10px;
+			}
+			#shouqi ul{
+				padding: 3px;
+			}
+			#shouqi ul li{
+				border-bottom: solid 1px rgb(204,191,159); padding-bottom: 2px;
+			}
+			#shouqi ul li .user-name,#shouqi ul li .user-content{
+				padding-left: 20px; color: rgb(85,85,85);
+			}
+			#shouqi ul li .time{
+				text-align: right; margin-top: 22px; color: rgb(200,191,151);
+			}
+			#guess-like {
+	            height: 50px;line-height: 50px;font-size: 16px;text-align: center;position: relative;color: red;
+        	}
+	        #guess-like .span-1,#guess-like .span-2 {
+	            border-top: 1px solid red; width: 31%;position: absolute;top: 25px;
+	        }
+	        #guess-like .span-1{
+	            left: 0px;
+	        }
+	        #guess-like .span-2{
+	            right: 0px;
+	        }
+	        
+	        /*活动规则*/
+	       #tips{
+	       		background-color: rgb(255,217,144); padding: 10px; margin: 10px; border: solid 1px rgb(205,200,175); border-radius: 5px;
+	       }
+	       #tips p:first-child{
+	       		color: rgb(240,93,0); text-align: center; font-size: 15px;
+	       }
+	       
+	       /*没有抢到红包*/
+	      #no-bag{
+	      	 height: 92px; text-align: center; font-size: 22px; font-weight: bold; color: rgb(85,85,85);
+	      }
+		</style>
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"> 
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			开业红包
+		</div>
+
+		<div id="header">
+			<img src="../Style/index-images/activity/q-title.png" alt="头部" class="am-img-responsive" />
+		</div>
+		<div id="main">
+			<img src="../Style/index-images/activity/q-title2.png" alt="头部" class="am-img-responsive" />
+			<p class="line"></p>
+			<div class="content">
+				<ul>
+					<if condition="$points gt 0">
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4">
+  								<img src="../Style/index-images/activity/fan-main.png" alt="" class="am-img-responsive" style="width: 100px; height: 92px;"/>
+  							</div>
+  							<div class="am-u-sm-8">
+  								<p style="text-align: center; margin-top: 10px;">团洋范购物平台专用范票</p>
+  								<p style="text-align: center; margin-top: 10px;"><img src="../Style/index-images/activity/fanpiao-fan.png" alt="" style="width: 35px;"/>&nbsp;&nbsp;<span style="color: rgb(240,93,0); font-size: 15px;">x{$points}</span></p>
+  							</div>
+						</div>
+					</li>
+					</if>
+					<if condition="$coupon neq ''">
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4" style="position: relative; left: 0px; color: white;">
+  								<img src="../Style/index-images/lan.png" alt="" class="am-img-responsive" style="width: 100px; height: 92px;"/>
+  								<p style="position: absolute; left: 5px; top: 5px;">优惠券</p>
+  								<p style="position: absolute; left: 17px; top: 40px; font-size: 17px; border-bottom: solid 1px white; padding:0px 5px 5px 5px">￥<span style="font-size: 26px;">{$coupon.disPrice}</span></p>
+  							</div>
+  							<div class="am-u-sm-8">
+  								<p style="text-align: center;">活动奖励优惠券</p>
+  								<p style="text-align: center;"><img src="../Style/index-images/line-1.png" alt="" style="width: 100px;"/></p>
+  								<p style="text-align: center;">满{$coupon.condition}元可用</p>
+  								<p style="text-align: right; margin-right: 5px; border-top: dashed 1px rgb(155,155,155);">{$coupon.stime|date="Y.m.d",###}~{$coupon.etime|date="Y.m.d",###}</p>
+  							</div>
+						</div>
+					</li>
+					</if>
+					<if condition="$chance gt 0">
+					<li>
+						<div class="am-g">
+  							<div class="am-u-sm-4">
+  								<img src="../Style/index-images/activity/cishu.png" alt="" class="am-img-responsive" style="width: 100px; height: 92px;"/>
+  							</div>
+  							<div class="am-u-sm-8">
+  								<p style="text-align: center; margin-top: 10px;">团洋范幸运抽奖活动</p>
+  								<p style="text-align: center; margin-top: 10px; font-size: 17px; color: rgb(240,93,0);">抽奖机会&nbsp;{$chance}&nbsp;次</p>
+  							</div>
+						</div>
+					</li>
+					</if>
+					<!--没有抢到红包-->
+					<if condition="$flag neq 1">
+					<li>
+						<div id="no-bag" class="am-g">
+  							<div class="am-u-sm-12">
+  								<p style="margin-top: 15px;">高手太多，没抢到红包</p>
+  								<p style="margin-top: 15px;">难道是姿势不对~</p>
+  							</div>
+						</div>
+					</li>
+					</if>
+				</ul>
+				
+			</div>
+			<img src="../Style/index-images/activity/q-line.png" alt="线" class="am-img-responsive" style="width: 90%; margin: 0 auto;"/>
+			
+			<if condition="$flag eq 1">
+			<p style="color: white; text-align: center; font-size: 15px; margin-top: 5px;">红包已存入"我的-会员中心"中</p>
+			<p class="btn1"><button onclick="location.href='{:U('Index/index',array('shares'=>$shares))}'">去商场购物</button></p>
+			<p class="btn2"><button onclick="location.href='{:U('Zhuangpan/index')}'">去抽奖</button></p>
+			<else/>
+			<p class="btn1"><button onclick="location.href='{:U('Index/index',array('shares'=>$shares))}'">去商场下单领红包</button></p>
+			<p class="btn2"><button onclick="location.href='{:U('Zhuangpan/index')}'">去抽奖活动页面</button></p>
+			</if>
+		</div>
+		
+		<div id="shouqi">
+			<p id="guess-like">
+        		<span class="span-1"></span>
+        			看大家的手气
+        		<span class="span-2"></span>
+    		</p>
+			<ul>
+				<volist name="users" id="vol">
+				<li>
+					<div class="am-g">
+  						<div class="am-u-sm-1">
+							<img src="{$vol.cover}" alt="am-img-responsive" class="am-circle" style="width: 34px; margin-top: 7px;"/>
+  						</div>
+  						<div class="am-u-sm-9">
+  							<p class="user-name">{$vol.username}</p>
+  							<p class="user-content">抢到了{$sharesName}分享的红包</p>
+  						</div>
+						
+  						<div class="am-u-sm-2">
+  							<p class="time">{$vol.time|date="H:i:s",###}</p>
+  						</div> 
+					</div>
+				</li>
+				</volist>
+			</ul>
+			<div id="tips">
+				<p>活动规则</p>
+				<p style="margin-top: 8px;">1、红包新老用户共享</p>
+				<p>2、团洋范对本次活动保留最终的解释权</p>
+			</div>
+		</div>
+		<include file="public:footer" />  
+	</body>
+
+</html>

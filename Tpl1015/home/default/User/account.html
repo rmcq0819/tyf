@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>我的帐户中心</title>
+<link rel="stylesheet" type="text/css" href="../Style/shop.css" />
+<script charset="utf-8" src="../Style/js/jquery.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/ecmall.js" type="text/javascript"></script>
+<script charset="utf-8" src="../Style/js/touchslider.dev.js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js" ></script>
+<script charset="utf-8" type="text/javascript" src="../Style/js/mlselection.js" ></script>
+</head>
+<body>
+<include file="public:headuser" />
+<div id="content" style="background:#f1f9fa;min-height: 500px;">
+    <div class="wrap">
+        <div class="eject_btn" title="新增地址"><a class="enter" href="{:U('User/account')}">
+		 <if condition="$visitor['nickname'] neq NULL">{$visitor.nickname}
+        <elseif condition="$visitor['username'] neq NULL"/>{$visitor.username}
+        <else/>{$visitor.wechatid}</if>的帐户中心</a></div> 
+        <ul class="address_list">
+            <li>
+                <p>帐户余额：{$userinfo.user_account} 元</p>
+                <p>&nbsp;</p>
+                <p class="new_line"><br /></p>
+                </p>
+            </li>
+        </ul>
+        <div class="eject_btn" title="充值"><a class="enter" href="{:U('User/chongzhi')}">点击提现</a></div>
+        <div class="wrap_bottom"></div>
+    </div>
+</div>
+</body>
+</html>

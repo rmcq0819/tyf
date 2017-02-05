@@ -1,0 +1,83 @@
+<include file="public:header" />
+
+ <div class="content">
+<div class="cLineB">
+<div class="searchbar right">
+<form method="post" action="">
+<script>
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+
+</form>
+</div>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<div class="tab">
+<ul>
+<li class="<if condition="$isBranch eq 1">current</if> tabli" id="tab0"><a href="{:U('Company/index')}">公司信息</a></li>
+<li class="<if condition="$isBranch neq 1">current</if> tabli" id="tab2"><a href="{:U('Company/branches')}">分支机构</a></li>
+</ul>
+</div>
+<!--tab end-->
+<div class="msgWrap">
+<form method="post" action="{:U('Company/index')}" id="info">
+<div class="cLine">
+<div class="pageNavigator left"> <a href="{:U('Company/branch_add',array('isBranch'=>1))}" title="" class="btnGrayS vm bigbtn">添加</a></div>
+<div class="clr"></div>
+</div>
+
+<script type="text/javascript">
+function drop_confirm(str,url) {
+	if(confirm(str)) {
+		window.location.href = url;
+	}
+}
+</script>
+
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-left: 15px;text-align: center;width: 96%;">
+<thead style="background: #eee;height: 30px;line-height: 30px;">
+<tr>
+<th class="select" style="display:none"><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+<th width="50"></th>
+<th width="150">名称</th>
+<th width="150">电话</th>
+<th width="260">地址</th>
+<th width="100" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody style="line-height: 25px;">
+<tr></tr>
+<volist name="branches" id="c"> 
+<tr>
+<td><input type="checkbox" value="{$o.id}" class="cbitem" name="id_{$i}"></td>
+<td>{$c.name}</td>
+<td>{$c.tel}</td>
+<td>{$c.address}</td>
+<td class="norightborder"><a href="{:U('Company/index',array('id'=>$c['id'],'isBranch'=>1))}">修改</a> 
+<a href="javascript:drop_confirm('您确定要删除吗?', '{:U('Company/delete',array('id'=>$c['id'],'isBranch'=>1))}');">删除</a></td>
+</tr>
+</volist>
+</tbody>
+</table>
+<input type="hidden" name="token" value="{branches:$_GET['token']}" />
+</form>
+</div>
+				</div>
+			</div>
+			<div class="clr"></div>
+		</div>
+	</div>
+	<div class="clr"></div>

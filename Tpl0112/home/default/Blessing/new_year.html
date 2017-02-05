@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title></title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑"; outline: none;
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;  
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+			input,textarea{
+				border:0;-webkit-appearance:none;
+			}
+			#main{
+				position: relative; left: 0px; margin-bottom: -5px;
+			}
+			#main .center{
+				width: 280px;position: absolute; left: 50%; top: 45%; margin-left:-140px ;
+			}
+			#main .center .content{
+				width: 70%;text-align: center; margin: 0 auto; margin-top: 5px; color: rgb(240,93,0); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+			}
+			#main .center .content2{
+				width: 280px;text-align: center; margin: 0 auto; margin-top: 5px; color: rgb(180,47,33); font-size: 22px; margin-top: 12px;
+			}
+			#main .center input{
+				width: 180px;height: 27px;border: solid 1px rgb(180,47,33); padding-left: 5px; color: rgb(85,85,85); margin-top: 3px;
+			}
+			#main .center button{
+				width: 220px; height: 35px; background-color: rgb(180,47,33); border: none; color: rgb(252,243,2); border-radius: 5px; font-size: 16px; 
+			}
+			/*验证消息弹出框*/
+			.showinfo {
+	        	position: fixed;left: 50%;bottom: 180px;z-index: 99999;border-radius: 5px;background: #000;opacity: 0.9;filter: alpha(opacity=90);
+	        	padding: 0 5px;height: 38px;box-shadow: 0px 0px 10px #000;color: #FFFFFF;text-align: center;line-height: 38px;font-size: 14px;display: none;
+	        }
+		</style>
+		<link rel="stylesheet" href="../Style/css/animate.min.css" />
+	</head>
+
+	<body>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"> 
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			新年快乐
+		</div>
+		
+		<div id="main">
+			<img src="../Style/index-images/activity/p-bg5.jpg" alt="头部图片" class="am-img-responsive" style="margin-top: 49px;"/>
+			<div class="center">
+				<p style="text-align: center;"><img src="../Style/index-images/activity/p-user.png" alt="头像" class="am-circle" style="width: 70px;"/></p>
+				<p class="content">你的好友</p>
+				<p class="content2" style="line-height: 32px;">在礼包内给你留的新年祝福</p>
+				<div style="width: 290px;margin: 0 auto; margin-top: 15px; color: rgb(180,47,33);">
+					<p>输入收货手机号码，看好友是否为你留下了专属祝福</p>
+					<p style="text-align: center;"><input type="number" placeholder="输入手机号码"/></p>
+				</div>
+				<p style="text-align: center; margin-top: 25px;"><button id="submit">领取祝福</button></p>
+			</div>
+			
+			
+			<img src="../Style/index-images/activity/p-bg6.jpg" alt="底部图片" class="am-img-responsive" />
+			
+		</div>
+		
+		<div class="showinfo animated shake"></div>
+		<include file="public:footer" />  
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#submit").on("click",function(){
+					var phone_m = $("input[type=number]").val();
+					if(phone_m==''){
+						var content = $('.showinfo').html('请输入手机号码');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;  
+					}
+					var phone = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+					if(!phone.test(phone_m)){
+						var content = $('.showinfo').html('手机号码无效');
+						var w = content.width()/2;
+						$(".showinfo").css("margin-left",-w);
+						$(".showinfo").show().delay(3000).fadeOut();
+						return false;
+					}
+					location.href="{:U('Blessing/blessing')}&phone="+phone_m;
+				});
+			})
+		</script>
+	</body>
+
+</html>

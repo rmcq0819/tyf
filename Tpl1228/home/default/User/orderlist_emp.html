@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<include file="public:head" />
+		<link rel="stylesheet" type="text/css" href="../Style/jquery.css">
+		<script charset="utf-8" type="text/javascript" src="../Style/js/dialog.js" id="dialog_js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.ui.js"></script>
+		<script charset="utf-8" type="text/javascript" src="../Style/js/jquery.validate.js"></script>
+		<script charset="utf-8" type="text/javascript" src="__STATIC__/weixin/js/zh-CN.js"></script>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				border: none;
+				outline: none;
+			}
+			/*头部*/
+			.topnav{
+				height: 49px;
+				text-align: center;
+				background-color: rgb(240,93,0);
+			}
+			.topnav img{
+				float: left;
+				margin-top: 13px;
+			}
+			.topnav span{
+				color: white;
+				margin-left: -39px;
+				font-size: 16px;
+				line-height: 49px;
+				text-align: center;
+				
+			}
+			/*订单*/
+			.order{
+				width: 70%;
+				color: white;
+				text-align: center;
+				margin: 0 auto;
+				margin-top: 70px;
+			}
+			.order button{
+				width: 80px;
+				height: 30px;
+				margin: 0 auto;
+				line-height: 25px;
+				border-radius: 5px;
+				background-color: rgb(240,93,0);
+				
+			}
+		</style>
+		<!--<style>
+			.fl {
+				float: left;
+			}
+			
+			.fr {
+				float: right;
+			}
+			
+			.order {
+				background: #F3F3F3
+			}
+			
+			.order .top {
+				height: 40px;
+				margin-bottom: 20px;
+			}
+			
+			.order .top li {
+				float: left;
+				width: 25%;
+				background: #fff;
+				height: 40px;
+				line-height: 40px;
+				text-align: center;
+				border-bottom: 1px solid #DEDEDE;
+			}
+			
+			.order .top .active {
+				border-bottom: 2px solid red;
+			}
+			
+			.order .orderlist {
+				margin-bottom: 10px;
+				background: #fff;
+				border-top: 1px solid #DEDEDE;
+				border-bottom: 1px solid #DEDEDE;
+			}
+			
+			.order .orderlist .danhao {
+				border-bottom: 1px solid #DEDEDE;
+				padding: 4px 10px;
+			}
+			
+			.order .orderlist .danhao .orderstatus {
+				color: red;
+				font-weight: bold;
+			}
+			
+			.order .orderlist .item {
+				height: 80px;
+				padding: 10px;
+				border-bottom: 1px solid #DEDEDE
+			}
+			
+			.order .orderlist .item .item_img {
+				padding-right: 10px;
+			}
+			
+			.order .orderlist .item .item_info {
+				width: 64%
+			}
+			
+			.order .orderlist .orderinfo {
+				padding: 6px 10px;
+			}
+			
+			.order .orderlist .orderinfo span {}
+		</style>-->
+	</head>
+
+	<body>
+		<title>待付款</title>
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back"><img src="../Style/images/fanhui1.png" width="25" /></a>
+			<span>待付款</span>
+		</div>
+		<div class="order">
+			<img src="../Style/index-images/emp-order.png" alt="空订单" class="am-img-responsive" />
+			<button>去逛逛~</button>
+		</div>
+	</body>
+	<include file="public:footer" />
+</html>

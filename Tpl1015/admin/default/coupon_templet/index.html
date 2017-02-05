@@ -1,0 +1,94 @@
+<include file="public:header" />
+<style type="text/css">
+.coupon-a{ background:#EAEEF4; padding:5px 15px; border:1px solid #999999}
+</style>
+<div class="pad_lr_10" >
+    <form name="searchform" method="get" >
+    <table width="100%" cellspacing="0" class="search_form">
+        <tbody>
+            <tr>
+                <td>
+                <div class="explain_col">
+                    <input type="hidden" name="g" value="admin" />
+                    <input type="hidden" name="m" value="coupon_templet" />
+                    <input type="hidden" name="a" value="index" />
+                    <input type="hidden" name="menuid" value="{$menuid}" />
+                    &nbsp;关键字 :
+                    <input name="keyword" type="text" class="input-text" size="35" value="{$search}" placeholder="支持按优惠券名称、描述、优惠价、使用条件查找"/>
+                    <input type="submit" name="search" class="btn" value="搜索" />
+					
+					<input onclick="location.href='./index.php?g=admin&m=coupon_templet&a=add'" class="btn" size="6" value="新增优惠券">
+					<!-- <input onclick="location.href='./index.php?g=admin&m=coupon_templet&a=send_coupon'" class="btn" size="6" value="发放优惠券"> -->
+                </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </form>
+<script type="text/javascript">
+
+</script>
+    <div class="J_tablelist table_list" data-acturi="{:U('coupon_templet/ajax_edit')}">
+	<form name="myForm" method="post" action="./index.php?g=admin&m=coupon_templet&a=dels" >
+    <table width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+					<input type="checkbox" name="checkall" class="J_checkall">
+				</th>
+				<th width="5%"><span data-tdtype="order_by" data-field="id">ID</span></th>
+                <th width="10%"><span data-field="title">优惠券名称</span></th>
+				<th width="5%"><span data-tdtype="order_by" data-field="kind">类型</span></th>
+				<th width="10%">兑换条件</th>
+				<th width="5%"><span data-tdtype="order_by" data-field="num">优惠券数量</span></th>
+				<th width="10%"><span data-tdtype="order_by" data-field="count">持券用户</span></th>
+				<th width="5%"><span data-tdtype="order_by" data-field="disPrice">券面金额<span></th>
+				<th width="10%">满多少金额可使用</th>
+				<th width="10%"><span data-tdtype="order_by" data-field="start_time">可领取开始日期</span></th>
+				<th width="10%"><span data-tdtype="order_by" data-field="end_time">可领取结束日期</span></th>
+				<th width="5%">自领取起有效天数</th>
+				<th width="5%"><span data-tdtype="order_by" data-field="status">是否启用</span></th>
+				<th width="10%">操作</th>
+            </tr>
+        </thead>
+    	<tbody>
+            <volist name="lists" id="val" >
+				<tr>
+					<td align="center"><input type="checkbox" class="J_checkitem" name="id[]" value="{$val.id}"></td>
+					<td align="center">{$val.id}<if condition="$val.is_recom gt 0">（首页）</if></td>
+					<td align="center"><span data-tdtype="edit" data-field="title" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.title}<span></td>
+					<td align="center">
+						<if condition="$val.kind eq 1">通用券</if>
+						<if condition="$val.kind eq 2">品类券</if>
+						<if condition="$val.kind eq 3">兑换券</if>
+						<if condition="$val.kind eq 4">新人券</if>
+						</td>
+					<td align="center"><if condition="$val.exchangeCond gt 0">{$val.exchangeCond}范票</if></td>
+					<td align="center"><span data-tdtype="edit" data-field="num" data-id="{$val.id}" class="tdedit" style="color:{$val.colors};">{$val.num}</span></td>
+					<td align="center"><a href="./index.php?g=admin&m=coupon_templet&a=user&id={$val.id}">查看</a>（{$val.count}）</td>
+					<td align="center">{$val.disPrice}</td>
+					<td align="center"><img src="__STATIC__/images/admin/jb.png" width="14"/>
+					{$val.condition}
+					</td>
+					<td align="center"><if condition="$val.start_time eq 0"><else />{$val.start_time|date="Y-m-d",###}</if></td>
+					<td align="center"><if condition="$val.end_time eq 0"><else />{$val.end_time|date="Y-m-d",###}</if></td>
+					<td align="center">{$val.days}</td>
+					 <td align="center"><img data-tdtype="toggle" data-id="{$val.id}" data-field="status" data-value="{$val.status}" src="__STATIC__/images/admin/toggle_<if condition="$val.status eq 0">disabled<else/>enabled</if>.gif" /></td>
+					<td align="center"><a href="./index.php?g=admin&m=coupon_templet&a=edit&id={$val.id}">编辑</a>&nbsp;|&nbsp;
+									   <a href="./index.php?g=admin&m=coupon_templet&a=del&id={$val.id}" onClick="return confirm('你确定要将该记录删除吗？');">删除</a></td>
+				</tr>
+            </volist>
+    	</tbody>
+    </table>
+    <div class="btn_wrap_fixed" style="bottom: 5px;">
+      <label class="select_all mr10"><input type="checkbox" name="checkall" class="J_checkall">{:L('select_all')}/{:L('cancel')}</label>
+        <a href="javascript:;" onclick="document.myForm.submit();" class="coupon-a">{:L('delete')}</a>
+        <div id="pages">{$page}</div>
+    </div>
+	
+	</form>
+
+</div>
+<include file="public:footer" />
+</body>
+</html>

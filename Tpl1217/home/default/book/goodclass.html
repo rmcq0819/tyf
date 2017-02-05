@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$page_seo.title}--商品搜索</title>
+<include file="public:headtop" />
+</head>
+<body style="margin: 0 auto;">
+<include file="public:head" />
+<div class="search product_search">
+  <form action="{:U('book/search')}" method="post">
+  <div class="text"> <input class="txtseach2" type="text" name="Keyword" class="input" value="" placeholder="输入商品名称..."/></div>
+   <div class="btn"><input  class="btnseach2"  type="submit" class="submit" value="" class="olp-bg-search"/></div>
+  </form>
+</div>
+ <div class="banner">
+	<volist name='itemArrRv' id='itemArrRvItem'>
+		<empty name="itemArrRvItem[1]">
+		<a href="{:U('book/index',array('id'=>$itemArrRvItem[0]['id']))}" style="margin-bottom: 1px;width:95%;padding-left: 5%;display: block;height:42px;background:#bcd1d4;">
+		<span style="line-height:42px;display: block;float: left;">{$itemArrRvItem[0].name}</span>
+		<img src="../Style/images/book_03.png" style="float: right;"/>
+		</a>
+		<else />
+		<a href="{:U('book/goodclass',array('pid'=>0,'id'=>$itemArrRvItem[0]['id']))}" style="margin-bottom: 1px;width:95%;padding-left: 5%;display: block;height:42px;background:#bcd1d4;">
+		<span style="line-height:42px;display: block;float: left;">{$itemArrRvItem[0].name}</span>
+		<?php $id = $_GET['id'];?>
+		<?php $pid = $_GET['pid'];?>
+		<if condition="$itemArrRvItem[0]['id'] eq $id">
+		<img src="../Style/images/book_05.png" style="float: right;"/>
+		<else />
+		<img src="../Style/images/book_03.png" style="float: right;"/>
+		</if>
+		</a>
+		</empty>
+			<volist name='itemArrRvItem[1]' id='itemArrRv2Item'>
+			<if condition="($itemArrRv2Item[0]['pid'] eq $id)||($itemArrRv2Item[0]['pid'] eq $pid)">
+			<empty name="itemArrRv2Item[1]">
+				<a href="{:U('book/index',array('id'=>$itemArrRv2Item[0]['id']))}" style="margin-bottom: 1px;width:95%;padding-left: 5%;display: block;height:42px;background:#e7f3f5;">
+				<span style="line-height:42px;display: block;float: left;">{$itemArrRv2Item[0].name}</span>
+				<img src="../Style/images/book_07.png" style="float: right;"/>
+				</a>
+			<else />
+				<a href="{:U('book/goodclass',array('pid'=>$itemArrRv2Item[0]['pid'],'id'=>$itemArrRv2Item[0]['id']))}" style="margin-bottom: 1px;width:95%;padding-left: 5%;display: block;height:42px;background:#e7f3f5;">
+				<span style="line-height:42px;display: block;float: left;">{$itemArrRv2Item[0].name}</span>
+				<?php $id = $_GET['id'];?>
+				<if condition="$itemArrRv2Item[0]['id'] eq $id">
+				<img src="../Style/images/book_08.png" style="float: right;"/>
+				<else />
+				<img src="../Style/images/book_07.png" style="float: right;"/>
+				</if>
+				</a>
+			</empty>	
+					<volist name='itemArrRv2Item[1]' id='itemArrRv3Item'>
+					<if condition="$itemArrRv3Item['pid'] eq $id">
+					<a href="{:U('book/index',array('id'=>$itemArrRv3Item['id']))}" style="border-bottom: 1px solid #e6e6e6;width:95%;padding-left: 5%;display: block;height:42px;background:#fff;">
+					<span style="line-height:42px;display: block;float: left;">{$itemArrRv3Item.name}</span>
+					</a>
+					</if>	
+					</volist>
+			</if>	
+			</volist>			
+    </volist> 
+    </div>
+<div class="clear" style="height:33px;"></div>
+
+<include file="public:footer" />
+</body>
+</html>

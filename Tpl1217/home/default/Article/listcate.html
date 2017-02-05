@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$page_seo.title}</title>
+<include file="public:headtop" />
+</head>
+<body>
+<include file="public:head" />
+<div class="top-title" id="end">
+<div class="am-g">
+	<div class="am-u-sm-1"><a href="javascript:;" onClick="window.history.back(-1);" class="am-icon-chevron-left" style="color:#FFFFFF;font-size:14px;"></a></div>
+	<div class="am-u-sm-11" style="font-size:14px; padding-right:10px;"><h2>素材分类</h2></div>
+</div>
+</div>
+<div class="clear" style="height:55px;"></div>
+<div style="padding:0 15px">
+<ul class="am-avg-sm-3 am-thumbnails dailidh">
+	<volist name="art_list" id="vo">
+		<li style="padding:5px">
+			<a href="{:U('Article/cate',array('cid'=>$vo['id']))}">
+				<img src="{:attach($vo['img'], 'article_cate')}">
+				<span>{$vo.name}</span>
+			</a>
+		</li>
+	</volist>
+</ul>
+</div>
+<div class="clear" style="height:30px;"></div>
+
+</body>
+</html>

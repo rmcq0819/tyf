@@ -1,0 +1,73 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<title>选择商品评价</title>
+		<include file="public:head" />
+		<style type="text/css">
+			*{
+				font-family: "微软雅黑";
+			}
+			.topnav {
+				z-index: 999;position: fixed;width: 100%;height: 49px;background: rgb(240,93,0);text-align: center;color: #fff;font-size: 18px;line-height: 49px;top: 0;
+			}
+			.topnav .back{
+				position: absolute;left: 8px;top: 6px;margin-top: -8px;
+			}
+			.topnav img{
+				position: absolute;top: 14px;left: 5px;
+			}
+
+			#order{
+				background-color: white; border-bottom: solid 1px rgb(237,237,237);
+			}
+			#comm .num{
+				border-bottom: solid 1px rgb(200,200,200); padding: 7px; color: rgb(85,85,85); background-color: white;
+			}
+			
+			#order .pro-name{
+				margin-top: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 9px; color: rgb(85,85,85); font-size: 12px;
+			}
+			#order .pro-pri{
+				margin-top: 10px;color: rgb(138,138,138);padding-left: 9px;  font-size: 12px;
+			}
+			/*去评价按钮*/
+			.go-comm{
+				background-color: white; border:solid 1px rgb(240,93,0); color: rgb(240,93,0); float: right; margin-right: 5px; border-radius: 3px; outline: none;
+			}
+		</style>
+	</head>
+
+	<body style="background-color: rgb(243,243,243);">
+		<div class="topnav">
+			<a href="javascript:;" onClick="window.history.back(-1);" class="back">
+				<img src="../Style/images/fanhui1.png" width="25" />
+			</a>
+			选择商品评价
+		</div>
+		
+		<div id="comm">
+			<ul>
+				<p class="num" style="margin-top: 49px;">订单号：{$orderId} </p>
+				<volist name="item_detail" id="vo">
+				<li>
+					<div id="order">
+						<div class="am-g" style="padding: 7px;">
+  							<div class="am-u-sm-3">
+  								<img src="data/upload/item/{$vo['img']}" alt="商品" class="am-img-responsive" style="width:80px;"/>
+  							</div>
+  							<div class="am-u-sm-9">
+  								<p class="pro-name">{$vo.title}</p>
+  								<p class="pro-pri">优品价：<span style="color: rgb(240,93,0); font-size: 13px;">￥{$vo.price}</span></p>
+  							</div>
+  							<button class="go-comm" onclick="location.href='{:U('User/do_comment',array('orderId'=>$orderId,'itemId'=>$vo['itemId']))}'">去评价</button>
+						</div>
+					</div>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<include file="public:footer" />
+	</body>
+
+</html>

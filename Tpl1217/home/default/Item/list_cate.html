@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "
+http://www.w3.org/TR/html4/frameset.dtd">
+<html class="no-js">
+<head>
+<include file="public:head" />
+<meta charset="utf-8">
+<style>
+*{font-family: "微软雅黑";}
+.prices{width:100%;height: 49px;margin-top: 70px;}
+<!-- .li-active{
+	color:rgb(240,93,0);
+	border-left:solid 1px rgb(240,93,0);
+	background-color:#eee;
+}  -->
+.left-classify .left .active{background-color:#eee;}
+</style>
+<script>
+	$(document).ready(function(){ 
+		//限制字符个数 
+		$(".title").each(function(){ 
+			var maxwidth=40; 
+			if($(this).text().length>maxwidth){
+				 $(this).text($(this).text().substring(0,maxwidth)); 
+				 $(this).html($(this).html()+'...'); 
+			} 
+		}); 
+	});
+</script>
+</head>
+<body>
+<!--顶端右边单张图片-->
+<div class="leibanner" style="float:right;display:block;margin-top: -10px;">
+
+	<!-- <a href="{:U('Item/itemlist',array('id'=>$vo['id']))}">
+	<div class="leibannerbj">
+	<P style="font-size:16px;line-height:44px;display:none;">{$vo.name}</P></div>
+	</a> -->
+	<img src="./Tpl/home/default/Style/index-images/banner01.jpg" style="height:110px"/>
+
+	<!--列表分类选项-->
+	<div>
+		<ul class="am-avg-sm-2 am-thumbnails left beautiful">
+			<volist name="sub_itemcate" id="vo">
+				<li style="margin-bottom:0;margin-top: 2%;">
+				<if condition="$vo['id'] eq $_GET['sub_pid']">
+						<a style="font-size: 14px;color:#e15f11;" href="{:U('Item/list_cate', array('pid' => $pid,'sub_pid' => $vo['id']))}" target="rt_frame">{$vo.name}</a></li>
+				<else/>
+				<a style="font-size: 14px;" href="{:U('Item/list_cate', array('pid' => $pid,'sub_pid' => $vo['id']))}" target="rt_frame">{$vo.name}</a></li>
+				</if>
+			</volist>
+		</ul>
+	</div>
+</div>   
+<!--顶端右边单张图片-->
+<div class="leibanner"  style="float:right;margin-right:0;">
+<!--产品列表区-->
+	<div class="index_product_list">
+		<ul class="am-avg-sm-2 am-thumbnails indexpromain right">
+			<volist name="item_list" id="vo">				
+				<li class="leilogo">
+					<a href="{:U('Item/index',array('id'=>$vo['id'],'shares'=>$info['id']))}" target="_blank">
+						<img src="data/upload/item/{$vo.img}"/>
+						<div class="am-g product-presentation">
+							<div class="am-u-sm-12 product">
+								<span class="title" style="padding-left:5px;padding-right:5px;font-size:13px;color:#555;height:45px;overflow: hidden;display: block;">{$vo.title}</span>
+							</div>
+						<!-- 	<div class="am-u-sm-3">
+								<img src="./Tpl/home/default/Style/index-images/cplist_05.jpg" alt="">
+								<span>美国</span>
+							</div> -->
+							<div class="prices" style="margin-top:46px;height:33px;">
+								<p style="padding-left:5px;font-size:13px;">免税价:<a style="color:#e15f11;font-size:13px;font-weight:bold;">￥{$vo.price}</a></p >
+								<!--<p>市场价:<a style="text-decoration:line-through;">￥{$vo.priceyuan}</a></p>-->
+							</div>
+						</div>
+					</a>
+				</li>				
+			</volist>
+		</ul>
+	</div>	
+</div>  
+
+</script>
+</body>
+</html>
+
+
